@@ -1,0 +1,694 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<!-- AUTH -->
+	<bean name="/admin/authanticate" class="com.yd.etravel.web.user.AuthanticationAction">
+		<property name="userManager">
+			<ref bean="userService" />
+		</property>
+	</bean>
+	<bean name="/admin/logout" class="com.yd.etravel.web.user.LogoutAction">
+	</bean>
+	<!-- USER -->
+	<bean name="/admin/forwardUser" class="com.yd.etravel.web.user.UserAction">
+		<property name="userManager">
+			<ref bean="userService" />
+		</property>
+	</bean>
+	<bean name="/admin/initUserCreate" class="com.yd.etravel.web.user.UserAction">
+		<property name="userManager">
+			<ref bean="userService" />
+		</property>
+	</bean>
+	<bean name="/admin/createUser" class="com.yd.etravel.web.user.UserAction">
+		<property name="userManager">
+			<ref bean="userService" />
+		</property>
+	</bean>
+	<bean name="/admin/initUserEdit" class="com.yd.etravel.web.user.UserAction">
+		<property name="userManager">
+			<ref bean="userService" />
+		</property>
+	</bean>
+	<bean name="/admin/deleteUser" class="com.yd.etravel.web.user.UserAction">
+		<property name="userManager">
+			<ref bean="userService" />
+		</property>
+	</bean>
+	<bean name="/admin/initPwChange" class="com.yd.etravel.web.user.ChangePasswordAction">
+	</bean>
+	<bean name="/admin/ResetPw" class="com.yd.etravel.web.user.ChangePasswordAction">
+		<property name="userManager">
+			<ref bean="userService" />
+		</property>
+	</bean>
+	<!-- ROLE -->
+	<bean name="/admin/forwardRole" class="com.yd.etravel.web.user.RoleAction">
+		<property name="userManager">
+			<ref bean="userService" />
+		</property>
+	</bean>
+	<bean name="/admin/initRoleCreate" class="com.yd.etravel.web.user.RoleAction">
+		<property name="userManager">
+			<ref bean="userService" />
+		</property>
+	</bean>
+	<bean name="/admin/createRole" class="com.yd.etravel.web.user.RoleAction">
+		<property name="userManager">
+			<ref bean="userService" />
+		</property>
+	</bean>
+	<bean name="/admin/initRoleEdit" class="com.yd.etravel.web.user.RoleAction">
+		<property name="userManager">
+			<ref bean="userService" />
+		</property>
+	</bean>
+	<bean name="/admin/deleteRole" class="com.yd.etravel.web.user.RoleAction">
+		<property name="userManager">
+			<ref bean="userService" />
+		</property>
+	</bean>
+	<!-- HOTEL -->
+	<bean name="/admin/initHotelCreate" class="com.yd.etravel.web.hotel.HotelAction">
+		<property name="userManager">
+			<ref bean="userService" />
+		</property>
+		<property name="hotelManager">
+			<ref bean="hotelService" />
+		</property>
+	</bean>
+	<bean name="/admin/createHotel" class="com.yd.etravel.web.hotel.HotelAction">
+		<property name="hotelManager">
+			<ref bean="hotelService" />
+		</property>
+		<property name="userManager">
+			<ref bean="userService" />
+		</property>
+	</bean>
+	<bean name="/admin/forwardHotel" class="com.yd.etravel.web.hotel.HotelAction">
+		<property name="userManager">
+			<ref bean="userService" />
+		</property>
+		<property name="hotelManager">
+			<ref bean="hotelService" />
+		</property>
+	</bean>
+	<bean name="/admin/initHotelEdit" class="com.yd.etravel.web.hotel.HotelAction">
+		<property name="userManager">
+			<ref bean="userService" />
+		</property>
+		<property name="hotelManager">
+			<ref bean="hotelService" />
+		</property>
+	</bean>
+	<bean name="/admin/deleteHotel" class="com.yd.etravel.web.hotel.HotelAction">
+		<property name="hotelManager">
+			<ref bean="hotelService" />
+		</property>
+	</bean>
+	<!-- SEASON -->
+	<bean name="/admin/forwardSeason" class="com.yd.etravel.web.season.SeasonAction">
+		<property name="seasonManager">
+			<ref bean="seasonService" />
+		</property>
+		<property name="hotelManager">
+			<ref bean="hotelService" />
+		</property>
+	</bean>
+	<bean name="/admin/initSeasonCreate" class="com.yd.etravel.web.season.SeasonAction">
+		<property name="seasonManager">
+			<ref bean="seasonService" />
+		</property>
+		<property name="hotelManager">
+			<ref bean="hotelService" />
+		</property>
+	</bean>
+	<bean name="/admin/createSeason" class="com.yd.etravel.web.season.SeasonAction">
+		<property name="seasonManager">
+			<ref bean="seasonService" />
+		</property>
+		<property name="hotelManager">
+			<ref bean="hotelService" />
+		</property>
+	</bean>
+	<bean name="/admin/initSeasonEdit" class="com.yd.etravel.web.season.SeasonAction">
+		<property name="seasonManager">
+			<ref bean="seasonService" />
+		</property>
+		<property name="hotelManager">
+			<ref bean="hotelService" />
+		</property>
+	</bean>
+	<bean name="/admin/deleteSeason" class="com.yd.etravel.web.season.SeasonAction">
+		<property name="seasonManager">
+			<ref bean="seasonService" />
+		</property>
+		<property name="hotelManager">
+			<ref bean="hotelService" />
+		</property>
+	</bean>
+	<!-- PAX -->
+	<bean name="/admin/initPaxCreate" class="com.yd.etravel.web.pax.PaxAction">
+		<property name="paxManager">
+			<ref bean="paxService" />
+		</property>
+		<property name="hotelManager">
+			<ref bean="hotelService" />
+		</property>
+	</bean>
+	<bean name="/admin/forwardPax" class="com.yd.etravel.web.pax.PaxAction">
+		<property name="paxManager">
+			<ref bean="paxService" />
+		</property>
+		<property name="hotelManager">
+			<ref bean="hotelService" />
+		</property>
+	</bean>
+	<bean name="/admin/hotelOnChange" class="com.yd.etravel.web.pax.PaxAction">
+		<property name="paxManager">
+			<ref bean="paxService" />
+		</property>
+		<property name="hotelManager">
+			<ref bean="hotelService" />
+		</property>
+	</bean>
+	<bean name="/admin/createPax" class="com.yd.etravel.web.pax.PaxAction">
+		<property name="hotelManager">
+			<ref bean="hotelService" />
+		</property>
+		<property name="paxManager">
+			<ref bean="paxService" />
+		</property>
+	</bean>
+	<bean name="/admin/initPaxEdit" class="com.yd.etravel.web.pax.PaxAction">
+		<property name="paxManager">
+			<ref bean="paxService" />
+		</property>
+		<property name="hotelManager">
+			<ref bean="hotelService" />
+		</property>
+	</bean>
+	<bean name="/admin/deletePax" class="com.yd.etravel.web.pax.PaxAction">
+		<property name="paxManager">
+			<ref bean="paxService" />
+		</property>
+	</bean>
+	<!-- ROOM TYPE -->
+	<bean name="/admin/forwardRoomType" class="com.yd.etravel.web.roomtype.RoomTypeAction">
+		<property name="roomTypeManager">
+			<ref bean="roomTypeService" />
+		</property>
+	</bean>
+	<bean name="/admin/initRoomTypeCreate" class="com.yd.etravel.web.roomtype.RoomTypeAction">
+		<property name="roomTypeManager">
+			<ref bean="roomTypeService" />
+		</property>
+	</bean>
+	<bean name="/admin/createRoomType" class="com.yd.etravel.web.roomtype.RoomTypeAction">
+		<property name="roomTypeManager">
+			<ref bean="roomTypeService" />
+		</property>
+	</bean>
+	<bean name="/admin/initRoomTypeEdit" class="com.yd.etravel.web.roomtype.RoomTypeAction">
+		<property name="roomTypeManager">
+			<ref bean="roomTypeService" />
+		</property>
+	</bean>
+	<bean name="/admin/deleteRoomType" class="com.yd.etravel.web.roomtype.RoomTypeAction">
+		<property name="roomTypeManager">
+			<ref bean="roomTypeService" />
+		</property>
+	</bean>
+	<!-- OCCUPANCY -->
+	<bean name="/admin/forwardOccupancy" class="com.yd.etravel.web.occupancy.OccupancyAction">
+		<property name="occupancyManager">
+			<ref bean="occupancyService" />
+		</property>
+		<property name="roomTypeManager">
+			<ref bean="roomTypeService" />
+		</property>
+	</bean>
+	<bean name="/admin/initOccupancyCreate" class="com.yd.etravel.web.occupancy.OccupancyAction">
+		<property name="occupancyManager">
+			<ref bean="occupancyService" />
+		</property>
+		<property name="roomTypeManager">
+			<ref bean="roomTypeService" />
+		</property>
+	</bean>
+	<bean name="/admin/createOccupancy" class="com.yd.etravel.web.occupancy.OccupancyAction">
+		<property name="occupancyManager">
+			<ref bean="occupancyService" />
+		</property>
+		<property name="roomTypeManager">
+			<ref bean="roomTypeService" />
+		</property>
+	</bean>
+	<bean name="/admin/initOccupancyEdit" class="com.yd.etravel.web.occupancy.OccupancyAction">
+		<property name="occupancyManager">
+			<ref bean="occupancyService" />
+		</property>
+		<property name="roomTypeManager">
+			<ref bean="roomTypeService" />
+		</property>
+	</bean>
+	<bean name="/admin/deleteOccupancy" class="com.yd.etravel.web.occupancy.OccupancyAction">
+		<property name="occupancyManager">
+			<ref bean="occupancyService" />
+		</property>
+		<property name="roomTypeManager">
+			<ref bean="roomTypeService" />
+		</property>
+	</bean>
+	<!-- Room Seasonal Rate -->
+	<bean name="/admin/forwardRoomSeasonalRate" class="com.yd.etravel.web.season.RoomSeasonalRateAction">
+		<property name="seasonManager">
+			<ref bean="seasonService" />
+		</property>
+		<property name="roomManager">
+			<ref bean="roomService" />
+		</property>
+		<property name="hotelManager">
+			<ref bean="hotelService" />
+		</property>
+	</bean>
+	<bean name="/admin/initRoomSeasonalRateCreate" class="com.yd.etravel.web.season.RoomSeasonalRateAction">
+		<property name="seasonManager">
+			<ref bean="seasonService" />
+		</property>
+		<property name="roomManager">
+			<ref bean="roomService" />
+		</property>
+		<property name="hotelManager">
+			<ref bean="hotelService" />
+		</property>
+	</bean>
+	<bean name="/admin/createRoomSeasonalRate" class="com.yd.etravel.web.season.RoomSeasonalRateAction">
+		<property name="seasonManager">
+			<ref bean="seasonService" />
+		</property>
+		<property name="roomManager">
+			<ref bean="roomService" />
+		</property>
+		<property name="hotelManager">
+			<ref bean="hotelService" />
+		</property>
+	</bean>
+	<bean name="/admin/initRoomSeasonalRateEdit" class="com.yd.etravel.web.season.RoomSeasonalRateAction">
+		<property name="seasonManager">
+			<ref bean="seasonService" />
+		</property>
+		<property name="roomManager">
+			<ref bean="roomService" />
+		</property>
+		<property name="hotelManager">
+			<ref bean="hotelService" />
+		</property>
+	</bean>
+	<bean name="/admin/deleteRoomSeasonalRate" class="com.yd.etravel.web.season.RoomSeasonalRateAction">
+		<property name="seasonManager">
+			<ref bean="seasonService" />
+		</property>
+		<property name="roomManager">
+			<ref bean="roomService" />
+		</property>
+	</bean>
+	<!-- RoomAvailability -->
+	<bean name="/admin/forwardRoomAvailability"
+		class="com.yd.etravel.web.roomavailability.RoomAvailabilityAction">
+		<property name="roomAvailabilityManager">
+			<ref bean="roomAvailabilityService" />
+		</property>
+		<property name="occupancyManager">
+			<ref bean="occupancyService" />
+		</property>
+		<property name="roomManager">
+			<ref bean="roomService" />
+		</property>
+		<property name="hotelManager">
+			<ref bean="hotelService" />
+		</property>
+	</bean>
+	<bean name="/admin/initRoomAvailabilityCreate"
+		class="com.yd.etravel.web.roomavailability.RoomAvailabilityAction">
+		<property name="roomAvailabilityManager">
+			<ref bean="roomAvailabilityService" />
+		</property>
+		<property name="occupancyManager">
+			<ref bean="occupancyService" />
+		</property>
+		<property name="roomManager">
+			<ref bean="roomService" />
+		</property>
+		<property name="hotelManager">
+			<ref bean="hotelService" />
+		</property>
+	</bean>
+	<bean name="/admin/createRoomAvailability"
+		class="com.yd.etravel.web.roomavailability.RoomAvailabilityAction">
+		<property name="roomAvailabilityManager">
+			<ref bean="roomAvailabilityService" />
+		</property>
+		<property name="occupancyManager">
+			<ref bean="occupancyService" />
+		</property>
+		<property name="roomManager">
+			<ref bean="roomService" />
+		</property>
+		<property name="hotelManager">
+			<ref bean="hotelService" />
+		</property>
+	</bean>
+	<bean name="/admin/initRoomAvailabilityEdit"
+		class="com.yd.etravel.web.roomavailability.RoomAvailabilityAction">
+		<property name="roomAvailabilityManager">
+			<ref bean="roomAvailabilityService" />
+		</property>
+		<property name="occupancyManager">
+			<ref bean="occupancyService" />
+		</property>
+		<property name="roomManager">
+			<ref bean="roomService" />
+		</property>
+		<property name="hotelManager">
+			<ref bean="hotelService" />
+		</property>
+	</bean>
+	<bean name="/admin/deleteRoomAvailability"
+		class="com.yd.etravel.web.roomavailability.RoomAvailabilityAction">
+		<property name="roomAvailabilityManager">
+			<ref bean="roomAvailabilityService" />
+		</property>
+		<property name="occupancyManager">
+			<ref bean="occupancyService" />
+		</property>
+		<property name="roomManager">
+			<ref bean="roomService" />
+		</property>
+		<property name="hotelManager">
+			<ref bean="hotelService" />
+		</property>
+	</bean>
+	<bean name="/admin/findRoomDailyAvailability"
+		class="com.yd.etravel.web.roomavailability.RoomAvailabilityAction">
+		<property name="roomAvailabilityManager">
+			<ref bean="roomAvailabilityService" />
+		</property>
+		<property name="hotelManager">
+			<ref bean="hotelService" />
+		</property>
+	</bean>
+	<bean name="/admin/findAllRoomDailyAvailability"
+		class="com.yd.etravel.web.roomavailability.RoomDailyAvailabilityAction">
+		<property name="roomAvailabilityManager">
+			<ref bean="roomAvailabilityService" />
+		</property>
+	</bean>
+	<bean name="/admin/roomOnChange"
+		class="com.yd.etravel.web.roomavailability.RoomAvailabilityAction">
+		<property name="roomAvailabilityManager">
+			<ref bean="roomAvailabilityService" />
+		</property>
+		<property name="occupancyManager">
+			<ref bean="occupancyService" />
+		</property>
+		<property name="hotelManager">
+			<ref bean="hotelService" />
+		</property>
+		<property name="roomManager">
+			<ref bean="roomService" />
+		</property>
+	</bean>
+	<bean name="/admin/avilhotelOnChange"
+		class="com.yd.etravel.web.roomavailability.RoomAvailabilityAction">
+		<property name="roomAvailabilityManager">
+			<ref bean="roomAvailabilityService" />
+		</property>
+		<property name="occupancyManager">
+			<ref bean="occupancyService" />
+		</property>
+		<property name="hotelManager">
+			<ref bean="hotelService" />
+		</property>
+		<property name="roomManager">
+			<ref bean="roomService" />
+		</property>
+	</bean>
+	<!-- ROOM -->
+	<bean name="/admin/initRoomCreate" class="com.yd.etravel.web.room.RoomAction">
+		<property name="roomManager">
+			<ref bean="roomService" />
+		</property>
+		<property name="hotelManager">
+			<ref bean="hotelService" />
+		</property>
+		<property name="roomTypeManager">
+			<ref bean="roomTypeService" />
+		</property>
+	</bean>
+	<bean name="/admin/forwardRoom" class="com.yd.etravel.web.room.RoomAction">
+		<property name="roomManager">
+			<ref bean="roomService" />
+		</property>
+		<property name="hotelManager">
+			<ref bean="hotelService" />
+		</property>
+		<property name="roomTypeManager">
+			<ref bean="roomTypeService" />
+		</property>
+	</bean>
+	<bean name="/admin/createRoom" class="com.yd.etravel.web.room.RoomAction">
+		<property name="hotelManager">
+			<ref bean="hotelService" />
+		</property>
+		<property name="roomManager">
+			<ref bean="roomService" />
+		</property>
+		<property name="roomTypeManager">
+			<ref bean="roomTypeService" />
+		</property>
+	</bean>
+	<bean name="/admin/roomHotelOnChange" class="com.yd.etravel.web.room.RoomAction">
+		<property name="roomManager">
+			<ref bean="roomService" />
+		</property>
+		<property name="hotelManager">
+			<ref bean="hotelService" />
+		</property>
+		<property name="roomTypeManager">
+			<ref bean="roomTypeService" />
+		</property>
+	</bean>
+	<bean name="/admin/initRoomEdit" class="com.yd.etravel.web.room.RoomAction">
+		<property name="roomManager">
+			<ref bean="roomService" />
+		</property>
+		<property name="hotelManager">
+			<ref bean="hotelService" />
+		</property>
+		<property name="roomTypeManager">
+			<ref bean="roomTypeService" />
+		</property>
+	</bean>
+	<bean name="/admin/deleteRoom" class="com.yd.etravel.web.room.RoomAction">
+		<property name="roomManager">
+			<ref bean="roomService" />
+		</property>
+	</bean>
+	<!-- CUSTOMER -->
+	<bean name="/customer/initCustomerCreate" class="com.yd.etravel.web.customer.CustomerAction">
+	</bean>
+	<bean name="/customer/forwardCustomer" class="com.yd.etravel.web.customer.CustomerAction">
+	</bean>
+	<bean name="/customer/createCustomer" class="com.yd.etravel.web.customer.CustomerAction">
+		<property name="userManager">
+			<ref bean="userService" />
+		</property>
+	</bean>
+	<!-- Search -->
+	<bean name="/admin/initSearch" class="com.yd.etravel.web.search.SearchAction">
+		<property name="searchManager">
+			<ref bean="searchService" />
+		</property>
+		<property name="hotelManager">
+			<ref bean="hotelService" />
+		</property>
+		<property name="roomManager">
+			<ref bean="roomService" />
+		</property>
+	</bean>
+	<bean name="/admin/backSearch" class="com.yd.etravel.web.search.SearchAction">
+		<property name="searchManager">
+			<ref bean="searchService" />
+		</property>
+		<property name="hotelManager">
+			<ref bean="hotelService" />
+		</property>
+		<property name="roomManager">
+			<ref bean="roomService" />
+		</property>
+	</bean>
+	<bean name="/admin/findSearch" class="com.yd.etravel.web.search.SearchAction">
+		<property name="searchManager">
+			<ref bean="searchService" />
+		</property>
+		<property name="hotelManager">
+			<ref bean="hotelService" />
+		</property>
+		<property name="itemManager">
+			<ref bean="itemService" />
+		</property>
+		<property name="roomManager">
+			<ref bean="roomService" />
+		</property>
+	</bean>
+	<bean name="/admin/processSearch" class="com.yd.etravel.web.search.SearchAction">
+		<property name="searchManager">
+			<ref bean="searchService" />
+		</property>
+		<property name="hotelManager">
+			<ref bean="hotelService" />
+		</property>
+	</bean>
+	<!--EXTRA ITEM -->
+	<bean name="/admin/initExtraCreate" class="com.yd.etravel.web.extraitem.ExtraItemAction">
+		<property name="hotelManager">
+			<ref bean="hotelService" />
+		</property>
+		<property name="itemManager">
+			<ref bean="itemService" />
+		</property>
+	</bean>
+	<bean name="/admin/forwardExtra" class="com.yd.etravel.web.extraitem.ExtraItemAction">
+		<property name="hotelManager">
+			<ref bean="hotelService" />
+		</property>
+		<property name="itemManager">
+			<ref bean="itemService" />
+		</property>
+	</bean>
+	<bean name="/admin/createExtra" class="com.yd.etravel.web.extraitem.ExtraItemAction">
+		<property name="hotelManager">
+			<ref bean="hotelService" />
+		</property>
+		<property name="itemManager">
+			<ref bean="itemService" />
+		</property>
+	</bean>
+	<bean name="/admin/initExtraEdit" class="com.yd.etravel.web.extraitem.ExtraItemAction">
+		<property name="hotelManager">
+			<ref bean="hotelService" />
+		</property>
+		<property name="itemManager">
+			<ref bean="itemService" />
+		</property>
+	</bean>
+	<bean name="/admin/deleteExtra" class="com.yd.etravel.web.extraitem.ExtraItemAction">
+		<property name="hotelManager">
+			<ref bean="hotelService" />
+		</property>
+		<property name="itemManager">
+			<ref bean="itemService" />
+		</property>
+	</bean>
+	<!--BOOKING -->
+	<bean name="/admin/initBookingCreate" class="com.yd.etravel.web.booking.BookingAction">
+		<property name="bookingManager">
+			<ref bean="bookingService" />
+		</property>
+		<property name="userManager">
+			<ref bean="userService" />
+		</property>
+	</bean>
+	<bean name="/admin/createBooking" class="com.yd.etravel.web.booking.BookingAction">
+		<property name="bookingManager">
+			<ref bean="bookingService" />
+		</property>
+		<property name="userManager">
+			<ref bean="userService" />
+		</property>
+		<property name="hotelManager">
+			<ref bean="hotelService" />
+		</property>
+		<property name="itemManager">
+			<ref bean="itemService" />
+		</property>
+	</bean>
+	<bean name="/admin/initViewBooking" class="com.yd.etravel.web.booking.ViewBookingAction">
+		<property name="bookingManager">
+			<ref bean="bookingService" />
+		</property>
+		<property name="userManager">
+			<ref bean="userService" />
+		</property>
+	</bean>
+	<!-- Booking Report -->
+	<bean name="/admin/initBookingRepSearch" class="com.yd.etravel.web.booking.BookingReportAction">
+		<property name="bookingManager">
+			<ref bean="bookingService" />
+		</property>
+		<property name="hotelManager">
+			<ref bean="hotelService" />
+		</property>
+		<property name="roomManager">
+			<ref bean="roomService" />
+		</property>
+	</bean>
+	<bean name="/admin/searchBookingRep" class="com.yd.etravel.web.booking.BookingReportAction">
+		<property name="bookingManager">
+			<ref bean="bookingService" />
+		</property>
+		<property name="hotelManager">
+			<ref bean="hotelService" />
+		</property>
+		<property name="roomManager">
+			<ref bean="roomService" />
+		</property>
+	</bean>
+	<bean name="/admin/initReservationSheet" class="com.yd.etravel.web.reservation.ReservationSheetAction">
+		<property name="hotelManager">
+			<ref bean="hotelService" />
+		</property>
+	</bean>
+	<bean name="/admin/findReservationSheet" class="com.yd.etravel.web.reservation.ReservationSheetAction">
+		<property name="hotelManager">
+			<ref bean="hotelService" />
+		</property>
+		<property name="roomAvailabilityManager">
+			<ref bean="roomAvailabilityService" />
+		</property>
+		<property name="bookingManager">
+			<ref bean="bookingService" />
+		</property>
+	</bean>
+	<bean name="/admin/viewBookingDetail" class="com.yd.etravel.web.booking.BookingDetailAction">
+		<property name="itemManager">
+			<ref bean="itemService" />
+		</property>
+		<property name="bookingManager">
+			<ref bean="bookingService" />
+		</property>
+	</bean>
+	<!-- Functions -->
+	<bean name="/admin/initFunction" class="com.yd.etravel.web.user.FunctionAction">
+		<property name="userManager">
+			<ref bean="userService" />
+		</property>
+	</bean>
+	<bean name="/admin/saveFunction" class="com.yd.etravel.web.user.FunctionAction">
+		<property name="userManager">
+			<ref bean="userService" />
+		</property>
+	</bean>
+	<!-- IPG Callback -->
+	<bean name="/admin/bookingCallBack" class="com.yd.etravel.web.booking.IpgAction">
+		<property name="bookingManager">
+			<ref bean="bookingService" />
+		</property>
+	</bean>
+	<bean name="/admin/repay" class="com.yd.etravel.web.booking.BookingAction">
+		<property name="bookingManager">
+			<ref bean="bookingService" />
+		</property>
+	</bean>
+</beans>
