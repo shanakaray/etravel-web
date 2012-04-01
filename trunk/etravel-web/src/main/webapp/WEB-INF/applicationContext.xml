@@ -29,18 +29,6 @@
 				<value>com.yd.etravel.domain.user.role.Function</value>
 			</list>
 		</property>
-		<property name="hibernateProperties">
-			<props>
-				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
-				<prop key="hibernate.show_sql">false</prop>
-				<prop key="hbm2ddl.auto">false</prop>
-				<prop key="hibernate.hbm2ddl.auto">update</prop>
-				<prop key="hibernate.lazy">true</prop>
-				<prop key="hibernate.connection.autocommit">false</prop>
-				<prop key="hibernate.cglib.use_reflection_optimizer">true</prop>
-				<prop key="hibernate.max_fetch_depth">10</prop>
-			</props>
-		</property>
 	</bean>
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -55,11 +43,11 @@
 	</bean>
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
-		<property name="driverClassName" value="${db.driverClassName}" />
+		<property name="driverClassName" value="${hibernate.connection.driver_class}" />
 		<property name="url"
-			value="${db.url}" />
-		<property name="username" value="${db.username}" />
-		<property name="password" value="${db.password}" />
+			value="${hibernate.connection.url}" />
+		<property name="username" value="${hibernate.connection.username}" />
+		<property name="password" value="${hibernate.connection.password}" />
 	</bean>
 	<!-- Transaction manager for a single Hibernate SessionFactory (alternative 
 		to JTA) -->
