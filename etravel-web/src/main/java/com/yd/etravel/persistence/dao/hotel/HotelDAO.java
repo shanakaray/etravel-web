@@ -63,8 +63,8 @@ public class HotelDAO extends BaseDAO implements IHotelDAO {
 		    .getCurrentSession();
 	    Query query = session.createQuery(FIND_HOTEL_WITH_USER.toString());
 	    query.setParameter("pk", id);
-	    List list = query.list();
-	    return list.isEmpty() ? null : (Hotel) list.get(0);
+	    List<Hotel> list = query.list();
+	    return list.isEmpty() ? null : list.get(0);
 	} catch (HibernateException e) {
 	    throw new PersistenceException(e);
 	}

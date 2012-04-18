@@ -82,8 +82,8 @@
 			<props>
 				<prop key="authanticate*">PROPAGATION_SUPPORTS</prop>
 				<prop key="find*">PROPAGATION_SUPPORTS</prop>
-				<prop key="save*"> PROPAGATION_REQUIRED,-ServiceException</prop>
-				<prop key="delete*"> PROPAGATION_REQUIRED,-ServiceException</prop>
+				<prop key="save*">PROPAGATION_REQUIRED,-ServiceException</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED,-ServiceException</prop>
 			</props>
 		</property>
 	</bean>
@@ -98,8 +98,8 @@
 		<property name="transactionAttributes">
 			<props>
 				<prop key="find*">PROPAGATION_SUPPORTS</prop>
-				<prop key="save*"> PROPAGATION_REQUIRED,-ServiceException</prop>
-				<prop key="delete*"> PROPAGATION_REQUIRED,-ServiceException</prop>
+				<prop key="save*">PROPAGATION_REQUIRED,-ServiceException</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED,-ServiceException</prop>
 			</props>
 		</property>
 	</bean>
@@ -114,8 +114,8 @@
 		<property name="transactionAttributes">
 			<props>
 				<prop key="find*">PROPAGATION_SUPPORTS</prop>
-				<prop key="save*"> PROPAGATION_REQUIRED,-ServiceException</prop>
-				<prop key="delete*"> PROPAGATION_REQUIRED,-ServiceException</prop>
+				<prop key="save*">PROPAGATION_REQUIRED,-ServiceException</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED,-ServiceException</prop>
 			</props>
 		</property>
 	</bean>
@@ -130,8 +130,8 @@
 		<property name="transactionAttributes">
 			<props>
 				<prop key="find*">PROPAGATION_SUPPORTS</prop>
-				<prop key="save*"> PROPAGATION_REQUIRED,-ServiceException</prop>
-				<prop key="delete*"> PROPAGATION_REQUIRED,-ServiceException</prop>
+				<prop key="save*">PROPAGATION_REQUIRED,-ServiceException</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED,-ServiceException</prop>
 			</props>
 		</property>
 	</bean>
@@ -146,8 +146,8 @@
 		<property name="transactionAttributes">
 			<props>
 				<prop key="find*">PROPAGATION_SUPPORTS</prop>
-				<prop key="save*"> PROPAGATION_REQUIRED,-ServiceException</prop>
-				<prop key="delete*"> PROPAGATION_REQUIRED,-ServiceException</prop>
+				<prop key="save*">PROPAGATION_REQUIRED,-ServiceException</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED,-ServiceException</prop>
 			</props>
 		</property>
 	</bean>
@@ -162,8 +162,8 @@
 		<property name="transactionAttributes">
 			<props>
 				<prop key="find*">PROPAGATION_SUPPORTS</prop>
-				<prop key="save*"> PROPAGATION_REQUIRED,-ServiceException</prop>
-				<prop key="delete*"> PROPAGATION_REQUIRED,-ServiceException</prop>
+				<prop key="save*">PROPAGATION_REQUIRED,-ServiceException</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED,-ServiceException</prop>
 			</props>
 		</property>
 	</bean>
@@ -178,8 +178,8 @@
 		<property name="transactionAttributes">
 			<props>
 				<prop key="find*">PROPAGATION_SUPPORTS</prop>
-				<prop key="save*"> PROPAGATION_REQUIRED,-ServiceException</prop>
-				<prop key="delete*"> PROPAGATION_REQUIRED,-ServiceException</prop>
+				<prop key="save*">PROPAGATION_REQUIRED,-ServiceException</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED,-ServiceException</prop>
 			</props>
 		</property>
 	</bean>
@@ -194,8 +194,8 @@
 		<property name="transactionAttributes">
 			<props>
 				<prop key="find*">PROPAGATION_SUPPORTS</prop>
-				<prop key="save*"> PROPAGATION_REQUIRED,-ServiceException</prop>
-				<prop key="delete*"> PROPAGATION_REQUIRED,-ServiceException</prop>
+				<prop key="save*">PROPAGATION_REQUIRED,-ServiceException</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED,-ServiceException</prop>
 			</props>
 		</property>
 	</bean>
@@ -211,8 +211,8 @@
 			<props>
 				<prop key="find*">PROPAGATION_SUPPORTS</prop>
 				<prop key="search*">PROPAGATION_SUPPORTS</prop>
-				<prop key="save*"> PROPAGATION_REQUIRED,-ServiceException</prop>
-				<prop key="delete*"> PROPAGATION_REQUIRED,-ServiceException</prop>
+				<prop key="save*">PROPAGATION_REQUIRED,-ServiceException</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED,-ServiceException</prop>
 			</props>
 		</property>
 	</bean>
@@ -228,8 +228,8 @@
 			<props>
 				<prop key="find*">PROPAGATION_SUPPORTS</prop>
 				<prop key="search*">PROPAGATION_SUPPORTS</prop>
-				<prop key="save*"> PROPAGATION_REQUIRED,-ServiceException</prop>
-				<prop key="delete*"> PROPAGATION_REQUIRED,-ServiceException</prop>
+				<prop key="save*">PROPAGATION_REQUIRED,-ServiceException</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED,-ServiceException</prop>
 			</props>
 		</property>
 	</bean>

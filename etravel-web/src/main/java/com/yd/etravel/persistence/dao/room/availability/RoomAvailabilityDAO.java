@@ -3,7 +3,6 @@
  */
 package com.yd.etravel.persistence.dao.room.availability;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -63,7 +62,6 @@ public class RoomAvailabilityDAO extends BaseDAO implements
     public boolean isDataRangeValid(final Long roomId, final Date fromDate,
 	    final Date toDate) throws PersistenceException {
 	try {
-	    ArrayList results = new ArrayList();
 
 	    Session session = getHibernateTemplate().getSessionFactory()
 		    .getCurrentSession();
@@ -73,9 +71,8 @@ public class RoomAvailabilityDAO extends BaseDAO implements
 	    query.setParameter(2, toDate);
 	    query.setParameter(3, toDate);
 	    query.setParameter(4, roomId);
-	    List list = query.list();
 
-	    return (list.isEmpty());
+	    return (query.list().isEmpty());
 	} catch (HibernateException e) {
 	    throw new PersistenceException(e);
 	}
@@ -197,9 +194,7 @@ public class RoomAvailabilityDAO extends BaseDAO implements
 	    Query query = session.createQuery(FIND_ALL_DAILY_ROOM_AVAILABILITY
 		    .toString());
 
-	    List list = query.list();
-
-	    return list;
+	    return query.list();
 
 	} catch (HibernateException e) {
 	    throw new PersistenceException(e);
@@ -216,9 +211,7 @@ public class RoomAvailabilityDAO extends BaseDAO implements
 			    .toString());
 	    query.setParameter(0, id);
 
-	    List list = query.list();
-
-	    return list;
+	    return query.list();
 
 	} catch (HibernateException e) {
 	    throw new PersistenceException(e);
@@ -235,14 +228,9 @@ public class RoomAvailabilityDAO extends BaseDAO implements
 			    .toString());
 	    query.setParameter(0, id);
 
-	    List list = query.list();
-	    if (!list.isEmpty()) {
-
-		return (RoomAvailability) list.get(0);
-	    } else {
-
-		return new RoomAvailability();
-	    }
+	    List<RoomAvailability> list = query.list();
+	    return !list.isEmpty() ? (RoomAvailability) list.get(0)
+		    : new RoomAvailability();
 
 	} catch (HibernateException e) {
 	    throw new PersistenceException(e);
@@ -262,9 +250,8 @@ public class RoomAvailabilityDAO extends BaseDAO implements
 	    query.setParameter(1, checkIn);
 	    query.setParameter(2, checkOut);
 
-	    List list = query.list();
 
-	    return list;
+	    return query.list();
 
 	} catch (HibernateException e) {
 	    throw new PersistenceException(e);
@@ -296,9 +283,8 @@ public class RoomAvailabilityDAO extends BaseDAO implements
 	    if (id != null) {
 		query.setParameter(0, id);
 	    }
-	    List list = query.list();
 
-	    return list;
+	    return query.list();
 
 	} catch (HibernateException e) {
 	    throw new PersistenceException(e);
