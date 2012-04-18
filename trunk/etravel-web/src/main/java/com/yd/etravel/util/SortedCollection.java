@@ -108,7 +108,7 @@ public class SortedCollection {
      * @throws UnableToSortException
      * @throws Exception
      */
-    @SuppressWarnings(value = { "" })
+    @SuppressWarnings(value = { })
     public static Collection orderByField(Collection list, String field,
 	    boolean assendingOrder) throws Exception {
 	ArrayList sortedList = new ArrayList(0);
@@ -225,11 +225,7 @@ public class SortedCollection {
 			+ exp.getMessage());
 		throw new Exception();
 	    }
-	    // System.out.println("NoSuchMethodException in getObject :
-	    // "+e.getMessage());
-	    // throw new Exception();
 	} catch (IllegalAccessException e) {
-	    // TODO: handle exception
 	    log.info("IllegalAccessException in getObject : " + e.getMessage());
 	    throw new Exception(e.getMessage(), e);
 	} catch (InvocationTargetException e) {

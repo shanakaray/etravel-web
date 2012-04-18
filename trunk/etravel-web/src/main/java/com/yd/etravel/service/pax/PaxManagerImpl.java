@@ -1,6 +1,5 @@
 package com.yd.etravel.service.pax;
 
-import java.util.Collections;
 import java.util.List;
 
 import com.yd.etravel.domain.custom.pax.PaxSearchDTO;
@@ -34,35 +33,29 @@ public class PaxManagerImpl implements IPaxManager {
     }
 
     public List<Pax> findAllActivePax() throws ServiceException {
-	List<Pax> list = Collections.EMPTY_LIST;
 	try {
-	    list = paxDAO.findAllActive(Pax.class);
+	    return paxDAO.findAllActive(Pax.class);
 	} catch (PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
-	return list;
     }
 
     public List<Pax> findAllPax() throws ServiceException {
-	List<Pax> list = Collections.EMPTY_LIST;
 	try {
-	    list = paxDAO.findAll(Pax.class);
+	    return paxDAO.findAll(Pax.class);
 	} catch (PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
-	return list;
     }
 
     public List<Pax> findPaxByHotel(Long hotelId) throws ServiceException {
-	List<Pax> list = Collections.EMPTY_LIST;
 	try {
 	    PaxSearchDTO searchDTO = new PaxSearchDTO();
 	    searchDTO.setHotelId(hotelId);
-	    list = paxDAO.findPax(searchDTO);
+	    return paxDAO.findPax(searchDTO);
 	} catch (PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
-	return list;
     }
 
     public Pax findPaxById(Long id) throws ServiceException {
@@ -100,13 +93,11 @@ public class PaxManagerImpl implements IPaxManager {
     }
 
     public List<Pax> findPax(PaxSearchDTO paxSearchDTO) throws ServiceException {
-	List<Pax> list = Collections.EMPTY_LIST;
 	try {
-	    list = paxDAO.findPax(paxSearchDTO);
+	    return paxDAO.findPax(paxSearchDTO);
 	} catch (PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
-	return list;
     }
 
 }

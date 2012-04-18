@@ -156,7 +156,6 @@ public class SeasonDAO extends BaseDAO implements ISeasonDAO {
 
     public List<RoomSeasonalRate> findRoomSeasonalRateByRoomId(Long roomId)
 	    throws PersistenceException {
-	List<RoomSeasonalRate> list = null;
 	try {
 
 	    Session session = getHibernateTemplate().getSessionFactory()
@@ -166,11 +165,10 @@ public class SeasonDAO extends BaseDAO implements ISeasonDAO {
 			    .toString());
 	    query.setParameter(0, roomId);
 
-	    list = query.list();
+	    return query.list();
 	} catch (HibernateException e) {
 	    throw new PersistenceException(e);
 	}
-	return list;
     }
 
     public List<Season> findSeasonByHotel(Long hotelId)
@@ -209,7 +207,7 @@ public class SeasonDAO extends BaseDAO implements ISeasonDAO {
 		    .getCurrentSession();
 	    Query query = session.createQuery(sb.toString());
 	    query.setParameter("id", id);
-	    List list = query.list();
+	    List<RoomSeasonalRate> list = query.list();
 	    return list.isEmpty() ? null : (RoomSeasonalRate) list.get(0);
 
 	} catch (HibernateException e) {

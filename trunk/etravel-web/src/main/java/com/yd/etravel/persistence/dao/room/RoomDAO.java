@@ -24,7 +24,7 @@ public class RoomDAO extends BaseDAO implements IRoomDAO {
     public boolean isExist(Long hotelId, Long roomTypeId, Long id)
 	    throws PersistenceException {
 	try {
-	    StringBuilder IS_ROOM_EXIST = new StringBuilder(
+	    final StringBuilder IS_ROOM_EXIST = new StringBuilder(
 		    "SELECT room FROM Room as room where ")
 		    .append("room.hotel.id=:hid AND room.roomType.id=:typeid ");
 
