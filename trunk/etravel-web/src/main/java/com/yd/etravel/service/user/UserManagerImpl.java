@@ -340,9 +340,9 @@ public class UserManagerImpl implements IUserManager {
 		}
 	    }
 	    List<Function> newfunclist = new ArrayList<Function>();
-	    for (Function f : role.getFunction()) {
-		if (functionIds.contains(f.getId())) {
-		    newfunclist.add(f);
+	    for (Function function : role.getFunction()) {
+		if (functionIds.contains(function.getId())) {
+		    newfunclist.add(function);
 		}
 	    }
 	    role.getFunction().clear();
