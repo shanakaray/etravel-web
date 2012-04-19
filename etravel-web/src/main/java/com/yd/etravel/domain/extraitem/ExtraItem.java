@@ -3,16 +3,20 @@
  */
 package com.yd.etravel.domain.extraitem;
 
+import static javax.persistence.CascadeType.ALL;
+
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import com.yd.etravel.domain.common.BaseObject;
 import com.yd.etravel.domain.hotel.Hotel;
@@ -40,7 +44,9 @@ public class ExtraItem extends BaseObject {
     @Column
     private String currency;
 
-    @ManyToMany(cascade = { CascadeType.ALL })
+    @ManyToMany(cascade = { ALL })
+    @JoinTable(joinColumns = @JoinColumn(name = "ITEM_ID", nullable = false), inverseJoinColumns = @JoinColumn(name = "HOTEL_ID", nullable = false), uniqueConstraints = @UniqueConstraint(columnNames = {
+	    "ITEM_ID", "HOTEL_ID" }))
     private List<Hotel> hotel;
 
     public ExtraItem() {
@@ -50,10 +56,6 @@ public class ExtraItem extends BaseObject {
 	super(id, name, code);
     }
 
-    /**
-     * 
-     * @hibernate.property
-     */
     public BigDecimal getCost() {
 	return cost;
     }
@@ -62,10 +64,6 @@ public class ExtraItem extends BaseObject {
 	this.cost = cost;
     }
 
-    /**
-     * 
-     * @hibernate.property
-     */
     public String getComments() {
 	return comments;
     }
@@ -86,13 +84,6 @@ public class ExtraItem extends BaseObject {
 	this.currency = currency;
     }
 
-    /**
-     * @hibernate.list table="T_ITEM_HOTEL" cascade="save-update" lazy="true"
-     * @hibernate.collection-many-to-many column="FK_HOTEL_ID"
-     *                                    class="com.yd.etravel.domain.hotel.Hotel"
-     * @hibernate.collection-key column="FK_ITEM_ID"
-     * @hibernate.collection-index column="HOTEL_INDEX"
-     */
     public List<Hotel> getHotel() {
 	return hotel;
     }
@@ -109,17 +100,10 @@ public class ExtraItem extends BaseObject {
 	return (Long[]) idSet.toArray(new Long[0]);
     }
 
-    /**
-     * @return the bookingComments
-     */
     public String getBookingComments() {
 	return bookingComments;
     }
 
-    /**
-     * @param bookingComments
-     *            the bookingComments to set
-     */
     public void setBookingComments(String bookingComments) {
 	this.bookingComments = bookingComments;
     }

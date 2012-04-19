@@ -1,5 +1,7 @@
 package com.yd.etravel.domain.user.role;
 
+import static javax.persistence.CascadeType.ALL;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -18,7 +20,7 @@ import com.yd.etravel.domain.common.BaseObject;
 @Table(name = "T_ROLE")
 public class Role extends BaseObject {
 
-    @ManyToMany( cascade = { javax.persistence.CascadeType.ALL } )
+    @ManyToMany( cascade = { ALL } )
     @JoinTable( name="T_ROLE_T_FUNC",
          joinColumns = @JoinColumn(name = "T_ROLE_ID", nullable = false),
          inverseJoinColumns = @JoinColumn(name = "FUNCTION_ID", nullable = false),

@@ -19,9 +19,6 @@ public class RoomSeasonalRate extends BaseObject {
     @ManyToOne
     private Room room;
 
-    // private BigDecimal adultCost;
-    // private BigDecimal childCost;
-    // private BigDecimal infantCost;
     @Column
     private BigDecimal totalCost;
 
