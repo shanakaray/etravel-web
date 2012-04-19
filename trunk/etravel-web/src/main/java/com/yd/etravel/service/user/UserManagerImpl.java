@@ -5,6 +5,7 @@ package com.yd.etravel.service.user;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import com.yd.etravel.domain.custom.user.UserSearchDTO;
@@ -333,20 +334,19 @@ public class UserManagerImpl implements IUserManager {
 	try {
 
 	    Role role = (Role) userDAO.findById(Role.class, roleId);
+	    role.getFunction().size();
+	    for (Iterator<Function> funcIt = role.getFunction().iterator(); funcIt.hasNext();) {
+		if (!functionIds.contains(funcIt.next().getId())) {
+		    funcIt.remove();
+		}
+	    }
+
 	    for (Long fid : functionIds) {
 		if (!role.hasFunctionId(fid)) {
-		    role.getFunction().add(
-			    (Function) userDAO.findById(Function.class, fid));
+		    role.getFunction().add((Function) userDAO.findById(Function.class, fid));
 		}
 	    }
-	    List<Function> newfunclist = new ArrayList<Function>();
-	    for (Function function : role.getFunction()) {
-		if (functionIds.contains(function.getId())) {
-		    newfunclist.add(function);
-		}
-	    }
-	    role.getFunction().clear();
-	    role.setFunction(newfunclist);
+
 	    userDAO.save(role);
 	} catch (PersistenceException e) {
 	    throw new ServiceException(null, e);
