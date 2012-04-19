@@ -6,8 +6,11 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import com.yd.etravel.domain.common.BaseObject;
 
@@ -15,7 +18,11 @@ import com.yd.etravel.domain.common.BaseObject;
 @Table(name = "T_ROLE")
 public class Role extends BaseObject {
 
-    @ManyToMany
+    @ManyToMany( cascade = { javax.persistence.CascadeType.ALL } )
+    @JoinTable( name="T_ROLE_T_FUNC",
+         joinColumns = @JoinColumn(name = "T_ROLE_ID", nullable = false),
+         inverseJoinColumns = @JoinColumn(name = "FUNCTION_ID", nullable = false),
+         uniqueConstraints = @UniqueConstraint (columnNames = { "T_ROLE_ID", "FUNCTION_ID" }))
     private List<Function> function;
 
     public Role(String name) {
@@ -49,7 +56,7 @@ public class Role extends BaseObject {
 
     public boolean hasFunctionId(Long key) {
 	for (Function function : getFunction()) {
-	    if (function.getId() == key)
+	    if (function.getId().equals( key) )
 		return true;
 	}
 	return false;
