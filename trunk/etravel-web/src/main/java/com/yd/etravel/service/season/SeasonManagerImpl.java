@@ -1,6 +1,5 @@
 package com.yd.etravel.service.season;
 
-import java.util.Collections;
 import java.util.List;
 
 import com.yd.etravel.domain.hotel.Hotel;
@@ -101,25 +100,20 @@ public class SeasonManagerImpl implements ISeasonManager {
     }
 
     public List<Season> findAllSeason() throws ServiceException {
-	List<Season> list = Collections.EMPTY_LIST;
 	try {
-	    list = seasonDAO.findAll(Season.class);
+	    return seasonDAO.findAll(Season.class);
 
 	} catch (PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
-	return list;
     }
 
     public List<Season> findAllSeasonWithHotel() throws ServiceException {
-	List<Season> list = Collections.EMPTY_LIST;
 	try {
-	    list = seasonDAO.findAllSeasonWithHotel();
-
+	    return seasonDAO.findAllSeasonWithHotel();
 	} catch (PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
-	return list;
     }
 
     /*
@@ -128,13 +122,11 @@ public class SeasonManagerImpl implements ISeasonManager {
      * @see com.yd.etravel.service.hotel.IHotelManager#findAllActiveHotels()
      */
     public List<Season> findAllActiveSeason() throws ServiceException {
-	List<Season> list = Collections.EMPTY_LIST;
 	try {
-	    list = seasonDAO.findAllActive(Season.class);
+	    return seasonDAO.findAllActive(Season.class);
 	} catch (PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
-	return list;
     }
 
     // / Seasonal Rate
@@ -202,36 +194,30 @@ public class SeasonManagerImpl implements ISeasonManager {
 
     public List<RoomSeasonalRate> findAllRoomSeasonalRate()
 	    throws ServiceException {
-	List<RoomSeasonalRate> list = Collections.EMPTY_LIST;
 	try {
-	    list = seasonDAO.findAll(RoomSeasonalRate.class);
+	    return seasonDAO.findAll(RoomSeasonalRate.class);
 
 	} catch (PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
-	return list;
     }
 
     public List<RoomSeasonalRate> findAllRoomSeasonalRateWithRoomAndSeason(
 	    Long hotelId) throws ServiceException {
-	List<RoomSeasonalRate> list = Collections.EMPTY_LIST;
 	try {
-	    list = seasonDAO.findAllRoomSeasonalRateWithRoomAndSeason(hotelId);
+	    return seasonDAO.findAllRoomSeasonalRateWithRoomAndSeason(hotelId);
 
 	} catch (PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
-	return list;
     }
 
     public List<Season> findSeasonByHotel(Long hotelId) throws ServiceException {
-	List<Season> list = Collections.EMPTY_LIST;
 	try {
-	    list = seasonDAO.findSeasonByHotel(hotelId);
+	    return seasonDAO.findSeasonByHotel(hotelId);
 
 	} catch (PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
-	return list;
     }
 }

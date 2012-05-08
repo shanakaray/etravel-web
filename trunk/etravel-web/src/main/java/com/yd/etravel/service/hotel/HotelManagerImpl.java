@@ -3,7 +3,6 @@
  */
 package com.yd.etravel.service.hotel;
 
-import java.util.Collections;
 import java.util.List;
 
 import com.yd.etravel.domain.custom.user.UserSearchDTO;
@@ -55,13 +54,11 @@ public class HotelManagerImpl implements IHotelManager {
      * @see com.yd.etravel.service.hotel.IHotelManager#findAllActiveHotels()
      */
     public List<Hotel> findAllActiveHotels() throws ServiceException {
-	List<Hotel> list = Collections.EMPTY_LIST;
 	try {
-	    list = hotelDAO.findAllActive(Hotel.class);
+	    return hotelDAO.findAllActive(Hotel.class);
 	} catch (PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
-	return list;
     }
 
     /*
@@ -70,13 +67,11 @@ public class HotelManagerImpl implements IHotelManager {
      * @see com.yd.etravel.service.hotel.IHotelManager#findAllHotel()
      */
     public List<Hotel> findAllHotel() throws ServiceException {
-	List<Hotel> list = Collections.EMPTY_LIST;
 	try {
-	    list = hotelDAO.findAll(Hotel.class);
+	    return hotelDAO.findAll(Hotel.class);
 	} catch (PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
-	return list;
     }
 
     /*
@@ -97,15 +92,11 @@ public class HotelManagerImpl implements IHotelManager {
     }
 
     public List<Hotel> findHotelsById(Long id[]) throws ServiceException {
-	List<Hotel> hotels = Collections.EMPTY_LIST;
 	try {
-
-	    hotels = hotelDAO.findAll(Hotel.class, id);
-
+	    return hotelDAO.findAll(Hotel.class, id);
 	} catch (PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
-	return hotels;
     }
 
     /*
@@ -131,7 +122,6 @@ public class HotelManagerImpl implements IHotelManager {
 	    hotel.setSuperUser(userDAO.findUsers(userSearchDTO));
 
 	    if (hotel.getId() == null) {
-
 		hotel = (Hotel) hotelDAO.save(hotel);
 	    } else {
 		hotel = (Hotel) hotelDAO.update(hotel);

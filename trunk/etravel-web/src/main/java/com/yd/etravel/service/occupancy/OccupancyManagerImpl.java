@@ -1,6 +1,5 @@
 package com.yd.etravel.service.occupancy;
 
-import java.util.Collections;
 import java.util.List;
 
 import com.yd.etravel.domain.occupancy.Occupancy;
@@ -94,27 +93,23 @@ public class OccupancyManagerImpl implements IOccupancyManager {
     }
 
     public List<Occupancy> findAllOccupancy() throws ServiceException {
-	List<Occupancy> list = Collections.EMPTY_LIST;
 	try {
-	    list = occupancyDAO.findAll(Occupancy.class);
+	    return occupancyDAO.findAll(Occupancy.class);
 
 	} catch (PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
-	return list;
     }
 
     public List<Occupancy> findAllOccupancyWithRoomType()
 	    throws ServiceException {
-	List<Occupancy> list = Collections.EMPTY_LIST;
 	try {
-	    list = (List<Occupancy>) occupancyDAO
+	    return (List<Occupancy>) occupancyDAO
 		    .findAllOccupancyWithRoomType();
 
 	} catch (PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
-	return list;
     }
 
     /*
@@ -123,13 +118,11 @@ public class OccupancyManagerImpl implements IOccupancyManager {
      * @see com.yd.etravel.service.hotel.IHotelManager#findAllActiveHotels()
      */
     public List<Occupancy> findAllActiveOccupancy() throws ServiceException {
-	List<Occupancy> list = Collections.EMPTY_LIST;
 	try {
-	    list = occupancyDAO.findAllActive(Occupancy.class);
+	    return occupancyDAO.findAllActive(Occupancy.class);
 	} catch (PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
-	return list;
     }
 
     /*
@@ -139,14 +132,12 @@ public class OccupancyManagerImpl implements IOccupancyManager {
      */
     public List<Occupancy> findAllOccupancyByRoomType(Long roomTypeId)
 	    throws ServiceException {
-	List<Occupancy> list = Collections.EMPTY_LIST;
 	try {
 
-	    list = occupancyDAO.findAllOccupancyByRoomType(roomTypeId);
+	    return occupancyDAO.findAllOccupancyByRoomType(roomTypeId);
 
 	} catch (PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
-	return list;
     }
 }
