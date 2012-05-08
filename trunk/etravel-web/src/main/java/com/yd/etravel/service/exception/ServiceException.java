@@ -21,7 +21,7 @@ public class ServiceException extends Exception {
 	// TODO Auto-generated constructor stub
     }
 
-    public ServiceException(UIMesssage uiMesssage) {
+    public ServiceException(final UIMesssage uiMesssage) {
 	super();
 	this.uiMesssage = uiMesssage;
     }
@@ -30,13 +30,13 @@ public class ServiceException extends Exception {
      * @param arg0
      * @param arg1
      */
-    public ServiceException(UIMesssage uiMesssage, Throwable arg1) {
+    public ServiceException(final UIMesssage uiMesssage, final Throwable arg1) {
 	super(arg1);
 	this.uiMesssage = uiMesssage;
     }
 
     public UIMesssage getUIMessage() {
-	return uiMesssage;
+	return this.uiMesssage;
     }
 
 }

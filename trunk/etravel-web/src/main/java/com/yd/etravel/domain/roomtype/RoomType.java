@@ -19,18 +19,18 @@ public class RoomType extends BaseObject {
     private int maxPassengers;
 
     public String getComments() {
-	return comments;
+	return this.comments;
     }
 
-    public void setComments(String comments) {
+    public void setComments(final String comments) {
 	this.comments = comments;
     }
 
     public int getMaxPassengers() {
-	return maxPassengers;
+	return this.maxPassengers;
     }
 
-    public void setMaxPassengers(int maxPassengers) {
+    public void setMaxPassengers(final int maxPassengers) {
 	this.maxPassengers = maxPassengers;
     }
 

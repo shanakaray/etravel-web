@@ -29,14 +29,14 @@ public class SearchRequestDTO {
      * @return the hotelId
      */
     public Long getHotelId() {
-	return hotelId;
+	return this.hotelId;
     }
 
     /**
      * @param hotelId
      *            the hotelId to set
      */
-    public void setHotelId(Long hotelId) {
+    public void setHotelId(final Long hotelId) {
 	this.hotelId = hotelId;
     }
 
@@ -44,14 +44,14 @@ public class SearchRequestDTO {
      * @return the hotelName
      */
     public String getHotelName() {
-	return hotelName;
+	return this.hotelName;
     }
 
     /**
      * @param hotelName
      *            the hotelName to set
      */
-    public void setHotelName(String hotelName) {
+    public void setHotelName(final String hotelName) {
 	this.hotelName = hotelName;
     }
 
@@ -59,29 +59,29 @@ public class SearchRequestDTO {
      * @return the roomTypeId
      */
     public Long getRoomTypeId() {
-	return roomTypeId;
+	return this.roomTypeId;
     }
 
     /**
      * @param roomTypeId
      *            the roomTypeId to set
      */
-    public void setRoomTypeId(Long Long) {
-	this.roomTypeId = roomTypeId;
+    public void setRoomTypeId(final Long Long) {
+	this.roomTypeId = this.roomTypeId;
     }
 
     /**
      * @return the roomTypeName
      */
     public String getRoomTypeName() {
-	return roomTypeName;
+	return this.roomTypeName;
     }
 
     /**
      * @param roomTypeName
      *            the roomTypeName to set
      */
-    public void setRoomTypeName(String roomTypeName) {
+    public void setRoomTypeName(final String roomTypeName) {
 	this.roomTypeName = roomTypeName;
     }
 
@@ -89,18 +89,18 @@ public class SearchRequestDTO {
      * @return the checkIn
      */
     public Date getCheckIn() {
-	return checkIn;
+	return this.checkIn;
     }
 
     public String getCheckInString() {
-	return DateUtil.format(checkIn);
+	return DateUtil.format(this.checkIn);
     }
 
     /**
      * @param checkIn
      *            the checkIn to set
      */
-    public void setCheckIn(Date checkIn) {
+    public void setCheckIn(final Date checkIn) {
 	this.checkIn = checkIn;
     }
 
@@ -108,24 +108,24 @@ public class SearchRequestDTO {
      * @return the checkOut
      */
     public Date getCheckOut() {
-	return checkOut;
+	return this.checkOut;
     }
 
     public String getCheckOutString() {
-	return DateUtil.format(checkOut);
+	return DateUtil.format(this.checkOut);
     }
 
     public int getNoOfNights() {
-	Calendar calendar1 = Calendar.getInstance();
+	final Calendar calendar1 = Calendar.getInstance();
 	calendar1.setTime(getCheckOut());
 	calendar1.getTime();
 
-	Calendar calendar2 = Calendar.getInstance();
+	final Calendar calendar2 = Calendar.getInstance();
 	calendar2.setTime(getCheckIn());
 	calendar2.getTime();
 
-	long diff = calendar1.getTimeInMillis() - calendar2.getTimeInMillis();
-	int noOfNights = new Long(diff / (24 * 60 * 60 * 1000)).intValue();
+	final long diff = calendar1.getTimeInMillis() - calendar2.getTimeInMillis();
+	final int noOfNights = new Long(diff / (24 * 60 * 60 * 1000)).intValue();
 	return noOfNights;
     }
 
@@ -133,7 +133,7 @@ public class SearchRequestDTO {
      * @param checkOut
      *            the checkOut to set
      */
-    public void setCheckOut(Date checkOut) {
+    public void setCheckOut(final Date checkOut) {
 	this.checkOut = checkOut;
     }
 
@@ -141,14 +141,14 @@ public class SearchRequestDTO {
      * @return the adult
      */
     public Integer getAdult() {
-	return adult;
+	return this.adult;
     }
 
     /**
      * @param adult
      *            the adult to set
      */
-    public void setAdult(Integer adult) {
+    public void setAdult(final Integer adult) {
 	this.adult = adult;
     }
 
@@ -156,14 +156,14 @@ public class SearchRequestDTO {
      * @return the child
      */
     public Integer getChild() {
-	return child;
+	return this.child;
     }
 
     /**
      * @param child
      *            the child to set
      */
-    public void setChild(Integer child) {
+    public void setChild(final Integer child) {
 	this.child = child;
     }
 
@@ -171,14 +171,14 @@ public class SearchRequestDTO {
      * @return the infant
      */
     public Integer getInfant() {
-	return infant;
+	return this.infant;
     }
 
     /**
      * @param infant
      *            the infant to set
      */
-    public void setInfant(Integer infant) {
+    public void setInfant(final Integer infant) {
 	this.infant = infant;
     }
 
@@ -186,14 +186,14 @@ public class SearchRequestDTO {
      * @return the childAge
      */
     public Integer getChildAge() {
-	return childAge;
+	return this.childAge;
     }
 
     /**
      * @param childAge
      *            the childAge to set
      */
-    public void setChildAge(Integer childAge) {
+    public void setChildAge(final Integer childAge) {
 	this.childAge = childAge;
     }
 
@@ -201,14 +201,14 @@ public class SearchRequestDTO {
      * @return the infantAge
      */
     public Integer getInfantAge() {
-	return infantAge;
+	return this.infantAge;
     }
 
     /**
      * @param infantAge
      *            the infantAge to set
      */
-    public void setInfantAge(Integer infantAge) {
+    public void setInfantAge(final Integer infantAge) {
 	this.infantAge = infantAge;
     }
 

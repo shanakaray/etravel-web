@@ -27,6 +27,7 @@
 				<value>com.yd.etravel.domain.booking.ExtraItemBooking</value>
 				<value>com.yd.etravel.domain.booking.Payment</value>
 				<value>com.yd.etravel.domain.user.role.Function</value>
+				<value>com.yd.etravel.domain.cmt.content.Image</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">

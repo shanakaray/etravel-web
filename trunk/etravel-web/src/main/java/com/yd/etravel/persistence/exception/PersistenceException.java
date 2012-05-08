@@ -19,7 +19,7 @@ public class PersistenceException extends Exception {
     /**
      * @param arg0
      */
-    public PersistenceException(String arg0) {
+    public PersistenceException(final String arg0) {
 	super(arg0);
 	// TODO Auto-generated constructor stub
     }
@@ -27,7 +27,7 @@ public class PersistenceException extends Exception {
     /**
      * @param arg0
      */
-    public PersistenceException(Throwable arg0) {
+    public PersistenceException(final Throwable arg0) {
 	super(arg0);
 	// TODO Auto-generated constructor stub
     }
@@ -36,7 +36,7 @@ public class PersistenceException extends Exception {
      * @param arg0
      * @param arg1
      */
-    public PersistenceException(String arg0, Throwable arg1) {
+    public PersistenceException(final String arg0, final Throwable arg1) {
 	super(arg0, arg1);
 	// TODO Auto-generated constructor stub
     }

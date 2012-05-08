@@ -59,41 +59,41 @@ public class BookingForm extends BaseForm {
     private String payed;
 
     public boolean isRegisterd() {
-	return registerd;
+	return this.registerd;
     }
 
-    public void setRegisterd(boolean registerd) {
+    public void setRegisterd(final boolean registerd) {
 	this.registerd = registerd;
     }
 
     public String getRUsername() {
-	return rUsername;
+	return this.rUsername;
     }
 
-    public void setRUsername(String username) {
-	rUsername = username;
+    public void setRUsername(final String username) {
+	this.rUsername = username;
     }
 
     public String getRPassword() {
-	return rPassword;
+	return this.rPassword;
     }
 
-    public void setRPassword(String password) {
-	rPassword = password;
+    public void setRPassword(final String password) {
+	this.rPassword = password;
     }
 
     /**
      * @return the totalPax
      */
     public Integer getTotalPax() {
-	return totalPax;
+	return this.totalPax;
     }
 
     /**
      * @param totalPax
      *            the totalPax to set
      */
-    public void setTotalPax(Integer totalPax) {
+    public void setTotalPax(final Integer totalPax) {
 	this.totalPax = totalPax;
     }
 
@@ -101,14 +101,14 @@ public class BookingForm extends BaseForm {
      * @return the adult
      */
     public Integer getAdult() {
-	return adult;
+	return this.adult;
     }
 
     /**
      * @param adult
      *            the adult to set
      */
-    public void setAdult(Integer adult) {
+    public void setAdult(final Integer adult) {
 	this.adult = adult;
     }
 
@@ -116,14 +116,14 @@ public class BookingForm extends BaseForm {
      * @return the child
      */
     public Integer getChild() {
-	return child;
+	return this.child;
     }
 
     /**
      * @param child
      *            the child to set
      */
-    public void setChild(Integer child) {
+    public void setChild(final Integer child) {
 	this.child = child;
     }
 
@@ -131,14 +131,14 @@ public class BookingForm extends BaseForm {
      * @return the infant
      */
     public Integer getInfant() {
-	return infant;
+	return this.infant;
     }
 
     /**
      * @param infant
      *            the infant to set
      */
-    public void setInfant(Integer infant) {
+    public void setInfant(final Integer infant) {
 	this.infant = infant;
     }
 
@@ -146,14 +146,14 @@ public class BookingForm extends BaseForm {
      * @return the noOfRoom
      */
     public Integer getNoOfRoom() {
-	return noOfRoom;
+	return this.noOfRoom;
     }
 
     /**
      * @param noOfRoom
      *            the noOfRoom to set
      */
-    public void setNoOfRoom(Integer noOfRoom) {
+    public void setNoOfRoom(final Integer noOfRoom) {
 	this.noOfRoom = noOfRoom;
     }
 
@@ -161,14 +161,14 @@ public class BookingForm extends BaseForm {
      * @return the comments
      */
     public String getComments() {
-	return comments;
+	return this.comments;
     }
 
     /**
      * @param comments
      *            the comments to set
      */
-    public void setComments(String comments) {
+    public void setComments(final String comments) {
 	this.comments = comments;
     }
 
@@ -176,14 +176,14 @@ public class BookingForm extends BaseForm {
      * @return the roomDTO
      */
     public RoomDTO getRoomDTO() {
-	return roomDTO;
+	return this.roomDTO;
     }
 
     /**
      * @param roomDTO
      *            the roomDTO to set
      */
-    public void setRoomDTO(RoomDTO roomDTO) {
+    public void setRoomDTO(final RoomDTO roomDTO) {
 	this.roomDTO = roomDTO;
     }
 
@@ -191,14 +191,14 @@ public class BookingForm extends BaseForm {
      * @return the paymentMethodId
      */
     public String getPaymentMethodId() {
-	return paymentMethodId;
+	return this.paymentMethodId;
     }
 
     /**
      * @param paymentMethodId
      *            the paymentMethodId to set
      */
-    public void setPaymentMethodId(String paymentMethodId) {
+    public void setPaymentMethodId(final String paymentMethodId) {
 	this.paymentMethodId = paymentMethodId;
     }
 
@@ -210,7 +210,7 @@ public class BookingForm extends BaseForm {
      * .ActionMapping, javax.servlet.http.HttpServletRequest)
      */
     @Override
-    public void resetBean(ActionMapping mapping, HttpServletRequest request) {
+    public void resetBean(final ActionMapping mapping, final HttpServletRequest request) {
 	// this.address = EMPTY_STRING;
 	// this.contact = EMPTY_STRING;
 	// this.email = EMPTY_STRING;
@@ -229,42 +229,42 @@ public class BookingForm extends BaseForm {
     }
 
     public List<User> getAllCustomers() {
-	return allCustomers;
+	return this.allCustomers;
     }
 
-    public void setAllCustomers(List<User> allCustomers) {
+    public void setAllCustomers(final List<User> allCustomers) {
 	this.allCustomers = allCustomers;
     }
 
     public Long getBookedUserId() {
-	return bookedUserId;
+	return this.bookedUserId;
     }
 
-    public void setBookedUserId(Long bookedUserId) {
+    public void setBookedUserId(final Long bookedUserId) {
 	this.bookedUserId = bookedUserId;
     }
 
     public boolean isNewCustomer() {
-	return newCustomer;
+	return this.newCustomer;
     }
 
-    public void setNewCustomer(boolean newCustomer) {
+    public void setNewCustomer(final boolean newCustomer) {
 	this.newCustomer = newCustomer;
     }
 
     public String getBookingId() {
-	return bookingId;
+	return this.bookingId;
     }
 
-    public void setBookingId(String bookingId) {
+    public void setBookingId(final String bookingId) {
 	this.bookingId = bookingId;
     }
 
     public String getPayed() {
-	return payed;
+	return this.payed;
     }
 
-    public void setPayed(String payed) {
+    public void setPayed(final String payed) {
 	this.payed = payed;
     }
 
@@ -276,12 +276,12 @@ public class BookingForm extends BaseForm {
      * .ActionMapping, javax.servlet.http.HttpServletRequest)
      */
     @Override
-    public ActionErrors validateBean(ActionMapping mapping,
-	    HttpServletRequest request) {
+    public ActionErrors validateBean(final ActionMapping mapping,
+	    final HttpServletRequest request) {
 	// TODO Auto-generated method stub
 
-	ActionErrors errors = new ActionErrors();
-	if ((isGuest() && !isRegisterd()) || isNewCustomer()) {
+	final ActionErrors errors = new ActionErrors();
+	if (isGuest() && !isRegisterd() || isNewCustomer()) {
 	    if (StringUtils.isEmpty(this.firstName)) {
 		addErrors(errors, "etravel.error.customer.firstname.required");
 	    }
@@ -316,7 +316,7 @@ public class BookingForm extends BaseForm {
 		addErrors(errors, "etravel.error.pw.length");
 		this.cusPassword = EMPTY_STRING;
 		this.repassword = EMPTY_STRING;
-	    } else if (!this.cusPassword.equals(repassword)) {
+	    } else if (!this.cusPassword.equals(this.repassword)) {
 		addErrors(errors, "etravel.error.pw.notmached");
 		this.cusPassword = EMPTY_STRING;
 		this.repassword = EMPTY_STRING;
@@ -339,7 +339,7 @@ public class BookingForm extends BaseForm {
 
 	}
 
-	if ((this.totalPax) <= 0) {
+	if (this.totalPax <= 0) {
 	    addErrors(errors, "etravel.error.booking.pax.count.zero");
 
 	}
@@ -355,14 +355,14 @@ public class BookingForm extends BaseForm {
      * @return the id
      */
     public Long getId() {
-	return id;
+	return this.id;
     }
 
     /**
      * @param id
      *            the id to set
      */
-    public void setId(Long id) {
+    public void setId(final Long id) {
 	this.id = id;
     }
 
@@ -370,14 +370,14 @@ public class BookingForm extends BaseForm {
      * @return the allAgent
      */
     public List<User> getAllAgent() {
-	return allAgent;
+	return this.allAgent;
     }
 
     /**
      * @param allAgent
      *            the allAgent to set
      */
-    public void setAllAgent(List<User> allAgent) {
+    public void setAllAgent(final List<User> allAgent) {
 	this.allAgent = allAgent;
     }
 
@@ -385,110 +385,110 @@ public class BookingForm extends BaseForm {
      * @return the agentId
      */
     public Long getAgentId() {
-	return agentId;
+	return this.agentId;
     }
 
     /**
      * @param agentId
      *            the agentId to set
      */
-    public void setAgentId(Long agentId) {
+    public void setAgentId(final Long agentId) {
 	this.agentId = agentId;
     }
 
     public Long getUid() {
-	return uid;
+	return this.uid;
     }
 
-    public void setUid(Long uid) {
+    public void setUid(final Long uid) {
 	this.uid = uid;
     }
 
     public String getCusUsername() {
-	return cusUsername;
+	return this.cusUsername;
     }
 
-    public void setCusUsername(String cusUsername) {
+    public void setCusUsername(final String cusUsername) {
 	this.cusUsername = cusUsername;
     }
 
     public String getCusPassword() {
-	return cusPassword;
+	return this.cusPassword;
     }
 
-    public void setCusPassword(String cusPassword) {
+    public void setCusPassword(final String cusPassword) {
 	this.cusPassword = cusPassword;
     }
 
     public String getRepassword() {
-	return repassword;
+	return this.repassword;
     }
 
-    public void setRepassword(String repassword) {
+    public void setRepassword(final String repassword) {
 	this.repassword = repassword;
     }
 
     public String getAddress() {
-	return address;
+	return this.address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(final String address) {
 	this.address = address;
     }
 
     public String getContact() {
-	return contact;
+	return this.contact;
     }
 
-    public void setContact(String contact) {
+    public void setContact(final String contact) {
 	this.contact = contact;
     }
 
     public String getEmail() {
-	return email;
+	return this.email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(final String email) {
 	this.email = email;
     }
 
     public String getFirstName() {
-	return firstName;
+	return this.firstName;
     }
 
-    public void setFirstName(String firstName) {
+    public void setFirstName(final String firstName) {
 	this.firstName = firstName;
     }
 
     public String getLastName() {
-	return lastName;
+	return this.lastName;
     }
 
-    public void setLastName(String lastName) {
+    public void setLastName(final String lastName) {
 	this.lastName = lastName;
     }
 
     public String getNic() {
-	return nic;
+	return this.nic;
     }
 
-    public void setNic(String nic) {
+    public void setNic(final String nic) {
 	this.nic = nic;
     }
 
     public boolean isGuest() {
-	return guest;
+	return this.guest;
     }
 
-    public void setGuest(boolean guest) {
+    public void setGuest(final boolean guest) {
 	this.guest = guest;
     }
 
     public boolean isSingleNight() {
-	return singleNight;
+	return this.singleNight;
     }
 
-    public void setSingleNight(boolean singleNight) {
+    public void setSingleNight(final boolean singleNight) {
 	this.singleNight = singleNight;
     }
 

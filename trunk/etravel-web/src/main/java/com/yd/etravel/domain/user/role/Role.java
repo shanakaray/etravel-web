@@ -27,7 +27,7 @@ public class Role extends BaseObject {
          uniqueConstraints = @UniqueConstraint (columnNames = { "T_ROLE_ID", "FUNCTION_ID" }))
     private List<Function> function;
 
-    public Role(String name) {
+    public Role(final String name) {
 	super(name);
     }
 
@@ -35,38 +35,41 @@ public class Role extends BaseObject {
 	super();
     }
 
+    @Override
     @Column(unique = true, nullable = true)
     public String getName() {
 	return super.getName();
     }
 
-    public void setName(String name) {
+    @Override
+    public void setName(final String name) {
 	super.setName(name);
     }
 
     public List<Function> getFunction() {
-	return function;
+	return this.function;
     }
 
-    public void setFunction(List<Function> function) {
+    public void setFunction(final List<Function> function) {
 	this.function = function;
     }
 
-    public boolean hasFunction(String key) {
+    public boolean hasFunction(final String key) {
 	return this.function.contains(new Function(key));
     }
 
-    public boolean hasFunctionId(Long key) {
-	for (Function function : getFunction()) {
-	    if (function.getId().equals( key) )
+    public boolean hasFunctionId(final Long key) {
+	for (final Function function : getFunction()) {
+	    if (function.getId().equals( key) ) {
 		return true;
+	    }
 	}
 	return false;
     }
 
     public Set<String> getFunctionNames() {
-	Set<String> set = new HashSet<String>();
-	for (Function function : getFunction()) {
+	final Set<String> set = new HashSet<String>();
+	for (final Function function : getFunction()) {
 	    set.add(function.getKey());
 	}
 	return set;

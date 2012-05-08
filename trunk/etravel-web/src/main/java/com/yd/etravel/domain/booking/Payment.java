@@ -22,18 +22,18 @@ public class Payment extends BaseObject {
     private BigDecimal totalPrice;
 
     public Booking getBooking() {
-	return booking;
+	return this.booking;
     }
 
-    public void setBooking(Booking booking) {
+    public void setBooking(final Booking booking) {
 	this.booking = booking;
     }
 
     public BigDecimal getTotalPrice() {
-	return totalPrice;
+	return this.totalPrice;
     }
 
-    public void setTotalPrice(BigDecimal totalPrice) {
+    public void setTotalPrice(final BigDecimal totalPrice) {
 	this.totalPrice = totalPrice;
     }
 }

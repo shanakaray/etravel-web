@@ -40,8 +40,8 @@ public class SearchAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward add(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward add(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	// TODO Auto-generated method stub
 	return null;
@@ -56,11 +56,11 @@ public class SearchAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward back(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward back(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	final SearchForm searchForm = (SearchForm) form;
-	List<Hotel> allHotel = getHotelManager().findAllActiveHotels();
+	final List<Hotel> allHotel = getHotelManager().findAllActiveHotels();
 	searchForm.setAllHotel(allHotel);
 	request.getSession().setAttribute("hotelId", "");
 
@@ -77,8 +77,8 @@ public class SearchAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    public ActionForward create(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    public ActionForward create(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	// TODO Auto-generated method stub
 	return null;
@@ -94,8 +94,8 @@ public class SearchAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward delete(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward delete(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	// TODO Auto-generated method stub
 	return null;
@@ -110,8 +110,8 @@ public class SearchAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward edit(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward edit(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	// TODO Auto-generated method stub
 	return null;
@@ -126,13 +126,13 @@ public class SearchAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward find(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward find(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	final SearchForm searchForm = (SearchForm) form;
 
 	SearchResultsDTO searchResultsDTO = new SearchResultsDTO();
-	SearchRequestDTO searchRequestDTO = new SearchRequestDTO();
+	final SearchRequestDTO searchRequestDTO = new SearchRequestDTO();
 
 	searchRequestDTO.setCheckIn(DateUtil.parse(searchForm.getCheckIn()));
 	searchRequestDTO.setCheckOut(DateUtil.parse(searchForm.getCheckOut()));
@@ -157,12 +157,12 @@ public class SearchAction extends BaseAction {
 
 	searchResultsDTO = getSearchManager().searchRoom(searchRequestDTO);
 
-	List<ExtraItemDTO> extraItemDTOList = new ArrayList<ExtraItemDTO>();
-	List<ExtraItem> eiList = getItemManager().findExtraItemsByHotel(
+	final List<ExtraItemDTO> extraItemDTOList = new ArrayList<ExtraItemDTO>();
+	final List<ExtraItem> eiList = getItemManager().findExtraItemsByHotel(
 		searchForm.getHotelId());
 
-	for (ExtraItem extraItem : eiList) {
-	    ExtraItemDTO eid = new ExtraItemDTO();
+	for (final ExtraItem extraItem : eiList) {
+	    final ExtraItemDTO eid = new ExtraItemDTO();
 
 	    eid.setExtraItem(extraItem);
 	    extraItemDTOList.add(eid);
@@ -193,8 +193,8 @@ public class SearchAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward forward(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward forward(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	final SearchForm searchForm = (SearchForm) form;
 
@@ -208,10 +208,10 @@ public class SearchAction extends BaseAction {
 	// SearchRequestDTO searchRequestDTO =(SearchRequestDTO)
 	// request.getSession().getAttribute("searchRequestDTO");
 
-	SearchResultsDTO searchResultsDTO = (SearchResultsDTO) request
+	final SearchResultsDTO searchResultsDTO = (SearchResultsDTO) request
 		.getSession().getAttribute("searchResultsDTO");
 
-	for (RoomDTO dto : searchResultsDTO.getRoomDTO()) {
+	for (final RoomDTO dto : searchResultsDTO.getRoomDTO()) {
 	    if (dto.getId().longValue() == searchForm.getId().longValue()) {
 		request.getSession().setAttribute("roomDTO", dto);
 		break;
@@ -231,21 +231,21 @@ public class SearchAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward init(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward init(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	// TODO Auto-generated method stub
 	final SearchForm searchForm = (SearchForm) form;
 	// searchForm.reset(mapping, request);
 
-	List<Hotel> allHotel = getHotelManager().findAllActiveHotels();
+	final List<Hotel> allHotel = getHotelManager().findAllActiveHotels();
 	searchForm.setAllHotel(allHotel);
 	request.getSession().setAttribute("hotelId", "");
 
 	if (searchForm.getHotelId() != null
 		&& searchForm.getHotelId().longValue() > 0) {
 
-	    List<Room> roomList = getRoomManager().findAllRoomWithRoomType(
+	    final List<Room> roomList = getRoomManager().findAllRoomWithRoomType(
 		    searchForm.getHotelId());
 	    searchForm.setAllRoom(roomList);
 
@@ -264,8 +264,8 @@ public class SearchAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    public ActionForward process(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    public ActionForward process(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	// TODO Auto-generated method stub
 
@@ -279,22 +279,22 @@ public class SearchAction extends BaseAction {
 
 	}
 
-	SearchResultsDTO searchResultsDTO = (SearchResultsDTO) request
+	final SearchResultsDTO searchResultsDTO = (SearchResultsDTO) request
 		.getSession().getAttribute("searchResultsDTO");
 
-	for (RoomDTO dto : searchResultsDTO.getRoomDTO()) {
+	for (final RoomDTO dto : searchResultsDTO.getRoomDTO()) {
 	    if (dto.getId().longValue() == searchForm.getId().longValue()) {
 		request.getSession().setAttribute("roomDTO", dto);
 		break;
 	    }
 	}
 
-	ArrayList<ExtraItem> extraItem = new ArrayList<ExtraItem>();
+	final ArrayList<ExtraItem> extraItem = new ArrayList<ExtraItem>();
 	double itemsPrice = 0.00;
 
 	if (searchForm.getExtraItemId() != null) {
 	    for (int i = 0; i < searchForm.getExtraItemId().length; i++) {
-		for (ExtraItemDTO edto : searchResultsDTO.getExtraItemDTO()) {
+		for (final ExtraItemDTO edto : searchResultsDTO.getExtraItemDTO()) {
 
 		    if (edto.getExtraItem().getId().longValue() == searchForm
 			    .getExtraItemId()[i].longValue()) {
@@ -324,8 +324,8 @@ public class SearchAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward save(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward save(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	// TODO Auto-generated method stub
 	return null;
@@ -340,8 +340,8 @@ public class SearchAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward send(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward send(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	// TODO Auto-generated method stub
 	return null;
@@ -356,16 +356,16 @@ public class SearchAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward sort(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward sort(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	// TODO Auto-generated method stub
 	return null;
     }
 
     @Override
-    public ActionForward search(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    public ActionForward search(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	// TODO Auto-generated method stub
 	return null;

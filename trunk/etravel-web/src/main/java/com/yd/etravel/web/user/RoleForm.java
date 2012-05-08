@@ -35,42 +35,42 @@ public class RoleForm extends BaseForm {
     }
 
     public String getName() {
-	return name;
+	return this.name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
 	this.name = name;
     }
 
     public List<Role> getAllRoles() {
-	return allRoles;
+	return this.allRoles;
     }
 
-    public void setAllRoles(List<Role> allRoles) {
+    public void setAllRoles(final List<Role> allRoles) {
 	this.allRoles = allRoles;
     }
 
     public boolean isActive() {
-	return active;
+	return this.active;
     }
 
-    public void setActive(boolean active) {
+    public void setActive(final boolean active) {
 	this.active = active;
     }
 
     public String getDiscription() {
-	return discription;
+	return this.discription;
     }
 
-    public void setDiscription(String discription) {
+    public void setDiscription(final String discription) {
 	this.discription = discription;
     }
 
     public Long getId() {
-	return id;
+	return this.id;
     }
 
-    public void setId(Long id) {
+    public void setId(final Long id) {
 	this.id = id;
     }
 
@@ -82,7 +82,7 @@ public class RoleForm extends BaseForm {
      * .ActionMapping, javax.servlet.http.HttpServletRequest)
      */
     @Override
-    public void resetBean(ActionMapping mapping, HttpServletRequest request) {
+    public void resetBean(final ActionMapping mapping, final HttpServletRequest request) {
 	this.name = ICommon.EMPTY_STRING;
 	this.discription = ICommon.EMPTY_STRING;
 	this.active = false;
@@ -98,9 +98,9 @@ public class RoleForm extends BaseForm {
      * .ActionMapping, javax.servlet.http.HttpServletRequest)
      */
     @Override
-    public ActionErrors validateBean(ActionMapping mapping,
-	    HttpServletRequest request) {
-	ActionErrors errors = new ActionErrors();
+    public ActionErrors validateBean(final ActionMapping mapping,
+	    final HttpServletRequest request) {
+	final ActionErrors errors = new ActionErrors();
 
 	if (StringUtils.isEmpty(this.name)) {
 	    addErrors(errors, "etravel.error.rolename.required");

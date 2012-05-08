@@ -26,34 +26,34 @@ public class Room extends BaseObject {
     private RoomSeasonalRate roomSeasonalRate;
 
     public RoomType getRoomType() {
-	return roomType;
+	return this.roomType;
     }
 
-    public void setRoomType(RoomType roomType) {
+    public void setRoomType(final RoomType roomType) {
 	this.roomType = roomType;
     }
 
     public int getNoOfRoom() {
-	return noOfRoom;
+	return this.noOfRoom;
     }
 
-    public void setNoOfRoom(int noOfRoom) {
+    public void setNoOfRoom(final int noOfRoom) {
 	this.noOfRoom = noOfRoom;
     }
 
     public Hotel getHotel() {
-	return hotel;
+	return this.hotel;
     }
 
-    public void setHotel(Hotel hotel) {
+    public void setHotel(final Hotel hotel) {
 	this.hotel = hotel;
     }
 
     public RoomSeasonalRate getRoomSeasonalRate() {
-	return roomSeasonalRate;
+	return this.roomSeasonalRate;
     }
 
-    public void setRoomSeasonalRate(RoomSeasonalRate roomSeasonalRate) {
+    public void setRoomSeasonalRate(final RoomSeasonalRate roomSeasonalRate) {
 	this.roomSeasonalRate = roomSeasonalRate;
     }
 

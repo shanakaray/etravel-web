@@ -42,11 +42,12 @@ public class OccupancyDAO extends BaseDAO implements IOccupancyDAO {
     public OccupancyDAO() {
     }
 
-    public boolean isOccupancyNameExist(final String occupancyName, Long id)
+    @Override
+    public boolean isOccupancyNameExist(final String occupancyName, final Long id)
 	    throws PersistenceException {
 	try {
 
-	    StringBuilder IS_OCCUPANCY_NAME_EXIST = new StringBuilder(
+	    final StringBuilder IS_OCCUPANCY_NAME_EXIST = new StringBuilder(
 		    "SELECT occupancy FROM com.yd.etravel.domain.occupancy.Occupancy as occupancy where ")
 		    .append(" UPPER(occupancy.name)= UPPER(:name) ");
 
@@ -54,70 +55,73 @@ public class OccupancyDAO extends BaseDAO implements IOccupancyDAO {
 		IS_OCCUPANCY_NAME_EXIST.append(" AND occupancy.id != :id");
 	    }
 
-	    Session session = getHibernateTemplate().getSessionFactory()
+	    final Session session = getHibernateTemplate().getSessionFactory()
 		    .getCurrentSession();
-	    Query query = session.createQuery(IS_OCCUPANCY_NAME_EXIST
+	    final Query query = session.createQuery(IS_OCCUPANCY_NAME_EXIST
 		    .toString());
 	    query.setParameter("name", occupancyName);
 	    if (id != null) {
 		query.setParameter("id", id);
 	    }
 
-	    return (!query.list().isEmpty());
-	} catch (HibernateException e) {
+	    return !query.list().isEmpty();
+	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 	}
     }
 
+    @Override
     @SuppressWarnings("unchecked")
     public List<Occupancy> findAllOccupancyWithRoomType()
 	    throws PersistenceException {
 	try {
-	    return (List<Occupancy>) getHibernateTemplate().find(
+	    return getHibernateTemplate().find(
 		    FIND_ALL_OCCUPANCY_WITH_ROOM_TYPE.toString());
 
-	} catch (HibernateException e) {
+	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 	}
     }
 
+    @Override
     public boolean findAllOccupancyByPaxInfo(final Occupancy occupancy)
 	    throws PersistenceException {
 
 	try {
-	    Session session = getHibernateTemplate().getSessionFactory()
+	    final Session session = getHibernateTemplate().getSessionFactory()
 		    .getCurrentSession();
-	    Query query = session.createQuery(FIND_ALL_OCCUPANCY_BY_PAX_INFO
+	    final Query query = session.createQuery(FIND_ALL_OCCUPANCY_BY_PAX_INFO
 		    .toString());
 	    query.setParameter(0, occupancy.getAdult());
 	    query.setParameter(1, occupancy.getChild());
 	    query.setParameter(2, occupancy.getInfant());
 
-	    return (query.list().isEmpty());
-	} catch (HibernateException e) {
+	    return query.list().isEmpty();
+	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 	}
     }
 
-    public List<Occupancy> findAllOccupancyByRoomType(Long roomTypeId)
+    @Override
+    public List<Occupancy> findAllOccupancyByRoomType(final Long roomTypeId)
 	    throws PersistenceException {
 	try {
-	    List<Occupancy> results = new ArrayList<Occupancy>();
-	    Session session = getHibernateTemplate().getSessionFactory()
+	    final List<Occupancy> results = new ArrayList<Occupancy>();
+	    final Session session = getHibernateTemplate().getSessionFactory()
 		    .getCurrentSession();
-	    Query query1 = session.createQuery(FIND_ALL_OCCUPANCY_BY_OCC_NAME
+	    final Query query1 = session.createQuery(FIND_ALL_OCCUPANCY_BY_OCC_NAME
 		    .toString());
 	    query1.setParameter(0, IOccupancy.COMMON_OCCUPANCY_NAME);
 	    results.addAll(query1.list());
 
-	    Query query = session.createQuery(FIND_ALL_OCCUPANCY_BY_ROOM_TYPE
+	    final Query query = session.createQuery(FIND_ALL_OCCUPANCY_BY_ROOM_TYPE
 		    .toString());
 	    query.setParameter(0, roomTypeId);
 
 	    results.addAll(query.list());
 
 	    return results;
-	} catch (HibernateException e) {
+	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 	}
     }

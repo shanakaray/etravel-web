@@ -29,14 +29,14 @@ public class RoomDetails extends BaseObject {
     private String bedType;
 
     public Room getRoom() {
-	return room;
+	return this.room;
     }
 
     /**
      * @param room
      *            the room to set
      */
-    public void setRoom(Room room) {
+    public void setRoom(final Room room) {
 	this.room = room;
     }
 
@@ -45,14 +45,14 @@ public class RoomDetails extends BaseObject {
      * @return the doorNumber
      */
     public int getDoorNumber() {
-	return doorNumber;
+	return this.doorNumber;
     }
 
     /**
      * @param doorNumber
      *            the doorNumber to set
      */
-    public void setDoorNumber(int doorNumber) {
+    public void setDoorNumber(final int doorNumber) {
 	this.doorNumber = doorNumber;
     }
 
@@ -61,14 +61,14 @@ public class RoomDetails extends BaseObject {
      * @return the smoking
      */
     public boolean getSmoking() {
-	return smoking;
+	return this.smoking;
     }
 
     /**
      * @param smoking
      *            the smoking to set
      */
-    public void setSmoking(boolean smoking) {
+    public void setSmoking(final boolean smoking) {
 	this.smoking = smoking;
     }
 
@@ -77,14 +77,14 @@ public class RoomDetails extends BaseObject {
      * @return the comments
      */
     public String getComments() {
-	return comments;
+	return this.comments;
     }
 
     /**
      * @param comments
      *            the comments to set
      */
-    public void setComments(String comments) {
+    public void setComments(final String comments) {
 	this.comments = comments;
     }
 
@@ -93,14 +93,14 @@ public class RoomDetails extends BaseObject {
      * @return the bedType
      */
     public String getBedType() {
-	return bedType;
+	return this.bedType;
     }
 
     /**
      * @param bedType
      *            the bedType to set
      */
-    public void setBedType(String bedType) {
+    public void setBedType(final String bedType) {
 	this.bedType = bedType;
     }
 

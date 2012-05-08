@@ -34,14 +34,14 @@ public class PaymentForm extends BaseForm {
      * @return the id
      */
     public Long getId() {
-	return id;
+	return this.id;
     }
 
     /**
      * @param id
      *            the id to set
      */
-    public void setId(Long id) {
+    public void setId(final Long id) {
 	this.id = id;
     }
 
@@ -49,14 +49,14 @@ public class PaymentForm extends BaseForm {
      * @return the cardNumber
      */
     public Integer getCardNumber() {
-	return cardNumber;
+	return this.cardNumber;
     }
 
     /**
      * @param cardNumber
      *            the cardNumber to set
      */
-    public void setCardNumber(Integer cardNumber) {
+    public void setCardNumber(final Integer cardNumber) {
 	this.cardNumber = cardNumber;
     }
 
@@ -64,14 +64,14 @@ public class PaymentForm extends BaseForm {
      * @return the expirDate
      */
     public Date getExpirDate() {
-	return expirDate;
+	return this.expirDate;
     }
 
     /**
      * @param expirDate
      *            the expirDate to set
      */
-    public void setExpirDate(Date expirDate) {
+    public void setExpirDate(final Date expirDate) {
 	this.expirDate = expirDate;
     }
 
@@ -79,14 +79,14 @@ public class PaymentForm extends BaseForm {
      * @return the securityCode
      */
     public String getSecurityCode() {
-	return securityCode;
+	return this.securityCode;
     }
 
     /**
      * @param securityCode
      *            the securityCode to set
      */
-    public void setSecurityCode(String securityCode) {
+    public void setSecurityCode(final String securityCode) {
 	this.securityCode = securityCode;
     }
 
@@ -94,14 +94,14 @@ public class PaymentForm extends BaseForm {
      * @return the address
      */
     public String getAddress() {
-	return address;
+	return this.address;
     }
 
     /**
      * @param address
      *            the address to set
      */
-    public void setAddress(String address) {
+    public void setAddress(final String address) {
 	this.address = address;
     }
 
@@ -109,14 +109,14 @@ public class PaymentForm extends BaseForm {
      * @return the city
      */
     public String getCity() {
-	return city;
+	return this.city;
     }
 
     /**
      * @param city
      *            the city to set
      */
-    public void setCity(String city) {
+    public void setCity(final String city) {
 	this.city = city;
     }
 
@@ -124,14 +124,14 @@ public class PaymentForm extends BaseForm {
      * @return the province
      */
     public String getProvince() {
-	return province;
+	return this.province;
     }
 
     /**
      * @param province
      *            the province to set
      */
-    public void setProvince(String province) {
+    public void setProvince(final String province) {
 	this.province = province;
     }
 
@@ -139,14 +139,14 @@ public class PaymentForm extends BaseForm {
      * @return the zipCode
      */
     public String getZipCode() {
-	return zipCode;
+	return this.zipCode;
     }
 
     /**
      * @param zipCode
      *            the zipCode to set
      */
-    public void setZipCode(String zipCode) {
+    public void setZipCode(final String zipCode) {
 	this.zipCode = zipCode;
     }
 
@@ -154,14 +154,14 @@ public class PaymentForm extends BaseForm {
      * @return the country
      */
     public String getCountry() {
-	return country;
+	return this.country;
     }
 
     /**
      * @param country
      *            the country to set
      */
-    public void setCountry(String country) {
+    public void setCountry(final String country) {
 	this.country = country;
     }
 
@@ -169,14 +169,14 @@ public class PaymentForm extends BaseForm {
      * @return the amount
      */
     public BigDecimal getAmount() {
-	return amount;
+	return this.amount;
     }
 
     /**
      * @param amount
      *            the amount to set
      */
-    public void setAmount(BigDecimal amount) {
+    public void setAmount(final BigDecimal amount) {
 	this.amount = amount;
     }
 
@@ -188,7 +188,7 @@ public class PaymentForm extends BaseForm {
      * .ActionMapping, javax.servlet.http.HttpServletRequest)
      */
     @Override
-    public void resetBean(ActionMapping mapping, HttpServletRequest request) {
+    public void resetBean(final ActionMapping mapping, final HttpServletRequest request) {
 	// TODO Auto-generated method stub
 
     }
@@ -201,11 +201,11 @@ public class PaymentForm extends BaseForm {
      * .ActionMapping, javax.servlet.http.HttpServletRequest)
      */
     @Override
-    public ActionErrors validateBean(ActionMapping mapping,
-	    HttpServletRequest request) {
+    public ActionErrors validateBean(final ActionMapping mapping,
+	    final HttpServletRequest request) {
 	// TODO Auto-generated method stub
 
-	ActionErrors errors = new ActionErrors();
+	final ActionErrors errors = new ActionErrors();
 
 	return errors;
     }

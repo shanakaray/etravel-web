@@ -23,34 +23,34 @@ public class ChangePasswordForm extends BaseForm {
     private Long userId;
 
     public String getOldPw() {
-	return oldPw;
+	return this.oldPw;
     }
 
-    public void setOldPw(String oldPw) {
+    public void setOldPw(final String oldPw) {
 	this.oldPw = oldPw;
     }
 
     public String getNewPw() {
-	return newPw;
+	return this.newPw;
     }
 
-    public void setNewPw(String newPw) {
+    public void setNewPw(final String newPw) {
 	this.newPw = newPw;
     }
 
     public String getNewRepPw() {
-	return newRepPw;
+	return this.newRepPw;
     }
 
-    public void setNewRepPw(String newRepPw) {
+    public void setNewRepPw(final String newRepPw) {
 	this.newRepPw = newRepPw;
     }
 
     public Long getUserId() {
-	return userId;
+	return this.userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(final Long userId) {
 	this.userId = userId;
     }
 
@@ -62,11 +62,11 @@ public class ChangePasswordForm extends BaseForm {
      * .ActionMapping, javax.servlet.http.HttpServletRequest)
      */
     @Override
-    public void resetBean(ActionMapping mapping, HttpServletRequest request) {
-	oldPw = EMPTY_STRING;
-	newPw = EMPTY_STRING;
-	newRepPw = EMPTY_STRING;
-	userId = 0L;
+    public void resetBean(final ActionMapping mapping, final HttpServletRequest request) {
+	this.oldPw = EMPTY_STRING;
+	this.newPw = EMPTY_STRING;
+	this.newRepPw = EMPTY_STRING;
+	this.userId = 0L;
     }
 
     /*
@@ -77,22 +77,22 @@ public class ChangePasswordForm extends BaseForm {
      * .ActionMapping, javax.servlet.http.HttpServletRequest)
      */
     @Override
-    public ActionErrors validateBean(ActionMapping mapping,
-	    HttpServletRequest request) {
-	ActionErrors errors = new ActionErrors();
-	if (StringUtils.isEmpty(oldPw)) {
+    public ActionErrors validateBean(final ActionMapping mapping,
+	    final HttpServletRequest request) {
+	final ActionErrors errors = new ActionErrors();
+	if (StringUtils.isEmpty(this.oldPw)) {
 	    addErrors(errors, "etravel.error.new.pw.required");
 	}
-	if (StringUtils.isEmpty(newPw)) {
+	if (StringUtils.isEmpty(this.newPw)) {
 	    addErrors(errors, "etravel.error.old.pw.required");
-	} else if (newPw.trim().length() < 6) {
+	} else if (this.newPw.trim().length() < 6) {
 	    addErrors(errors, "etravel.error.pw.length");
 
-	} else if (!newPw.equals(newRepPw)) {
+	} else if (!this.newPw.equals(this.newRepPw)) {
 	    addErrors(errors, "etravel.error.pw.notmached");
 
-	    newPw = EMPTY_STRING;
-	    newRepPw = EMPTY_STRING;
+	    this.newPw = EMPTY_STRING;
+	    this.newRepPw = EMPTY_STRING;
 
 	}
 

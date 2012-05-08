@@ -52,23 +52,23 @@ public class ExtraItem extends BaseObject {
     public ExtraItem() {
     }
 
-    public ExtraItem(Long id, String name, String code) {
+    public ExtraItem(final Long id, final String name, final String code) {
 	super(id, name, code);
     }
 
     public BigDecimal getCost() {
-	return cost;
+	return this.cost;
     }
 
-    public void setCost(BigDecimal cost) {
+    public void setCost(final BigDecimal cost) {
 	this.cost = cost;
     }
 
     public String getComments() {
-	return comments;
+	return this.comments;
     }
 
-    public void setComments(String comments) {
+    public void setComments(final String comments) {
 	this.comments = comments;
     }
 
@@ -77,34 +77,34 @@ public class ExtraItem extends BaseObject {
      * @hibernate.property
      */
     public String getCurrency() {
-	return currency;
+	return this.currency;
     }
 
-    public void setCurrency(String currency) {
+    public void setCurrency(final String currency) {
 	this.currency = currency;
     }
 
     public List<Hotel> getHotel() {
-	return hotel;
+	return this.hotel;
     }
 
-    public void setHotel(List<Hotel> hotel) {
+    public void setHotel(final List<Hotel> hotel) {
 	this.hotel = hotel;
     }
 
     public Long[] getHotelIds() {
-	Set<Long> idSet = new HashSet<Long>();
-	for (Hotel ho : hotel) {
+	final Set<Long> idSet = new HashSet<Long>();
+	for (final Hotel ho : this.hotel) {
 	    idSet.add(ho.getId());
 	}
-	return (Long[]) idSet.toArray(new Long[0]);
+	return idSet.toArray(new Long[0]);
     }
 
     public String getBookingComments() {
-	return bookingComments;
+	return this.bookingComments;
     }
 
-    public void setBookingComments(String bookingComments) {
+    public void setBookingComments(final String bookingComments) {
 	this.bookingComments = bookingComments;
     }
 

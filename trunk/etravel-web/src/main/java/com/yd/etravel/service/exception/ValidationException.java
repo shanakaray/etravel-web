@@ -21,7 +21,7 @@ public class ValidationException extends ServiceException {
     /**
      * @param uiMesssage
      */
-    public ValidationException(UIMesssage uiMesssage) {
+    public ValidationException(final UIMesssage uiMesssage) {
 	super(uiMesssage);
 	// TODO Auto-generated constructor stub
     }
@@ -30,7 +30,7 @@ public class ValidationException extends ServiceException {
      * @param uiMesssage
      * @param arg1
      */
-    public ValidationException(UIMesssage uiMesssage, Throwable arg1) {
+    public ValidationException(final UIMesssage uiMesssage, final Throwable arg1) {
 	super(uiMesssage, arg1);
 	// TODO Auto-generated constructor stub
     }

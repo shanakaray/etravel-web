@@ -31,7 +31,7 @@ public class LogoutForm extends BaseForm {
      * .ActionMapping, javax.servlet.http.HttpServletRequest)
      */
     @Override
-    public void resetBean(ActionMapping mapping, HttpServletRequest request) {
+    public void resetBean(final ActionMapping mapping, final HttpServletRequest request) {
 	// TODO Auto-generated method stub
 
     }
@@ -44,8 +44,8 @@ public class LogoutForm extends BaseForm {
      * .ActionMapping, javax.servlet.http.HttpServletRequest)
      */
     @Override
-    public ActionErrors validateBean(ActionMapping mapping,
-	    HttpServletRequest request) {
+    public ActionErrors validateBean(final ActionMapping mapping,
+	    final HttpServletRequest request) {
 	// TODO Auto-generated method stub
 	return null;
     }

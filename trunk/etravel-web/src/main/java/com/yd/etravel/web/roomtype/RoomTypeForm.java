@@ -32,14 +32,14 @@ public class RoomTypeForm extends BaseForm {
      * @return the id
      */
     public Long getId() {
-	return id;
+	return this.id;
     }
 
     /**
      * @param id
      *            the id to set
      */
-    public void setId(Long id) {
+    public void setId(final Long id) {
 	this.id = id;
     }
 
@@ -47,14 +47,14 @@ public class RoomTypeForm extends BaseForm {
      * @return the code
      */
     public String getCode() {
-	return code;
+	return this.code;
     }
 
     /**
      * @param code
      *            the code to set
      */
-    public void setCode(String code) {
+    public void setCode(final String code) {
 	this.code = code;
     }
 
@@ -62,14 +62,14 @@ public class RoomTypeForm extends BaseForm {
      * @return the name
      */
     public String getName() {
-	return name;
+	return this.name;
     }
 
     /**
      * @param name
      *            the name to set
      */
-    public void setName(String name) {
+    public void setName(final String name) {
 	this.name = name;
     }
 
@@ -77,14 +77,14 @@ public class RoomTypeForm extends BaseForm {
      * @return the comments
      */
     public String getComments() {
-	return comments;
+	return this.comments;
     }
 
     /**
      * @param comments
      *            the comments to set
      */
-    public void setComments(String comments) {
+    public void setComments(final String comments) {
 	this.comments = comments;
     }
 
@@ -92,14 +92,14 @@ public class RoomTypeForm extends BaseForm {
      * @return the active
      */
     public boolean getActive() {
-	return active;
+	return this.active;
     }
 
     /**
      * @param active
      *            the active to set
      */
-    public void setActive(boolean active) {
+    public void setActive(final boolean active) {
 	this.active = active;
     }
 
@@ -107,22 +107,22 @@ public class RoomTypeForm extends BaseForm {
      * @return the allRoomType
      */
     public List<RoomType> getAllRoomType() {
-	return allRoomType;
+	return this.allRoomType;
     }
 
     /**
      * @param allRoomType
      *            the allRoomType to set
      */
-    public void setAllRoomType(List<RoomType> allRoomType) {
+    public void setAllRoomType(final List<RoomType> allRoomType) {
 	this.allRoomType = allRoomType;
     }
 
     public int getMaxPassengers() {
-	return maxPassengers;
+	return this.maxPassengers;
     }
 
-    public void setMaxPassengers(int maxPassengers) {
+    public void setMaxPassengers(final int maxPassengers) {
 	this.maxPassengers = maxPassengers;
     }
 
@@ -134,7 +134,7 @@ public class RoomTypeForm extends BaseForm {
      * .ActionMapping, javax.servlet.http.HttpServletRequest)
      */
     @Override
-    public void resetBean(ActionMapping mapping, HttpServletRequest request) {
+    public void resetBean(final ActionMapping mapping, final HttpServletRequest request) {
 	// TODO Auto-generated method stub
 	this.name = EMPTY_STRING;
 	this.comments = EMPTY_STRING;
@@ -152,15 +152,15 @@ public class RoomTypeForm extends BaseForm {
      * .ActionMapping, javax.servlet.http.HttpServletRequest)
      */
     @Override
-    public ActionErrors validateBean(ActionMapping mapping,
-	    HttpServletRequest request) {
-	ActionErrors errors = new ActionErrors();
+    public ActionErrors validateBean(final ActionMapping mapping,
+	    final HttpServletRequest request) {
+	final ActionErrors errors = new ActionErrors();
 
 	if (StringUtils.isEmpty(this.name)) {
 	    addErrors(errors, "etravel.roomType.name.required");
 	}
 
-	if (maxPassengers <= 0) {
+	if (this.maxPassengers <= 0) {
 	    addErrors(errors, "etravel.roomtype.max.passengers");
 	}
 

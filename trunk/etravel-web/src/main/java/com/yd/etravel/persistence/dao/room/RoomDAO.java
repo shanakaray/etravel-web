@@ -21,7 +21,8 @@ import com.yd.etravel.persistence.exception.PersistenceException;
  */
 public class RoomDAO extends BaseDAO implements IRoomDAO {
 
-    public boolean isExist(Long hotelId, Long roomTypeId, Long id)
+    @Override
+    public boolean isExist(final Long hotelId, final Long roomTypeId, final Long id)
 	    throws PersistenceException {
 	try {
 	    final StringBuilder IS_ROOM_EXIST = new StringBuilder(
@@ -32,9 +33,9 @@ public class RoomDAO extends BaseDAO implements IRoomDAO {
 		IS_ROOM_EXIST.append(" AND room.id != :id");
 	    }
 
-	    Session session = getHibernateTemplate().getSessionFactory()
+	    final Session session = getHibernateTemplate().getSessionFactory()
 		    .getCurrentSession();
-	    Query query = session.createQuery(IS_ROOM_EXIST.toString());
+	    final Query query = session.createQuery(IS_ROOM_EXIST.toString());
 	    query.setParameter("hid", hotelId);
 	    query.setParameter("typeid", roomTypeId);
 
@@ -42,18 +43,19 @@ public class RoomDAO extends BaseDAO implements IRoomDAO {
 		query.setParameter("id", id);
 	    }
 
-	    return (!query.list().isEmpty());
-	} catch (HibernateException e) {
+	    return !query.list().isEmpty();
+	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 	}
     }
 
-    public List<Room> findRooms(RoomSearchDTO roomSearchDTO)
+    @Override
+    public List<Room> findRooms(final RoomSearchDTO roomSearchDTO)
 	    throws PersistenceException {
 	try {
-	    StringBuilder stringBuilder = new StringBuilder(
+	    final StringBuilder stringBuilder = new StringBuilder(
 		    " from Room as room where 1=1 ");
-	    Session session = getHibernateTemplate().getSessionFactory()
+	    final Session session = getHibernateTemplate().getSessionFactory()
 		    .getCurrentSession();
 
 	    if (roomSearchDTO.getHotelId() != null) {
@@ -64,7 +66,7 @@ public class RoomDAO extends BaseDAO implements IRoomDAO {
 		stringBuilder.append(" and room.roomType.id=:tid ");
 	    }
 
-	    Query query = session.createQuery(stringBuilder.toString());
+	    final Query query = session.createQuery(stringBuilder.toString());
 
 	    if (roomSearchDTO.getHotelId() != null) {
 		query.setParameter("hid", roomSearchDTO.getHotelId());
@@ -76,12 +78,13 @@ public class RoomDAO extends BaseDAO implements IRoomDAO {
 
 	    return query.list();
 
-	} catch (HibernateException e) {
+	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 	}
     }
 
-    public List<Room> findAllRoomWithRoomType(Long hotelId)
+    @Override
+    public List<Room> findAllRoomWithRoomType(final Long hotelId)
 	    throws PersistenceException {
 	final StringBuilder sb = new StringBuilder(
 		"SELECT room FROM Room as room join fetch  room.roomType as roomType"
@@ -93,7 +96,7 @@ public class RoomDAO extends BaseDAO implements IRoomDAO {
 		sb.append(" AND hot.id=:hid ");
 	    }
 
-	    Query query = getHibernateTemplate().getSessionFactory()
+	    final Query query = getHibernateTemplate().getSessionFactory()
 		    .getCurrentSession().createQuery(sb.toString());
 
 	    if (hotelId != null) {
@@ -101,7 +104,7 @@ public class RoomDAO extends BaseDAO implements IRoomDAO {
 	    }
 
 	    return query.list();
-	} catch (HibernateException e) {
+	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 	}
     }

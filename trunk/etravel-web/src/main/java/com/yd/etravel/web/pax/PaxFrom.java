@@ -43,20 +43,20 @@ public class PaxFrom extends BaseForm {
     private Map<Long, String> hotelNameMap;
 
     public Long getHotelId() {
-	return hotelId;
+	return this.hotelId;
     }
 
-    public void setHotelId(Long hotelId) {
+    public void setHotelId(final Long hotelId) {
 	this.hotelId = hotelId;
     }
 
     public List<Hotel> getHotelList() {
-	return hotelList;
+	return this.hotelList;
     }
 
-    public Hotel getHotel(Long id) {
+    public Hotel getHotel(final Long id) {
 	Hotel hotel = null;
-	for (Hotel hot : hotelList) {
+	for (final Hotel hot : this.hotelList) {
 	    if (hot.getId().equals(id)) {
 		hotel = hot;
 		break;
@@ -65,15 +65,15 @@ public class PaxFrom extends BaseForm {
 	return hotel;
     }
 
-    public void setHotelList(List<Hotel> hotelList) {
+    public void setHotelList(final List<Hotel> hotelList) {
 	this.hotelList = hotelList;
 	this.hotelNameMap = new HashMap<Long, String>();
-	for (Hotel hotel : hotelList) {
+	for (final Hotel hotel : hotelList) {
 	    this.hotelNameMap.put(hotel.getId(), hotel.getName());
 	}
     }
 
-    public String getHotelName(Long id) {
+    public String getHotelName(final Long id) {
 	if (this.hotelNameMap != null && this.hotelNameMap.containsKey(id)) {
 	    return this.hotelNameMap.get(id).toString();
 	}
@@ -81,66 +81,66 @@ public class PaxFrom extends BaseForm {
     }
 
     public Long getId() {
-	return id;
+	return this.id;
     }
 
-    public void setId(Long id) {
+    public void setId(final Long id) {
 	this.id = id;
     }
 
     public List<Pax> getPaxList() {
-	return paxList;
+	return this.paxList;
     }
 
-    public void setPaxList(List<Pax> paxList) {
+    public void setPaxList(final List<Pax> paxList) {
 	this.paxList = paxList;
     }
 
     public int getChildMax() {
-	return childMax;
+	return this.childMax;
     }
 
-    public void setChildMax(int childMax) {
+    public void setChildMax(final int childMax) {
 	this.childMax = childMax;
     }
 
     public int getChildMin() {
-	return childMin;
+	return this.childMin;
     }
 
-    public void setChildMin(int childMin) {
+    public void setChildMin(final int childMin) {
 	this.childMin = childMin;
     }
 
     public int getInfantMax() {
-	return infantMax;
+	return this.infantMax;
     }
 
-    public void setInfantMax(int infantMax) {
+    public void setInfantMax(final int infantMax) {
 	this.infantMax = infantMax;
     }
 
     public int getInfantMin() {
-	return infantMin;
+	return this.infantMin;
     }
 
-    public void setInfantMin(int infantMin) {
+    public void setInfantMin(final int infantMin) {
 	this.infantMin = infantMin;
     }
 
     public int getAdultMax() {
-	return adultMax;
+	return this.adultMax;
     }
 
-    public void setAdultMax(int adultMax) {
+    public void setAdultMax(final int adultMax) {
 	this.adultMax = adultMax;
     }
 
     public int getAdultMin() {
-	return adultMin;
+	return this.adultMin;
     }
 
-    public void setAdultMin(int adultMin) {
+    public void setAdultMin(final int adultMin) {
 	this.adultMin = adultMin;
     }
 
@@ -152,7 +152,7 @@ public class PaxFrom extends BaseForm {
      * .ActionMapping, javax.servlet.http.HttpServletRequest)
      */
     @Override
-    public void resetBean(ActionMapping mapping, HttpServletRequest request) {
+    public void resetBean(final ActionMapping mapping, final HttpServletRequest request) {
 	this.childMax = 0;
 	this.childMin = 0;
 
@@ -178,11 +178,11 @@ public class PaxFrom extends BaseForm {
      * .ActionMapping, javax.servlet.http.HttpServletRequest)
      */
     @Override
-    public ActionErrors validateBean(ActionMapping mapping,
-	    HttpServletRequest request) {
-	ActionErrors errors = new ActionErrors();
+    public ActionErrors validateBean(final ActionMapping mapping,
+	    final HttpServletRequest request) {
+	final ActionErrors errors = new ActionErrors();
 
-	if (StringUtils.isEmpty(hotelId)) {
+	if (StringUtils.isEmpty(this.hotelId)) {
 	    addErrors(errors, "etravel.error.pax.hotelid.required");
 	}
 
@@ -216,9 +216,9 @@ public class PaxFrom extends BaseForm {
 	    this.adultMax = 0;
 	}
 
-	if (infantMin > infantMax || infantMax > childMin
-		|| childMin > childMax || childMax > adultMin
-		|| adultMin > adultMax) {
+	if (this.infantMin > this.infantMax || this.infantMax > this.childMin
+		|| this.childMin > this.childMax || this.childMax > this.adultMin
+		|| this.adultMin > this.adultMax) {
 	    addErrors(errors, "etravel.error.pax.invalidage");
 	    this.childMax = 0;
 	    this.childMin = 0;

@@ -45,8 +45,8 @@ public class ReservationSheetAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward add(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward add(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	return null;
     }
@@ -60,8 +60,8 @@ public class ReservationSheetAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward back(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward back(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	return null;
     }
@@ -76,8 +76,8 @@ public class ReservationSheetAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    public ActionForward create(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    public ActionForward create(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	return null;
     }
@@ -92,8 +92,8 @@ public class ReservationSheetAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward delete(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward delete(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	return null;
     }
@@ -107,8 +107,8 @@ public class ReservationSheetAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward edit(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward edit(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	return null;
     }
@@ -122,11 +122,11 @@ public class ReservationSheetAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward find(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward find(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
-	ReservationSheetForm resForm = (ReservationSheetForm) form;
-	IUserProfile profile = getUserProfile(request);
+	final ReservationSheetForm resForm = (ReservationSheetForm) form;
+	final IUserProfile profile = getUserProfile(request);
 
 	if (profile.hasFunction(IUserFunctions.BOOKINGREPORT_ASSIGNHOTELS_ONLY)) {
 	    resForm.addHotelMap(profile.getAssignedHotels());
@@ -135,18 +135,18 @@ public class ReservationSheetAction extends BaseAction {
 	}
 	if (resForm.getHotelId() != null && resForm.getEndDateToDate() != null
 		&& resForm.getStartDateToDate() != null) {
-	    RoomAvailabilityDTO dto = new RoomAvailabilityDTO();
+	    final RoomAvailabilityDTO dto = new RoomAvailabilityDTO();
 	    dto.setHotelId(resForm.getHotelId());
 	    dto.setFromDate(resForm.getStartDateToDate());
 	    dto.setToDate(resForm.getEndDateToDate());
 	    resForm.setRoomAvailabilityList(getRoomAvailabilityManager()
 		    .findAllRoomAvailabilityDTO(dto));
 
-	    BookingReportSearchDTO bdto = new BookingReportSearchDTO();
+	    final BookingReportSearchDTO bdto = new BookingReportSearchDTO();
 	    bdto.setHotelId(resForm.getHotelIdSet());
 	    bdto.setCheckInFrom(resForm.getStartDateToDate());
 	    bdto.setCheckInTo(resForm.getEndDateToDate());
-	    List<String> status = new ArrayList<String>();
+	    final List<String> status = new ArrayList<String>();
 	    status.add(IBooking.BOOKING_SATATUS_ON_REQUEST);
 	    status.add(IBooking.BOOKING_SATATUS_BOOKING);
 	    status.add(IBooking.BOOKING_SATATUS_PAID);
@@ -169,8 +169,8 @@ public class ReservationSheetAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward forward(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward forward(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	return null;
     }
@@ -184,11 +184,11 @@ public class ReservationSheetAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward init(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward init(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
-	ReservationSheetForm resForm = (ReservationSheetForm) form;
-	IUserProfile profile = getUserProfile(request);
+	final ReservationSheetForm resForm = (ReservationSheetForm) form;
+	final IUserProfile profile = getUserProfile(request);
 
 	if (profile.hasFunction(IUserFunctions.BOOKINGREPORT_ASSIGNHOTELS_ONLY)) {
 	    resForm.addHotelMap(profile.getAssignedHotels());
@@ -209,8 +209,8 @@ public class ReservationSheetAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    public ActionForward process(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    public ActionForward process(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	return mapping.findForward(SUCCESS);
     }
@@ -224,8 +224,8 @@ public class ReservationSheetAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward save(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward save(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	return mapping.findForward(SUCCESS);
     }
@@ -239,8 +239,8 @@ public class ReservationSheetAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward send(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward send(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	return mapping.findForward(SUCCESS);
     }
@@ -254,15 +254,15 @@ public class ReservationSheetAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward sort(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward sort(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	return mapping.findForward(SUCCESS);
     }
 
     @Override
-    public ActionForward search(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    public ActionForward search(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	// TODO Auto-generated method stub
 	return null;

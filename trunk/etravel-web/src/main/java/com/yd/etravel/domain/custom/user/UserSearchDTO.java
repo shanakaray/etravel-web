@@ -21,86 +21,86 @@ public class UserSearchDTO {
     private Boolean active;
 
     public java.util.Set<Long> getRoleIds() {
-	return roleIds;
+	return this.roleIds;
     }
 
-    public void setRoleIds(java.util.Set<Long> roleIds) {
+    public void setRoleIds(final java.util.Set<Long> roleIds) {
 	this.roleIds = roleIds;
     }
 
     public String getName() {
-	return name;
+	return this.name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
 	this.name = name;
     }
 
     public String getPassword() {
-	return password;
+	return this.password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(final String password) {
 	this.password = password;
     }
 
     public String getAddress() {
-	return address;
+	return this.address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(final String address) {
 	this.address = address;
     }
 
     public String getFirstName() {
-	return firstName;
+	return this.firstName;
     }
 
-    public void setFirstName(String firstName) {
+    public void setFirstName(final String firstName) {
 	this.firstName = firstName;
     }
 
     public String getLastName() {
-	return lastName;
+	return this.lastName;
     }
 
-    public void setLastName(String lastName) {
+    public void setLastName(final String lastName) {
 	this.lastName = lastName;
     }
 
     public String getStatus() {
-	return status;
+	return this.status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(final String status) {
 	this.status = status;
     }
 
     public Boolean getActive() {
-	return active;
+	return this.active;
     }
 
-    public void setActive(Boolean active) {
+    public void setActive(final Boolean active) {
 	this.active = active;
     }
 
     public boolean hasRolesIds() {
-	return (roleIds != null && !roleIds.isEmpty());
+	return this.roleIds != null && !this.roleIds.isEmpty();
     }
 
     public Long[] getIds() {
-	return ids;
+	return this.ids;
     }
 
-    public void setIds(Long[] ids) {
+    public void setIds(final Long[] ids) {
 	this.ids = ids;
     }
 
     public java.util.Set<String> getUserNameSet() {
-	return userNameSet;
+	return this.userNameSet;
     }
 
-    public void setUserNameSet(java.util.Set<String> userNameSet) {
+    public void setUserNameSet(final java.util.Set<String> userNameSet) {
 	this.userNameSet = userNameSet;
     }
 

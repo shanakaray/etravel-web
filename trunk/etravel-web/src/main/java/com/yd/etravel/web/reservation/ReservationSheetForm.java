@@ -54,76 +54,76 @@ public class ReservationSheetForm extends BaseForm {
     private List<BookingReportDTO> bookingList;
 
     public List<Hotel> getHotelList() {
-	return hotelList;
+	return this.hotelList;
     }
 
-    public void setHotelList(List<Hotel> hotelList) {
+    public void setHotelList(final List<Hotel> hotelList) {
 	this.hotelList = hotelList;
     }
 
     public Long getHotelId() {
-	return hotelId;
+	return this.hotelId;
     }
 
-    public void setHotelId(Long hotelId) {
+    public void setHotelId(final Long hotelId) {
 	this.hotelId = hotelId;
     }
 
     public String getStartDate() {
-	return startDate;
+	return this.startDate;
     }
 
     public Date getStartDateToDate() {
-	return DateUtil.parse(startDate);
+	return DateUtil.parse(this.startDate);
     }
 
-    public void setStartDate(String startDate) {
+    public void setStartDate(final String startDate) {
 	this.startDate = startDate;
     }
 
     public String getEndDate() {
-	return endDate;
+	return this.endDate;
     }
 
     public Date getEndDateToDate() {
-	return DateUtil.parse(endDate);
+	return DateUtil.parse(this.endDate);
     }
 
-    public void setEndDate(String endDate) {
+    public void setEndDate(final String endDate) {
 	this.endDate = endDate;
     }
 
     public Set<RoomAvailabilityDTO> getRoomAvailabilitySet() {
-	return roomAvailabilitySet;
+	return this.roomAvailabilitySet;
     }
 
     public void setRoomAvailabilitySet(
-	    Set<RoomAvailabilityDTO> roomAvailabilitySet) {
+	    final Set<RoomAvailabilityDTO> roomAvailabilitySet) {
 	this.roomAvailabilitySet = roomAvailabilitySet;
     }
 
     public void setRoomAvailabilityList(
-	    List<RoomAvailabilityDTO> roomAvailabilityList) {
+	    final List<RoomAvailabilityDTO> roomAvailabilityList) {
 	this.roomAvailabilitySet = new HashSet<RoomAvailabilityDTO>();
 	this.roomAvailabilitySet.addAll(roomAvailabilityList);
     }
 
-    public String getColur(String bno) {
-	Integer intg = Integer
-		.valueOf((String.valueOf((bno.charAt(bno.length() - 1)))));
+    public String getColur(final String bno) {
+	final Integer intg = Integer
+		.valueOf(String.valueOf(bno.charAt(bno.length() - 1)));
 	return colurCodes.get(intg);
     }
 
     public List<BookingReportDTO> getBookingList() {
-	return bookingList;
+	return this.bookingList;
     }
 
-    public void setBookingList(List<BookingReportDTO> bookingList) {
+    public void setBookingList(final List<BookingReportDTO> bookingList) {
 	this.bookingList = bookingList;
     }
 
     @Override
-    public void resetBean(ActionMapping mapping, HttpServletRequest request) {
+    public void resetBean(final ActionMapping mapping, final HttpServletRequest request) {
 	this.hotelList = Collections.EMPTY_LIST;
 	this.roomAvailabilitySet = Collections.EMPTY_SET;
 	this.bookingList = Collections.EMPTY_LIST;
@@ -133,8 +133,8 @@ public class ReservationSheetForm extends BaseForm {
     }
 
     @Override
-    public ActionErrors validateBean(ActionMapping mapping,
-	    HttpServletRequest request) {
+    public ActionErrors validateBean(final ActionMapping mapping,
+	    final HttpServletRequest request) {
 	return null;
     }
 
@@ -143,10 +143,10 @@ public class ReservationSheetForm extends BaseForm {
 	return null;
     }
 
-    public void addHotelMap(Map<Long, String> hotelMap) {
+    public void addHotelMap(final Map<Long, String> hotelMap) {
 	this.hotelList = new ArrayList<Hotel>();
-	for (Map.Entry<Long, String> e : hotelMap.entrySet()) {
-	    Hotel hotel = new Hotel(e.getKey(), e.getValue(), "");
+	for (final Map.Entry<Long, String> e : hotelMap.entrySet()) {
+	    final Hotel hotel = new Hotel(e.getKey(), e.getValue(), "");
 	    this.hotelList.add(hotel);
 	}
 

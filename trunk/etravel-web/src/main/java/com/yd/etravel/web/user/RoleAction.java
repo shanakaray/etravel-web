@@ -35,8 +35,8 @@ public class RoleAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward add(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward add(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	// TODO Auto-generated method stub
 	return null;
@@ -51,8 +51,8 @@ public class RoleAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward back(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward back(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	// TODO Auto-generated method stub
 	return null;
@@ -68,12 +68,12 @@ public class RoleAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    public ActionForward create(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    public ActionForward create(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	boolean isnew = true;
-	RoleForm roleForm = (RoleForm) form;
-	Role role = new Role(roleForm.getName());
+	final RoleForm roleForm = (RoleForm) form;
+	final Role role = new Role(roleForm.getName());
 	if (roleForm.getId() != null && roleForm.getId() > 0) {
 	    role.setId(roleForm.getId());
 	    isnew = false;
@@ -101,10 +101,10 @@ public class RoleAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward delete(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward delete(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
-	RoleForm roleForm = (RoleForm) form;
+	final RoleForm roleForm = (RoleForm) form;
 	getUserManager().deleteRole(roleForm.getId());
 	addInfoMessages(COM_DELETE_MSG);
 	return mapping.findForward(SUCCESS);
@@ -119,11 +119,11 @@ public class RoleAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward edit(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward edit(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
-	RoleForm roleForm = (RoleForm) form;
-	Role role = getUserManager().findRoleById(roleForm.getId());
+	final RoleForm roleForm = (RoleForm) form;
+	final Role role = getUserManager().findRoleById(roleForm.getId());
 	roleForm.setName(role.getName());
 	roleForm.setActive(role.isActive());
 	roleForm.setDiscription(role.getCode());
@@ -140,8 +140,8 @@ public class RoleAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward find(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward find(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	// TODO Auto-generated method stub
 	return null;
@@ -157,8 +157,8 @@ public class RoleAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward forward(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward forward(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	final RoleForm roleForm = (RoleForm) form;
 	roleForm.reset(mapping, request);
@@ -175,8 +175,8 @@ public class RoleAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward init(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward init(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	final RoleForm roleForm = (RoleForm) form;
 	roleForm.reset(mapping, request);
@@ -194,8 +194,8 @@ public class RoleAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    public ActionForward process(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    public ActionForward process(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	// TODO Auto-generated method stub
 	return null;
@@ -210,8 +210,8 @@ public class RoleAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward save(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward save(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	// TODO Auto-generated method stub
 	return null;
@@ -226,8 +226,8 @@ public class RoleAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward send(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward send(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	// TODO Auto-generated method stub
 	return null;
@@ -242,16 +242,16 @@ public class RoleAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward sort(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward sort(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	// TODO Auto-generated method stub
 	return null;
     }
 
     @Override
-    public ActionForward search(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    public ActionForward search(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	// TODO Auto-generated method stub
 	return null;

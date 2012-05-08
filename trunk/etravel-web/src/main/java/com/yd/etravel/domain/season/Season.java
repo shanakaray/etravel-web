@@ -30,18 +30,18 @@ public class Season extends BaseObject {
     private Hotel hotel;
 
     public Date getFromDate() {
-	return fromDate;
+	return this.fromDate;
     }
 
     public String getFromDateString() {
-	return DateUtil.format(fromDate);
+	return DateUtil.format(this.fromDate);
     }
 
     /**
      * @param fromDate
      *            the fromDate to set
      */
-    public void setFromDate(Date fromDate) {
+    public void setFromDate(final Date fromDate) {
 	this.fromDate = fromDate;
     }
 
@@ -50,18 +50,18 @@ public class Season extends BaseObject {
      * @return the toDate
      */
     public Date getToDate() {
-	return toDate;
+	return this.toDate;
     }
 
     public String getToDateString() {
-	return DateUtil.format(toDate);
+	return DateUtil.format(this.toDate);
     }
 
     /**
      * @param toDate
      *            the toDate to set
      */
-    public void setToDate(Date toDate) {
+    public void setToDate(final Date toDate) {
 	this.toDate = toDate;
     }
 
@@ -70,10 +70,10 @@ public class Season extends BaseObject {
      * @return the season
      */
     public Hotel getHotel() {
-	return hotel;
+	return this.hotel;
     }
 
-    public void setHotel(Hotel hotel) {
+    public void setHotel(final Hotel hotel) {
 	this.hotel = hotel;
     }
 
@@ -82,10 +82,10 @@ public class Season extends BaseObject {
      * @return the status
      */
     public String getComments() {
-	return comments;
+	return this.comments;
     }
 
-    public void setComments(String comments) {
+    public void setComments(final String comments) {
 	this.comments = comments;
     }
 

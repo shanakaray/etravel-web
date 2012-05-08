@@ -66,8 +66,8 @@ public class BookingAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward add(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward add(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	return null;
     }
@@ -81,8 +81,8 @@ public class BookingAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward back(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward back(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	return null;
     }
@@ -97,8 +97,8 @@ public class BookingAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    public ActionForward create(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    public ActionForward create(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	final BookingForm bookingForm = (BookingForm) form;
 	double payed = 0.0;
@@ -106,13 +106,13 @@ public class BookingAction extends BaseAction {
 
 	    try {
 
-		IUserProfile profile = getUserManager().authanticateUser(
+		final IUserProfile profile = getUserManager().authanticateUser(
 			bookingForm.getRUsername(), bookingForm.getRPassword());
 
 		request.getSession().removeAttribute(IUser.USER_PROFILE);
 		request.getSession().setAttribute(IUser.USER_PROFILE, profile);
 
-	    } catch (ServiceException ex) {
+	    } catch (final ServiceException ex) {
 		bookingForm.setRUsername(ICommon.EMPTY_STRING);
 		bookingForm.setRPassword(ICommon.EMPTY_STRING);
 		throw ex;
@@ -120,9 +120,9 @@ public class BookingAction extends BaseAction {
 
 	} else if (bookingForm.isGuest()) {
 
-	    User user = new User();
-	    user.setId((bookingForm.getUid() != null && bookingForm.getUid()
-		    .longValue() > 0) ? bookingForm.getUid() : null);
+	    final User user = new User();
+	    user.setId(bookingForm.getUid() != null && bookingForm.getUid()
+		    .longValue() > 0 ? bookingForm.getUid() : null);
 	    user.setName(bookingForm.getCusUsername());
 	    user.setAddress(bookingForm.getAddress());
 	    user.setContact(bookingForm.getContact());
@@ -133,7 +133,7 @@ public class BookingAction extends BaseAction {
 	    user.setPassword(bookingForm.getCusPassword());
 	    user.setActive(true);
 
-	    IUserProfile profile = getUserManager().saveCustomer(user);
+	    final IUserProfile profile = getUserManager().saveCustomer(user);
 	    request.getSession().removeAttribute(IUser.USER_PROFILE);
 	    request.getSession().setAttribute(IUser.USER_PROFILE, profile);
 	    Thread.currentThread().setName(profile.getUsername());
@@ -157,8 +157,8 @@ public class BookingAction extends BaseAction {
 		    .getAttribute("extraItem");
 	}
 
-	if (roomDTO.getRoomType().getMaxPassengers() < (bookingForm
-		.getTotalPax() / bookingForm.getNoOfRoom())) {
+	if (roomDTO.getRoomType().getMaxPassengers() < bookingForm
+		.getTotalPax() / bookingForm.getNoOfRoom()) {
 	    throw new ServiceException(
 		    ValidationHelper
 			    .getMessageHolder("etravel.booking.max.pax.limit.exceed"));
@@ -166,10 +166,10 @@ public class BookingAction extends BaseAction {
 
 	double extraItemPrice = 0.0;
 
-	ArrayList<ExtraItemBooking> etbList = new ArrayList<ExtraItemBooking>();
+	final ArrayList<ExtraItemBooking> etbList = new ArrayList<ExtraItemBooking>();
 
-	for (ExtraItem object : extraItemList) {
-	    ExtraItemBooking eib = new ExtraItemBooking();
+	for (final ExtraItem object : extraItemList) {
+	    final ExtraItemBooking eib = new ExtraItemBooking();
 	    eib.setActive(true);
 	    eib.setExtraItem(object);
 	    eib.setComments(object.getBookingComments());
@@ -180,16 +180,16 @@ public class BookingAction extends BaseAction {
 	}
 
 	bookingDTO.setExtraItemBookingList(etbList);
-	Booking booking = new Booking();
+	final Booking booking = new Booking();
 
-	IUserProfile profile1 = (IUserProfile) request.getSession()
+	final IUserProfile profile1 = (IUserProfile) request.getSession()
 		.getAttribute(IUser.USER_PROFILE);
 	Long userId = profile1.getId();
 	// current user can change booking user(Hotel Admin)
 	if (profile1.hasFunction(IUserFunctions.BOOKING_USER_CAN_CHANGE)) {
 	    // creates a new Customer.
 	    if (bookingForm.isNewCustomer()) {
-		User user = new User();
+		final User user = new User();
 		user.setName(bookingForm.getCusUsername());
 		user.setAddress(bookingForm.getAddress());
 		user.setContact(bookingForm.getContact());
@@ -199,7 +199,7 @@ public class BookingAction extends BaseAction {
 		user.setLastName(bookingForm.getLastName());
 		user.setPassword(bookingForm.getCusPassword());
 		user.setActive(true);
-		IUserProfile profile2 = getUserManager().saveCustomer(user);
+		final IUserProfile profile2 = getUserManager().saveCustomer(user);
 		userId = profile2.getId();
 	    } else {
 		// selects a existing customer.
@@ -211,29 +211,29 @@ public class BookingAction extends BaseAction {
 
 	}
 
-	User bookingUser = getUserManager().findUserById(userId);
+	final User bookingUser = getUserManager().findUserById(userId);
 	booking.setBookingUser(bookingUser);
 	booking.setBookingDate(new Date());
 
 	if (bookingForm.getAgentId() != null
 		&& bookingForm.getAgentId().longValue() > 0) {
-	    User agent = getUserManager()
+	    final User agent = getUserManager()
 		    .findUserById(bookingForm.getAgentId());
 	    booking.setAgent(agent);
 	}
 
 	booking.setDepatureDate(searchRequestDTO.getCheckIn());
 
-	double totalPrice = bookingForm.getNoOfRoom()
+	final double totalPrice = bookingForm.getNoOfRoom()
 		* roomDTO.getRoomSeasonalRate().getTotalCost().doubleValue()
-		* (searchRequestDTO.getNoOfNights());
-	double tot = totalPrice + extraItemPrice;
+		* searchRequestDTO.getNoOfNights();
+	final double tot = totalPrice + extraItemPrice;
 
 	booking.setTotalPrice(format(tot));
 
-	BigDecimal roomPrice = format(bookingForm.getNoOfRoom()
+	final BigDecimal roomPrice = format(bookingForm.getNoOfRoom()
 		* roomDTO.getRoomSeasonalRate().getTotalCost().doubleValue()
-		* (searchRequestDTO.getNoOfNights()));
+		* searchRequestDTO.getNoOfNights());
 
 	booking.setRoomPrice(roomPrice);
 
@@ -253,7 +253,7 @@ public class BookingAction extends BaseAction {
 	bookingDTO.setBooking(booking);
 	bookingDTO.setRoomAvalabiltyId(roomDTO.getId());
 
-	HotelBooking hotelBooking = new HotelBooking();
+	final HotelBooking hotelBooking = new HotelBooking();
 	hotelBooking.setActive(true);
 	hotelBooking.setBooking(booking);
 	hotelBooking.setCheckInDate(searchRequestDTO.getCheckIn());
@@ -262,7 +262,7 @@ public class BookingAction extends BaseAction {
 	hotelBooking.setNoOfRoom(bookingForm.getNoOfRoom());
 	bookingDTO.setHotelBooking(hotelBooking);
 
-	RoomBooking roomBooking = new RoomBooking();
+	final RoomBooking roomBooking = new RoomBooking();
 	roomBooking.setHotelBooking(hotelBooking);
 	roomBooking.setActive(true);
 	roomBooking.setRoom(roomDTO.getRoom());
@@ -295,7 +295,7 @@ public class BookingAction extends BaseAction {
 	    bookingDTO.getBooking().setPaymentMethod(
 		    IBooking.BOOKING_PAYMENT_METHOD_CASH_DES);
 
-	    Payment payment = new Payment();
+	    final Payment payment = new Payment();
 	    payment.setTotalPrice(format(payed));
 	    bookingDTO.setPayment(payment);
 	    addInfoMessages(BOOKING_CONFIRM_MSG);
@@ -321,11 +321,12 @@ public class BookingAction extends BaseAction {
 		IBooking.BOOKING_PAYMENT_METHOD_ONLINE)) {
 	    addIpgPrams(request, bookingDTO);
 	    return mapping.findForward("ipg");
-	} else
+	} else {
 	    return mapping.findForward(SUCCESS);
+	}
     }
 
-    private static BigDecimal format(double val) {
+    private static BigDecimal format(final double val) {
 	synchronized (BookingAction.class) {
 	    BigDecimal bigDecimal = new BigDecimal(val);
 	    bigDecimal = bigDecimal.setScale(2, BigDecimal.ROUND_UP);
@@ -341,7 +342,7 @@ public class BookingAction extends BaseAction {
 
     private void addIpgPrams(final HttpServletRequest request,
 	    final String bookingId, final String annountInCts) {
-	IpgUtil ipg = ServiceHelper.getInstance().getIpgUtil();
+	final IpgUtil ipg = ServiceHelper.getInstance().getIpgUtil();
 	request.setAttribute(virtualPaymentClientURL,
 		ipg.getVirtualPaymentClientURL());
 	request.setAttribute(vpc_Version, ipg.getVpc_Version());
@@ -366,8 +367,8 @@ public class BookingAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward delete(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward delete(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	return null;
     }
@@ -381,8 +382,8 @@ public class BookingAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward edit(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward edit(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	return null;
     }
@@ -396,8 +397,8 @@ public class BookingAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward find(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward find(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 
 	return mapping.findForward(SUCCESS);
@@ -413,11 +414,11 @@ public class BookingAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward forward(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward forward(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	final BookingForm bookingForm = (BookingForm) form;
-	RoomBooking booking = getBookingManager().findRoomBooking(
+	final RoomBooking booking = getBookingManager().findRoomBooking(
 		bookingForm.getBookingId());
 	addIpgPrams(request, bookingForm.getBookingId(), booking
 		.getHotelBooking().getBooking().getPaidAmountCts());
@@ -433,8 +434,8 @@ public class BookingAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward init(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward init(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	final BookingForm bookingForm = (BookingForm) form;
 	bookingForm.reset(mapping, request);
@@ -444,22 +445,22 @@ public class BookingAction extends BaseAction {
 		    "roomDTO"));
 	}
 
-	UserSearchDTO userSearchDTO = new UserSearchDTO();
-	Set<Long> roleIds = new HashSet<Long>();
+	final UserSearchDTO userSearchDTO = new UserSearchDTO();
+	final Set<Long> roleIds = new HashSet<Long>();
 	roleIds.add(IUserRoles.AGENT_ROLE_ID);
 	userSearchDTO.setRoleIds(roleIds);
 
-	ArrayList<User> agentCol = (ArrayList<User>) getUserManager()
+	final ArrayList<User> agentCol = (ArrayList<User>) getUserManager()
 		.findUsers(userSearchDTO);
 	bookingForm.setAllAgent(agentCol);
 
-	if (this.hasAccess(IUserFunctions.BOOKING_USER_CAN_CHANGE, request)) {
+	if (hasAccess(IUserFunctions.BOOKING_USER_CAN_CHANGE, request)) {
 
-	    Set<Long> Ids = new HashSet<Long>();
+	    new HashSet<Long>();
 	    roleIds.add(IUserRoles.CUSTOMER_ROLE_ID);
 	    userSearchDTO.setRoleIds(roleIds);
 
-	    ArrayList<User> customers = (ArrayList<User>) getUserManager()
+	    final ArrayList<User> customers = (ArrayList<User>) getUserManager()
 		    .findUsers(userSearchDTO);
 	    bookingForm.setAllCustomers(customers);
 	}
@@ -477,8 +478,8 @@ public class BookingAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    public ActionForward process(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    public ActionForward process(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 
 	return mapping.findForward(SUCCESS);
@@ -493,8 +494,8 @@ public class BookingAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward save(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward save(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	return null;
     }
@@ -508,8 +509,8 @@ public class BookingAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward send(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward send(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	return null;
     }
@@ -523,15 +524,15 @@ public class BookingAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward sort(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward sort(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	return null;
     }
 
     @Override
-    public ActionForward search(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    public ActionForward search(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	// TODO Auto-generated method stub
 	return null;

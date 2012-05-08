@@ -43,14 +43,14 @@ public class Discount extends BaseObject {
      * @return the disName
      */
     public String getDisName() {
-	return disName;
+	return this.disName;
     }
 
     /**
      * @param disName
      *            the disName to set
      */
-    public void setDisName(String disName) {
+    public void setDisName(final String disName) {
 	this.disName = disName;
     }
 
@@ -59,14 +59,14 @@ public class Discount extends BaseObject {
      * @return the disType
      */
     public String getDisType() {
-	return disType;
+	return this.disType;
     }
 
     /**
      * @param disType
      *            the disType to set
      */
-    public void setDisType(String disType) {
+    public void setDisType(final String disType) {
 	this.disType = disType;
     }
 
@@ -75,14 +75,14 @@ public class Discount extends BaseObject {
      * @return the adultDis
      */
     public BigDecimal getAdultDis() {
-	return adultDis;
+	return this.adultDis;
     }
 
     /**
      * @param adultDis
      *            the adultDis to set
      */
-    public void setAdultDis(BigDecimal adultDis) {
+    public void setAdultDis(final BigDecimal adultDis) {
 	this.adultDis = adultDis;
     }
 
@@ -91,14 +91,14 @@ public class Discount extends BaseObject {
      * @return the childDis
      */
     public BigDecimal getChildDis() {
-	return childDis;
+	return this.childDis;
     }
 
     /**
      * @param childDis
      *            the childDis to set
      */
-    public void setChildDis(BigDecimal childDis) {
+    public void setChildDis(final BigDecimal childDis) {
 	this.childDis = childDis;
     }
 
@@ -107,14 +107,14 @@ public class Discount extends BaseObject {
      * @return the infantDis
      */
     public BigDecimal getInfantDis() {
-	return infantDis;
+	return this.infantDis;
     }
 
     /**
      * @param infantDis
      *            the infantDis to set
      */
-    public void setInfantDis(BigDecimal infantDis) {
+    public void setInfantDis(final BigDecimal infantDis) {
 	this.infantDis = infantDis;
     }
 
@@ -123,14 +123,14 @@ public class Discount extends BaseObject {
      * @return the disValue
      */
     public BigDecimal getDisValue() {
-	return disValue;
+	return this.disValue;
     }
 
     /**
      * @param disValue
      *            the disValue to set
      */
-    public void setDisValue(BigDecimal disValue) {
+    public void setDisValue(final BigDecimal disValue) {
 	this.disValue = disValue;
     }
 
@@ -139,14 +139,14 @@ public class Discount extends BaseObject {
      * @return the disPercentage
      */
     public BigDecimal getDisPercentage() {
-	return disPercentage;
+	return this.disPercentage;
     }
 
     /**
      * @param disPercentage
      *            the disPercentage to set
      */
-    public void setDisPercentage(BigDecimal disPercentage) {
+    public void setDisPercentage(final BigDecimal disPercentage) {
 	this.disPercentage = disPercentage;
     }
 
@@ -154,15 +154,17 @@ public class Discount extends BaseObject {
      * @hibernate.property
      * @return the status
      */
+    @Override
     public String getStatus() {
-	return status;
+	return this.status;
     }
 
     /**
      * @param status
      *            the status to set
      */
-    public void setStatus(String status) {
+    @Override
+    public void setStatus(final String status) {
 	this.status = status;
     }
 

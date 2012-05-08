@@ -32,10 +32,11 @@ public class HotelDAO extends BaseDAO implements IHotelDAO {
      * com.yd.etravel.persistence.dao.hotel.IHotelDAO#isHotelNameExist(java.
      * lang.String)
      */
-    public boolean isHotelNameExist(String name, Long id)
+    @Override
+    public boolean isHotelNameExist(final String name, final Long id)
 	    throws PersistenceException {
 	try {
-	    StringBuilder IS_HOTEL_NAME_EXIST = new StringBuilder(
+	    final StringBuilder IS_HOTEL_NAME_EXIST = new StringBuilder(
 		    "SELECT hotel FROM Hotel as hotel where ")
 		    .append(" UPPER(hotel.name)= UPPER(:name)");
 
@@ -43,51 +44,53 @@ public class HotelDAO extends BaseDAO implements IHotelDAO {
 		IS_HOTEL_NAME_EXIST.append(" AND hotel.id != :id ");
 	    }
 
-	    Session session = getHibernateTemplate().getSessionFactory()
+	    final Session session = getHibernateTemplate().getSessionFactory()
 		    .getCurrentSession();
-	    Query query = session.createQuery(IS_HOTEL_NAME_EXIST.toString());
+	    final Query query = session.createQuery(IS_HOTEL_NAME_EXIST.toString());
 	    query.setParameter("name", name);
 	    if (id != null) {
 		query.setParameter("id", id);
 	    }
 
-	    return (!query.list().isEmpty());
-	} catch (HibernateException e) {
+	    return !query.list().isEmpty();
+	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 	}
     }
 
-    public Hotel findHotelWithUser(Long id) throws PersistenceException {
+    @Override
+    public Hotel findHotelWithUser(final Long id) throws PersistenceException {
 	try {
-	    Session session = getHibernateTemplate().getSessionFactory()
+	    final Session session = getHibernateTemplate().getSessionFactory()
 		    .getCurrentSession();
-	    Query query = session.createQuery(FIND_HOTEL_WITH_USER.toString());
+	    final Query query = session.createQuery(FIND_HOTEL_WITH_USER.toString());
 	    query.setParameter("pk", id);
-	    List<Hotel> list = query.list();
+	    final List<Hotel> list = query.list();
 	    return list.isEmpty() ? null : list.get(0);
-	} catch (HibernateException e) {
+	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 	}
     }
 
-    public int deleteHotel(Long id) throws PersistenceException {
+    @Override
+    public int deleteHotel(final Long id) throws PersistenceException {
 	try {
 	    final StringBuilder sb = new StringBuilder("delete from ").append(
 		    Hotel.class.getName()).append(
 		    " as obj Where obj.id = (:id) ");
-	    Session session = getHibernateTemplate().getSessionFactory()
+	    final Session session = getHibernateTemplate().getSessionFactory()
 		    .getCurrentSession();
 
-	    Query sqlQuery = session
+	    final Query sqlQuery = session
 		    .createSQLQuery("delete from T_HOTEL_USER where FK_HOTEL_ID=:id");
 	    sqlQuery.setParameter("id", id);
 	    sqlQuery.executeUpdate();
 
-	    Query query = session.createQuery(sb.toString());
+	    final Query query = session.createQuery(sb.toString());
 	    query.setParameter("id", id);
 
 	    return query.executeUpdate();
-	} catch (HibernateException e) {
+	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 	}
     }

@@ -31,7 +31,7 @@ public class Content extends BaseObject {
      * @param name
      * @param code
      */
-    public Content(Long id, String name, String code) {
+    public Content(final Long id, final String name, final String code) {
 	super(id, name, code);
 	// TODO Auto-generated constructor stub
     }
@@ -40,10 +40,10 @@ public class Content extends BaseObject {
      * @hibernate.many-to-one cascade="save-update"
      */
     public Category getCategory() {
-	return category;
+	return this.category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(final Category category) {
 	this.category = category;
     }
 
@@ -51,10 +51,10 @@ public class Content extends BaseObject {
      * @hibernate.property length="1000"
      */
     public String getText() {
-	return text;
+	return this.text;
     }
 
-    public void setText(String text) {
+    public void setText(final String text) {
 	this.text = text;
     }
 
@@ -62,10 +62,10 @@ public class Content extends BaseObject {
      * @hibernate.property
      */
     public String getUrl() {
-	return url;
+	return this.url;
     }
 
-    public void setUrl(String url) {
+    public void setUrl(final String url) {
 	this.url = url;
     }
 
@@ -73,10 +73,10 @@ public class Content extends BaseObject {
      * @hibernate.property
      */
     public Long getPk() {
-	return pk;
+	return this.pk;
     }
 
-    public void setPk(Long pk) {
+    public void setPk(final Long pk) {
 	this.pk = pk;
     }
 
@@ -84,10 +84,10 @@ public class Content extends BaseObject {
      * @hibernate.property
      */
     public String getObject() {
-	return object;
+	return this.object;
     }
 
-    public void setObject(String object) {
+    public void setObject(final String object) {
 	this.object = object;
     }
 

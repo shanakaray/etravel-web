@@ -47,8 +47,8 @@ public class RoomAvailabilityAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward add(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward add(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	// TODO Auto-generated method stub
 	return null;
@@ -63,8 +63,8 @@ public class RoomAvailabilityAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward back(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward back(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	// TODO Auto-generated method stub
 	return null;
@@ -80,8 +80,8 @@ public class RoomAvailabilityAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    public ActionForward create(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    public ActionForward create(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	boolean isnew = true;
 
@@ -133,7 +133,7 @@ public class RoomAvailabilityAction extends BaseAction {
 
 	if (roomAvailabilityForm.getRoomId() != null
 		&& roomAvailabilityForm.getRoomId().longValue() > 0) {
-	    Room room = new Room();
+	    final Room room = new Room();
 	    room.setId(roomAvailabilityForm.getRoomId());
 	    roomAvailability.setRoom(room);
 	}
@@ -169,10 +169,10 @@ public class RoomAvailabilityAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward delete(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward delete(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
-	RoomAvailabilityForm roomAvailabilityForm = (RoomAvailabilityForm) form;
+	final RoomAvailabilityForm roomAvailabilityForm = (RoomAvailabilityForm) form;
 	getRoomAvailabilityManager().deleteRoomAvailability(
 		roomAvailabilityForm.getId());
 	addInfoMessages(COM_DELETE_MSG);
@@ -188,18 +188,18 @@ public class RoomAvailabilityAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward edit(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward edit(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 
-	RoomAvailabilityForm roomAvaForm = (RoomAvailabilityForm) form;
-	RoomAvailability ra = getRoomAvailabilityManager()
+	final RoomAvailabilityForm roomAvaForm = (RoomAvailabilityForm) form;
+	final RoomAvailability ra = getRoomAvailabilityManager()
 		.findRoomAvailabilityWithRoomInfoById(roomAvaForm.getId());
 	roomAvaForm.setUnit(ra.getUnit());
 	roomAvaForm.setActive(ra.isActive());
 	roomAvaForm.setFromDate(ra.getFromDateString());
 	roomAvaForm.setToDate(ra.getToDateString());
-	RoomAvailabilityDTO dto = new RoomAvailabilityDTO();
+	final RoomAvailabilityDTO dto = new RoomAvailabilityDTO();
 	dto.setHotelId(roomAvaForm.getHotelId() == null
 		|| roomAvaForm.getHotelId().longValue() <= 0 ? null
 		: roomAvaForm.getHotelId());
@@ -228,11 +228,11 @@ public class RoomAvailabilityAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward find(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward find(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	final RoomAvailabilityForm roomAvailabilityForm = (RoomAvailabilityForm) form;
-	List<DailyAvailabilityDTO> allRoomDailyAvailability = getRoomAvailabilityManager()
+	final List<DailyAvailabilityDTO> allRoomDailyAvailability = getRoomAvailabilityManager()
 		.findDailyAvailability(roomAvailabilityForm.getId());
 	request.getSession().setAttribute("allRoomDailyAvailability",
 		allRoomDailyAvailability);
@@ -250,8 +250,8 @@ public class RoomAvailabilityAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward forward(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward forward(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 
 	return init(mapping, form, request, response);
@@ -266,13 +266,13 @@ public class RoomAvailabilityAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward init(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward init(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	final RoomAvailabilityForm roomAvaForm = (RoomAvailabilityForm) form;
 
 	roomAvaForm.setHotelList(getHotelManager().findAllActiveHotels());
-	RoomAvailabilityDTO dto = new RoomAvailabilityDTO();
+	final RoomAvailabilityDTO dto = new RoomAvailabilityDTO();
 	dto.setHotelId(roomAvaForm.getHotelId() == null
 		|| roomAvaForm.getHotelId().longValue() <= 0 ? null
 		: roomAvaForm.getHotelId());
@@ -282,13 +282,13 @@ public class RoomAvailabilityAction extends BaseAction {
 	if (roomAvaForm.getHotelId() != null
 		&& roomAvaForm.getHotelId().longValue() > 0) {
 
-	    List<Room> roomList = getRoomManager().findAllRoomWithRoomType(
+	    final List<Room> roomList = getRoomManager().findAllRoomWithRoomType(
 		    roomAvaForm.getHotelId());
 	    roomAvaForm.setAllRoom(roomList);
 
 	    if (roomAvaForm.getRoomId() != null
 		    && roomAvaForm.getRoomId().longValue() > 0) {
-		for (Room room : roomList) {
+		for (final Room room : roomList) {
 		    if (room.getId().longValue() == roomAvaForm.getRoomId()
 			    .longValue()) {
 			roomAvaForm.setRoomType(room.getRoomType().getName());
@@ -318,8 +318,8 @@ public class RoomAvailabilityAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    public ActionForward process(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    public ActionForward process(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	final String param = mapping.getParameter();
 
@@ -341,8 +341,8 @@ public class RoomAvailabilityAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward save(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward save(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	// TODO Auto-generated method stub
 	return null;
@@ -357,8 +357,8 @@ public class RoomAvailabilityAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward send(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward send(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	// TODO Auto-generated method stub
 	return null;
@@ -373,30 +373,30 @@ public class RoomAvailabilityAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward sort(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward sort(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	// TODO Auto-generated method stub
 	return null;
     }
 
-    protected ActionForward roomOnChange(ActionMapping mapping,
-	    ActionForm form, HttpServletRequest request,
-	    HttpServletResponse response) throws Exception {
+    protected ActionForward roomOnChange(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	init(mapping, form, request, response);
 	return mapping.findForward(SUCCESS);
     }
 
-    protected ActionForward hotelOnChange(ActionMapping mapping,
-	    ActionForm form, HttpServletRequest request,
-	    HttpServletResponse response) throws Exception {
+    protected ActionForward hotelOnChange(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	init(mapping, form, request, response);
 	return mapping.findForward(SUCCESS);
     }
 
     @Override
-    public ActionForward search(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    public ActionForward search(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	// TODO Auto-generated method stub
 	return null;

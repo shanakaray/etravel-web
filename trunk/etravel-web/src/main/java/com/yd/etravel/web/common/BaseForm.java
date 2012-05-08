@@ -22,20 +22,22 @@ public abstract class BaseForm extends ValidatorActionForm implements
 	}
 
 	public long getTjwToken() {
-		return tjwToken;
+		return this.tjwToken;
 	}
 
-	public void setTjwToken(long tjwToken) {
+	public void setTjwToken(final long tjwToken) {
 		this.tjwToken = tjwToken;
 	}
 
-	public void reset(ActionMapping mapping, HttpServletRequest request) {
+	@Override
+	public void reset(final ActionMapping mapping, final HttpServletRequest request) {
 		this.tjwToken = 0l;
 		resetBean(mapping, request);
 	}
 
-	public ActionErrors validate(ActionMapping mapping,
-			HttpServletRequest request) {
+	@Override
+	public ActionErrors validate(final ActionMapping mapping,
+			final HttpServletRequest request) {
 		return validateBean(mapping, request);
 	}
 
@@ -45,7 +47,7 @@ public abstract class BaseForm extends ValidatorActionForm implements
 	public abstract void resetBean(ActionMapping mapping,
 			HttpServletRequest request);
 
-	protected void addErrors(ActionErrors actionMessages, String key) {
+	protected void addErrors(final ActionErrors actionMessages, final String key) {
 		actionMessages.add(Globals.ERROR_KEY, new ActionMessage(key));
 	}
 

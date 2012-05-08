@@ -23,7 +23,8 @@ public class RoomTypeDAO extends BaseDAO implements IRoomTypeDAO {
 	// TODO Auto-generated constructor stub
     }
 
-    public boolean isRoomTypeNameExist(final String type, Long id)
+    @Override
+    public boolean isRoomTypeNameExist(final String type, final Long id)
 	    throws PersistenceException {
 	try {
 	    final StringBuilder sb = new StringBuilder(
@@ -34,17 +35,17 @@ public class RoomTypeDAO extends BaseDAO implements IRoomTypeDAO {
 		sb.append(" AND roomType.id != :id");
 	    }
 
-	    Session session = getHibernateTemplate().getSessionFactory()
+	    final Session session = getHibernateTemplate().getSessionFactory()
 		    .getCurrentSession();
-	    Query query = session.createQuery(sb.toString());
+	    final Query query = session.createQuery(sb.toString());
 	    query.setParameter("name", type);
 
 	    if (id != null) {
 		query.setParameter("id", id);
 	    }
 
-	    return (!query.list().isEmpty());
-	} catch (HibernateException e) {
+	    return !query.list().isEmpty();
+	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 	}
     }

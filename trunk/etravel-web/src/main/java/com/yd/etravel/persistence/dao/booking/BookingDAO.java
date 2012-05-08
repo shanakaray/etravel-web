@@ -30,19 +30,21 @@ public class BookingDAO extends BaseDAO implements IBookingDAO {
 		    + "join fetch  hotelBooking.hotel as hotel "
 		    + "join fetch  hotelBooking.booking as booking ");
 
+    @Override
     public List<RoomBooking> findAllBooking() throws PersistenceException {
 	try {
-	    return (List<RoomBooking>) getHibernateTemplate().find(
+	    return getHibernateTemplate().find(
 		    FIND_ALL_BOOKING.toString());
-	} catch (HibernateException e) {
+	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 	}
     }
 
-    public List<BookingReportDTO> findBookingDetail(BookingReportSearchDTO dto)
+    @Override
+    public List<BookingReportDTO> findBookingDetail(final BookingReportSearchDTO dto)
 	    throws PersistenceException {
 	try {
-	    StringBuilder sb = new StringBuilder();
+	    final StringBuilder sb = new StringBuilder();
 	    sb.append(
 		    "SELECT new com.yd.etravel.domain.custom.booking.BookingReportDTO(")
 		    .append("b.id,r.id,rt.id,h.id,u.id")
@@ -104,9 +106,9 @@ public class BookingDAO extends BaseDAO implements IBookingDAO {
 	    }
 
 	    sb.append(" ORDER BY hb.checkInDate ");
-	    Session session = getHibernateTemplate().getSessionFactory()
+	    final Session session = getHibernateTemplate().getSessionFactory()
 		    .getCurrentSession();
-	    Query query = session.createQuery(sb.toString());
+	    final Query query = session.createQuery(sb.toString());
 
 	    if (dto.getHotelId() != null && !dto.getHotelId().isEmpty()) {
 		query.setParameterList("hid", dto.getHotelId());
@@ -151,49 +153,51 @@ public class BookingDAO extends BaseDAO implements IBookingDAO {
 		query.setParameterList("stalst", dto.getStatusList());
 	    }
 
-	    return (List<BookingReportDTO>) query.list();
+	    return query.list();
 
-	} catch (HibernateException e) {
+	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 	}
     }
 
+    @Override
     public List<RoomBooking> findExpiredBookings(final Date date,
 	    final String status, final String paymentMethod)
 	    throws PersistenceException {
 	try {
-	    StringBuilder sb = new StringBuilder();
+	    final StringBuilder sb = new StringBuilder();
 	    sb.append("SELECT r ")
 		    .append(" FROM RoomBooking r JOIN fetch r.hotelBooking h JOIN fetch h.booking b ")
 		    .append(" WHERE b.expireDate <= :expdate and  b.status=:status and  b.paymentMethod=:pm ");
-	    Session session = getHibernateTemplate().getSessionFactory()
+	    final Session session = getHibernateTemplate().getSessionFactory()
 		    .getCurrentSession();
-	    Query query = session.createQuery(sb.toString());
+	    final Query query = session.createQuery(sb.toString());
 	    query.setParameter("expdate", date);
 	    query.setParameter("status", status);
 	    query.setParameter("pm", paymentMethod);
-	    return (List<RoomBooking>) query.list();
+	    return query.list();
 
-	} catch (HibernateException e) {
+	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 	}
     }
 
-    public RoomBooking findRoomBooking(String bookingid)
+    @Override
+    public RoomBooking findRoomBooking(final String bookingid)
 	    throws PersistenceException {
 	try {
 	    final StringBuilder sb = new StringBuilder();
 	    sb.append("SELECT r ")
 		    .append(" FROM RoomBooking r JOIN fetch r.room rr JOIN fetch rr.roomType rt JOIN fetch r.hotelBooking h JOIN fetch h.hotel hh JOIN fetch h.booking b ")
 		    .append(" WHERE b.code = :code");
-	    Session session = getHibernateTemplate().getSessionFactory()
+	    final Session session = getHibernateTemplate().getSessionFactory()
 		    .getCurrentSession();
-	    Query query = session.createQuery(sb.toString());
+	    final Query query = session.createQuery(sb.toString());
 	    query.setParameter("code", bookingid);
-	    List<RoomBooking> list = query.list();
-	    return (!list.isEmpty()) ? list.get(0) : null;
+	    final List<RoomBooking> list = query.list();
+	    return !list.isEmpty() ? list.get(0) : null;
 
-	} catch (HibernateException e) {
+	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 	}
     }

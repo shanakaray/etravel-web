@@ -29,8 +29,8 @@ public class DateUtil {
      *            0-11
      * @return number of days for given year and month, 1-31
      */
-    public static int daysOfMonth(int year, int month) {
-	Calendar calendar = Calendar.getInstance();
+    public static int daysOfMonth(final int year, final int month) {
+	final Calendar calendar = Calendar.getInstance();
 	calendar.set(year, month, 1);
 	calendar.add(Calendar.MONTH, 1);
 	calendar.add(Calendar.DATE, -1);
@@ -38,79 +38,79 @@ public class DateUtil {
 	return calendar.get(Calendar.DATE);
     }
 
-    public static Date convertToStore(Date d) {
-	Date d2 = floor(d);
-	Calendar calendar = Calendar.getInstance();
+    public static Date convertToStore(final Date d) {
+	final Date d2 = floor(d);
+	final Calendar calendar = Calendar.getInstance();
 	calendar.setTime(d2);
 	calendar.add(Calendar.DATE, 1);
 	return calendar.getTime();
     }
 
-    public static Date convertFromStore(Date d) {
-	Calendar calendar = Calendar.getInstance();
+    public static Date convertFromStore(final Date d) {
+	final Calendar calendar = Calendar.getInstance();
 	calendar.setTime(d);
 	calendar.add(Calendar.DATE, -1);
 
 	return roof(calendar.getTime());
     }
 
-    public static Date floor(Date d) {
-	DateHolder dh = new DateHolder(d);
+    public static Date floor(final Date d) {
+	final DateHolder dh = new DateHolder(d);
 
-	Calendar calendar = Calendar.getInstance();
+	final Calendar calendar = Calendar.getInstance();
 	calendar.set(dh.getYear(), dh.getMonth(), dh.getDay(), 0, 0, 0);
 	return calendar.getTime();
     }
 
-    public static Date roof(Date d) {
-	DateHolder dh = new DateHolder(d);
+    public static Date roof(final Date d) {
+	final DateHolder dh = new DateHolder(d);
 
-	Calendar calendar = Calendar.getInstance();
+	final Calendar calendar = Calendar.getInstance();
 	calendar.set(dh.getYear(), dh.getMonth(), dh.getDay(), 23, 59, 59);
 	return calendar.getTime();
     }
 
-    public static boolean before(Date d1, Date d2) {
-	DateHolder dh1 = new DateHolder(d1);
-	DateHolder dh2 = new DateHolder(d2);
+    public static boolean before(final Date d1, final Date d2) {
+	final DateHolder dh1 = new DateHolder(d1);
+	final DateHolder dh2 = new DateHolder(d2);
 
-	return (dh1.getYear() < dh2.getYear())
-		|| (dh1.getYear() == dh2.getYear() && dh1.getMonth() < dh2
-			.getMonth())
-		|| (dh1.getYear() == dh2.getYear()
+	return dh1.getYear() < dh2.getYear()
+		|| dh1.getYear() == dh2.getYear() && dh1.getMonth() < dh2
+			.getMonth()
+		|| dh1.getYear() == dh2.getYear()
 			&& dh1.getMonth() == dh2.getMonth() && dh1.getDay() < dh2
-			.getDay());
+			.getDay();
     }
 
-    public static boolean equals(Date d1, Date d2) {
-	DateHolder dh1 = new DateHolder(d1);
-	DateHolder dh2 = new DateHolder(d2);
+    public static boolean equals(final Date d1, final Date d2) {
+	final DateHolder dh1 = new DateHolder(d1);
+	final DateHolder dh2 = new DateHolder(d2);
 
 	return dh1.getYear() == dh2.getYear()
 		&& dh1.getMonth() == dh2.getMonth()
 		&& dh1.getDay() == dh2.getDay();
     }
 
-    public static boolean after(Date d1, Date d2) {
+    public static boolean after(final Date d1, final Date d2) {
 	return !before(d1, d2) && !equals(d1, d2);
     }
 
-    public static boolean adjacent(Date d1, Date d2) {
-	DateHolder dh1 = new DateHolder(d1);
-	DateHolder dh2 = new DateHolder(d2);
+    public static boolean adjacent(final Date d1, final Date d2) {
+	final DateHolder dh1 = new DateHolder(d1);
+	final DateHolder dh2 = new DateHolder(d2);
 
-	return (dh1.getYear() == dh2.getYear()
-		&& dh1.getMonth() == dh2.getMonth() && dh1.getDay() == (dh2
-		.getDay() - 1))
-		|| (dh1.getYear() == dh2.getYear()
-			&& dh1.getMonth() == (dh2.getMonth() - 1)
+	return dh1.getYear() == dh2.getYear()
+		&& dh1.getMonth() == dh2.getMonth() && dh1.getDay() == dh2
+		.getDay() - 1
+		|| dh1.getYear() == dh2.getYear()
+			&& dh1.getMonth() == dh2.getMonth() - 1
 			&& dh1.getDay() == daysOfMonth(dh1.getYear(),
-				dh1.getMonth()) && dh2.getDay() == 1)
-		|| (dh1.getYear() == (dh2.getYear() - 1)
+				dh1.getMonth()) && dh2.getDay() == 1
+		|| dh1.getYear() == dh2.getYear() - 1
 			&& dh1.getMonth() == 11
 			&& dh2.getMonth() == 0
 			&& dh1.getDay() == daysOfMonth(dh1.getYear(),
-				dh1.getMonth()) && dh2.getDay() == 1);
+				dh1.getMonth()) && dh2.getDay() == 1;
 
     }
 
@@ -120,44 +120,44 @@ public class DateUtil {
 	protected int month;
 	protected int day;
 
-	public DateHolder(Date date) {
+	public DateHolder(final Date date) {
 	    this.date = new Date(date.getTime());
 	    initialize();
 	}
 
 	private void initialize() {
-	    Calendar calendar = Calendar.getInstance();
-	    calendar.setTime(date);
-	    year = calendar.get(Calendar.YEAR);
-	    month = calendar.get(Calendar.MONTH);
-	    day = calendar.get(Calendar.DATE);
+	    final Calendar calendar = Calendar.getInstance();
+	    calendar.setTime(this.date);
+	    this.year = calendar.get(Calendar.YEAR);
+	    this.month = calendar.get(Calendar.MONTH);
+	    this.day = calendar.get(Calendar.DATE);
 	}
 
 	public int getYear() {
-	    return year;
+	    return this.year;
 	}
 
 	public int getMonth() {
-	    return month;
+	    return this.month;
 	}
 
 	public int getDay() {
-	    return day;
+	    return this.day;
 	}
     }
 
-    public static int getDay(Date d) {
-	DateHolder dh1 = new DateHolder(d);
+    public static int getDay(final Date d) {
+	final DateHolder dh1 = new DateHolder(d);
 	return dh1.getDay();
     }
 
-    public static int getYear(Date d) {
-	DateHolder dh1 = new DateHolder(d);
+    public static int getYear(final Date d) {
+	final DateHolder dh1 = new DateHolder(d);
 	return dh1.getYear();
     }
 
-    public static int getMonth(Date d) {
-	DateHolder dh1 = new DateHolder(d);
+    public static int getMonth(final Date d) {
+	final DateHolder dh1 = new DateHolder(d);
 	return dh1.getMonth();
     }
 
@@ -168,7 +168,7 @@ public class DateUtil {
      *            the string to parse
      * @return a date object or null if the string was not a parsable date
      */
-    public static Date parseDate(String s, Locale locale) {
+    public static Date parseDate(final String s, final Locale locale) {
 	try {
 	    // Sanity check
 	    if (s == null) {
@@ -177,9 +177,9 @@ public class DateUtil {
 
 	    // Go back and forth to eliminate the datefunctions in all systems
 	    // that accepts e.g. 2002-01-32 as 2002-02-01 etc
-	    Date d = DateFormat.getDateInstance(DateFormat.SHORT, locale)
+	    final Date d = DateFormat.getDateInstance(DateFormat.SHORT, locale)
 		    .parse(s);
-	    String sd = DateFormat.getDateInstance(DateFormat.SHORT, locale)
+	    final String sd = DateFormat.getDateInstance(DateFormat.SHORT, locale)
 		    .format(d);
 
 	    if (s.equals(sd)) {
@@ -188,7 +188,7 @@ public class DateUtil {
 
 	    // Try to parse the date with finer granularity
 	    return parseDateShortTime(s, locale);
-	} catch (ParseException pe) {
+	} catch (final ParseException pe) {
 	    return null;
 	}
     }
@@ -200,18 +200,18 @@ public class DateUtil {
      *            the string to parse
      * @return a date object or null if the string was not a parsable date
      */
-    public static Date parse(String source) {
+    public static Date parse(final String source) {
 	try {
 
 	    if (StringUtils.isEmpty(source)) {
 		return null;
 	    }
 
-	    SimpleDateFormat dateFormat = new SimpleDateFormat(
+	    final SimpleDateFormat dateFormat = new SimpleDateFormat(
 		    SIMPLE_DATE_FORMAT);
 	    return dateFormat.parse(source);
 
-	} catch (ParseException pe) {
+	} catch (final ParseException pe) {
 	    return null;
 	}
     }
@@ -221,18 +221,18 @@ public class DateUtil {
      * @param source
      * @return
      */
-    public static String format(Date source) {
+    public static String format(final Date source) {
 	try {
 
 	    if (StringUtils.isEmpty(source)) {
 		return "";
 	    }
 
-	    SimpleDateFormat dateFormat = new SimpleDateFormat(
+	    final SimpleDateFormat dateFormat = new SimpleDateFormat(
 		    SIMPLE_DATE_FORMAT);
 	    return dateFormat.format(source);
 
-	} catch (Exception pe) {
+	} catch (final Exception pe) {
 	    return "";
 	}
     }
@@ -247,21 +247,22 @@ public class DateUtil {
      *            the string to parse example "18/02/08 00:00" for en_AU
      * @return a date object or null if the string was not a parsable date
      */
-    public static Date parseShortDate(String s, Locale locale) {
+    public static Date parseShortDate(final String s, final Locale locale) {
 	try {
 	    // Sanity check
 	    if (s == null) {
 		return null;
 	    }
 
-	    Date d = DateFormat.getDateInstance(DateFormat.SHORT, locale)
+	    final Date d = DateFormat.getDateInstance(DateFormat.SHORT, locale)
 		    .parse(s);
 
-	    if (d != null)
+	    if (d != null) {
 		return d;
-	    else
+	    } else {
 		return parseDateShortTime(s, locale);
-	} catch (ParseException pe) {
+	    }
+	} catch (final ParseException pe) {
 	    return null;
 	}
     }
@@ -275,7 +276,7 @@ public class DateUtil {
      * @return a date object or null if the string was not a parsable date and
      *         time
      */
-    public static Date parseDateShortTime(String s, Locale locale) {
+    public static Date parseDateShortTime(final String s, final Locale locale) {
 	try {
 	    // Sanity check
 	    if (s == null) {
@@ -284,9 +285,9 @@ public class DateUtil {
 
 	    // Go back and forth to eliminate the datefunctions in all systems
 	    // that accepts e.g. 2002-01-32 as 2002-02-01 etc
-	    Date d = DateFormat.getDateTimeInstance(DateFormat.SHORT,
+	    final Date d = DateFormat.getDateTimeInstance(DateFormat.SHORT,
 		    DateFormat.SHORT, locale).parse(s);
-	    String sd = DateFormat.getDateTimeInstance(DateFormat.SHORT,
+	    final String sd = DateFormat.getDateTimeInstance(DateFormat.SHORT,
 		    DateFormat.SHORT, locale).format(d);
 
 	    if (s.equals(sd)) {
@@ -295,7 +296,7 @@ public class DateUtil {
 
 	    // Try to parse with finer granularity
 	    return null;
-	} catch (ParseException pe) {
+	} catch (final ParseException pe) {
 	    return null;
 	}
     }
@@ -309,7 +310,7 @@ public class DateUtil {
      * @return a date object or null if the string was not a parsable date and
      *         time
      */
-    public static Date parseShortTime(String s, Locale locale) {
+    public static Date parseShortTime(final String s, final Locale locale) {
 	try {
 	    // Sanity check
 	    if (s == null) {
@@ -318,9 +319,9 @@ public class DateUtil {
 
 	    // Go back and forth to eliminate the datefunctions in all systems
 	    // that accepts e.g. 2002-01-32 as 2002-02-01 etc
-	    Date d = DateFormat.getTimeInstance(DateFormat.SHORT, locale)
+	    final Date d = DateFormat.getTimeInstance(DateFormat.SHORT, locale)
 		    .parse(s);
-	    String sd = DateFormat.getTimeInstance(DateFormat.SHORT, locale)
+	    final String sd = DateFormat.getTimeInstance(DateFormat.SHORT, locale)
 		    .format(d);
 
 	    if (s.equals(sd)) {
@@ -329,7 +330,7 @@ public class DateUtil {
 
 	    // Try to parse with finer granularity
 	    return parseDateTime(s, locale);
-	} catch (ParseException pe) {
+	} catch (final ParseException pe) {
 	    return null;
 	}
     }
@@ -342,7 +343,7 @@ public class DateUtil {
      * @return a date object or null if the string was not a parsable date and
      *         time
      */
-    public static Date parseDateTime(String s, Locale locale) {
+    public static Date parseDateTime(final String s, final Locale locale) {
 	try {
 	    // Sanity check
 	    if (s == null) {
@@ -351,9 +352,9 @@ public class DateUtil {
 
 	    // Go back and forth to eliminate the datefunctions in all systems
 	    // that accepts e.g. 2002-01-32 as 2002-02-01 etc
-	    Date d = DateFormat.getDateTimeInstance(DateFormat.SHORT,
+	    final Date d = DateFormat.getDateTimeInstance(DateFormat.SHORT,
 		    DateFormat.MEDIUM, locale).parse(s);
-	    String sd = DateFormat.getDateTimeInstance(DateFormat.SHORT,
+	    final String sd = DateFormat.getDateTimeInstance(DateFormat.SHORT,
 		    DateFormat.MEDIUM, locale).format(d);
 
 	    if (s.equals(sd)) {
@@ -362,7 +363,7 @@ public class DateUtil {
 
 	    // Not a valid date
 	    return null;
-	} catch (ParseException pe) {
+	} catch (final ParseException pe) {
 	    return null;
 	}
     }
@@ -375,9 +376,10 @@ public class DateUtil {
      *            the Date to be formated
      * @return a string containing the formated time
      */
-    public static String getDateShortTime(Date date, Locale locale) {
-	if (date == null)
+    public static String getDateShortTime(final Date date, final Locale locale) {
+	if (date == null) {
 	    return "";
+	}
 	return DateFormat.getDateTimeInstance(DateFormat.SHORT,
 		DateFormat.SHORT, locale).format(date);
     }
@@ -389,9 +391,10 @@ public class DateUtil {
      *            the Date to be formated
      * @return a string containing the formated date
      */
-    public static String getDate(Date date, Locale locale) {
-	if (date == null)
+    public static String getDate(final Date date, final Locale locale) {
+	if (date == null) {
 	    return "";
+	}
 	return DateFormat.getDateInstance(DateFormat.SHORT, locale)
 		.format(date);
     }
@@ -403,9 +406,10 @@ public class DateUtil {
      *            the Date to be formated
      * @return a string containing the formated date in an long format
      */
-    public static String getLongDate(Date date, Locale locale) {
-	if (date == null)
+    public static String getLongDate(final Date date, final Locale locale) {
+	if (date == null) {
 	    return "";
+	}
 	return DateFormat.getDateInstance(DateFormat.LONG, locale).format(date);
     }
 
@@ -417,9 +421,10 @@ public class DateUtil {
      *            the Date to be formated
      * @return a string containing the formated time
      */
-    public static String getDateTime(Date date, Locale locale) {
-	if (date == null)
+    public static String getDateTime(final Date date, final Locale locale) {
+	if (date == null) {
 	    return "";
+	}
 	return DateFormat.getDateTimeInstance(DateFormat.SHORT,
 		DateFormat.MEDIUM, locale).format(date);
     }
@@ -433,9 +438,10 @@ public class DateUtil {
      *            the Date to be formated
      * @return a string containing the formated time
      */
-    public static String getTime(Date date, Locale locale) {
-	if (date == null)
+    public static String getTime(final Date date, final Locale locale) {
+	if (date == null) {
 	    return "";
+	}
 	return DateFormat.getTimeInstance(DateFormat.LONG, locale).format(date);
     }
 
@@ -448,9 +454,10 @@ public class DateUtil {
      *            the Date to be formated
      * @return a string containing the formated time
      */
-    public static String getShortTime(Date date, Locale locale) {
-	if (date == null)
+    public static String getShortTime(final Date date, final Locale locale) {
+	if (date == null) {
 	    return "";
+	}
 	return DateFormat.getTimeInstance(DateFormat.SHORT, locale)
 		.format(date);
     }
@@ -464,12 +471,13 @@ public class DateUtil {
      *            Date and Time format string
      * @return The created Date
      */
-    public static Date parse(String date, String format) {
-	if (date == null)
+    public static Date parse(final String date, final String format) {
+	if (date == null) {
 	    return null;
+	}
 	try {
 	    return new SimpleDateFormat(format).parse(date);
-	} catch (ParseException e) {
+	} catch (final ParseException e) {
 	    return null;
 	}
     }
@@ -484,14 +492,15 @@ public class DateUtil {
      *            Time format string
      * @return a string containing the formated time
      */
-    public static String format(Date date, String format) {
-	if (date == null)
+    public static String format(final Date date, final String format) {
+	if (date == null) {
 	    return "";
+	}
 	return new SimpleDateFormat(format).format(date);
     }
 
-    public static String convert(String date, String fromFormat, String toFormat) {
-	Date tmp = parse(date, fromFormat);
+    public static String convert(final String date, final String fromFormat, final String toFormat) {
+	final Date tmp = parse(date, fromFormat);
 	if (tmp == null) {
 	    return "";
 	}
@@ -505,7 +514,7 @@ public class DateUtil {
      * @param date2
      * @return true if date1 is equal to or greater than date2
      */
-    public static boolean dateAfterOrEqual(Date date1, Date date2) {
+    public static boolean dateAfterOrEqual(final Date date1, final Date date2) {
 	return dateLessOrEqualDayInternal(date2, date1, false);
     }
 
@@ -516,7 +525,7 @@ public class DateUtil {
      * @param date2
      * @return true if date1 is equal to or greater than date2
      */
-    public static boolean dateAfterOrEqualMinute(Date date1, Date date2) {
+    public static boolean dateAfterOrEqualMinute(final Date date1, final Date date2) {
 	return dateLessOrEqualMinuteInternal(date2, date1, false);
     }
 
@@ -527,9 +536,9 @@ public class DateUtil {
      * @param date2
      * @return true if date1 is equal to date2
      */
-    public static boolean dateEqual(Date date1, Date date2) {
-	return (dateAfterOrEqual(date1, date2) && dateBeforeOrEqual(date1,
-		date2));
+    public static boolean dateEqual(final Date date1, final Date date2) {
+	return dateAfterOrEqual(date1, date2) && dateBeforeOrEqual(date1,
+		date2);
     }
 
     /**
@@ -539,34 +548,34 @@ public class DateUtil {
      * @param date2
      * @return true if date1 is equal to date2
      */
-    public static boolean dateEqualSecond(Date date1, Date date2) {
-	if ((date1 == null) || (date2 == null)) {
+    public static boolean dateEqualSecond(final Date date1, final Date date2) {
+	if (date1 == null || date2 == null) {
 	    return false;
 	}
 
-	Calendar cal1 = Calendar.getInstance();
+	final Calendar cal1 = Calendar.getInstance();
 	cal1.setTime(date1);
 
-	Calendar cal2 = Calendar.getInstance();
+	final Calendar cal2 = Calendar.getInstance();
 	cal2.setTime(date2);
 
-	int year1 = cal1.get(Calendar.YEAR);
-	int month1 = cal1.get(Calendar.MONTH);
-	int day1 = cal1.get(Calendar.DATE);
-	int hour1 = cal1.get(Calendar.HOUR_OF_DAY);
-	int minute1 = cal1.get(Calendar.MINUTE);
-	int second1 = cal1.get(Calendar.SECOND);
+	final int year1 = cal1.get(Calendar.YEAR);
+	final int month1 = cal1.get(Calendar.MONTH);
+	final int day1 = cal1.get(Calendar.DATE);
+	final int hour1 = cal1.get(Calendar.HOUR_OF_DAY);
+	final int minute1 = cal1.get(Calendar.MINUTE);
+	final int second1 = cal1.get(Calendar.SECOND);
 
-	int year2 = cal2.get(Calendar.YEAR);
-	int month2 = cal2.get(Calendar.MONTH);
-	int day2 = cal2.get(Calendar.DATE);
-	int hour2 = cal2.get(Calendar.HOUR_OF_DAY);
-	int minute2 = cal2.get(Calendar.MINUTE);
-	int second2 = cal2.get(Calendar.SECOND);
+	final int year2 = cal2.get(Calendar.YEAR);
+	final int month2 = cal2.get(Calendar.MONTH);
+	final int day2 = cal2.get(Calendar.DATE);
+	final int hour2 = cal2.get(Calendar.HOUR_OF_DAY);
+	final int minute2 = cal2.get(Calendar.MINUTE);
+	final int second2 = cal2.get(Calendar.SECOND);
 
-	return (year1 == year2) && (month1 == month2) && (day1 == day2)
-		&& (hour1 == hour2) && (minute1 == minute2)
-		&& (second1 == second2);
+	return year1 == year2 && month1 == month2 && day1 == day2
+		&& hour1 == hour2 && minute1 == minute2
+		&& second1 == second2;
 
     }
 
@@ -577,7 +586,7 @@ public class DateUtil {
      * @param date2
      * @return true if date1 is greater than date2
      */
-    public static boolean dateAfter(Date date1, Date date2) {
+    public static boolean dateAfter(final Date date1, final Date date2) {
 	return dateLessOrEqualDayInternal(date2, date1, true);
     }
 
@@ -588,7 +597,7 @@ public class DateUtil {
      * @param date2
      * @return true if date1 is equal to or less than date2
      */
-    public static boolean dateBeforeOrEqual(Date date1, Date date2) {
+    public static boolean dateBeforeOrEqual(final Date date1, final Date date2) {
 	return dateLessOrEqualDayInternal(date1, date2, false);
     }
 
@@ -599,7 +608,7 @@ public class DateUtil {
      * @param date2
      * @return true if date1 is less than date2
      */
-    public static boolean dateBefore(Date date1, Date date2) {
+    public static boolean dateBefore(final Date date1, final Date date2) {
 	return dateLessOrEqualDayInternal(date1, date2, true);
     }
 
@@ -609,7 +618,7 @@ public class DateUtil {
      * @param date
      * @return true if date is equal to or greater than todays date
      */
-    public static boolean dateEqualOrAfterToday(Date date) {
+    public static boolean dateEqualOrAfterToday(final Date date) {
 	return dateLessOrEqualDayInternal(new Date(System.currentTimeMillis()),
 		date, false);
     }
@@ -620,7 +629,7 @@ public class DateUtil {
      * @param date
      * @return true if date is equal to or less than todays date
      */
-    public static boolean dateEqualOrBeforeToday(Date date) {
+    public static boolean dateEqualOrBeforeToday(final Date date) {
 	return dateLessOrEqualDayInternal(date,
 		new Date(System.currentTimeMillis()), false);
     }
@@ -648,10 +657,10 @@ public class DateUtil {
      */
     public static boolean datesOverlap(Date fromDate1, Date toDate1,
 	    Date fromDate2, Date toDate2) {
-	fromDate1 = (fromDate1 == null) ? new Date(0) : fromDate1;
-	toDate1 = (toDate1 == null) ? new Date(Long.MAX_VALUE) : toDate1;
-	fromDate2 = (fromDate2 == null) ? new Date(0) : fromDate2;
-	toDate2 = (toDate2 == null) ? new Date(Long.MAX_VALUE) : toDate2;
+	fromDate1 = fromDate1 == null ? new Date(0) : fromDate1;
+	toDate1 = toDate1 == null ? new Date(Long.MAX_VALUE) : toDate1;
+	fromDate2 = fromDate2 == null ? new Date(0) : fromDate2;
+	toDate2 = toDate2 == null ? new Date(Long.MAX_VALUE) : toDate2;
 
 	// Sanity check
 	if (dateAfter(fromDate2, toDate2) || dateAfter(fromDate1, toDate1)) {
@@ -698,10 +707,10 @@ public class DateUtil {
      */
     public static boolean datesOverlapMinute(Date fromDate1, Date toDate1,
 	    Date fromDate2, Date toDate2) {
-	fromDate1 = (fromDate1 == null) ? new Date(0) : fromDate1;
-	toDate1 = (toDate1 == null) ? new Date(Long.MAX_VALUE) : toDate1;
-	fromDate2 = (fromDate2 == null) ? new Date(0) : fromDate2;
-	toDate2 = (toDate2 == null) ? new Date(Long.MAX_VALUE) : toDate2;
+	fromDate1 = fromDate1 == null ? new Date(0) : fromDate1;
+	toDate1 = toDate1 == null ? new Date(Long.MAX_VALUE) : toDate1;
+	fromDate2 = fromDate2 == null ? new Date(0) : fromDate2;
+	toDate2 = toDate2 == null ? new Date(Long.MAX_VALUE) : toDate2;
 
 	// Sanity check
 	if (dateAfterOrEqualMinute(fromDate2, toDate2)
@@ -733,65 +742,65 @@ public class DateUtil {
     }
 
     private static boolean dateLessOrEqualDayInternal(Date date1, Date date2,
-	    boolean strict) {
-	date1 = (date1 == null) ? new Date(0) : date1;
-	date2 = (date2 == null) ? new Date(Long.MAX_VALUE) : date2;
+	    final boolean strict) {
+	date1 = date1 == null ? new Date(0) : date1;
+	date2 = date2 == null ? new Date(Long.MAX_VALUE) : date2;
 
-	Calendar cal1 = new GregorianCalendar();
+	final Calendar cal1 = new GregorianCalendar();
 	cal1.setTime(date1);
 
-	int date1Year = cal1.get(Calendar.YEAR);
-	int date1Month = cal1.get(Calendar.MONTH);
-	int date1Day = cal1.get(Calendar.DATE);
+	final int date1Year = cal1.get(Calendar.YEAR);
+	final int date1Month = cal1.get(Calendar.MONTH);
+	final int date1Day = cal1.get(Calendar.DATE);
 
-	Calendar cal2 = new GregorianCalendar();
+	final Calendar cal2 = new GregorianCalendar();
 	cal2.setTime(date2);
 
-	int date2Year = cal2.get(Calendar.YEAR);
-	int date2Month = cal2.get(Calendar.MONTH);
-	int date2Day = cal2.get(Calendar.DATE);
+	final int date2Year = cal2.get(Calendar.YEAR);
+	final int date2Month = cal2.get(Calendar.MONTH);
+	final int date2Day = cal2.get(Calendar.DATE);
 
-	return (date1Year < date2Year)
-		|| (date1Year == date2Year && date1Month < date2Month)
-		|| (date1Year == date2Year && date1Month == date2Month && date1Day < date2Day)
-		|| (!strict && date1Year == date2Year
-			&& date1Month == date2Month && date1Day == date2Day);
+	return date1Year < date2Year
+		|| date1Year == date2Year && date1Month < date2Month
+		|| date1Year == date2Year && date1Month == date2Month && date1Day < date2Day
+		|| !strict && date1Year == date2Year
+			&& date1Month == date2Month && date1Day == date2Day;
 
     }
 
     private static boolean dateLessOrEqualMinuteInternal(Date date1,
-	    Date date2, boolean strict) {
-	date1 = (date1 == null) ? new Date(0) : date1;
-	date2 = (date2 == null) ? new Date(Long.MAX_VALUE) : date2;
+	    Date date2, final boolean strict) {
+	date1 = date1 == null ? new Date(0) : date1;
+	date2 = date2 == null ? new Date(Long.MAX_VALUE) : date2;
 
-	Calendar cal1 = new GregorianCalendar();
+	final Calendar cal1 = new GregorianCalendar();
 	cal1.setTime(date1);
 
-	int date1Year = cal1.get(Calendar.YEAR);
-	int date1Month = cal1.get(Calendar.MONTH);
-	int date1Day = cal1.get(Calendar.DATE);
-	int date1Hour = cal1.get(Calendar.HOUR_OF_DAY);
-	int date1Minute = cal1.get(Calendar.MINUTE);
+	final int date1Year = cal1.get(Calendar.YEAR);
+	final int date1Month = cal1.get(Calendar.MONTH);
+	final int date1Day = cal1.get(Calendar.DATE);
+	final int date1Hour = cal1.get(Calendar.HOUR_OF_DAY);
+	final int date1Minute = cal1.get(Calendar.MINUTE);
 
-	Calendar cal2 = new GregorianCalendar();
+	final Calendar cal2 = new GregorianCalendar();
 	cal2.setTime(date2);
 
-	int date2Year = cal2.get(Calendar.YEAR);
-	int date2Month = cal2.get(Calendar.MONTH);
-	int date2Day = cal2.get(Calendar.DATE);
-	int date2Hour = cal2.get(Calendar.HOUR_OF_DAY);
-	int date2Minute = cal2.get(Calendar.MINUTE);
+	final int date2Year = cal2.get(Calendar.YEAR);
+	final int date2Month = cal2.get(Calendar.MONTH);
+	final int date2Day = cal2.get(Calendar.DATE);
+	final int date2Hour = cal2.get(Calendar.HOUR_OF_DAY);
+	final int date2Minute = cal2.get(Calendar.MINUTE);
 
-	return (date1Year < date2Year)
-		|| (date1Year == date2Year && date1Month < date2Month)
-		|| (date1Year == date2Year && date1Month == date2Month && date1Day < date2Day)
-		|| (date1Year == date2Year && date1Month == date2Month
-			&& date1Day == date2Day && date1Hour < date2Hour)
-		|| (date1Year == date2Year && date1Month == date2Month
-			&& date1Day == date2Day && date1Hour == date2Hour && date1Minute < date2Minute)
-		|| (!strict && date1Year == date2Year
+	return date1Year < date2Year
+		|| date1Year == date2Year && date1Month < date2Month
+		|| date1Year == date2Year && date1Month == date2Month && date1Day < date2Day
+		|| date1Year == date2Year && date1Month == date2Month
+			&& date1Day == date2Day && date1Hour < date2Hour
+		|| date1Year == date2Year && date1Month == date2Month
+			&& date1Day == date2Day && date1Hour == date2Hour && date1Minute < date2Minute
+		|| !strict && date1Year == date2Year
 			&& date1Month == date2Month && date1Day == date2Day
-			&& date1Hour == date2Hour && date1Minute == date2Minute);
+			&& date1Hour == date2Hour && date1Minute == date2Minute;
 
     }
 
@@ -802,23 +811,23 @@ public class DateUtil {
      * @param locale
      * @return weekday and the time of the day
      */
-    public static String getDayAndTime(Date date, Locale locale) {
+    public static String getDayAndTime(final Date date, final Locale locale) {
 	if (date != null) {
 	    return getWeekDay(date, locale) + " " + getShortTime(date, locale);
 	}
 	return "";
     }
 
-    public static String getWeekDay(Date date, Locale locale) {
+    public static String getWeekDay(final Date date, final Locale locale) {
 	if (date != null) {
 	    return new SimpleDateFormat("EEEEEEEE", locale).format(date);
 	}
 	return "";
     }
 
-    public static Date substract(Date date, int years, int months, int days,
-	    int hours, int minutes, int seconds) {
-	Calendar cal = new GregorianCalendar();
+    public static Date substract(final Date date, final int years, final int months, final int days,
+	    final int hours, final int minutes, final int seconds) {
+	final Calendar cal = new GregorianCalendar();
 	cal.setTime(date);
 	cal.add(Calendar.YEAR, -years);
 	cal.add(Calendar.MONTH, -months);
@@ -830,9 +839,9 @@ public class DateUtil {
 	return cal.getTime();
     }
 
-    public static Date add(Date date, int years, int months, int days,
-	    int hours, int minutes, int seconds) {
-	Calendar cal = new GregorianCalendar();
+    public static Date add(final Date date, final int years, final int months, final int days,
+	    final int hours, final int minutes, final int seconds) {
+	final Calendar cal = new GregorianCalendar();
 	cal.setTime(date);
 	cal.add(Calendar.YEAR, years);
 	cal.add(Calendar.MONTH, months);
@@ -844,7 +853,7 @@ public class DateUtil {
 	return cal.getTime();
     }
 
-    public static int getDays(GregorianCalendar g1, GregorianCalendar g2) {
+    public static int getDays(final GregorianCalendar g1, final GregorianCalendar g2) {
 	int elapsed = 0;
 	GregorianCalendar gc1, gc2;
 
@@ -883,28 +892,28 @@ public class DateUtil {
     public Date[] getStartAndEndOfWeek() {
 	Date startDate;
 	Date endDate;
-	GregorianCalendar gc = new GregorianCalendar();
+	final GregorianCalendar gc = new GregorianCalendar();
 
 	switch (gc.get(Calendar.DAY_OF_WEEK)) {
 	// Set the first date of the week
-	case (1):
+	case 1:
 	    break;
-	case (2):
+	case 2:
 	    gc.add(Calendar.DAY_OF_MONTH, -1);
 	    break;
-	case (3):
+	case 3:
 	    gc.add(Calendar.DAY_OF_MONTH, -2);
 	    break;
-	case (4):
+	case 4:
 	    gc.add(Calendar.DAY_OF_MONTH, -3);
 	    break;
-	case (5):
+	case 5:
 	    gc.add(Calendar.DAY_OF_MONTH, -4);
 	    break;
-	case (6):
+	case 6:
 	    gc.add(Calendar.DAY_OF_MONTH, -5);
 	    break;
-	case (7):
+	case 7:
 	    gc.add(Calendar.DAY_OF_MONTH, -6);
 	    break;
 	}
@@ -927,17 +936,17 @@ public class DateUtil {
     public Date[] getStartAndEndOfMonth() {
 	Date startDate;
 	Date endDate;
-	GregorianCalendar gc = new GregorianCalendar();
+	final GregorianCalendar gc = new GregorianCalendar();
 
 	// Set the first date of month
 	gc.set(gc.get(Calendar.YEAR), gc.get(Calendar.MONTH), 1);
 	startDate = DateUtil.resetStartDate(gc);
 	// Set the last date of the month
 	switch (gc.get(Calendar.MONTH)) {
-	case (0):
+	case 0:
 	    gc.set(gc.get(Calendar.YEAR), gc.get(Calendar.MONTH), 31);
 	    break;
-	case (1):
+	case 1:
 	    // Handle leap years
 	    if (gc.isLeapYear(gc.get(Calendar.YEAR))) {
 		gc.set(gc.get(Calendar.YEAR), gc.get(Calendar.MONTH), 29);
@@ -945,34 +954,34 @@ public class DateUtil {
 		gc.set(gc.get(Calendar.YEAR), gc.get(Calendar.MONTH), 28);
 	    }
 	    break;
-	case (2):
+	case 2:
 	    gc.set(gc.get(Calendar.YEAR), gc.get(Calendar.MONTH), 31);
 	    break;
-	case (3):
+	case 3:
 	    gc.set(gc.get(Calendar.YEAR), gc.get(Calendar.MONTH), 30);
 	    break;
-	case (4):
+	case 4:
 	    gc.set(gc.get(Calendar.YEAR), gc.get(Calendar.MONTH), 31);
 	    break;
-	case (5):
+	case 5:
 	    gc.set(gc.get(Calendar.YEAR), gc.get(Calendar.MONTH), 30);
 	    break;
-	case (6):
+	case 6:
 	    gc.set(gc.get(Calendar.YEAR), gc.get(Calendar.MONTH), 31);
 	    break;
-	case (7):
+	case 7:
 	    gc.set(gc.get(Calendar.YEAR), gc.get(Calendar.MONTH), 31);
 	    break;
-	case (8):
+	case 8:
 	    gc.set(gc.get(Calendar.YEAR), gc.get(Calendar.MONTH), 30);
 	    break;
-	case (9):
+	case 9:
 	    gc.set(gc.get(Calendar.YEAR), gc.get(Calendar.MONTH), 31);
 	    break;
-	case (10):
+	case 10:
 	    gc.set(gc.get(Calendar.YEAR), gc.get(Calendar.MONTH), 30);
 	    break;
-	case (11):
+	case 11:
 	    gc.set(gc.get(Calendar.YEAR), gc.get(Calendar.MONTH), 31);
 	    break;
 	}
@@ -991,40 +1000,40 @@ public class DateUtil {
     public Date[] getStartAndEndOfQuarter() {
 	Date startDate = new Date();
 	Date endDate = new Date();
-	GregorianCalendar gc = new GregorianCalendar();
+	final GregorianCalendar gc = new GregorianCalendar();
 
 	switch (gc.get(Calendar.MONTH)) {
 	// Calculate the 1st quarter
-	case (0):
-	case (1):
-	case (2):
+	case 0:
+	case 1:
+	case 2:
 	    gc.set(gc.get(Calendar.YEAR), 0, 1);
 	    startDate = DateUtil.resetStartDate(gc);
 	    gc.set(gc.get(Calendar.YEAR), 2, 31);
 	    endDate = DateUtil.resetEndDate(gc);
 	    break;
 	// Calculate the 2nd quarter
-	case (3):
-	case (4):
-	case (5):
+	case 3:
+	case 4:
+	case 5:
 	    gc.set(gc.get(Calendar.YEAR), 3, 1);
 	    startDate = DateUtil.resetStartDate(gc);
 	    gc.set(gc.get(Calendar.YEAR), 5, 30);
 	    endDate = DateUtil.resetEndDate(gc);
 	    break;
 	// Calculate the 3rd quarter
-	case (6):
-	case (7):
-	case (8):
+	case 6:
+	case 7:
+	case 8:
 	    gc.set(gc.get(Calendar.YEAR), 6, 1);
 	    startDate = DateUtil.resetStartDate(gc);
 	    gc.set(gc.get(Calendar.YEAR), 8, 30);
 	    endDate = DateUtil.resetEndDate(gc);
 	    break;
 	// Calculate the 4th quarter
-	case (9):
-	case (10):
-	case (11):
+	case 9:
+	case 10:
+	case 11:
 	    gc.set(gc.get(Calendar.YEAR), 9, 1);
 	    startDate = DateUtil.resetStartDate(gc);
 	    gc.set(gc.get(Calendar.YEAR), 11, 31);
@@ -1044,7 +1053,7 @@ public class DateUtil {
     public Date[] getStartAndEndOfYear() {
 	Date startDate;
 	Date endDate;
-	GregorianCalendar gc = new GregorianCalendar();
+	final GregorianCalendar gc = new GregorianCalendar();
 	// Year start date set to 1st of January
 	gc.set(gc.get(Calendar.YEAR), 0, 1);
 	startDate = DateUtil.resetStartDate(gc);
@@ -1055,7 +1064,7 @@ public class DateUtil {
 	return new Date[] { startDate, endDate };
     }
 
-    public static Date resetStartDate(Calendar cal) {
+    public static Date resetStartDate(final Calendar cal) {
 	// Re-set the hh:mm:ss to 00:00:00 of the start date
 	cal.set(Calendar.HOUR_OF_DAY, 0);
 	cal.set(Calendar.MINUTE, 0);
@@ -1064,7 +1073,7 @@ public class DateUtil {
 	return cal.getTime();
     }
 
-    public static Date resetEndDate(Calendar cal) {
+    public static Date resetEndDate(final Calendar cal) {
 	// Re-set the hh:mm:ss to 23:59:59 of the start date
 	cal.set(Calendar.HOUR_OF_DAY, 23);
 	cal.set(Calendar.MINUTE, 59);
@@ -1081,8 +1090,8 @@ public class DateUtil {
      * @param lastDate
      * @return
      */
-    public static boolean isInsideInterval(Date aDate, Date firstDate,
-	    Date lastDate) {
+    public static boolean isInsideInterval(final Date aDate, final Date firstDate,
+	    final Date lastDate) {
 	if (aDate != null) {
 	    if (lastDate == null && firstDate == null) {
 		// Interval: ------

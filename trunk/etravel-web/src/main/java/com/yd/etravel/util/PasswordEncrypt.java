@@ -24,33 +24,33 @@ public class PasswordEncrypt {
     static {
 	try {
 	    md = MessageDigest.getInstance("SHA");
-	} catch (NoSuchAlgorithmException e) {
+	} catch (final NoSuchAlgorithmException e) {
 	    LOG.fatal(e.getMessage(), e);
 	}
     }
 
-    public static String encrypt(String plaintext) {
+    public static String encrypt(final String plaintext) {
 	try {
 	    md.update(plaintext.getBytes("UTF-8"));
-	} catch (UnsupportedEncodingException e) {
+	} catch (final UnsupportedEncodingException e) {
 	    LOG.fatal(e.getMessage(), e);
 	}
-	byte raw[] = md.digest();
-	String hash = (new BASE64Encoder()).encode(raw);
+	final byte raw[] = md.digest();
+	final String hash = new BASE64Encoder().encode(raw);
 	return hash;
     }
 
-    public static String decrypt(String plaintext) {
+    public static String decrypt(final String plaintext) {
 	try {
 	    md.update(plaintext.getBytes());
 
-	    byte raw[] = md.digest();
+	    final byte raw[] = md.digest();
 	    StringBuffer hash = null;
 
 	    hash = new StringBuffer().append(new BASE64Decoder()
 		    .decodeBuffer(new String(raw)));
 	    return new String(hash);
-	} catch (Exception e) {
+	} catch (final Exception e) {
 	    LOG.fatal(e.getMessage(), e);
 	}
 	return "";

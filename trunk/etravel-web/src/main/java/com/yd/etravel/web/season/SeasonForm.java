@@ -40,82 +40,82 @@ public class SeasonForm extends BaseForm {
     }
 
     public String getCode() {
-	return code;
+	return this.code;
     }
 
-    public void setCode(String code) {
+    public void setCode(final String code) {
 	this.code = code;
     }
 
     public String getFromDate() {
-	return fromDate;
+	return this.fromDate;
     }
 
-    public void setFromDate(String fromDate) {
+    public void setFromDate(final String fromDate) {
 	this.fromDate = fromDate;
     }
 
     public String getToDate() {
-	return toDate;
+	return this.toDate;
     }
 
-    public void setToDate(String toDate) {
+    public void setToDate(final String toDate) {
 	this.toDate = toDate;
     }
 
     public String getName() {
-	return name;
+	return this.name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
 	this.name = name;
     }
 
     public boolean getActive() {
-	return active;
+	return this.active;
     }
 
-    public void setActive(boolean active) {
+    public void setActive(final boolean active) {
 	this.active = active;
     }
 
     public List<Season> getAllSeason() {
-	return allSeason;
+	return this.allSeason;
     }
 
-    public void setAllSeason(List<Season> allSeason) {
+    public void setAllSeason(final List<Season> allSeason) {
 	this.allSeason = allSeason;
     }
 
     public Long getId() {
-	return id;
+	return this.id;
     }
 
-    public void setId(Long id) {
+    public void setId(final Long id) {
 	this.id = id;
     }
 
     public List<Hotel> getAllHotel() {
-	return allHotel;
+	return this.allHotel;
     }
 
-    public void setAllHotel(List<Hotel> allHotel) {
+    public void setAllHotel(final List<Hotel> allHotel) {
 	this.allHotel = allHotel;
     }
 
     public Long[] getHotelIds() {
-	return hotelIds;
+	return this.hotelIds;
     }
 
-    public void setHotelIds(Long[] hotelIds) {
+    public void setHotelIds(final Long[] hotelIds) {
 	this.hotelIds = hotelIds;
     }
 
     public String getComments() {
-	return comments;
+	return this.comments;
     }
 
-    public void setComments(String comments) {
+    public void setComments(final String comments) {
 	this.comments = comments;
     }
 
@@ -127,7 +127,7 @@ public class SeasonForm extends BaseForm {
      * .ActionMapping, javax.servlet.http.HttpServletRequest)
      */
     @Override
-    public void resetBean(ActionMapping mapping, HttpServletRequest request) {
+    public void resetBean(final ActionMapping mapping, final HttpServletRequest request) {
 	// TODO Auto-generated method stub
 
 	this.allSeason = Collections.EMPTY_LIST;
@@ -149,9 +149,9 @@ public class SeasonForm extends BaseForm {
      * .ActionMapping, javax.servlet.http.HttpServletRequest)
      */
     @Override
-    public ActionErrors validateBean(ActionMapping mapping,
-	    HttpServletRequest request) {
-	ActionErrors errors = new ActionErrors();
+    public ActionErrors validateBean(final ActionMapping mapping,
+	    final HttpServletRequest request) {
+	final ActionErrors errors = new ActionErrors();
 
 	if (StringUtils.isEmpty(this.name)) {
 	    addErrors(errors, "etravel.season.name.required");

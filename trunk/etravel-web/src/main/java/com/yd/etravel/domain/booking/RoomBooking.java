@@ -32,47 +32,47 @@ public class RoomBooking extends BaseObject {
     private Integer totalPax;
 
     public HotelBooking getHotelBooking() {
-	return hotelBooking;
+	return this.hotelBooking;
     }
 
-    public void setHotelBooking(HotelBooking hotelBooking) {
+    public void setHotelBooking(final HotelBooking hotelBooking) {
 	this.hotelBooking = hotelBooking;
     }
 
     public Room getRoom() {
-	return room;
+	return this.room;
     }
 
-    public void setRoom(Room room) {
+    public void setRoom(final Room room) {
 	this.room = room;
     }
 
     public BigDecimal getPrice() {
-	return price;
+	return this.price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(final BigDecimal price) {
 	this.price = price;
     }
 
     public Integer getTotalPax() {
-	return totalPax;
+	return this.totalPax;
     }
 
-    public void setTotalPax(Integer totalPax) {
+    public void setTotalPax(final Integer totalPax) {
 	this.totalPax = totalPax;
     }
 
     public Integer getRoomNumber() {
-	return roomNumber;
+	return this.roomNumber;
     }
 
-    public void setRoomNumber(Integer roomNumber) {
+    public void setRoomNumber(final Integer roomNumber) {
 	this.roomNumber = roomNumber;
     }
 
     public Map<String, String> getParams() {
-	Map<String, String> map = new HashMap<String, String>();
+	final Map<String, String> map = new HashMap<String, String>();
 	map.put("hotel.name", getHotelBooking().getHotel().getName());
 	map.put("booking.bookingId", getHotelBooking().getBooking().getCode());
 	map.put("booking.checkin",

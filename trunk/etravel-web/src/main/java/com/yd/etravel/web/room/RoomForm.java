@@ -44,49 +44,49 @@ public class RoomForm extends BaseForm {
     }
 
     public int getNoOfRooms() {
-	return noOfRooms;
+	return this.noOfRooms;
     }
 
-    public void setNoOfRooms(int noOfRooms) {
+    public void setNoOfRooms(final int noOfRooms) {
 	this.noOfRooms = noOfRooms;
     }
 
     public Long getRoomTypeId() {
-	return roomTypeId;
+	return this.roomTypeId;
     }
 
-    public void setRoomTypeId(Long roomTypeId) {
+    public void setRoomTypeId(final Long roomTypeId) {
 	this.roomTypeId = roomTypeId;
     }
 
     public Long getHotelId() {
-	return hotelId;
+	return this.hotelId;
     }
 
-    public void setHotelId(Long hotelId) {
+    public void setHotelId(final Long hotelId) {
 	this.hotelId = hotelId;
     }
 
     public List<Hotel> getHotelList() {
-	return hotelList;
+	return this.hotelList;
     }
 
-    public void setHotelList(List<Hotel> hotelList) {
+    public void setHotelList(final List<Hotel> hotelList) {
 	this.hotelList = hotelList;
 	this.hotelMap = new HashMap<Long, Hotel>();
-	for (Hotel hotel : hotelList) {
+	for (final Hotel hotel : hotelList) {
 	    this.hotelMap.put(hotel.getId(), hotel);
 	}
     }
 
-    public String getHotelName(Long id) {
+    public String getHotelName(final Long id) {
 	if (this.hotelMap != null && this.hotelMap.containsKey(id)) {
 	    return this.hotelMap.get(id).getName();
 	}
 	return EMPTY_STRING;
     }
 
-    public String getTypeName(Long id) {
+    public String getTypeName(final Long id) {
 	if (this.roomTypeMap != null && this.roomTypeMap.containsKey(id)) {
 	    return this.roomTypeMap.get(id).getName();
 	}
@@ -94,39 +94,39 @@ public class RoomForm extends BaseForm {
     }
 
     public List<RoomType> getRoomTypeList() {
-	return roomTypeList;
+	return this.roomTypeList;
     }
 
-    public void setRoomTypeList(List<RoomType> roomTypeList) {
+    public void setRoomTypeList(final List<RoomType> roomTypeList) {
 	this.roomTypeList = roomTypeList;
 	this.roomTypeMap = new HashMap<Long, RoomType>();
-	for (RoomType roomType : roomTypeList) {
+	for (final RoomType roomType : roomTypeList) {
 	    this.roomTypeMap.put(roomType.getId(), roomType);
 	}
 
     }
 
-    public RoomType getRoomType(Long id) {
+    public RoomType getRoomType(final Long id) {
 	return this.roomTypeMap.get(id);
     }
 
-    public Hotel getHotel(Long id) {
+    public Hotel getHotel(final Long id) {
 	return this.hotelMap.get(id);
     }
 
     public List<Room> getRoomList() {
-	return roomList;
+	return this.roomList;
     }
 
-    public void setRoomList(List<Room> roomList) {
+    public void setRoomList(final List<Room> roomList) {
 	this.roomList = roomList;
     }
 
     public Long getId() {
-	return id;
+	return this.id;
     }
 
-    public void setId(Long id) {
+    public void setId(final Long id) {
 	this.id = id;
     }
 
@@ -143,7 +143,7 @@ public class RoomForm extends BaseForm {
      * .ActionMapping, javax.servlet.http.HttpServletRequest)
      */
     @Override
-    public void resetBean(ActionMapping mapping, HttpServletRequest request) {
+    public void resetBean(final ActionMapping mapping, final HttpServletRequest request) {
 	this.hotelList = Collections.EMPTY_LIST;
 	this.roomTypeList = Collections.EMPTY_LIST;
 	this.roomList = Collections.EMPTY_LIST;
@@ -165,9 +165,9 @@ public class RoomForm extends BaseForm {
      * .ActionMapping, javax.servlet.http.HttpServletRequest)
      */
     @Override
-    public ActionErrors validateBean(ActionMapping mapping,
-	    HttpServletRequest request) {
-	ActionErrors errors = new ActionErrors();
+    public ActionErrors validateBean(final ActionMapping mapping,
+	    final HttpServletRequest request) {
+	final ActionErrors errors = new ActionErrors();
 
 	if (StringUtils.isEmpty(this.hotelId)) {
 	    addErrors(errors, "etravel.error.pax.hotelid.required");

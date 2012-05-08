@@ -22,7 +22,7 @@ public class Category extends BaseObject {
      * @param name
      * @param code
      */
-    public Category(Long id, String name, String code) {
+    public Category(final Long id, final String name, final String code) {
 	super(id, name, code);
     }
 

@@ -39,8 +39,8 @@ public class RoomSeasonalRateAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward add(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward add(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	// TODO Auto-generated method stub
 	return null;
@@ -55,8 +55,8 @@ public class RoomSeasonalRateAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward back(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward back(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	// TODO Auto-generated method stub
 	return null;
@@ -72,8 +72,8 @@ public class RoomSeasonalRateAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    public ActionForward create(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    public ActionForward create(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	// TODO Auto-generated method stub
 
@@ -93,11 +93,11 @@ public class RoomSeasonalRateAction extends BaseAction {
 	    isnew = false;
 	}
 
-	Season season = new Season();
+	final Season season = new Season();
 	season.setId(roomSeasonalRateForm.getSeasonId());
 	roomRate.setSeason(season);
 
-	Room room = new Room();
+	final Room room = new Room();
 	room.setId(roomSeasonalRateForm.getRoomId());
 
 	roomRate.setRoom(room);
@@ -122,10 +122,10 @@ public class RoomSeasonalRateAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward delete(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward delete(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
-	RoomSeasonalRateForm roomSeasonalRateForm = (RoomSeasonalRateForm) form;
+	final RoomSeasonalRateForm roomSeasonalRateForm = (RoomSeasonalRateForm) form;
 	getSeasonManager().deleteRoomSeasonalRate(roomSeasonalRateForm.getId());
 	addInfoMessages(COM_DELETE_MSG);
 	return mapping.findForward(SUCCESS);
@@ -140,12 +140,12 @@ public class RoomSeasonalRateAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward edit(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward edit(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	// TODO Auto-generated method stub
-	RoomSeasonalRateForm roomForm = (RoomSeasonalRateForm) form;
-	RoomSeasonalRate roomSeasonalRate = getSeasonManager()
+	final RoomSeasonalRateForm roomForm = (RoomSeasonalRateForm) form;
+	final RoomSeasonalRate roomSeasonalRate = getSeasonManager()
 		.findRoomSeasonalRateById(roomForm.getId());
 
 	roomForm.setActive(roomSeasonalRate.isActive());
@@ -171,8 +171,8 @@ public class RoomSeasonalRateAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward find(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward find(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	// TODO Auto-generated method stub
 	return null;
@@ -188,8 +188,8 @@ public class RoomSeasonalRateAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward forward(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward forward(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	// TODO Auto-generated method stub
 
@@ -205,8 +205,8 @@ public class RoomSeasonalRateAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward init(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward init(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	final RoomSeasonalRateForm roomForm = (RoomSeasonalRateForm) form;
 
@@ -220,11 +220,11 @@ public class RoomSeasonalRateAction extends BaseAction {
 
 	if (roomForm.getHotelId() != null
 		&& roomForm.getHotelId().longValue() > 0) {
-	    List<Room> rooms = getRoomManager().findAllRoomWithRoomType(
+	    final List<Room> rooms = getRoomManager().findAllRoomWithRoomType(
 		    roomForm.getHotelId());
 	    roomForm.setAllRoom(rooms);
 
-	    List<Season> allSeason = getSeasonManager().findSeasonByHotel(
+	    final List<Season> allSeason = getSeasonManager().findSeasonByHotel(
 		    roomForm.getHotelId() != null
 			    && roomForm.getHotelId().longValue() > 0 ? roomForm
 			    .getHotelId() : null);
@@ -245,8 +245,8 @@ public class RoomSeasonalRateAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    public ActionForward process(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    public ActionForward process(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	// TODO Auto-generated method stub
 	return init(mapping, form, request, response);
@@ -261,8 +261,8 @@ public class RoomSeasonalRateAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward save(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward save(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	// TODO Auto-generated method stub
 	return null;
@@ -277,8 +277,8 @@ public class RoomSeasonalRateAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward send(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward send(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	// TODO Auto-generated method stub
 	return null;
@@ -293,16 +293,16 @@ public class RoomSeasonalRateAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward sort(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward sort(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	// TODO Auto-generated method stub
 	return null;
     }
 
     @Override
-    public ActionForward search(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    public ActionForward search(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	// TODO Auto-generated method stub
 	return null;

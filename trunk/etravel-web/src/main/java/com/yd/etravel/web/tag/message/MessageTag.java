@@ -17,17 +17,18 @@ import com.yd.etravel.util.IConstants.ICommon;
  */
 public class MessageTag extends TagSupport {
 
+    @Override
     public int doStartTag() throws JspException {
-	ResponseUtils.write(pageContext, renderTag());
+	ResponseUtils.write(this.pageContext, renderTag());
 	return SKIP_BODY;
     }
 
     protected String renderTag() {
-	StringBuffer buf = new StringBuffer("");
-	if (pageContext.getSession().getAttribute(ICommon.INFO_MSG_KEY) != null) {
-	    List<String> msgList = (List<String>) pageContext.getSession()
+	final StringBuffer buf = new StringBuffer("");
+	if (this.pageContext.getSession().getAttribute(ICommon.INFO_MSG_KEY) != null) {
+	    final List<String> msgList = (List<String>) this.pageContext.getSession()
 		    .getAttribute(ICommon.INFO_MSG_KEY);
-	    for (String string : msgList) {
+	    for (final String string : msgList) {
 		buf.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>&#187;&nbsp;</strong>"
 			+ string + "<BR/>");
 	    }
