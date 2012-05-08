@@ -39,8 +39,8 @@ public class PaxAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward add(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward add(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	// TODO Auto-generated method stub
 	return null;
@@ -55,8 +55,8 @@ public class PaxAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward back(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward back(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	// TODO Auto-generated method stub
 	return null;
@@ -72,13 +72,13 @@ public class PaxAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    public ActionForward create(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    public ActionForward create(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	final PaxFrom paxFrom = (PaxFrom) form;
 	paxFrom.setHotelList(getHotelManager().findAllActiveHotels());
 
-	Pax pax = new Pax();
+	final Pax pax = new Pax();
 	pax.setId(StringUtils.isEmpty(paxFrom.getId()) ? null : paxFrom.getId());
 
 	pax.setInfantMin(paxFrom.getInfantMin());
@@ -94,7 +94,7 @@ public class PaxAction extends BaseAction {
 	pax.setActive(true);
 	getPaxManager().savePax(pax);
 
-	PaxSearchDTO searchDTO = new PaxSearchDTO();
+	final PaxSearchDTO searchDTO = new PaxSearchDTO();
 	searchDTO.setHotelId(StringUtils.isEmpty(paxFrom.getHotelId()) ? null
 		: paxFrom.getHotelId());
 	paxFrom.setPaxList(getPaxManager().findPax(searchDTO));
@@ -112,8 +112,8 @@ public class PaxAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward delete(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward delete(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	final PaxFrom paxFrom = (PaxFrom) form;
 	getPaxManager().deletePax(paxFrom.getId());
@@ -129,11 +129,11 @@ public class PaxAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward edit(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward edit(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	final PaxFrom paxFrom = (PaxFrom) form;
-	Pax pax = getPaxManager().findPaxById(paxFrom.getId());
+	final Pax pax = getPaxManager().findPaxById(paxFrom.getId());
 
 	paxFrom.setInfantMin(pax.getInfantMin());
 	paxFrom.setInfantMax(pax.getInfantMax());
@@ -148,7 +148,7 @@ public class PaxAction extends BaseAction {
 
 	paxFrom.setHotelList(getHotelManager().findAllActiveHotels());
 
-	PaxSearchDTO searchDTO = new PaxSearchDTO();
+	final PaxSearchDTO searchDTO = new PaxSearchDTO();
 	searchDTO.setHotelId(StringUtils.isEmpty(paxFrom.getHotelId()) ? null
 		: paxFrom.getHotelId());
 	paxFrom.setPaxList(getPaxManager().findPax(searchDTO));
@@ -165,8 +165,8 @@ public class PaxAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward find(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward find(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	// TODO Auto-generated method stub
 	return null;
@@ -182,12 +182,12 @@ public class PaxAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward forward(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward forward(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	final PaxFrom paxFrom = (PaxFrom) form;
 
-	PaxSearchDTO searchDTO = new PaxSearchDTO();
+	final PaxSearchDTO searchDTO = new PaxSearchDTO();
 	searchDTO.setHotelId(StringUtils.isEmpty(paxFrom.getHotelId()) ? null
 		: paxFrom.getHotelId());
 	paxFrom.setPaxList(getPaxManager().findPax(searchDTO));
@@ -209,11 +209,11 @@ public class PaxAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward init(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward init(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	final PaxFrom paxFrom = (PaxFrom) form;
-	PaxSearchDTO searchDTO = new PaxSearchDTO();
+	final PaxSearchDTO searchDTO = new PaxSearchDTO();
 	searchDTO.setHotelId(StringUtils.isEmpty(paxFrom.getHotelId()) ? null
 		: paxFrom.getHotelId());
 	paxFrom.setPaxList(getPaxManager().findPax(searchDTO));
@@ -232,12 +232,12 @@ public class PaxAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    public ActionForward process(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    public ActionForward process(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 
 	final PaxFrom paxFrom = (PaxFrom) form;
-	PaxSearchDTO searchDTO = new PaxSearchDTO();
+	final PaxSearchDTO searchDTO = new PaxSearchDTO();
 	searchDTO.setHotelId(StringUtils.isEmpty(paxFrom.getHotelId()) ? null
 		: paxFrom.getHotelId());
 	paxFrom.setPaxList(getPaxManager().findPax(searchDTO));
@@ -256,8 +256,8 @@ public class PaxAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward save(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward save(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 
 	return mapping.findForward(SUCCESS);
@@ -272,8 +272,8 @@ public class PaxAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward send(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward send(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	// TODO Auto-generated method stub
 	return null;
@@ -288,16 +288,16 @@ public class PaxAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward sort(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward sort(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	// TODO Auto-generated method stub
 	return null;
     }
 
     @Override
-    public ActionForward search(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    public ActionForward search(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	// TODO Auto-generated method stub
 	return null;

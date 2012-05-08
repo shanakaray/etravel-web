@@ -48,111 +48,112 @@ public class BookingReportForm extends BaseForm {
     }
 
     public List<BookingReportDTO> getBookingList() {
-	return bookingList;
+	return this.bookingList;
     }
 
-    public void setBookingList(List<BookingReportDTO> bookingList) {
+    public void setBookingList(final List<BookingReportDTO> bookingList) {
 	this.bookingList = bookingList;
     }
 
     public Long getRoomTypeId() {
-	return roomTypeId;
+	return this.roomTypeId;
     }
 
-    public void setRoomTypeId(Long roomTypeId) {
+    public void setRoomTypeId(final Long roomTypeId) {
 	this.roomTypeId = roomTypeId;
     }
 
     public Long getHotelId() {
-	return hotelId;
+	return this.hotelId;
     }
 
-    public void setHotelId(Long hotelId) {
+    public void setHotelId(final Long hotelId) {
 	this.hotelId = hotelId;
     }
 
     public Set<Long> getHotelSet() {
-	Set<Long> set = new HashSet<Long>();
-	if (hotelId != null && hotelId.longValue() > 0)
-	    set.add(hotelId);
+	final Set<Long> set = new HashSet<Long>();
+	if (this.hotelId != null && this.hotelId.longValue() > 0) {
+	    set.add(this.hotelId);
+	}
 	return set;
     }
 
     public String getUserName() {
-	return userName;
+	return this.userName;
     }
 
-    public void setUserName(String userName) {
+    public void setUserName(final String userName) {
 	this.userName = userName;
     }
 
     public String getUserCode() {
-	return userCode;
+	return this.userCode;
     }
 
-    public void setUserCode(String userCode) {
+    public void setUserCode(final String userCode) {
 	this.userCode = userCode;
     }
 
     public List<Hotel> getHotelList() {
-	return hotelList;
+	return this.hotelList;
     }
 
-    public void setHotelList(List<Hotel> hotelList) {
+    public void setHotelList(final List<Hotel> hotelList) {
 	this.hotelList = hotelList;
     }
 
-    public void addHotelMap(Map<Long, String> hotelMap) {
+    public void addHotelMap(final Map<Long, String> hotelMap) {
 	this.hotelList = new ArrayList<Hotel>();
-	for (Map.Entry<Long, String> e : hotelMap.entrySet()) {
-	    Hotel hotel = new Hotel(e.getKey(), e.getValue(), "");
+	for (final Map.Entry<Long, String> e : hotelMap.entrySet()) {
+	    final Hotel hotel = new Hotel(e.getKey(), e.getValue(), "");
 	    this.hotelList.add(hotel);
 	}
 
     }
 
     public List<Room> getAllRoom() {
-	return allRoom;
+	return this.allRoom;
     }
 
-    public void setAllRoom(List<Room> allRoom) {
+    public void setAllRoom(final List<Room> allRoom) {
 	this.allRoom = allRoom;
     }
 
     public Long getRoomId() {
-	return roomId;
+	return this.roomId;
     }
 
-    public void setRoomId(Long roomId) {
+    public void setRoomId(final Long roomId) {
 	this.roomId = roomId;
     }
 
     public String getBookingId() {
-	return bookingId;
+	return this.bookingId;
     }
 
-    public void setBookingId(String bookingId) {
+    public void setBookingId(final String bookingId) {
 	this.bookingId = bookingId;
     }
 
     public String getBookedFromString() {
-	return bookedFromString;
+	return this.bookedFromString;
     }
 
-    public void setBookedFromString(String bookedFromString) {
+    public void setBookedFromString(final String bookedFromString) {
 	this.bookedFromString = bookedFromString;
     }
 
     public String getBookedToString() {
-	return bookedToString;
+	return this.bookedToString;
     }
 
-    public void setBookedToString(String bookedToString) {
+    public void setBookedToString(final String bookedToString) {
 	this.bookedToString = bookedToString;
     }
 
     @Override
-    public void resetBean(ActionMapping mapping, HttpServletRequest request) {
+    public void resetBean(final ActionMapping mapping, final HttpServletRequest request) {
 	this.bookingList = Collections.EMPTY_LIST;
 	this.hotelList = Collections.EMPTY_LIST;
 	this.allRoom = Collections.EMPTY_LIST;
@@ -174,8 +175,8 @@ public class BookingReportForm extends BaseForm {
      * .ActionMapping, javax.servlet.http.HttpServletRequest)
      */
     @Override
-    public ActionErrors validateBean(ActionMapping mapping,
-	    HttpServletRequest request) {
+    public ActionErrors validateBean(final ActionMapping mapping,
+	    final HttpServletRequest request) {
 	// TODO Auto-generated method stub
 	return null;
     }

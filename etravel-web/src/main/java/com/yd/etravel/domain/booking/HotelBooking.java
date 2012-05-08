@@ -37,79 +37,79 @@ public class HotelBooking extends BaseObject {
     private Long roomAvalabiltyId;
 
     public Hotel getHotel() {
-	return hotel;
+	return this.hotel;
     }
 
-    public void setHotel(Hotel hotel) {
+    public void setHotel(final Hotel hotel) {
 	this.hotel = hotel;
     }
 
     public Date getCheckInDate() {
-	return checkInDate;
+	return this.checkInDate;
     }
 
     public String getCheckInDateString() {
-	return DateUtil.format(checkInDate);
+	return DateUtil.format(this.checkInDate);
     }
 
-    public void setCheckInDate(Date checkInDate) {
+    public void setCheckInDate(final Date checkInDate) {
 	this.checkInDate = checkInDate;
     }
 
     public Date getCheckOutDate() {
-	return checkOutDate;
+	return this.checkOutDate;
     }
 
     public String getCheckOutString() {
-	return DateUtil.format(checkOutDate);
+	return DateUtil.format(this.checkOutDate);
     }
 
-    public void setCheckOutDate(Date checkOutDate) {
+    public void setCheckOutDate(final Date checkOutDate) {
 	this.checkOutDate = checkOutDate;
     }
 
     public Integer getNoOfRoom() {
-	return noOfRoom;
+	return this.noOfRoom;
     }
 
-    public void setNoOfRoom(Integer noOfRoom) {
+    public void setNoOfRoom(final Integer noOfRoom) {
 	this.noOfRoom = noOfRoom;
     }
 
     public Booking getBooking() {
-	return booking;
+	return this.booking;
     }
 
-    public void setBooking(Booking booking) {
+    public void setBooking(final Booking booking) {
 	this.booking = booking;
     }
 
     public Long getRoomAvalabiltyId() {
-	return roomAvalabiltyId;
+	return this.roomAvalabiltyId;
     }
 
-    public void setRoomAvalabiltyId(Long roomAvalabiltyId) {
+    public void setRoomAvalabiltyId(final Long roomAvalabiltyId) {
 	this.roomAvalabiltyId = roomAvalabiltyId;
     }
 
     public int getNoOfNights() {
-	Calendar calendar1 = Calendar.getInstance();
-	calendar1.setTime(checkOutDate);
+	final Calendar calendar1 = Calendar.getInstance();
+	calendar1.setTime(this.checkOutDate);
 	calendar1.getTime();
 
-	Calendar calendar2 = Calendar.getInstance();
-	calendar2.setTime(checkInDate);
+	final Calendar calendar2 = Calendar.getInstance();
+	calendar2.setTime(this.checkInDate);
 	calendar2.getTime();
 
-	long diff = calendar1.getTimeInMillis() - calendar2.getTimeInMillis();
+	final long diff = calendar1.getTimeInMillis() - calendar2.getTimeInMillis();
 
-	int noOfNights = Long.valueOf(diff / (24 * 60 * 60 * 1000)).intValue();
+	final int noOfNights = Long.valueOf(diff / (24 * 60 * 60 * 1000)).intValue();
 
 	return noOfNights;
     }
 
     public Map<String, String> getParams() {
-	Map<String, String> map = new HashMap<String, String>();
+	final Map<String, String> map = new HashMap<String, String>();
 	map.put("hotel.name", getHotel().getName());
 	map.put("booking.bookingId", getBooking().getCode());
 	map.put("booking.checkin", DateUtil.format(getCheckInDate()));

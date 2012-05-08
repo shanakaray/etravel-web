@@ -36,15 +36,17 @@ public class SessionCheckingFilter implements Filter {
 
     private FilterConfig config = null;
 
+    @Override
     public void destroy() {
-	config = null;
+	this.config = null;
     }
 
-    public void doFilter(ServletRequest request, ServletResponse response,
-	    FilterChain filterChain) throws IOException, ServletException {
-	String URI = ((HttpServletRequest) request).getRequestURI();
-	HttpSession session = ((HttpServletRequest) request).getSession(false);
-	String[] valStrings = URI.split(APP_NAME);
+    @Override
+    public void doFilter(final ServletRequest request, final ServletResponse response,
+	    final FilterChain filterChain) throws IOException, ServletException {
+	final String URI = ((HttpServletRequest) request).getRequestURI();
+	final HttpSession session = ((HttpServletRequest) request).getSession(false);
+	final String[] valStrings = URI.split(APP_NAME);
 	String uriend = "";
 	if (valStrings != null) {
 	    uriend = valStrings[valStrings.length - 1];
@@ -77,7 +79,8 @@ public class SessionCheckingFilter implements Filter {
     }
 
     
-    public void init(FilterConfig config) throws ServletException {
+    @Override
+    public void init(final FilterConfig config) throws ServletException {
 	this.config = config;
     }
 

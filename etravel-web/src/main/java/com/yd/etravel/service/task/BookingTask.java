@@ -20,10 +20,10 @@ public class BookingTask implements ITask {
     protected static final Log log = LogFactory.getLog(BookingTask.class);
 
     public IBookingManager getBookingManager() {
-	return bookingManager;
+	return this.bookingManager;
     }
 
-    public void setBookingManager(IBookingManager bookingManager) {
+    public void setBookingManager(final IBookingManager bookingManager) {
 	this.bookingManager = bookingManager;
     }
 
@@ -39,12 +39,13 @@ public class BookingTask implements ITask {
      * 
      * @see com.yd.etravel.service.task.ITask#runTask()
      */
+    @Override
     public void runTask() {
 	try {
 	    Thread.currentThread().setName(THREADNAME);
 	    getBookingManager().saveFailedOnRequestBookings();
 	    getBookingManager().saveFailedOnlineBookings();
-	} catch (Exception e) {
+	} catch (final Exception e) {
 	    log.fatal(e.getMessage(), e);
 	}
 

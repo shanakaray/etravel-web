@@ -46,14 +46,14 @@ public class RoomAvailabilityForm extends BaseForm {
      * @return the id
      */
     public Long getId() {
-	return id;
+	return this.id;
     }
 
     /**
      * @param id
      *            the id to set
      */
-    public void setId(Long id) {
+    public void setId(final Long id) {
 	this.id = id;
     }
 
@@ -61,14 +61,14 @@ public class RoomAvailabilityForm extends BaseForm {
      * @return the fromDate
      */
     public String getFromDate() {
-	return fromDate;
+	return this.fromDate;
     }
 
     /**
      * @param fromDate
      *            the fromDate to set
      */
-    public void setFromDate(String fromDate) {
+    public void setFromDate(final String fromDate) {
 	this.fromDate = fromDate;
     }
 
@@ -76,14 +76,14 @@ public class RoomAvailabilityForm extends BaseForm {
      * @return the toDate
      */
     public String getToDate() {
-	return toDate;
+	return this.toDate;
     }
 
     /**
      * @param toDate
      *            the toDate to set
      */
-    public void setToDate(String toDate) {
+    public void setToDate(final String toDate) {
 	this.toDate = toDate;
     }
 
@@ -91,14 +91,14 @@ public class RoomAvailabilityForm extends BaseForm {
      * @return the active
      */
     public boolean getActive() {
-	return active;
+	return this.active;
     }
 
     /**
      * @param active
      *            the active to set
      */
-    public void setActive(boolean active) {
+    public void setActive(final boolean active) {
 	this.active = active;
     }
 
@@ -106,14 +106,14 @@ public class RoomAvailabilityForm extends BaseForm {
      * @return the unit
      */
     public int getUnit() {
-	return unit;
+	return this.unit;
     }
 
     /**
      * @param unit
      *            the unit to set
      */
-    public void setUnit(int unit) {
+    public void setUnit(final int unit) {
 	this.unit = unit;
     }
 
@@ -121,7 +121,7 @@ public class RoomAvailabilityForm extends BaseForm {
      * @return the allRoomAvailability
      */
     public List<RoomAvailabilityDTO> getAllRoomAvailability() {
-	return allRoomAvailability;
+	return this.allRoomAvailability;
     }
 
     /**
@@ -129,7 +129,7 @@ public class RoomAvailabilityForm extends BaseForm {
      *            the allRoomAvailability to set
      */
     public void setAllRoomAvailability(
-	    List<RoomAvailabilityDTO> allRoomAvailability) {
+	    final List<RoomAvailabilityDTO> allRoomAvailability) {
 	this.allRoomAvailability = allRoomAvailability;
     }
 
@@ -137,14 +137,14 @@ public class RoomAvailabilityForm extends BaseForm {
      * @return the allRoom
      */
     public List<Room> getAllRoom() {
-	return allRoom;
+	return this.allRoom;
     }
 
     /**
      * @param allRoom
      *            the allRoom to set
      */
-    public void setAllRoom(List<Room> allRoom) {
+    public void setAllRoom(final List<Room> allRoom) {
 	this.allRoom = allRoom;
     }
 
@@ -167,7 +167,7 @@ public class RoomAvailabilityForm extends BaseForm {
      * @return the allRoomDailyAvailability
      */
     public List<RoomDailyAvailability> getAllRoomDailyAvailability() {
-	return allRoomDailyAvailability;
+	return this.allRoomDailyAvailability;
     }
 
     /**
@@ -175,7 +175,7 @@ public class RoomAvailabilityForm extends BaseForm {
      *            the allRoomDailyAvailability to set
      */
     public void setAllRoomDailyAvailability(
-	    List<RoomDailyAvailability> allRoomDailyAvailability) {
+	    final List<RoomDailyAvailability> allRoomDailyAvailability) {
 	this.allRoomDailyAvailability = allRoomDailyAvailability;
     }
 
@@ -183,86 +183,86 @@ public class RoomAvailabilityForm extends BaseForm {
      * @return the roomType
      */
     public String getRoomType() {
-	return roomType;
+	return this.roomType;
     }
 
     /**
      * @param roomType
      *            the roomType to set
      */
-    public void setRoomType(String roomType) {
+    public void setRoomType(final String roomType) {
 	this.roomType = roomType;
     }
 
     public Long getHotelId() {
-	return hotelId;
+	return this.hotelId;
     }
 
-    public void setHotelId(Long hotelId) {
+    public void setHotelId(final Long hotelId) {
 	this.hotelId = hotelId;
     }
 
     public List<Hotel> getHotelList() {
-	return hotelList;
+	return this.hotelList;
     }
 
-    public void setHotelList(List<Hotel> hotelList) {
+    public void setHotelList(final List<Hotel> hotelList) {
 	this.hotelList = hotelList;
     }
 
     public Long getOccupancyId() {
-	return occupancyId;
+	return this.occupancyId;
     }
 
-    public void setOccupancyId(Long occupancyId) {
+    public void setOccupancyId(final Long occupancyId) {
 	this.occupancyId = occupancyId;
     }
 
     public Long getRoomId() {
-	return roomId;
+	return this.roomId;
     }
 
-    public void setRoomId(Long roomId) {
+    public void setRoomId(final Long roomId) {
 	this.roomId = roomId;
     }
 
     public Long getRoomTypeId() {
-	return roomTypeId;
+	return this.roomTypeId;
     }
 
-    public void setRoomTypeId(Long roomTypeId) {
+    public void setRoomTypeId(final Long roomTypeId) {
 	this.roomTypeId = roomTypeId;
     }
 
     public boolean isEdit() {
-	return edit;
+	return this.edit;
     }
 
-    public void setEdit(boolean edit) {
+    public void setEdit(final boolean edit) {
 	this.edit = edit;
     }
 
     @Override
-    public void resetBean(ActionMapping mapping, HttpServletRequest request) {
-	allRoomAvailability = Collections.EMPTY_LIST;
-	allRoom = Collections.EMPTY_LIST;
+    public void resetBean(final ActionMapping mapping, final HttpServletRequest request) {
+	this.allRoomAvailability = Collections.EMPTY_LIST;
+	this.allRoom = Collections.EMPTY_LIST;
 	// allOccupancy = Collections.EMPTY_LIST;
-	allRoomDailyAvailability = Collections.EMPTY_LIST;
-	fromDate = EMPTY_STRING;
-	toDate = EMPTY_STRING;
-	roomType = EMPTY_STRING;
-	hotelId = -1l;
-	roomId = -1l;
-	occupancyId = -1l;
-	roomTypeId = -1l;
-	unit = 0;
-	edit = false;
+	this.allRoomDailyAvailability = Collections.EMPTY_LIST;
+	this.fromDate = EMPTY_STRING;
+	this.toDate = EMPTY_STRING;
+	this.roomType = EMPTY_STRING;
+	this.hotelId = -1l;
+	this.roomId = -1l;
+	this.occupancyId = -1l;
+	this.roomTypeId = -1l;
+	this.unit = 0;
+	this.edit = false;
     }
 
     @Override
-    public ActionErrors validateBean(ActionMapping mapping,
-	    HttpServletRequest request) {
-	ActionErrors errors = new ActionErrors();
+    public ActionErrors validateBean(final ActionMapping mapping,
+	    final HttpServletRequest request) {
+	final ActionErrors errors = new ActionErrors();
 
 	if (StringUtils.isEmpty(this.fromDate)) {
 	    addErrors(errors, "etravel.roomAvailability.fromDate.required");

@@ -38,14 +38,14 @@ public class OccupancyForm extends BaseForm {
      * @return the id
      */
     public Long getId() {
-	return id;
+	return this.id;
     }
 
     /**
      * @param id
      *            the id to set
      */
-    public void setId(Long id) {
+    public void setId(final Long id) {
 	this.id = id;
     }
 
@@ -53,14 +53,14 @@ public class OccupancyForm extends BaseForm {
      * @return the comments
      */
     public String getComments() {
-	return comments;
+	return this.comments;
     }
 
     /**
      * @param comments
      *            the comments to set
      */
-    public void setComments(String comments) {
+    public void setComments(final String comments) {
 	this.comments = comments;
     }
 
@@ -68,14 +68,14 @@ public class OccupancyForm extends BaseForm {
      * @return the adult
      */
     public int getAdult() {
-	return adult;
+	return this.adult;
     }
 
     /**
      * @param adult
      *            the adult to set
      */
-    public void setAdult(int adult) {
+    public void setAdult(final int adult) {
 	this.adult = adult;
     }
 
@@ -83,14 +83,14 @@ public class OccupancyForm extends BaseForm {
      * @return the child
      */
     public int getChild() {
-	return child;
+	return this.child;
     }
 
     /**
      * @param child
      *            the child to set
      */
-    public void setChild(int child) {
+    public void setChild(final int child) {
 	this.child = child;
     }
 
@@ -98,14 +98,14 @@ public class OccupancyForm extends BaseForm {
      * @return the infant
      */
     public int getInfant() {
-	return infant;
+	return this.infant;
     }
 
     /**
      * @param infant
      *            the infant to set
      */
-    public void setInfant(int infant) {
+    public void setInfant(final int infant) {
 	this.infant = infant;
     }
 
@@ -113,14 +113,14 @@ public class OccupancyForm extends BaseForm {
      * @return the totalPax
      */
     public int getTotalPax() {
-	return totalPax;
+	return this.totalPax;
     }
 
     /**
      * @param totalPax
      *            the totalPax to set
      */
-    public void setTotalPax(int totalPax) {
+    public void setTotalPax(final int totalPax) {
 	this.totalPax = totalPax;
     }
 
@@ -128,14 +128,14 @@ public class OccupancyForm extends BaseForm {
      * @return the active
      */
     public boolean getActive() {
-	return active;
+	return this.active;
     }
 
     /**
      * @param active
      *            the active to set
      */
-    public void setActive(boolean active) {
+    public void setActive(final boolean active) {
 	this.active = active;
     }
 
@@ -143,14 +143,14 @@ public class OccupancyForm extends BaseForm {
      * @return the allOccupancy
      */
     public List<Occupancy> getAllOccupancy() {
-	return allOccupancy;
+	return this.allOccupancy;
     }
 
     /**
      * @param allOccupancy
      *            the allOccupancy to set
      */
-    public void setAllOccupancy(List<Occupancy> allOccupancy) {
+    public void setAllOccupancy(final List<Occupancy> allOccupancy) {
 	this.allOccupancy = allOccupancy;
     }
 
@@ -158,14 +158,14 @@ public class OccupancyForm extends BaseForm {
      * @return the allRoomType
      */
     public List<RoomType> getAllRoomType() {
-	return allRoomType;
+	return this.allRoomType;
     }
 
     /**
      * @param allRoomType
      *            the allRoomType to set
      */
-    public void setAllRoomType(List<RoomType> allRoomType) {
+    public void setAllRoomType(final List<RoomType> allRoomType) {
 	this.allRoomType = allRoomType;
     }
 
@@ -173,14 +173,14 @@ public class OccupancyForm extends BaseForm {
      * @return the roomTypeids
      */
     public Long[] getRoomTypeids() {
-	return roomTypeids;
+	return this.roomTypeids;
     }
 
     /**
      * @param roomTypeids
      *            the roomTypeids to set
      */
-    public void setRoomTypeids(Long[] roomTypeids) {
+    public void setRoomTypeids(final Long[] roomTypeids) {
 	this.roomTypeids = roomTypeids;
     }
 
@@ -188,14 +188,14 @@ public class OccupancyForm extends BaseForm {
      * @return the name
      */
     public String getName() {
-	return name;
+	return this.name;
     }
 
     /**
      * @param name
      *            the name to set
      */
-    public void setName(String name) {
+    public void setName(final String name) {
 	this.name = name;
     }
 
@@ -207,7 +207,7 @@ public class OccupancyForm extends BaseForm {
      * .ActionMapping, javax.servlet.http.HttpServletRequest)
      */
     @Override
-    public void resetBean(ActionMapping mapping, HttpServletRequest request) {
+    public void resetBean(final ActionMapping mapping, final HttpServletRequest request) {
 	// TODO Auto-generated method stub
 
 	this.name = EMPTY_STRING;
@@ -218,8 +218,8 @@ public class OccupancyForm extends BaseForm {
 	this.totalPax = 0;
 	this.active = true;
 	this.id = null;
-	allOccupancy = Collections.EMPTY_LIST;
-	allRoomType = Collections.EMPTY_LIST;
+	this.allOccupancy = Collections.EMPTY_LIST;
+	this.allRoomType = Collections.EMPTY_LIST;
 
     }
 
@@ -231,9 +231,9 @@ public class OccupancyForm extends BaseForm {
      * .ActionMapping, javax.servlet.http.HttpServletRequest)
      */
     @Override
-    public ActionErrors validateBean(ActionMapping mapping,
-	    HttpServletRequest request) {
-	ActionErrors errors = new ActionErrors();
+    public ActionErrors validateBean(final ActionMapping mapping,
+	    final HttpServletRequest request) {
+	final ActionErrors errors = new ActionErrors();
 
 	if (StringUtils.isEmpty(this.name)) {
 	    addErrors(errors, "etravel.occupancy.name.required");

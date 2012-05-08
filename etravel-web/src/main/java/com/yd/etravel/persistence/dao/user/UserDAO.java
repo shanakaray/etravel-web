@@ -38,14 +38,15 @@ public class UserDAO extends BaseDAO implements IUserDAO {
     public UserDAO() {
     }
 
+    @Override
     public User findUser(final String username) throws PersistenceException {
 	try {
-	    Session session = getHibernateTemplate().getSessionFactory()
+	    final Session session = getHibernateTemplate().getSessionFactory()
 		    .getCurrentSession();
-	    Query query = session.createQuery(FIND_USER.toString());
+	    final Query query = session.createQuery(FIND_USER.toString());
 	    query.setParameter("uname", username);
 
-	    List<User> list = query.list();
+	    final List<User> list = query.list();
 	    User user = null;
 
 	    if (!list.isEmpty()) {
@@ -54,14 +55,15 @@ public class UserDAO extends BaseDAO implements IUserDAO {
 
 	    return user;
 
-	} catch (HibernateException e) {
+	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 	}
 
     }
 
+    @Override
     public User findAuth(final String username, final String password,
-	    List<String> roles) throws PersistenceException {
+	    final List<String> roles) throws PersistenceException {
 
 	final StringBuilder FIND_AUTH = new StringBuilder(
 		"FROM User as usr join fetch usr.roles as rol where usr.active=1 AND")
@@ -71,9 +73,9 @@ public class UserDAO extends BaseDAO implements IUserDAO {
 		FIND_AUTH.append("AND rol.name IN (:roles) ");
 	    }
 
-	    Session session = getHibernateTemplate().getSessionFactory()
+	    final Session session = getHibernateTemplate().getSessionFactory()
 		    .getCurrentSession();
-	    Query query = session.createQuery(FIND_AUTH.toString());
+	    final Query query = session.createQuery(FIND_AUTH.toString());
 	    query.setParameter("uname", username);
 	    query.setParameter("pw", password);
 
@@ -81,7 +83,7 @@ public class UserDAO extends BaseDAO implements IUserDAO {
 		query.setParameterList("roles", roles);
 	    }
 
-	    List<User> list = query.list();
+	    final List<User> list = query.list();
 	    User user = null;
 
 	    if (!list.isEmpty()) {
@@ -90,31 +92,33 @@ public class UserDAO extends BaseDAO implements IUserDAO {
 
 	    return user;
 
-	} catch (HibernateException e) {
+	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 	}
     }
 
+    @Override
     public List<Hotel> findAssignedHotels(final Long userId)
 	    throws PersistenceException {
 	try {
-	    StringBuilder sqlBuilder = new StringBuilder(
+	    final StringBuilder sqlBuilder = new StringBuilder(
 		    "SELECT h FROM Hotel h join h.superUser u where u.id=:uid ");
-	    Session session = getHibernateTemplate().getSessionFactory()
+	    final Session session = getHibernateTemplate().getSessionFactory()
 		    .getCurrentSession();
-	    Query query = session.createQuery(sqlBuilder.toString());
+	    final Query query = session.createQuery(sqlBuilder.toString());
 	    query.setParameter("uid", userId);
 	    return query.list();
-	} catch (HibernateException e) {
+	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 	}
 
     }
 
+    @Override
     public boolean isUsernameExist(final String username, final Long id)
 	    throws PersistenceException {
 	try {
-	    StringBuilder sb = new StringBuilder(
+	    final StringBuilder sb = new StringBuilder(
 		    "SELECT usr FROM User as usr where ")
 		    .append(" UPPER(usr.name)= UPPER(:uname) ");
 
@@ -122,38 +126,40 @@ public class UserDAO extends BaseDAO implements IUserDAO {
 		sb.append(" AND usr.id!=:id");
 	    }
 
-	    Session session = getHibernateTemplate().getSessionFactory()
+	    final Session session = getHibernateTemplate().getSessionFactory()
 		    .getCurrentSession();
-	    Query query = session.createQuery(sb.toString());
+	    final Query query = session.createQuery(sb.toString());
 	    query.setParameter("uname", username);
 
 	    if (id != null) {
 		query.setParameter("id", id);
 	    }
 
-	    return (!query.list().isEmpty());
-	} catch (HibernateException e) {
+	    return !query.list().isEmpty();
+	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 	}
     }
 
-    public boolean isUserRoleExist(String username) throws PersistenceException {
+    @Override
+    public boolean isUserRoleExist(final String username) throws PersistenceException {
 	try {
-	    Session session = getHibernateTemplate().getSessionFactory()
+	    final Session session = getHibernateTemplate().getSessionFactory()
 		    .getCurrentSession();
-	    Query query = session.createQuery(IS_USER_ROLE_EXIST.toString());
+	    final Query query = session.createQuery(IS_USER_ROLE_EXIST.toString());
 	    query.setParameter("rolename", username);
-	    return (!query.list().isEmpty());
-	} catch (HibernateException e) {
+	    return !query.list().isEmpty();
+	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 	}
     }
 
-    public List<User> findUsers(UserSearchDTO userSearchDTO)
+    @Override
+    public List<User> findUsers(final UserSearchDTO userSearchDTO)
 	    throws PersistenceException {
 	try {
 
-	    StringBuilder sqlBuilder = new StringBuilder(
+	    final StringBuilder sqlBuilder = new StringBuilder(
 		    "SELECT user FROM User user ");
 
 	    if (userSearchDTO.hasRolesIds()) {
@@ -178,10 +184,10 @@ public class UserDAO extends BaseDAO implements IUserDAO {
 		sqlBuilder.append("and user.active = :active ");
 	    }
 
-	    Session session = getHibernateTemplate().getSessionFactory()
+	    final Session session = getHibernateTemplate().getSessionFactory()
 		    .getCurrentSession();
 
-	    Query query = session.createQuery(sqlBuilder.toString());
+	    final Query query = session.createQuery(sqlBuilder.toString());
 
 	    if (userSearchDTO.getUserNameSet() != null) {
 		query.setParameterList("nameset",
@@ -202,91 +208,95 @@ public class UserDAO extends BaseDAO implements IUserDAO {
 
 	    return query.list();
 
-	} catch (HibernateException e) {
+	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 	}
     }
 
-    public User findById(Long id) throws PersistenceException {
+    @Override
+    public User findById(final Long id) throws PersistenceException {
 	try {
-	    StringBuilder sb = new StringBuilder(
+	    final StringBuilder sb = new StringBuilder(
 		    "SELECT usr FROM User as usr left join fetch usr.roles as rol where ");
 	    sb.append(" usr.id=:id");
 
-	    Session session = getHibernateTemplate().getSessionFactory()
+	    final Session session = getHibernateTemplate().getSessionFactory()
 		    .getCurrentSession();
-	    Query query = session.createQuery(sb.toString());
+	    final Query query = session.createQuery(sb.toString());
 	    query.setParameter("id", id);
 
-	    List<User> list = query.list();
+	    final List<User> list = query.list();
 
 	    if (!list.isEmpty()) {
 		return list.get(0);
 	    }
 
-	} catch (HibernateException e) {
+	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 	}
 
 	return null;
     }
 
-    public int deleteUser(Long id) throws PersistenceException {
+    @Override
+    public int deleteUser(final Long id) throws PersistenceException {
 	try {
 
 	    final StringBuilder sb = new StringBuilder("delete from User ")
 		    .append(" as obj Where obj.id = (:id) ");
-	    Session session = getHibernateTemplate().getSessionFactory()
+	    final Session session = getHibernateTemplate().getSessionFactory()
 		    .getCurrentSession();
 
-	    SQLQuery qry = session
+	    final SQLQuery qry = session
 		    .createSQLQuery("delete from T_USER_ROLE where FK_USER_ID = :id ");
 	    qry.setParameter("id", id);
 	    qry.executeUpdate();
 
-	    Query query = session.createQuery(sb.toString());
+	    final Query query = session.createQuery(sb.toString());
 	    query.setParameter("id", id);
 
 	    return query.executeUpdate();
 
-	} catch (HibernateException e) {
+	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
-	} catch (DataAccessException e) {
+	} catch (final DataAccessException e) {
 	    throw new PersistenceException(e);
 	}
 
     }
 
-    public List<Function> findFunctionByRoleId(Long id)
+    @Override
+    public List<Function> findFunctionByRoleId(final Long id)
 	    throws PersistenceException {
 	try {
-	    StringBuilder sb = new StringBuilder(
+	    final StringBuilder sb = new StringBuilder(
 		    "SELECT f FROM Role as r join r.function as f where ");
 	    sb.append(" r.id=:id order by f.key ASC ");
 
-	    Session session = getHibernateTemplate().getSessionFactory()
+	    final Session session = getHibernateTemplate().getSessionFactory()
 		    .getCurrentSession();
-	    Query query = session.createQuery(sb.toString());
+	    final Query query = session.createQuery(sb.toString());
 	    query.setParameter("id", id);
 
 	    return query.list();
 
-	} catch (HibernateException e) {
+	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 	}
     }
 
+    @Override
     public List<Function> findAllFunctions() throws PersistenceException {
 	try {
-	    StringBuilder sb = new StringBuilder("SELECT f FROM Function as f ");
+	    final StringBuilder sb = new StringBuilder("SELECT f FROM Function as f ");
 	    sb.append(" order by f.key ASC ");
 
-	    Session session = getHibernateTemplate().getSessionFactory()
+	    final Session session = getHibernateTemplate().getSessionFactory()
 		    .getCurrentSession();
-	    Query query = session.createQuery(sb.toString());
+	    final Query query = session.createQuery(sb.toString());
 	    return query.list();
 
-	} catch (HibernateException e) {
+	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 	}
     }

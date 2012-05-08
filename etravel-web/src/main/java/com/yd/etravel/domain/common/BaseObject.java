@@ -48,92 +48,92 @@ public class BaseObject implements Serializable {
 	super();
     }
 
-    public BaseObject(Long id, String name, String code) {
+    public BaseObject(final Long id, final String name, final String code) {
 	super();
 	this.id = id;
 	this.name = name;
 	this.code = code;
     }
 
-    public BaseObject(Long id) {
+    public BaseObject(final Long id) {
 	super();
 	this.id = id;
     }
 
-    public BaseObject(String name) {
+    public BaseObject(final String name) {
 	super();
 	this.name = name;
     }
 
     public Long getId() {
-	return id;
+	return this.id;
     }
 
-    public void setId(Long id) {
+    public void setId(final Long id) {
 	this.id = id;
     }
 
     public String getName() {
-	return name;
+	return this.name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
 	this.name = name;
     }
 
     public String getCode() {
-	return code;
+	return this.code;
     }
 
-    public void setCode(String code) {
+    public void setCode(final String code) {
 	this.code = code;
     }
 
     public Date getCreatedDate() {
-	return createdDate;
+	return this.createdDate;
     }
 
-    public void setCreatedDate(Date createdDate) {
+    public void setCreatedDate(final Date createdDate) {
 	this.createdDate = createdDate;
     }
 
     public Date getModifiedDate() {
-	return modifiedDate;
+	return this.modifiedDate;
     }
 
-    public void setModifiedDate(Date modifiedDate) {
+    public void setModifiedDate(final Date modifiedDate) {
 	this.modifiedDate = modifiedDate;
     }
 
     public String getCreatedBy() {
-	return createdBy;
+	return this.createdBy;
     }
 
-    public void setCreatedBy(String createdBy) {
+    public void setCreatedBy(final String createdBy) {
 	this.createdBy = createdBy;
     }
 
     public String getModifiedBy() {
-	return modifiedBy;
+	return this.modifiedBy;
     }
 
-    public void setModifiedBy(String modifiedBy) {
+    public void setModifiedBy(final String modifiedBy) {
 	this.modifiedBy = modifiedBy;
     }
 
     public String getStatus() {
-	return status;
+	return this.status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(final String status) {
 	this.status = status;
     }
 
     public boolean isActive() {
-	return active;
+	return this.active;
     }
 
-    public void setActive(boolean active) {
+    public void setActive(final boolean active) {
 	this.active = active;
     }
 

@@ -25,10 +25,11 @@ public class PaxDAO extends BaseDAO implements IPaxDAO {
      * com.yd.etravel.persistence.dao.pax.IPaxDAO.isPaxTypeExist(java.lang.Long
      * , java.lang.String)
      */
-    public boolean isPaxTypeExist(Long hotelId, Long id)
+    @Override
+    public boolean isPaxTypeExist(final Long hotelId, final Long id)
 	    throws PersistenceException {
 	try {
-	    StringBuilder IS_PAX_TYPE_EXIST = new StringBuilder(
+	    final StringBuilder IS_PAX_TYPE_EXIST = new StringBuilder(
 		    "SELECT pax FROM Pax as pax where ")
 		    .append("pax.hotel.id=:hid");
 
@@ -36,26 +37,27 @@ public class PaxDAO extends BaseDAO implements IPaxDAO {
 		IS_PAX_TYPE_EXIST.append(" AND pax.id != :id");
 	    }
 
-	    Session session = getHibernateTemplate().getSessionFactory()
+	    final Session session = getHibernateTemplate().getSessionFactory()
 		    .getCurrentSession();
-	    Query query = session.createQuery(IS_PAX_TYPE_EXIST.toString());
+	    final Query query = session.createQuery(IS_PAX_TYPE_EXIST.toString());
 	    query.setParameter("hid", hotelId);
 
 	    if (id != null) {
 		query.setParameter("id", id);
 	    }
-	    return (!query.list().isEmpty());
-	} catch (HibernateException e) {
+	    return !query.list().isEmpty();
+	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 	}
     }
 
-    public List<Pax> findPax(PaxSearchDTO paxSearchDTO)
+    @Override
+    public List<Pax> findPax(final PaxSearchDTO paxSearchDTO)
 	    throws PersistenceException {
 	try {
-	    StringBuilder sb = new StringBuilder(
+	    final StringBuilder sb = new StringBuilder(
 		    "select pax from Pax as pax where 1=1 ");
-	    Session session = getHibernateTemplate().getSessionFactory()
+	    final Session session = getHibernateTemplate().getSessionFactory()
 		    .getCurrentSession();
 
 	    if (paxSearchDTO.getType() != null) {
@@ -66,7 +68,7 @@ public class PaxDAO extends BaseDAO implements IPaxDAO {
 		sb.append(" and pax.hotel.id=:hid ");
 	    }
 
-	    Query query = session.createQuery(sb.toString());
+	    final Query query = session.createQuery(sb.toString());
 
 	    if (paxSearchDTO.getType() != null) {
 		query.setParameter("type", paxSearchDTO.getType());
@@ -78,7 +80,7 @@ public class PaxDAO extends BaseDAO implements IPaxDAO {
 
 	    return query.list();
 
-	} catch (HibernateException e) {
+	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 	}
     }

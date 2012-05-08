@@ -34,35 +34,35 @@ public class ExtraItemBooking extends BaseObject {
     private BigDecimal price;
 
     public ExtraItem getExtraItem() {
-	return extraItem;
+	return this.extraItem;
     }
 
-    public void setExtraItem(ExtraItem extraItem) {
+    public void setExtraItem(final ExtraItem extraItem) {
 	this.extraItem = extraItem;
     }
 
 
     public Booking getBooking() {
-	return booking;
+	return this.booking;
     }
 
-    public void setBooking(Booking booking) {
+    public void setBooking(final Booking booking) {
 	this.booking = booking;
     }
 
     public String getComments() {
-	return comments;
+	return this.comments;
     }
 
-    public void setComments(String comments) {
+    public void setComments(final String comments) {
 	this.comments = comments;
     }
 
     public BigDecimal getPrice() {
-	return price;
+	return this.price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(final BigDecimal price) {
 	this.price = price;
     }
 

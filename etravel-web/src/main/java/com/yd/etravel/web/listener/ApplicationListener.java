@@ -26,18 +26,20 @@ public class ApplicationListener implements ServletContextListener {
 	// TODO Auto-generated constructor stub
     }
 
-    public void contextDestroyed(ServletContextEvent event) {
+    @Override
+    public void contextDestroyed(final ServletContextEvent event) {
 
     }
 
-    public void contextInitialized(ServletContextEvent event) {
+    @Override
+    public void contextInitialized(final ServletContextEvent event) {
 	try {
-	    ServletContext servletContext = event.getServletContext();
-	    WebApplicationContext wac = WebApplicationContextUtils
+	    final ServletContext servletContext = event.getServletContext();
+	    final WebApplicationContext wac = WebApplicationContextUtils
 		    .getWebApplicationContext(servletContext);
 	    ServiceHelper.getInstance().setApplicationContext(wac);
 
-	} catch (Exception e) {
+	} catch (final Exception e) {
 	    log.fatal(e.getMessage(), e);
 	}
     }

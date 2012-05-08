@@ -46,87 +46,87 @@ public class ExtraItemForm extends BaseForm {
     }
 
     public List<Hotel> getHotelList() {
-	return hotelList;
+	return this.hotelList;
     }
 
-    public void setHotelList(List<Hotel> hotelList) {
+    public void setHotelList(final List<Hotel> hotelList) {
 	this.hotelList = hotelList;
     }
 
     public List<ExtraItem> getExtraItemList() {
-	return extraItemList;
+	return this.extraItemList;
     }
 
-    public void setExtraItemList(List<ExtraItem> extraItemList) {
+    public void setExtraItemList(final List<ExtraItem> extraItemList) {
 	this.extraItemList = extraItemList;
     }
 
     public BigDecimal getCost() {
-	return cost;
+	return this.cost;
     }
 
-    public void setCost(BigDecimal cost) {
+    public void setCost(final BigDecimal cost) {
 	this.cost = cost;
     }
 
     public String getComments() {
-	return comments;
+	return this.comments;
     }
 
-    public void setComments(String comments) {
+    public void setComments(final String comments) {
 	this.comments = comments;
     }
 
     public String getCurrency() {
-	return currency;
+	return this.currency;
     }
 
-    public void setCurrency(String currency) {
+    public void setCurrency(final String currency) {
 	this.currency = currency;
     }
 
     public String getCode() {
-	return code;
+	return this.code;
     }
 
-    public void setCode(String code) {
+    public void setCode(final String code) {
 	this.code = code;
     }
 
     public List<String> getCurrencyList() {
-	return currencyList;
+	return this.currencyList;
     }
 
-    public void setCurrencyList(List<String> currencyList) {
+    public void setCurrencyList(final List<String> currencyList) {
 	this.currencyList = currencyList;
     }
 
     public String getName() {
-	return name;
+	return this.name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
 	this.name = name;
     }
 
     public Long[] getHotelId() {
-	return hotelId;
+	return this.hotelId;
     }
 
-    public void setHotelId(Long[] hotelId) {
+    public void setHotelId(final Long[] hotelId) {
 	this.hotelId = hotelId;
     }
 
     public Long getId() {
-	return id;
+	return this.id;
     }
 
-    public void setId(Long id) {
+    public void setId(final Long id) {
 	this.id = id;
     }
 
     @Override
-    public void resetBean(ActionMapping mapping, HttpServletRequest request) {
+    public void resetBean(final ActionMapping mapping, final HttpServletRequest request) {
 	this.hotelList = Collections.EMPTY_LIST;
 	this.extraItemList = Collections.EMPTY_LIST;
 	this.currencyList = new ArrayList<String>();
@@ -146,15 +146,15 @@ public class ExtraItemForm extends BaseForm {
      * .ActionMapping, javax.servlet.http.HttpServletRequest)
      */
     @Override
-    public ActionErrors validateBean(ActionMapping mapping,
-	    HttpServletRequest request) {
-	ActionErrors errors = new ActionErrors();
+    public ActionErrors validateBean(final ActionMapping mapping,
+	    final HttpServletRequest request) {
+	final ActionErrors errors = new ActionErrors();
 
-	if (StringUtils.isEmpty(name)) {
+	if (StringUtils.isEmpty(this.name)) {
 	    addErrors(errors, "etravel.extraitem.name.required");
 	}
 
-	if (StringUtils.isEmpty(code)) {
+	if (StringUtils.isEmpty(this.code)) {
 	    addErrors(errors, "etravel.extraitem.code.required");
 	}
 

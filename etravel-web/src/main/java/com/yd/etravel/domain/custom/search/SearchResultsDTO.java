@@ -19,14 +19,14 @@ public class SearchResultsDTO {
      * @return the roomDTO
      */
     public List<RoomDTO> getRoomDTO() {
-	return roomDTO;
+	return this.roomDTO;
     }
 
     /**
      * @param roomDTO
      *            the roomDTO to set
      */
-    public void setRoomDTO(List<RoomDTO> roomDTO) {
+    public void setRoomDTO(final List<RoomDTO> roomDTO) {
 	this.roomDTO = roomDTO;
     }
 
@@ -34,14 +34,14 @@ public class SearchResultsDTO {
      * @return the extraItem
      */
     public List<ExtraItemDTO> getExtraItemDTO() {
-	return extraItemDTO;
+	return this.extraItemDTO;
     }
 
     /**
      * @param extraItem
      *            the extraItem to set
      */
-    public void setExtraItemDTO(List<ExtraItemDTO> extraItemDTO) {
+    public void setExtraItemDTO(final List<ExtraItemDTO> extraItemDTO) {
 	this.extraItemDTO = extraItemDTO;
     }
 

@@ -24,42 +24,42 @@ public class PaxSearchDTO {
     }
 
     public String getType() {
-	return type;
+	return this.type;
     }
 
-    public void setType(String type) {
+    public void setType(final String type) {
 	this.type = type;
     }
 
     public Integer getMaxage() {
-	return maxage;
+	return this.maxage;
     }
 
-    public void setMaxage(Integer maxage) {
+    public void setMaxage(final Integer maxage) {
 	this.maxage = maxage;
     }
 
     public Integer getMinage() {
-	return minage;
+	return this.minage;
     }
 
-    public void setMinage(Integer minage) {
+    public void setMinage(final Integer minage) {
 	this.minage = minage;
     }
 
     public Long getId() {
-	return id;
+	return this.id;
     }
 
-    public void setId(Long id) {
+    public void setId(final Long id) {
 	this.id = id;
     }
 
     public Long getHotelId() {
-	return hotelId;
+	return this.hotelId;
     }
 
-    public void setHotelId(Long hotelId) {
+    public void setHotelId(final Long hotelId) {
 	this.hotelId = hotelId;
     }
 

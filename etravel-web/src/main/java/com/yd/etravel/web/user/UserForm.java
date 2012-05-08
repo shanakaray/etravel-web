@@ -42,18 +42,18 @@ public class UserForm extends BaseForm {
     }
 
     public User getUser() {
-	return user;
+	return this.user;
     }
 
-    public void setUser(User user) {
+    public void setUser(final User user) {
 	this.user = user;
     }
 
     public String getName() {
-	return user.getName();
+	return this.user.getName();
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
 	this.user.setName(name);
     }
 
@@ -61,7 +61,7 @@ public class UserForm extends BaseForm {
 	return this.user.getPassword();
     }
 
-    public void setPw(String password) {
+    public void setPw(final String password) {
 	this.user.setPassword(password);
     }
 
@@ -69,71 +69,71 @@ public class UserForm extends BaseForm {
 	return this.user.getAddress();
     }
 
-    public void setAddress(String address) {
+    public void setAddress(final String address) {
 	this.user.setAddress(address);
     }
 
     public String getContact() {
-	return user.getContact();
+	return this.user.getContact();
     }
 
-    public void setContact(String contact) {
+    public void setContact(final String contact) {
 	this.user.setContact(contact);
     }
 
     public String getEmail() {
-	return user.getEmail();
+	return this.user.getEmail();
     }
 
-    public void setEmail(String email) {
+    public void setEmail(final String email) {
 	this.user.setEmail(email);
     }
 
     public String getFirstName() {
-	return user.getFirstName();
+	return this.user.getFirstName();
     }
 
-    public void setFirstName(String firstName) {
+    public void setFirstName(final String firstName) {
 	this.user.setFirstName(firstName);
     }
 
     public String getLastName() {
-	return user.getLastName();
+	return this.user.getLastName();
     }
 
-    public void setLastName(String lastName) {
+    public void setLastName(final String lastName) {
 	this.user.setLastName(lastName);
     }
 
     public String getRepw() {
-	return repassword;
+	return this.repassword;
     }
 
-    public void setRepw(String repassword) {
+    public void setRepw(final String repassword) {
 	this.repassword = repassword;
     }
 
     public Long[] getRoleIds() {
-	return roleIds;
+	return this.roleIds;
     }
 
-    public void setRoleIds(Long[] roleIds) {
+    public void setRoleIds(final Long[] roleIds) {
 	this.roleIds = roleIds;
     }
 
     public List<Role> getAllRoles() {
-	return allRoles;
+	return this.allRoles;
     }
 
-    public void setAllRoles(List<Role> allRoles) {
+    public void setAllRoles(final List<Role> allRoles) {
 	this.allRoles = allRoles;
     }
 
     public List<User> getAllUsers() {
-	return allUsers;
+	return this.allUsers;
     }
 
-    public void setAllUsers(List<User> allUsers) {
+    public void setAllUsers(final List<User> allUsers) {
 	this.allUsers = allUsers;
     }
 
@@ -141,28 +141,28 @@ public class UserForm extends BaseForm {
 	return this.user.isActive();
     }
 
-    public void setActive(Boolean active) {
+    public void setActive(final Boolean active) {
 	this.user.setActive(active);
     }
 
     public Long getId() {
-	return id;
+	return this.id;
     }
 
-    public void setId(Long id) {
+    public void setId(final Long id) {
 	this.id = id;
     }
 
     public boolean isPasswordReset() {
-	return passwordReset;
+	return this.passwordReset;
     }
 
-    public void setPasswordReset(boolean passwordReset) {
+    public void setPasswordReset(final boolean passwordReset) {
 	this.passwordReset = passwordReset;
     }
 
     @Override
-    public void resetBean(ActionMapping mapping, HttpServletRequest request) {
+    public void resetBean(final ActionMapping mapping, final HttpServletRequest request) {
 
 	this.id = 0L;
 	this.user = new User();
@@ -174,9 +174,9 @@ public class UserForm extends BaseForm {
     }
 
     @Override
-    public ActionErrors validateBean(ActionMapping mapping,
-	    HttpServletRequest request) {
-	ActionErrors errors = new ActionErrors();
+    public ActionErrors validateBean(final ActionMapping mapping,
+	    final HttpServletRequest request) {
+	final ActionErrors errors = new ActionErrors();
 
 	if (StringUtils.isEmpty(this.user.getFirstName())) {
 	    addErrors(errors, "etravel.error.fistname.required");
@@ -194,17 +194,17 @@ public class UserForm extends BaseForm {
 	    this.user.setEmail(EMPTY_STRING);
 	}
 
-	if (passwordReset
-		|| (this.getId() == null || this.getId().longValue() <= 0)) {
+	if (this.passwordReset
+		|| getId() == null || getId().longValue() <= 0) {
 	    if (StringUtils.isEmpty(this.user.getPassword())) {
 		addErrors(errors, "etravel.error.pw.required");
-	    } else if (!this.user.getPassword().equals(repassword)) {
+	    } else if (!this.user.getPassword().equals(this.repassword)) {
 		addErrors(errors, "etravel.error.pw.notmached");
 
-		this.setRepw(EMPTY_STRING);
-		this.setPw(EMPTY_STRING);
+		setRepw(EMPTY_STRING);
+		setPw(EMPTY_STRING);
 
-		this.setPasswordReset(false);
+		setPasswordReset(false);
 	    }
 	}
 

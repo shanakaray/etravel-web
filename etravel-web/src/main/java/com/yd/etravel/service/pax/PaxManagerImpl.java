@@ -18,84 +18,91 @@ public class PaxManagerImpl implements IPaxManager {
 
     private IPaxDAO paxDAO;
 
-    public void setPaxDAO(IPaxDAO paxDAO) {
+    public void setPaxDAO(final IPaxDAO paxDAO) {
 	this.paxDAO = paxDAO;
     }
 
-    public int deletePax(Long id) throws ServiceException {
+    @Override
+    public int deletePax(final Long id) throws ServiceException {
 	int count = 0;
 	try {
-	    count = paxDAO.deleteAny(Pax.class, id);
-	} catch (PersistenceException e) {
+	    count = this.paxDAO.deleteAny(Pax.class, id);
+	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
 	return count;
     }
 
+    @Override
     public List<Pax> findAllActivePax() throws ServiceException {
 	try {
-	    return paxDAO.findAllActive(Pax.class);
-	} catch (PersistenceException e) {
+	    return this.paxDAO.findAllActive(Pax.class);
+	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
     }
 
+    @Override
     public List<Pax> findAllPax() throws ServiceException {
 	try {
-	    return paxDAO.findAll(Pax.class);
-	} catch (PersistenceException e) {
+	    return this.paxDAO.findAll(Pax.class);
+	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
     }
 
-    public List<Pax> findPaxByHotel(Long hotelId) throws ServiceException {
+    @Override
+    public List<Pax> findPaxByHotel(final Long hotelId) throws ServiceException {
 	try {
-	    PaxSearchDTO searchDTO = new PaxSearchDTO();
+	    final PaxSearchDTO searchDTO = new PaxSearchDTO();
 	    searchDTO.setHotelId(hotelId);
-	    return paxDAO.findPax(searchDTO);
-	} catch (PersistenceException e) {
+	    return this.paxDAO.findPax(searchDTO);
+	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
     }
 
-    public Pax findPaxById(Long id) throws ServiceException {
+    @Override
+    public Pax findPaxById(final Long id) throws ServiceException {
 	Pax pax = null;
 	try {
 
-	    pax = (Pax) paxDAO.findById(Pax.class, id);
+	    pax = (Pax) this.paxDAO.findById(Pax.class, id);
 
-	} catch (PersistenceException e) {
+	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
 	return pax;
 
     }
 
+    @Override
     public Pax savePax(Pax pax) throws ServiceException {
 	try {
 
-	    if (paxDAO.isPaxTypeExist(pax.getHotel().getId(), pax.getId())) {
+	    if (this.paxDAO.isPaxTypeExist(pax.getHotel().getId(), pax.getId())) {
 		throw new ServiceException(
 			ValidationHelper
 				.getMessageHolder("etravel.pax.type.exist"));
 	    }
 
 	    if (pax.getId() == null) {
-		pax = (Pax) paxDAO.save(pax);
+		pax = (Pax) this.paxDAO.save(pax);
 	    } else {
-		pax = (Pax) paxDAO.update(pax);
+		pax = (Pax) this.paxDAO.update(pax);
 	    }
 
-	} catch (PersistenceException e) {
+	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
 	return pax;
     }
 
-    public List<Pax> findPax(PaxSearchDTO paxSearchDTO) throws ServiceException {
+    @Override
+    public List<Pax> findPax(final PaxSearchDTO paxSearchDTO) throws ServiceException {
 	try {
-	    return paxDAO.findPax(paxSearchDTO);
-	} catch (PersistenceException e) {
+	    return this.paxDAO.findPax(paxSearchDTO);
+	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
     }

@@ -20,18 +20,18 @@ public class RoomDiscount extends BaseObject {
     private Discount discount;
 
     public Room getRoom() {
-	return room;
+	return this.room;
     }
 
-    public void setRoom(Room room) {
+    public void setRoom(final Room room) {
 	this.room = room;
     }
 
     public Discount getDiscount() {
-	return discount;
+	return this.discount;
     }
 
-    public void setDiscount(Discount discount) {
+    public void setDiscount(final Discount discount) {
 	this.discount = discount;
     }
 

@@ -20,25 +20,25 @@ public class StringUtils implements ICommon {
 
     public static int chompLength = 32;
 
-    public static Map<String, String> getProperties(Object object) {
-	Map<String, String> map = new HashMap<String, String>();
-	Method fields[] = object.getClass().getMethods();
+    public static Map<String, String> getProperties(final Object object) {
+	final Map<String, String> map = new HashMap<String, String>();
+	final Method fields[] = object.getClass().getMethods();
 	try {
-	    for (Method method : fields) {
+	    for (final Method method : fields) {
 		if (method.getName().startsWith("get")
 			&& method.getReturnType().equals(String.class)) {
 		    map.put(method.getName(), (String) object.getClass()
 			    .getMethod(method.getName()).invoke(object, null));
 		}
 	    }
-	} catch (Exception e) {
+	} catch (final Exception e) {
 	    e.printStackTrace();
 
 	}
 	return map;
     }
 
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
 	getProperties(new UserProfile());
     }
 
@@ -50,15 +50,15 @@ public class StringUtils implements ICommon {
 	return flag;
     }
 
-    public static boolean isValidEmail(String email) {
-	Pattern p = Pattern.compile(EMAIL_VALIDATION);
-	Matcher m = p.matcher(email);
+    public static boolean isValidEmail(final String email) {
+	final Pattern p = Pattern.compile(EMAIL_VALIDATION);
+	final Matcher m = p.matcher(email);
 	// check whether match is found
 	return m.matches();
     }
 
     @SuppressWarnings("rawtypes")
-    public static boolean isEmpty(Object obj) {
+    public static boolean isEmpty(final Object obj) {
 	if (obj == null) {
 	    return true;
 	} else if (obj instanceof String) {
@@ -81,7 +81,7 @@ public class StringUtils implements ICommon {
 	return false; // Object not null!
     }
 
-    public static boolean isNotEmpty(Object obj) {
+    public static boolean isNotEmpty(final Object obj) {
 	return !isEmpty(obj);
     }
 
@@ -93,7 +93,7 @@ public class StringUtils implements ICommon {
      * @return html encoded string
      * @throws UnsupportedEncodingException
      */
-    public static String urlEncode(String pText)
+    public static String urlEncode(final String pText)
 	    throws UnsupportedEncodingException {
 
 	return URLEncoder.encode(pText, "UTF-8");

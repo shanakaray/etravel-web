@@ -19,26 +19,26 @@ public class RoomSearchDTO {
     }
 
     public Integer getNoOfRoom() {
-	return noOfRoom;
+	return this.noOfRoom;
     }
 
-    public void setNoOfRoom(Integer noOfRoom) {
+    public void setNoOfRoom(final Integer noOfRoom) {
 	this.noOfRoom = noOfRoom;
     }
 
     public Long getRoomTypeId() {
-	return roomTypeId;
+	return this.roomTypeId;
     }
 
-    public void setRoomTypeId(Long roomTypeId) {
+    public void setRoomTypeId(final Long roomTypeId) {
 	this.roomTypeId = roomTypeId;
     }
 
     public Long getHotelId() {
-	return hotelId;
+	return this.hotelId;
     }
 
-    public void setHotelId(Long hotelId) {
+    public void setHotelId(final Long hotelId) {
 	this.hotelId = hotelId;
     }
 

@@ -12,7 +12,7 @@ values ('Customer', 'Customer',1,3);
 insert into T_ROLE (NAME, code, active, id) 
 values ('Agent', 'Agent',1,4);
 
-INSERT INTO T_USER_T_ROLE (T_USER_ID,ROLES_ID) VALUES (1,2);
+INSERT INTO T_USER_T_ROLE (USER_ID,ROLE_ID) VALUES (1,2);
 
 INSERT INTO T_FUNC (ID,FUNC_KEY,FUNC_TYPE,active)VALUES(1,'sys.menu.manageuser.newuser','menu',1);
 INSERT INTO T_FUNC (ID,FUNC_KEY,FUNC_TYPE,active)VALUES(2,'sys.menu.manageuser.newrole','menu',1);

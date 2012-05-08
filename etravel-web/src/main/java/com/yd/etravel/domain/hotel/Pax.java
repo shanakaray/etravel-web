@@ -38,15 +38,15 @@ public class Pax extends BaseObject {
 
     }
 
-    public Pax(Long id, String name, String code) {
+    public Pax(final Long id, final String name, final String code) {
 	super(id, name, code);
     }
 
     public Hotel getHotel() {
-	return hotel;
+	return this.hotel;
     }
 
-    public void setHotel(Hotel hotel) {
+    public void setHotel(final Hotel hotel) {
 	this.hotel = hotel;
     }
 
@@ -54,10 +54,10 @@ public class Pax extends BaseObject {
      * @hibernate.property
      */
     public int getChildMax() {
-	return childMax;
+	return this.childMax;
     }
 
-    public void setChildMax(int childMax) {
+    public void setChildMax(final int childMax) {
 	this.childMax = childMax;
     }
 
@@ -65,10 +65,10 @@ public class Pax extends BaseObject {
      * @hibernate.property
      */
     public int getChildMin() {
-	return childMin;
+	return this.childMin;
     }
 
-    public void setChildMin(int childMin) {
+    public void setChildMin(final int childMin) {
 	this.childMin = childMin;
     }
 
@@ -76,10 +76,10 @@ public class Pax extends BaseObject {
      * @hibernate.property
      */
     public int getInfantMax() {
-	return infantMax;
+	return this.infantMax;
     }
 
-    public void setInfantMax(int infantMax) {
+    public void setInfantMax(final int infantMax) {
 	this.infantMax = infantMax;
     }
 
@@ -87,10 +87,10 @@ public class Pax extends BaseObject {
      * @hibernate.property
      */
     public int getInfantMin() {
-	return infantMin;
+	return this.infantMin;
     }
 
-    public void setInfantMin(int infantMin) {
+    public void setInfantMin(final int infantMin) {
 	this.infantMin = infantMin;
     }
 
@@ -98,10 +98,10 @@ public class Pax extends BaseObject {
      * @hibernate.property
      */
     public int getAdultMax() {
-	return adultMax;
+	return this.adultMax;
     }
 
-    public void setAdultMax(int adultMax) {
+    public void setAdultMax(final int adultMax) {
 	this.adultMax = adultMax;
     }
 
@@ -109,10 +109,10 @@ public class Pax extends BaseObject {
      * @hibernate.property
      */
     public int getAdultMin() {
-	return adultMin;
+	return this.adultMin;
     }
 
-    public void setAdultMin(int adultMin) {
+    public void setAdultMin(final int adultMin) {
 	this.adultMin = adultMin;
     }
 

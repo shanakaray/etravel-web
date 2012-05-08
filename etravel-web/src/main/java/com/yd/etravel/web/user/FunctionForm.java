@@ -37,70 +37,73 @@ public class FunctionForm extends BaseForm {
 	 * 
 	 */
     public FunctionForm() {
-	functionIds = new Long[0];
+	this.functionIds = new Long[0];
     }
 
     public List<Function> getFuctionList() {
 
-	return fuctionList;
+	return this.fuctionList;
     }
 
     public Set<Function> getSelectedFuctionList() {
-	Set<Function> sfunc = new HashSet<Function>();
-	if (getFunctionIds() != null)
-	    for (Long s : getFunctionIds()) {
-		for (Function f : fuctionList) {
+	final Set<Function> sfunc = new HashSet<Function>();
+	if (getFunctionIds() != null) {
+	    for (final Long s : getFunctionIds()) {
+		for (final Function f : this.fuctionList) {
 		    if (f.getId().equals(s)) {
 			sfunc.add(f);
 			break;
 		    }
 		}
 	    }
+	}
 	return sfunc;
     }
 
     public List<Function> getRemainFuctionList() {
-	List<Function> sfunc = new ArrayList<Function>();
-	Long stmp[] = getFunctionIds();
-	for (Function f : fuctionList) {
+	final List<Function> sfunc = new ArrayList<Function>();
+	final Long stmp[] = getFunctionIds();
+	for (final Function f : this.fuctionList) {
 	    boolean flag = false;
-	    if (stmp != null)
-		for (Long s : stmp) {
+	    if (stmp != null) {
+		for (final Long s : stmp) {
 		    if (f.getId().equals(s)) {
 			flag = true;
 			break;
 		    }
 		}
-	    if (!flag)
+	    }
+	    if (!flag) {
 		sfunc.add(f);
+	    }
 	}
 	return sfunc;
     }
 
-    public void setFuctionList(List<Function> fuctionList) {
+    public void setFuctionList(final List<Function> fuctionList) {
 	this.fuctionList = fuctionList;
     }
 
     public Long getRoleId() {
-	return roleId;
+	return this.roleId;
     }
 
-    public void setRoleId(Long roleId) {
+    public void setRoleId(final Long roleId) {
 	this.roleId = roleId;
     }
 
     public Long[] getFunctionIds() {
-	return functionIds;
+	return this.functionIds;
     }
 
-    public void setFunctionIds(Long[] functionIds) {
+    public void setFunctionIds(final Long[] functionIds) {
 	this.functionIds = functionIds;
     }
 
-    public void setFunctionIds(List<Function> functionIds) {
+    public void setFunctionIds(final List<Function> functionIds) {
 	this.functionIds = null;
-	List<Long> llist = new ArrayList<Long>();
-	for (Function f : functionIds) {
+	final List<Long> llist = new ArrayList<Long>();
+	for (final Function f : functionIds) {
 	    llist.add(f.getId());
 	}
 
@@ -110,23 +113,23 @@ public class FunctionForm extends BaseForm {
     }
 
     public List<Role> getAllRoles() {
-	return allRoles;
+	return this.allRoles;
     }
 
-    public void setAllRoles(List<Role> allRoles) {
+    public void setAllRoles(final List<Role> allRoles) {
 	this.allRoles = allRoles;
     }
 
     public Long[] getAllFunctionIds() {
-	return allFunctionIds;
+	return this.allFunctionIds;
     }
 
-    public void setAllFunctionIds(Long[] allFunctionIds) {
+    public void setAllFunctionIds(final Long[] allFunctionIds) {
 	this.allFunctionIds = allFunctionIds;
     }
 
     @Override
-    public void resetBean(ActionMapping mapping, HttpServletRequest request) {
+    public void resetBean(final ActionMapping mapping, final HttpServletRequest request) {
 	this.fuctionList = Collections.EMPTY_LIST;
 	this.roleId = -1l;
 	this.functionIds = new Long[0];
@@ -143,8 +146,8 @@ public class FunctionForm extends BaseForm {
      * .ActionMapping, javax.servlet.http.HttpServletRequest)
      */
     @Override
-    public ActionErrors validateBean(ActionMapping mapping,
-	    HttpServletRequest request) {
+    public ActionErrors validateBean(final ActionMapping mapping,
+	    final HttpServletRequest request) {
 	// TODO Auto-generated method stub
 	return null;
     }

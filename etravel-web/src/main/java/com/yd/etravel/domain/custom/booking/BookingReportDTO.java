@@ -55,315 +55,316 @@ public class BookingReportDTO {
     private Integer noOfRoom;
 
     public Long getBookingId() {
-	return bookingId;
+	return this.bookingId;
     }
 
-    public void setBookingId(Long bookingId) {
+    public void setBookingId(final Long bookingId) {
 	this.bookingId = bookingId;
     }
 
     public Long getRoomId() {
-	return roomId;
+	return this.roomId;
     }
 
-    public void setRoomId(Long roomId) {
+    public void setRoomId(final Long roomId) {
 	this.roomId = roomId;
     }
 
     public Long getRoomTypeId() {
-	return roomTypeId;
+	return this.roomTypeId;
     }
 
-    public void setRoomTypeId(Long roomTypeId) {
+    public void setRoomTypeId(final Long roomTypeId) {
 	this.roomTypeId = roomTypeId;
     }
 
     public Long getHotelId() {
-	return hotelId;
+	return this.hotelId;
     }
 
-    public void setHotelId(Long hotelId) {
+    public void setHotelId(final Long hotelId) {
 	this.hotelId = hotelId;
     }
 
     public Long getUserId() {
-	return userId;
+	return this.userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(final Long userId) {
 	this.userId = userId;
     }
 
     public Long getAgentId() {
-	return agentId;
+	return this.agentId;
     }
 
-    public void setAgentId(Long agentId) {
+    public void setAgentId(final Long agentId) {
 	this.agentId = agentId;
     }
 
     public String getBookingCode() {
-	return bookingCode;
+	return this.bookingCode;
     }
 
-    public void setBookingCode(String bookingCode) {
+    public void setBookingCode(final String bookingCode) {
 	this.bookingCode = bookingCode;
     }
 
     public String getUserName() {
-	return userName;
+	return this.userName;
     }
 
-    public void setUserName(String userName) {
+    public void setUserName(final String userName) {
 	this.userName = userName;
     }
 
     public String getUserFName() {
-	if (!StringUtils.isEmpty(userFName)) {
-	    String str = new String(new char[] { userFName.trim().charAt(0) });
+	if (!StringUtils.isEmpty(this.userFName)) {
+	    String str = new String(new char[] { this.userFName.trim().charAt(0) });
 	    str = str.toUpperCase();
-	    return new StringBuilder(userFName.trim()).replace(0, 1, str)
+	    return new StringBuilder(this.userFName.trim()).replace(0, 1, str)
 		    .toString();
 	} else {
-	    return agentName;
+	    return this.agentName;
 	}
     }
 
-    public void setUserFName(String userFName) {
+    public void setUserFName(final String userFName) {
 	this.userFName = userFName;
     }
 
     public String getUserLName() {
-	if (!StringUtils.isEmpty(userLName)) {
-	    String str = new String(new char[] { userLName.trim().charAt(0) });
+	if (!StringUtils.isEmpty(this.userLName)) {
+	    String str = new String(new char[] { this.userLName.trim().charAt(0) });
 	    str = str.toUpperCase();
-	    return new StringBuilder(userLName.trim()).replace(0, 1, str)
+	    return new StringBuilder(this.userLName.trim()).replace(0, 1, str)
 		    .toString();
 	} else {
-	    return agentName;
+	    return this.agentName;
 	}
 
     }
 
-    public void setUserLName(String userLName) {
+    public void setUserLName(final String userLName) {
 	this.userLName = userLName;
     }
 
     public String getAgentName() {
-	if (!StringUtils.isEmpty(agentName)) {
-	    String str = new String(new char[] { agentName.trim().charAt(0) });
+	if (!StringUtils.isEmpty(this.agentName)) {
+	    String str = new String(new char[] { this.agentName.trim().charAt(0) });
 	    str = str.toUpperCase();
-	    return new StringBuilder(agentName.trim()).replace(0, 1, str)
+	    return new StringBuilder(this.agentName.trim()).replace(0, 1, str)
 		    .toString();
 	} else {
-	    return agentName;
+	    return this.agentName;
 	}
 
     }
 
-    public void setAgentName(String agentName) {
+    public void setAgentName(final String agentName) {
 	this.agentName = agentName;
     }
 
     public String getHotelName() {
-	return hotelName;
+	return this.hotelName;
     }
 
-    public void setHotelName(String hotelName) {
+    public void setHotelName(final String hotelName) {
 	this.hotelName = hotelName;
     }
 
     public String getRoomName() {
-	return roomName;
+	return this.roomName;
     }
 
-    public void setRoomName(String roomName) {
+    public void setRoomName(final String roomName) {
 	this.roomName = roomName;
     }
 
     public String getRoomTypeName() {
-	return roomTypeName;
+	return this.roomTypeName;
     }
 
-    public void setRoomTypeName(String roomTypeName) {
+    public void setRoomTypeName(final String roomTypeName) {
 	this.roomTypeName = roomTypeName;
     }
 
     public String getStatus() {
-	return status;
+	return this.status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(final String status) {
 	this.status = status;
     }
 
     public Date getDepatureDate() {
-	return depatureDate;
+	return this.depatureDate;
     }
 
-    public void setDepatureDate(Date depatureDate) {
+    public void setDepatureDate(final Date depatureDate) {
 	this.depatureDate = depatureDate;
     }
 
     public Date getBookingDate() {
-	return bookingDate;
+	return this.bookingDate;
     }
 
-    public void setBookingDate(Date bookingDate) {
+    public void setBookingDate(final Date bookingDate) {
 	this.bookingDate = bookingDate;
     }
 
     public BigDecimal getTotalPrice() {
-	return totalPrice;
+	return this.totalPrice;
     }
 
-    public void setTotalPrice(BigDecimal totalPrice) {
+    public void setTotalPrice(final BigDecimal totalPrice) {
 	this.totalPrice = totalPrice;
     }
 
     public BigDecimal getTotalCost() {
-	return totalCost;
+	return this.totalCost;
     }
 
-    public void setTotalCost(BigDecimal totalCost) {
+    public void setTotalCost(final BigDecimal totalCost) {
 	this.totalCost = totalCost;
     }
 
     public String getPaymentMethod() {
-	return paymentMethod;
+	return this.paymentMethod;
     }
 
-    public void setPaymentMethod(String paymentMethod) {
+    public void setPaymentMethod(final String paymentMethod) {
 	this.paymentMethod = paymentMethod;
     }
 
     public Date getCheckInDate() {
-	return checkInDate;
+	return this.checkInDate;
     }
 
-    public void setCheckInDate(Date checkInDate) {
+    public void setCheckInDate(final Date checkInDate) {
 	this.checkInDate = checkInDate;
     }
 
     public Date getCheckOutDate() {
-	return checkOutDate;
+	return this.checkOutDate;
     }
 
-    public void setCheckOutDate(Date checkOutDate) {
+    public void setCheckOutDate(final Date checkOutDate) {
 	this.checkOutDate = checkOutDate;
     }
 
     public Integer getNoOfRoom() {
-	return noOfRoom;
+	return this.noOfRoom;
     }
 
-    public void setNoOfRoom(Integer noOfRoom) {
+    public void setNoOfRoom(final Integer noOfRoom) {
 	this.noOfRoom = noOfRoom;
     }
 
     public String getCheckInDateString() {
-	return DateUtil.format(checkInDate);
+	return DateUtil.format(this.checkInDate);
     }
 
     public String getCheckOutDateString() {
-	return DateUtil.format(checkOutDate);
+	return DateUtil.format(this.checkOutDate);
     }
 
     public String getDepatureDateString() {
-	return DateUtil.format(depatureDate);
+	return DateUtil.format(this.depatureDate);
     }
 
     public String getBookingDateString() {
-	return DateUtil.format(bookingDate);
+	return DateUtil.format(this.bookingDate);
     }
 
     public BigDecimal getPaidAmount() {
-	if (status.equals(IConstants.IBooking.BOOKING_SATATUS_ON_REQUEST))
+	if (this.status.equals(IConstants.IBooking.BOOKING_SATATUS_ON_REQUEST)) {
 	    return new BigDecimal(0.00);
-	else
-	    return paidAmount;
+	} else {
+	    return this.paidAmount;
+	}
     }
 
-    public void setPaidAmount(BigDecimal paidAmount) {
+    public void setPaidAmount(final BigDecimal paidAmount) {
 	this.paidAmount = paidAmount;
     }
 
     public String getUserAddress() {
-	return userAddress;
+	return this.userAddress;
     }
 
-    public void setUserAddress(String userAddress) {
+    public void setUserAddress(final String userAddress) {
 	this.userAddress = userAddress;
     }
 
     public String getUserContact() {
-	return userContact;
+	return this.userContact;
     }
 
-    public void setUserContact(String userContact) {
+    public void setUserContact(final String userContact) {
 	this.userContact = userContact;
     }
 
     public String getUserEmail() {
-	return userEmail;
+	return this.userEmail;
     }
 
-    public void setUserEmail(String userEmail) {
+    public void setUserEmail(final String userEmail) {
 	this.userEmail = userEmail;
     }
 
     public Date getCancelDate() {
-	return cancelDate;
+	return this.cancelDate;
     }
 
-    public void setCancelDate(Date cancelDate) {
+    public void setCancelDate(final Date cancelDate) {
 	this.cancelDate = cancelDate;
     }
 
     public String getCancelDateString() {
-	return DateUtil.format(cancelDate);
+	return DateUtil.format(this.cancelDate);
     }
 
     public int getNoOfNights() {
-	Calendar calendar1 = Calendar.getInstance();
-	calendar1.setTime(checkOutDate);
+	final Calendar calendar1 = Calendar.getInstance();
+	calendar1.setTime(this.checkOutDate);
 	calendar1.getTime();
 
-	Calendar calendar2 = Calendar.getInstance();
-	calendar2.setTime(checkInDate);
+	final Calendar calendar2 = Calendar.getInstance();
+	calendar2.setTime(this.checkInDate);
 	calendar2.getTime();
 
-	long diff = calendar1.getTimeInMillis() - calendar2.getTimeInMillis();
+	final long diff = calendar1.getTimeInMillis() - calendar2.getTimeInMillis();
 
-	int noOfNights = Long.valueOf(diff / (24 * 60 * 60 * 1000)).intValue();
+	final int noOfNights = Long.valueOf(diff / (24 * 60 * 60 * 1000)).intValue();
 
 	return noOfNights;
     }
 
     public Date getExpireDate() {
-	return expireDate;
+	return this.expireDate;
     }
 
-    public void setExpireDate(Date expireDate) {
+    public void setExpireDate(final Date expireDate) {
 	this.expireDate = expireDate;
     }
 
     public String getExpireDateString() {
-	return DateUtil.format(expireDate, DateUtil.SIMPLE_DATE_TIME_FORMAT);
+	return DateUtil.format(this.expireDate, DateUtil.SIMPLE_DATE_TIME_FORMAT);
     }
 
     public BookingReportDTO() {
     }
 
-    public BookingReportDTO(Long bookingId, Long roomId, Long roomTypeId,
-	    Long hotelId, Long userId, String bookingCode, String userName,
-	    String userFName, String userLName, String userAdress,
-	    String userContact, String userEmail, String hotelName,
-	    String roomName, String roomTypeName, String status,
-	    Date depatureDate, Date bookingDate, Date cancelDate,
-	    Date expireDate, BigDecimal totalPrice, BigDecimal totalCost,
-	    String paymentMethod, BigDecimal paidAmount, Date checkInDate,
-	    Date checkOutDate, Integer noOfRoom, Long agentId, String agentName) {
+    public BookingReportDTO(final Long bookingId, final Long roomId, final Long roomTypeId,
+	    final Long hotelId, final Long userId, final String bookingCode, final String userName,
+	    final String userFName, final String userLName, final String userAdress,
+	    final String userContact, final String userEmail, final String hotelName,
+	    final String roomName, final String roomTypeName, final String status,
+	    final Date depatureDate, final Date bookingDate, final Date cancelDate,
+	    final Date expireDate, final BigDecimal totalPrice, final BigDecimal totalCost,
+	    final String paymentMethod, final BigDecimal paidAmount, final Date checkInDate,
+	    final Date checkOutDate, final Integer noOfRoom, final Long agentId, final String agentName) {
 	super();
 	this.bookingId = bookingId;
 	this.roomId = roomId;

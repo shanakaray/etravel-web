@@ -30,32 +30,32 @@ public class Function extends BaseObject {
 
     }
 
-    public Function(String key) {
+    public Function(final String key) {
 	this.key = key;
     }
 
-    public Function(Long id) {
+    public Function(final Long id) {
 	super(id);
     }
 
-    public Function(Long id, String key, String code) {
+    public Function(final Long id, final String key, final String code) {
 	super(id, "", code);
 	this.key = key;
     }
 
     public String getKey() {
-	return key;
+	return this.key;
     }
 
-    public void setKey(String key) {
+    public void setKey(final String key) {
 	this.key = key;
     }
 
     public String getType() {
-	return type;
+	return this.type;
     }
 
-    public void setType(String type) {
+    public void setType(final String type) {
 	this.type = type;
     }
 
@@ -63,24 +63,29 @@ public class Function extends BaseObject {
     public int hashCode() {
 	final int prime = 31;
 	int result = 1;
-	result = prime * result + ((key == null) ? 0 : key.hashCode());
+	result = prime * result + (this.key == null ? 0 : this.key.hashCode());
 	return result;
     }
 
     @Override
-    public boolean equals(Object obj) {
-	if (this == obj)
+    public boolean equals(final Object obj) {
+	if (this == obj) {
 	    return true;
-	if (obj == null)
+	}
+	if (obj == null) {
 	    return false;
-	if (!(obj instanceof Function))
+	}
+	if (!(obj instanceof Function)) {
 	    return false;
+	}
 	final Function other = (Function) obj;
-	if (key == null) {
-	    if (other.key != null)
+	if (this.key == null) {
+	    if (other.key != null) {
 		return false;
-	} else if (!key.equals(other.key))
+	    }
+	} else if (!this.key.equals(other.key)) {
 	    return false;
+	}
 	return true;
     }
 
@@ -89,14 +94,14 @@ public class Function extends BaseObject {
 	private String name;
 
 	public String getName() {
-	    return name;
+	    return this.name;
 	}
 
-	public void setName(String name) {
+	public void setName(final String name) {
 	    this.name = name;
 	}
 
-	FunctionType(String name) {
+	FunctionType(final String name) {
 	    this.name = name;
 	}
 

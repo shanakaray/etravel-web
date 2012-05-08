@@ -48,81 +48,81 @@ public class User extends BaseObject {
     private String lastName;
 
     public String getPassword() {
-	return password;
+	return this.password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(final String password) {
 	this.password = password;
     }
 
     public String getAddress() {
-	return address;
+	return this.address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(final String address) {
 	this.address = address;
     }
 
     public String getContact() {
-	return contact;
+	return this.contact;
     }
 
-    public void setContact(String contact) {
+    public void setContact(final String contact) {
 	this.contact = contact;
     }
 
     public String getEmail() {
-	return email;
+	return this.email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(final String email) {
 	this.email = email;
     }
 
     public String getFirstName() {
-	return firstName;
+	return this.firstName;
     }
 
-    public void setFirstName(String firstName) {
+    public void setFirstName(final String firstName) {
 	this.firstName = firstName;
     }
 
     public String getLastName() {
-	return lastName;
+	return this.lastName;
     }
 
-    public void setLastName(String lastName) {
+    public void setLastName(final String lastName) {
 	this.lastName = lastName;
     }
 
     public List<Role> getRoles() {
-	return roles;
+	return this.roles;
     }
 
-    public void setRoles(List<Role> roles) {
+    public void setRoles(final List<Role> roles) {
 	this.roles = roles;
     }
 
     public Set<String> getRoleNames() {
-	Set<String> set = new HashSet<String>();
-	List<Role> roleList = getRoles();
-	for (Role role : roleList) {
+	final Set<String> set = new HashSet<String>();
+	final List<Role> roleList = getRoles();
+	for (final Role role : roleList) {
 	    set.add(role.getName());
 	}
 	return set;
     }
 
     public Set<Long> getRoleIds() {
-	Set<Long> set = new HashSet<Long>();
-	List<Role> roleList = getRoles();
-	for (Role role : roleList) {
+	final Set<Long> set = new HashSet<Long>();
+	final List<Role> roleList = getRoles();
+	for (final Role role : roleList) {
 	    set.add(role.getId());
 	}
 	return set;
     }
 
-    public boolean hasFunction(String key) {
-	for (Role role : getRoles()) {
+    public boolean hasFunction(final String key) {
+	for (final Role role : getRoles()) {
 	    if (role.hasFunction(key)) {
 		return true;
 	    }
@@ -131,8 +131,8 @@ public class User extends BaseObject {
     }
 
     public Set<String> getFunctionSet() {
-	Set<String> key = new HashSet<String>();
-	for (Role role : getRoles()) {
+	final Set<String> key = new HashSet<String>();
+	for (final Role role : getRoles()) {
 	    key.addAll(role.getFunctionNames());
 	}
 	return key;

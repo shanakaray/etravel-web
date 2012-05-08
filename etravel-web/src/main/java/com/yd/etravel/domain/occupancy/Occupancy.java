@@ -33,50 +33,50 @@ public class Occupancy extends BaseObject {
     private RoomType roomType;
 
     public String getComments() {
-	return comments;
+	return this.comments;
     }
 
-    public void setComments(String comments) {
+    public void setComments(final String comments) {
 	this.comments = comments;
     }
 
     public int getAdult() {
-	return adult;
+	return this.adult;
     }
 
-    public void setAdult(int adult) {
+    public void setAdult(final int adult) {
 	this.adult = adult;
     }
 
     public int getChild() {
-	return child;
+	return this.child;
     }
 
-    public void setChild(int child) {
+    public void setChild(final int child) {
 	this.child = child;
     }
 
     public int getInfant() {
-	return infant;
+	return this.infant;
     }
 
-    public void setInfant(int infant) {
+    public void setInfant(final int infant) {
 	this.infant = infant;
     }
 
     public int getTotalPax() {
-	return totalPax;
+	return this.totalPax;
     }
 
-    public void setTotalPax(int totalPax) {
+    public void setTotalPax(final int totalPax) {
 	this.totalPax = totalPax;
     }
 
     public RoomType getRoomType() {
-	return roomType;
+	return this.roomType;
     }
 
-    public void setRoomType(RoomType roomType) {
+    public void setRoomType(final RoomType roomType) {
 	this.roomType = roomType;
     }
 

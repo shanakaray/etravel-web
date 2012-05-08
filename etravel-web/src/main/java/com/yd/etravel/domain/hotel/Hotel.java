@@ -51,15 +51,17 @@ public class Hotel extends BaseObject {
 	super();
     }
 
-    public Hotel(Long id, String name, String code) {
+    public Hotel(final Long id, final String name, final String code) {
 	super(id, name, code);
     }
 
+    @Override
     public String getName() {
 	return super.getName();
     }
 
-    public void setName(String name) {
+    @Override
+    public void setName(final String name) {
 	super.setName(name);
     }
 
@@ -67,10 +69,10 @@ public class Hotel extends BaseObject {
      * @hibernate.property
      */
     public String getAddress() {
-	return address;
+	return this.address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(final String address) {
 	this.address = address;
     }
 
@@ -78,10 +80,10 @@ public class Hotel extends BaseObject {
      * @hibernate.property
      */
     public String getCity() {
-	return city;
+	return this.city;
     }
 
-    public void setCity(String city) {
+    public void setCity(final String city) {
 	this.city = city;
     }
 
@@ -89,10 +91,10 @@ public class Hotel extends BaseObject {
      * @hibernate.property
      */
     public String getContact() {
-	return contact;
+	return this.contact;
     }
 
-    public void setContact(String contact) {
+    public void setContact(final String contact) {
 	this.contact = contact;
     }
 
@@ -100,10 +102,10 @@ public class Hotel extends BaseObject {
      * @hibernate.property
      */
     public String getEmail() {
-	return email;
+	return this.email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(final String email) {
 	this.email = email;
     }
 
@@ -111,18 +113,18 @@ public class Hotel extends BaseObject {
      * @hibernate.property
      */
     public int getRating() {
-	return rating;
+	return this.rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(final int rating) {
 	this.rating = rating;
     }
 
     public List<User> getSuperUser() {
-	return superUser;
+	return this.superUser;
     }
 
-    public void setSuperUser(List<User> superUser) {
+    public void setSuperUser(final List<User> superUser) {
 	this.superUser = superUser;
     }
 
@@ -130,16 +132,16 @@ public class Hotel extends BaseObject {
      * @hibernate.property
      */
     public String getCountry() {
-	return country;
+	return this.country;
     }
 
-    public void setCountry(String country) {
+    public void setCountry(final String country) {
 	this.country = country;
     }
 
     public Long[] getUserIds() {
-	Set<Long> userIds = new HashSet<Long>();
-	for (User u : getSuperUser()) {
+	final Set<Long> userIds = new HashSet<Long>();
+	for (final User u : getSuperUser()) {
 	    userIds.add(u.getId());
 	}
 

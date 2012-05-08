@@ -17,14 +17,14 @@ public class ExtraItemDTO {
      * @return the extraItem
      */
     public ExtraItem getExtraItem() {
-	return extraItem;
+	return this.extraItem;
     }
 
     /**
      * @param extraItem
      *            the extraItem to set
      */
-    public void setExtraItem(ExtraItem extraItem) {
+    public void setExtraItem(final ExtraItem extraItem) {
 	this.extraItem = extraItem;
     }
 

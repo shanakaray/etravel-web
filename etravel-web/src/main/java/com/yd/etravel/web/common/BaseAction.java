@@ -15,6 +15,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
+import org.apache.struts.util.MessageResources;
 import org.apache.struts.util.PropertyMessageResources;
 
 import com.yd.etravel.service.booking.IBookingManager;
@@ -67,17 +68,18 @@ public abstract class BaseAction extends Action implements
 	this.infoMessages = new ArrayList<String>();
     }
 
-    public ActionForward execute(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    @Override
+    public ActionForward execute(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	ActionForward actionForward = null;
-	BaseForm baseForm = (BaseForm) form;
+	final BaseForm baseForm = (BaseForm) form;
 	try {
 
 	    this.actionMessages.clear();
 
 	    if (request.getSession().getAttribute(IUser.USER_PROFILE) != null) {
-		IUserProfile profile = (IUserProfile) request.getSession()
+		final IUserProfile profile = (IUserProfile) request.getSession()
 			.getAttribute(IUser.USER_PROFILE);
 		Thread.currentThread().setName(profile.getUsername());
 	    }
@@ -89,7 +91,7 @@ public abstract class BaseAction extends Action implements
 	    }
 
 	    final String param = mapping.getParameter();
-	    WebMethod method = (param != null) ? WebMethod.valueOf(param)
+	    final WebMethod method = param != null ? WebMethod.valueOf(param)
 		    : WebMethod.process;
 
 	    switch (method) {
@@ -154,9 +156,9 @@ public abstract class BaseAction extends Action implements
 	    saveMessages(request, this.actionMessages);
 	    setHistoryToken(baseForm, request);
 
-	} catch (ValidationException e) {
+	} catch (final ValidationException e) {
 
-	    List<Message> msgList = new ArrayList<Message>();
+	    final List<Message> msgList = new ArrayList<Message>();
 	    msgList.addAll(e.getUIMessage().getInformations());
 	    msgList.addAll(e.getUIMessage().getErrors());
 
@@ -170,7 +172,7 @@ public abstract class BaseAction extends Action implements
 
 	    LOG.info(e.getMessage());
 
-	} catch (ServiceException e) {
+	} catch (final ServiceException e) {
 
 	    if (e.getUIMessage() == null) {
 
@@ -179,7 +181,7 @@ public abstract class BaseAction extends Action implements
 
 	    } else {
 
-		List<Message> msgList = new ArrayList<Message>();
+		final List<Message> msgList = new ArrayList<Message>();
 		msgList.addAll(e.getUIMessage().getInformations());
 		msgList.addAll(e.getUIMessage().getErrors());
 		actionForward = mapping.getInputForward();
@@ -189,20 +191,20 @@ public abstract class BaseAction extends Action implements
 		    actionForward = init(mapping, form, request, response);
 		}
 
-		for (Message message : msgList) {
-		    actionMessages.add(Globals.ERROR_KEY, new ActionMessage(
+		for (final Message message : msgList) {
+		    this.actionMessages.add(Globals.ERROR_KEY, new ActionMessage(
 			    message.getKey()));
 		}
 		LOG.info(e.getMessage());
 	    }
 
-	} catch (Exception e) {
+	} catch (final Exception e) {
 	    LOG.fatal(e.getMessage(), e);
 	    return mapping.findForward(ERROR);
 
 	} finally {
 
-	    addErrors(request, actionMessages);
+	    addErrors(request, this.actionMessages);
 	    if (!this.infoMessages.isEmpty()) {
 		request.getSession().setAttribute(ICommon.INFO_MSG_KEY,
 			this.infoMessages);
@@ -212,8 +214,8 @@ public abstract class BaseAction extends Action implements
 	return actionForward;
     }
 
-    private boolean historyCheck(BaseForm baseForm, HttpServletRequest request) {
-	long historyVal = request.getSession()
+    private boolean historyCheck(final BaseForm baseForm, final HttpServletRequest request) {
+	final long historyVal = request.getSession()
 		.getAttribute(IUser.HISTORY_TOKEN) != null ? Long
 		.valueOf(request.getSession().getAttribute(IUser.HISTORY_TOKEN)
 			.toString()) : 0l;
@@ -224,16 +226,16 @@ public abstract class BaseAction extends Action implements
 	return true;
     }
 
-    protected boolean hasAccess(String function, HttpServletRequest request) {
-	IUserProfile profile = getUserProfile(request);
+    protected boolean hasAccess(final String function, final HttpServletRequest request) {
+	final IUserProfile profile = getUserProfile(request);
 	if (profile != null) {
 	    return profile.hasFunction(function);
 	}
 	return false;
     }
 
-    private void setHistoryToken(BaseForm baseForm, HttpServletRequest request) {
-	long historyVal = System.nanoTime();
+    private void setHistoryToken(final BaseForm baseForm, final HttpServletRequest request) {
+	final long historyVal = System.nanoTime();
 	request.getSession().setAttribute(IUser.HISTORY_TOKEN, historyVal);
 	baseForm.setTjwToken(historyVal);
 
@@ -291,36 +293,36 @@ public abstract class BaseAction extends Action implements
 	    ActionForm form, HttpServletRequest request,
 	    HttpServletResponse response) throws Exception;
 
-    protected void addActionMessages(String key, ActionMessage actionMessage) {
+    protected void addActionMessages(final String key, final ActionMessage actionMessage) {
 	this.actionMessages.add(key, actionMessage);
     }
 
-    protected void addInfoMessages(String msg) {
-	this.infoMessages.add(PropertyMessageResources.getMessageResources(
+    protected void addInfoMessages(final String msg) {
+	this.infoMessages.add(MessageResources.getMessageResources(
 		ICommon.MSG_RES).getMessage(msg));
     }
 
-    public void setUserManager(IUserManager userManager) {
+    public void setUserManager(final IUserManager userManager) {
 	this.userManager = userManager;
     }
 
     protected IUserManager getUserManager() {
-	return userManager;
+	return this.userManager;
     }
 
     protected ISeasonManager getSeasonManager() {
-	return seasonManager;
+	return this.seasonManager;
     }
 
-    public void setSeasonManager(ISeasonManager seasonManager) {
+    public void setSeasonManager(final ISeasonManager seasonManager) {
 	this.seasonManager = seasonManager;
     }
 
     protected IHotelManager getHotelManager() {
-	return hotelManager;
+	return this.hotelManager;
     }
 
-    public void setHotelManager(IHotelManager hotelManager) {
+    public void setHotelManager(final IHotelManager hotelManager) {
 	this.hotelManager = hotelManager;
     }
 
@@ -329,7 +331,7 @@ public abstract class BaseAction extends Action implements
      */
 
     public IRoomTypeManager getRoomTypeManager() {
-	return roomTypeManager;
+	return this.roomTypeManager;
     }
 
     /**
@@ -337,7 +339,7 @@ public abstract class BaseAction extends Action implements
      *            the roomTypeManager to set
      */
 
-    public void setRoomTypeManager(IRoomTypeManager roomTypeManager) {
+    public void setRoomTypeManager(final IRoomTypeManager roomTypeManager) {
 	this.roomTypeManager = roomTypeManager;
     }
 
@@ -346,7 +348,7 @@ public abstract class BaseAction extends Action implements
      */
 
     public IOccupancyManager getOccupancyManager() {
-	return occupancyManager;
+	return this.occupancyManager;
     }
 
     /**
@@ -354,15 +356,15 @@ public abstract class BaseAction extends Action implements
      *            the occupancyManager to set
      */
 
-    public void setOccupancyManager(IOccupancyManager occupancyManager) {
+    public void setOccupancyManager(final IOccupancyManager occupancyManager) {
 	this.occupancyManager = occupancyManager;
     }
 
     public IPaxManager getPaxManager() {
-	return paxManager;
+	return this.paxManager;
     }
 
-    public void setPaxManager(IPaxManager paxManager) {
+    public void setPaxManager(final IPaxManager paxManager) {
 	this.paxManager = paxManager;
     }
 
@@ -370,7 +372,7 @@ public abstract class BaseAction extends Action implements
      * @return the roomAvailabilityManager
      */
     public IRoomAvailabilityManager getRoomAvailabilityManager() {
-	return roomAvailabilityManager;
+	return this.roomAvailabilityManager;
     }
 
     /**
@@ -378,15 +380,15 @@ public abstract class BaseAction extends Action implements
      *            the roomAvailabilityManager to set
      */
     public void setRoomAvailabilityManager(
-	    IRoomAvailabilityManager roomAvailabilityManager) {
+	    final IRoomAvailabilityManager roomAvailabilityManager) {
 	this.roomAvailabilityManager = roomAvailabilityManager;
     }
 
     public IRoomManager getRoomManager() {
-	return roomManager;
+	return this.roomManager;
     }
 
-    public void setRoomManager(IRoomManager roomManager) {
+    public void setRoomManager(final IRoomManager roomManager) {
 	this.roomManager = roomManager;
     }
 
@@ -394,22 +396,22 @@ public abstract class BaseAction extends Action implements
      * @return the searchManager
      */
     public ISearchManager getSearchManager() {
-	return searchManager;
+	return this.searchManager;
     }
 
     /**
      * @param searchManager
      *            the searchManager to set
      */
-    public void setSearchManager(ISearchManager searchManager) {
+    public void setSearchManager(final ISearchManager searchManager) {
 	this.searchManager = searchManager;
     }
 
     public IExtraItemManager getItemManager() {
-	return itemManager;
+	return this.itemManager;
     }
 
-    public void setItemManager(IExtraItemManager itemManager) {
+    public void setItemManager(final IExtraItemManager itemManager) {
 	this.itemManager = itemManager;
     }
 
@@ -417,18 +419,18 @@ public abstract class BaseAction extends Action implements
      * @return the bookingManager
      */
     public IBookingManager getBookingManager() {
-	return bookingManager;
+	return this.bookingManager;
     }
 
     /**
      * @param bookingManager
      *            the bookingManager to set
      */
-    public void setBookingManager(IBookingManager bookingManager) {
+    public void setBookingManager(final IBookingManager bookingManager) {
 	this.bookingManager = bookingManager;
     }
 
-    protected IUserProfile getUserProfile(HttpServletRequest request) {
+    protected IUserProfile getUserProfile(final HttpServletRequest request) {
 	return (IUserProfile) request.getSession().getAttribute(
 		IUser.USER_PROFILE);
     }

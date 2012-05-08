@@ -20,18 +20,19 @@ public class OccupancyManagerImpl implements IOccupancyManager {
     private IOccupancyDAO occupancyDAO;
     private IRoomTypeDAO roomTypeDAO;
 
-    public void setOccupancyDAO(IOccupancyDAO occupancyDAO) {
+    public void setOccupancyDAO(final IOccupancyDAO occupancyDAO) {
 	this.occupancyDAO = occupancyDAO;
     }
 
-    public void setRoomTypeDAO(IRoomTypeDAO roomTypeDAO) {
+    public void setRoomTypeDAO(final IRoomTypeDAO roomTypeDAO) {
 	this.roomTypeDAO = roomTypeDAO;
     }
 
+    @Override
     public Occupancy save(final Occupancy occupancy) throws ServiceException {
 	try {
 
-	    if (occupancyDAO.isOccupancyNameExist(occupancy.getName(),
+	    if (this.occupancyDAO.isOccupancyNameExist(occupancy.getName(),
 		    occupancy.getId())) {
 		throw new ServiceException(
 			ValidationHelper
@@ -39,7 +40,7 @@ public class OccupancyManagerImpl implements IOccupancyManager {
 	    }
 
 	    if (occupancy.getId() == null) {
-		if (!occupancyDAO.findAllOccupancyByPaxInfo(occupancy)) {
+		if (!this.occupancyDAO.findAllOccupancyByPaxInfo(occupancy)) {
 
 		    throw new ServiceException(
 			    ValidationHelper
@@ -47,67 +48,71 @@ public class OccupancyManagerImpl implements IOccupancyManager {
 
 		} else {
 
-		    RoomType roomType = (RoomType) roomTypeDAO.findById(
+		    final RoomType roomType = (RoomType) this.roomTypeDAO.findById(
 			    RoomType.class, occupancy.getRoomType().getId());
 
 		    occupancy.setRoomType(roomType);
 
-		    occupancyDAO.save(occupancy);
+		    this.occupancyDAO.save(occupancy);
 		}
 
 	    } else {
 
-		RoomType roomType = (RoomType) roomTypeDAO.findById(
+		final RoomType roomType = (RoomType) this.roomTypeDAO.findById(
 			RoomType.class, occupancy.getRoomType().getId());
 
 		occupancy.setRoomType(roomType);
-		occupancyDAO.update(occupancy);
+		this.occupancyDAO.update(occupancy);
 	    }
 
-	} catch (PersistenceException e) {
+	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
 	return occupancy;
     }
 
+    @Override
     public Occupancy findOccupancyById(final Long id) throws ServiceException {
 	Occupancy occupancy = null;
 	try {
-	    occupancy = (Occupancy) occupancyDAO.findById(Occupancy.class, id);
+	    occupancy = (Occupancy) this.occupancyDAO.findById(Occupancy.class, id);
 
-	} catch (PersistenceException e) {
+	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
 	return occupancy;
     }
 
+    @Override
     public int deleteOccupancy(final Long id) throws ServiceException {
 	int flag = 0;
 	try {
-	    flag = occupancyDAO.deleteAny(Occupancy.class, id);
+	    flag = this.occupancyDAO.deleteAny(Occupancy.class, id);
 
-	} catch (PersistenceException e) {
+	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
 	return flag;
     }
 
+    @Override
     public List<Occupancy> findAllOccupancy() throws ServiceException {
 	try {
-	    return occupancyDAO.findAll(Occupancy.class);
+	    return this.occupancyDAO.findAll(Occupancy.class);
 
-	} catch (PersistenceException e) {
+	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
     }
 
+    @Override
     public List<Occupancy> findAllOccupancyWithRoomType()
 	    throws ServiceException {
 	try {
-	    return (List<Occupancy>) occupancyDAO
+	    return this.occupancyDAO
 		    .findAllOccupancyWithRoomType();
 
-	} catch (PersistenceException e) {
+	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
     }
@@ -117,10 +122,11 @@ public class OccupancyManagerImpl implements IOccupancyManager {
      * 
      * @see com.yd.etravel.service.hotel.IHotelManager#findAllActiveHotels()
      */
+    @Override
     public List<Occupancy> findAllActiveOccupancy() throws ServiceException {
 	try {
-	    return occupancyDAO.findAllActive(Occupancy.class);
-	} catch (PersistenceException e) {
+	    return this.occupancyDAO.findAllActive(Occupancy.class);
+	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
     }
@@ -130,13 +136,14 @@ public class OccupancyManagerImpl implements IOccupancyManager {
      * 
      * @see com.yd.etravel.service.hotel.IHotelManager#findAllActiveHotels()
      */
-    public List<Occupancy> findAllOccupancyByRoomType(Long roomTypeId)
+    @Override
+    public List<Occupancy> findAllOccupancyByRoomType(final Long roomTypeId)
 	    throws ServiceException {
 	try {
 
-	    return occupancyDAO.findAllOccupancyByRoomType(roomTypeId);
+	    return this.occupancyDAO.findAllOccupancyByRoomType(roomTypeId);
 
-	} catch (PersistenceException e) {
+	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
     }

@@ -30,14 +30,14 @@ public class RoomDTO {
      * @return the room
      */
     public Room getRoom() {
-	return room;
+	return this.room;
     }
 
     /**
      * @param room
      *            the room to set
      */
-    public void setRoom(Room room) {
+    public void setRoom(final Room room) {
 	this.room = room;
     }
 
@@ -45,14 +45,14 @@ public class RoomDTO {
      * @return the roomType
      */
     public RoomType getRoomType() {
-	return roomType;
+	return this.roomType;
     }
 
     /**
      * @param roomType
      *            the roomType to set
      */
-    public void setRoomType(RoomType roomType) {
+    public void setRoomType(final RoomType roomType) {
 	this.roomType = roomType;
     }
 
@@ -60,14 +60,14 @@ public class RoomDTO {
      * @return the roomSeasonalRate
      */
     public RoomSeasonalRate getRoomSeasonalRate() {
-	return roomSeasonalRate;
+	return this.roomSeasonalRate;
     }
 
     /**
      * @param roomSeasonalRate
      *            the roomSeasonalRate to set
      */
-    public void setRoomSeasonalRate(RoomSeasonalRate roomSeasonalRate) {
+    public void setRoomSeasonalRate(final RoomSeasonalRate roomSeasonalRate) {
 	this.roomSeasonalRate = roomSeasonalRate;
     }
 
@@ -87,14 +87,14 @@ public class RoomDTO {
      * @return the roomAvailability
      */
     public RoomAvailability getRoomAvailability() {
-	return roomAvailability;
+	return this.roomAvailability;
     }
 
     /**
      * @param roomAvailability
      *            the roomAvailability to set
      */
-    public void setRoomAvailability(RoomAvailability roomAvailability) {
+    public void setRoomAvailability(final RoomAvailability roomAvailability) {
 	this.roomAvailability = roomAvailability;
     }
 
@@ -102,14 +102,14 @@ public class RoomDTO {
      * @return the hotel
      */
     public Hotel getHotel() {
-	return hotel;
+	return this.hotel;
     }
 
     /**
      * @param hotel
      *            the hotel to set
      */
-    public void setHotel(Hotel hotel) {
+    public void setHotel(final Hotel hotel) {
 	this.hotel = hotel;
     }
 
@@ -117,14 +117,14 @@ public class RoomDTO {
      * @return the id
      */
     public Long getId() {
-	return id;
+	return this.id;
     }
 
     /**
      * @param id
      *            the id to set
      */
-    public void setId(Long id) {
+    public void setId(final Long id) {
 	this.id = id;
     }
 
@@ -132,14 +132,14 @@ public class RoomDTO {
      * @return the combineAvailability
      */
     public boolean isCombineAvailability() {
-	return combineAvailability;
+	return this.combineAvailability;
     }
 
     /**
      * @param combineAvailability
      *            the combineAvailability to set
      */
-    public void setCombineAvailability(boolean combineAvailability) {
+    public void setCombineAvailability(final boolean combineAvailability) {
 	this.combineAvailability = combineAvailability;
     }
 
@@ -147,7 +147,7 @@ public class RoomDTO {
      * @return the roomAvailabilityCheckIn
      */
     public RoomAvailability getRoomAvailabilityCheckIn() {
-	return roomAvailabilityCheckIn;
+	return this.roomAvailabilityCheckIn;
     }
 
     /**
@@ -155,7 +155,7 @@ public class RoomDTO {
      *            the roomAvailabilityCheckIn to set
      */
     public void setRoomAvailabilityCheckIn(
-	    RoomAvailability roomAvailabilityCheckIn) {
+	    final RoomAvailability roomAvailabilityCheckIn) {
 	this.roomAvailabilityCheckIn = roomAvailabilityCheckIn;
     }
 
@@ -163,7 +163,7 @@ public class RoomDTO {
      * @return the roomAvailabilityCheckOut
      */
     public RoomAvailability getRoomAvailabilityCheckOut() {
-	return roomAvailabilityCheckOut;
+	return this.roomAvailabilityCheckOut;
     }
 
     /**
@@ -171,7 +171,7 @@ public class RoomDTO {
      *            the roomAvailabilityCheckOut to set
      */
     public void setRoomAvailabilityCheckOut(
-	    RoomAvailability roomAvailabilityCheckOut) {
+	    final RoomAvailability roomAvailabilityCheckOut) {
 	this.roomAvailabilityCheckOut = roomAvailabilityCheckOut;
     }
 

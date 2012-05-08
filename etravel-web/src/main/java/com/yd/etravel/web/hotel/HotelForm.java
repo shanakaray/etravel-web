@@ -43,98 +43,98 @@ public class HotelForm extends BaseForm {
     }
 
     public String getName() {
-	return name;
+	return this.name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
 	this.name = name;
     }
 
     public String getAddress() {
-	return address;
+	return this.address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(final String address) {
 	this.address = address;
     }
 
     public String getCity() {
-	return city;
+	return this.city;
     }
 
-    public void setCity(String city) {
+    public void setCity(final String city) {
 	this.city = city;
     }
 
     public String getContact() {
-	return contact;
+	return this.contact;
     }
 
-    public void setContact(String contact) {
+    public void setContact(final String contact) {
 	this.contact = contact;
     }
 
     public String getEmail() {
-	return email;
+	return this.email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(final String email) {
 	this.email = email;
     }
 
     public int getRating() {
-	return rating;
+	return this.rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(final int rating) {
 	this.rating = rating;
     }
 
     public Long[] getSuperUserId() {
-	return superUserId;
+	return this.superUserId;
     }
 
-    public void setSuperUserId(Long[] superUserId) {
+    public void setSuperUserId(final Long[] superUserId) {
 	this.superUserId = superUserId;
     }
 
     public List<User> getAdminList() {
-	return adminList;
+	return this.adminList;
     }
 
-    public void setAdminList(List<User> adminList) {
+    public void setAdminList(final List<User> adminList) {
 	this.adminList = adminList;
     }
 
     public String getCountry() {
-	return country;
+	return this.country;
     }
 
-    public void setCountry(String country) {
+    public void setCountry(final String country) {
 	this.country = country;
     }
 
     public List<Hotel> getHotelList() {
-	return hotelList;
+	return this.hotelList;
     }
 
-    public void setHotelList(List<Hotel> hotelList) {
+    public void setHotelList(final List<Hotel> hotelList) {
 	this.hotelList = hotelList;
     }
 
     public boolean isActive() {
-	return active;
+	return this.active;
     }
 
-    public void setActive(boolean active) {
+    public void setActive(final boolean active) {
 	this.active = active;
     }
 
     public Long getId() {
-	return id;
+	return this.id;
     }
 
-    public void setId(Long id) {
+    public void setId(final Long id) {
 	this.id = id;
     }
 
@@ -146,7 +146,7 @@ public class HotelForm extends BaseForm {
      * .ActionMapping, javax.servlet.http.HttpServletRequest)
      */
     @Override
-    public void resetBean(ActionMapping mapping, HttpServletRequest request) {
+    public void resetBean(final ActionMapping mapping, final HttpServletRequest request) {
 	this.adminList = Collections.EMPTY_LIST;
 	this.hotelList = Collections.EMPTY_LIST;
 	this.address = EMPTY_STRING;
@@ -169,9 +169,9 @@ public class HotelForm extends BaseForm {
      * .ActionMapping, javax.servlet.http.HttpServletRequest)
      */
     @Override
-    public ActionErrors validateBean(ActionMapping mapping,
-	    HttpServletRequest request) {
-	ActionErrors errors = new ActionErrors();
+    public ActionErrors validateBean(final ActionMapping mapping,
+	    final HttpServletRequest request) {
+	final ActionErrors errors = new ActionErrors();
 	if (StringUtils.isEmpty(this.name)) {
 	    addErrors(errors, "etravel.error.hotel.name.required");
 	}

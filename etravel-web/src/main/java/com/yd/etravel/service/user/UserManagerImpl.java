@@ -49,23 +49,24 @@ public class UserManagerImpl implements IUserManager {
 	return new UserProfile();
     }
 
-    public void setUserDAO(IUserDAO userDAO) {
+    public void setUserDAO(final IUserDAO userDAO) {
 	this.userDAO = userDAO;
     }
 
     public MailMessage getMailMessage() {
-	return mailMessage;
+	return this.mailMessage;
     }
 
-    public void setMailMessage(MailMessage mailMessage) {
+    public void setMailMessage(final MailMessage mailMessage) {
 	this.mailMessage = mailMessage;
     }
 
+    @Override
     public IUserProfile authanticateUser(final String username,
 	    final String password) throws ServiceException {
 	IUserProfile userProfile = getProfile();
 	try {
-	    User user = userDAO.findAuth(username,
+	    final User user = this.userDAO.findAuth(username,
 		    PasswordEncrypt.encrypt(password), null);
 	    if (user == null) {
 		throw new ServiceException(
@@ -76,8 +77,8 @@ public class UserManagerImpl implements IUserManager {
 			.getUserProfile(userProfile, user);
 	    }
 
-	    List<Hotel> hlist = userDAO.findAssignedHotels(user.getId());
-	    for (Hotel h : hlist) {
+	    final List<Hotel> hlist = this.userDAO.findAssignedHotels(user.getId());
+	    for (final Hotel h : hlist) {
 		userProfile.putHotel(h.getId(), h.getName());
 	    }
 
@@ -86,17 +87,18 @@ public class UserManagerImpl implements IUserManager {
 			ValidationHelper
 				.getMessageHolder("etravel.authantication.no.rights"));
 	    }
-	} catch (PersistenceException e) {
+	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
 	return userProfile;
     }
 
+    @Override
     public IUserProfile authanticateCustomer(final String username,
 	    final String password) throws ServiceException {
 	IUserProfile userProfile = getProfile();
 	try {
-	    User user = userDAO.findAuth(username,
+	    final User user = this.userDAO.findAuth(username,
 		    PasswordEncrypt.encrypt(password), ACCESS_CUSTOMER_ROLES);
 	    if (user == null) {
 		throw new ServiceException(
@@ -113,74 +115,77 @@ public class UserManagerImpl implements IUserManager {
 				.getMessageHolder("etravel.authantication.no.rights"));
 	    }
 
-	} catch (PersistenceException e) {
+	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
 	return userProfile;
     }
 
-    public User save(final User user, Long[] ids) throws ServiceException {
+    @Override
+    public User save(final User user, final Long[] ids) throws ServiceException {
 	try {
 
-	    if (userDAO.isUsernameExist(user.getName(), user.getId())) {
+	    if (this.userDAO.isUsernameExist(user.getName(), user.getId())) {
 		throw new ServiceException(
 			ValidationHelper
 				.getMessageHolder("etravel.username.exist"));
 	    }
 
 	    if (ids != null && ids.length > 0) {
-		List<Role> roles = userDAO.findAll(Role.class, ids);
+		final List<Role> roles = this.userDAO.findAll(Role.class, ids);
 		user.setRoles(roles);
 
 	    }
 
 	    if (user.getId() == null) {
 		user.encriptPW();
-		userDAO.save(user);
+		this.userDAO.save(user);
 	    } else {
-		userDAO.update(user);
+		this.userDAO.update(user);
 	    }
 
-	} catch (PersistenceException e) {
+	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
 	return user;
     }
 
+    @Override
     public User save(final User user) throws ServiceException {
 	try {
 
-	    if (userDAO.isUsernameExist(user.getName(), user.getId())) {
+	    if (this.userDAO.isUsernameExist(user.getName(), user.getId())) {
 		throw new ServiceException(
 			ValidationHelper
 				.getMessageHolder("etravel.username.exist"));
 	    }
 
 	    if (user.getId() == null) {
-		userDAO.save(user);
+		this.userDAO.save(user);
 		user.encriptPW();
 	    } else {
-		userDAO.update(user);
+		this.userDAO.update(user);
 	    }
-	} catch (PersistenceException e) {
+	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
 	return user;
     }
 
+    @Override
     public IUserProfile saveCustomer(User user) throws ServiceException {
 
 	IUserProfile userProfile = getProfile();
 	try {
 
-	    if (userDAO.isUsernameExist(user.getName(), user.getId())) {
+	    if (this.userDAO.isUsernameExist(user.getName(), user.getId())) {
 		throw new ServiceException(
 			ValidationHelper
 				.getMessageHolder("etravel.username.exist"));
 	    }
 
-	    List<Role> roles = new ArrayList<Role>();
-	    Role role = (Role) userDAO.findById(Role.class,
+	    final List<Role> roles = new ArrayList<Role>();
+	    final Role role = (Role) this.userDAO.findById(Role.class,
 		    IUserRoles.CUSTOMER_ROLE_ID);
 	    roles.add(role);
 	    user.setRoles(roles);
@@ -189,168 +194,181 @@ public class UserManagerImpl implements IUserManager {
 
 	    user.encriptPW();
 	    if (user.getId() == null) {
-		user = (User) userDAO.save(user);
-		mailMessage.setParam(userProfile.getParams());
-		mailMessage.sendMail();
+		user = (User) this.userDAO.save(user);
+		this.mailMessage.setParam(userProfile.getParams());
+		this.mailMessage.sendMail();
 	    } else {
-		user = (User) userDAO.update(user);
+		user = (User) this.userDAO.update(user);
 	    }
 	    userProfile.setFunctionKeySet(user.getFunctionSet());
 	    userProfile.setId(user.getId());
 
-	} catch (PersistenceException e) {
+	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
 	return userProfile;
     }
 
+    @Override
     public Role saveUserRole(final Role role) throws ServiceException {
 	try {
 	    if (role.getId() == null) {
-		if (userDAO.isUserRoleExist(role.getName())) {
+		if (this.userDAO.isUserRoleExist(role.getName())) {
 		    throw new ServiceException(
 			    ValidationHelper
 				    .getMessageHolder("etravel.userrole.exist"));
 		}
-		userDAO.save(role);
+		this.userDAO.save(role);
 	    } else {
-		userDAO.update(role);
+		this.userDAO.update(role);
 	    }
-	} catch (PersistenceException e) {
+	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
 	return role;
     }
 
+    @Override
     public List<Role> findAllActiveRoles() throws ServiceException {
 	try {
-	    return userDAO.findAllActive(Role.class);
+	    return this.userDAO.findAllActive(Role.class);
 
-	} catch (PersistenceException e) {
+	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
     }
 
-    public Role findRoleById(Long id) throws ServiceException {
+    @Override
+    public Role findRoleById(final Long id) throws ServiceException {
 	Role role = null;
 	try {
-	    role = (Role) userDAO.findById(Role.class, id);
+	    role = (Role) this.userDAO.findById(Role.class, id);
 	    role.toString();
 
-	} catch (PersistenceException e) {
+	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
 	return role;
     }
 
+    @Override
     public List<Role> findAllRoles() throws ServiceException {
 	try {
-	    return userDAO.findAll(Role.class);
+	    return this.userDAO.findAll(Role.class);
 
-	} catch (PersistenceException e) {
+	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
     }
 
-    public int deleteRole(Long id) throws ServiceException {
+    @Override
+    public int deleteRole(final Long id) throws ServiceException {
 	int flag = 0;
 	try {
-	    flag = userDAO.deleteAny(Role.class, id);
+	    flag = this.userDAO.deleteAny(Role.class, id);
 
-	} catch (PersistenceException e) {
+	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
 	return flag;
     }
 
-    public List<User> findUsers(UserSearchDTO userSearchDTO)
+    @Override
+    public List<User> findUsers(final UserSearchDTO userSearchDTO)
 	    throws ServiceException {
 	try {
-	    return  userDAO.findUsers(userSearchDTO);
+	    return  this.userDAO.findUsers(userSearchDTO);
 
-	} catch (PersistenceException e) {
+	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
     }
 
-    public User findUserById(Long id) throws ServiceException {
+    @Override
+    public User findUserById(final Long id) throws ServiceException {
 	User usr;
 	try {
-	    usr = userDAO.findById(id);
-	} catch (PersistenceException e) {
+	    usr = this.userDAO.findById(id);
+	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
 	return usr;
     }
 
-    public List<Role> findRolesById(Long[] id) throws ServiceException {
+    @Override
+    public List<Role> findRolesById(final Long[] id) throws ServiceException {
 	try {
-	    List<Role> list = userDAO.findAll(Role.class, id);
+	    final List<Role> list = this.userDAO.findAll(Role.class, id);
 	    return list;
-	} catch (PersistenceException e) {
+	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
 
     }
 
-    public int deleteUser(Long id) throws ServiceException {
+    @Override
+    public int deleteUser(final Long id) throws ServiceException {
 	int flag = 0;
 	try {
-	    flag = userDAO.deleteUser(id);
+	    flag = this.userDAO.deleteUser(id);
 
-	} catch (PersistenceException e) {
+	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
 	return flag;
     }
 
+    @Override
     public List<Function> findAllFunctions() throws ServiceException {
 	try {
-	    List<Function> list = userDAO.findAllFunctions();
+	    final List<Function> list = this.userDAO.findAllFunctions();
 	    return list;
-	} catch (PersistenceException e) {
+	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
     }
 
-    public List<Function> findFindByRoleId(Long id) throws ServiceException {
+    @Override
+    public List<Function> findFindByRoleId(final Long id) throws ServiceException {
 	try {
-	    List<Function> list = userDAO.findFunctionByRoleId(id);
+	    final List<Function> list = this.userDAO.findFunctionByRoleId(id);
 	    return list;
-	} catch (PersistenceException e) {
+	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
     }
 
-    public void saveUserRoleFunctions(Long roleId, List<Long> functionIds)
+    @Override
+    public void saveUserRoleFunctions(final Long roleId, final List<Long> functionIds)
 	    throws ServiceException {
 	try {
 
-	    Role role = (Role) userDAO.findById(Role.class, roleId);
+	    final Role role = (Role) this.userDAO.findById(Role.class, roleId);
 	    role.getFunction().size();
-	    for (Iterator<Function> funcIt = role.getFunction().iterator(); funcIt.hasNext();) {
+	    for (final Iterator<Function> funcIt = role.getFunction().iterator(); funcIt.hasNext();) {
 		if (!functionIds.contains(funcIt.next().getId())) {
 		    funcIt.remove();
 		}
 	    }
 
-	    for (Long fid : functionIds) {
+	    for (final Long fid : functionIds) {
 		if (!role.hasFunctionId(fid)) {
-		    role.getFunction().add((Function) userDAO.findById(Function.class, fid));
+		    role.getFunction().add((Function) this.userDAO.findById(Function.class, fid));
 		}
 	    }
 
-	    userDAO.save(role);
-	} catch (PersistenceException e) {
+	    this.userDAO.save(role);
+	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
     }
 
-    public IUserProfile findUserProfile(String username)
+    @Override
+    public IUserProfile findUserProfile(final String username)
 	    throws ServiceException {
 	IUserProfile profile = getProfile();
 	try {
-	    User user = userDAO.findUser(username);
+	    final User user = this.userDAO.findUser(username);
 	    if (user == null) {
 		throw new ServiceException(
 			ValidationHelper
@@ -359,16 +377,17 @@ public class UserManagerImpl implements IUserManager {
 		profile = new UserHelper().getUserProfile(profile, user);
 	    }
 
-	} catch (PersistenceException e) {
+	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
 	return profile;
     }
 
-    public void saveUserPassWord(Long userId, String oldPw, String newPw)
+    @Override
+    public void saveUserPassWord(final Long userId, final String oldPw, final String newPw)
 	    throws ServiceException {
 	try {
-	    User usr = (User) userDAO.findById(userId);
+	    final User usr = this.userDAO.findById(userId);
 
 	    if (usr == null
 		    || !usr.getPassword().equals(
@@ -379,8 +398,8 @@ public class UserManagerImpl implements IUserManager {
 	    }
 
 	    usr.setPassword(PasswordEncrypt.encrypt(newPw.trim()));
-	    userDAO.update(usr);
-	} catch (PersistenceException e) {
+	    this.userDAO.update(usr);
+	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
 

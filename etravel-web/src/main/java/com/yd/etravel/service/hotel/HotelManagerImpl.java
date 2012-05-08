@@ -24,11 +24,11 @@ public class HotelManagerImpl implements IHotelManager {
     private IHotelDAO hotelDAO;
     private IUserDAO userDAO;
 
-    public void setHotelDAO(IHotelDAO hotelDAO) {
+    public void setHotelDAO(final IHotelDAO hotelDAO) {
 	this.hotelDAO = hotelDAO;
     }
 
-    public void setUserDAO(IUserDAO userDAO) {
+    public void setUserDAO(final IUserDAO userDAO) {
 	this.userDAO = userDAO;
     }
 
@@ -38,11 +38,12 @@ public class HotelManagerImpl implements IHotelManager {
      * @see
      * com.yd.etravel.service.hotel.IHotelManager#deleteHotel(java.lang.Long)
      */
-    public int deleteHotel(Long id) throws ServiceException {
+    @Override
+    public int deleteHotel(final Long id) throws ServiceException {
 	int val = 0;
 	try {
-	    val = hotelDAO.deleteHotel(id);
-	} catch (PersistenceException e) {
+	    val = this.hotelDAO.deleteHotel(id);
+	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
 	return val;
@@ -53,10 +54,11 @@ public class HotelManagerImpl implements IHotelManager {
      * 
      * @see com.yd.etravel.service.hotel.IHotelManager#findAllActiveHotels()
      */
+    @Override
     public List<Hotel> findAllActiveHotels() throws ServiceException {
 	try {
-	    return hotelDAO.findAllActive(Hotel.class);
-	} catch (PersistenceException e) {
+	    return this.hotelDAO.findAllActive(Hotel.class);
+	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
     }
@@ -66,10 +68,11 @@ public class HotelManagerImpl implements IHotelManager {
      * 
      * @see com.yd.etravel.service.hotel.IHotelManager#findAllHotel()
      */
+    @Override
     public List<Hotel> findAllHotel() throws ServiceException {
 	try {
-	    return hotelDAO.findAll(Hotel.class);
-	} catch (PersistenceException e) {
+	    return this.hotelDAO.findAll(Hotel.class);
+	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
     }
@@ -80,21 +83,23 @@ public class HotelManagerImpl implements IHotelManager {
      * @see
      * com.yd.etravel.service.hotel.IHotelManager#findRoleById(java.lang.Long)
      */
-    public Hotel findHotelById(Long id) throws ServiceException {
+    @Override
+    public Hotel findHotelById(final Long id) throws ServiceException {
 	Hotel hotel = null;
 	try {
-	    hotel = (Hotel) hotelDAO.findById(Hotel.class, id);
+	    hotel = (Hotel) this.hotelDAO.findById(Hotel.class, id);
 	    hotel.getUserIds();
-	} catch (PersistenceException e) {
+	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
 	return hotel;
     }
 
-    public List<Hotel> findHotelsById(Long id[]) throws ServiceException {
+    @Override
+    public List<Hotel> findHotelsById(final Long id[]) throws ServiceException {
 	try {
-	    return hotelDAO.findAll(Hotel.class, id);
-	} catch (PersistenceException e) {
+	    return this.hotelDAO.findAll(Hotel.class, id);
+	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
     }
@@ -106,28 +111,30 @@ public class HotelManagerImpl implements IHotelManager {
      * com.yd.etravel.service.hotel.IHotelManager#saveHotel(com.yd.etravel.domain
      * .hotel.Hotel)
      */
+    @Override
     public Hotel saveHotel(Hotel hotel, final Long[] userids)
 	    throws ServiceException {
 	try {
 
-	    if (hotelDAO.isHotelNameExist(hotel.getName(), hotel.getId())) {
+	    if (this.hotelDAO.isHotelNameExist(hotel.getName(), hotel.getId())) {
 		throw new ServiceException(
 			ValidationHelper
 				.getMessageHolder("etravel.hotelname.exist"));
 	    }
-	    UserSearchDTO userSearchDTO = new UserSearchDTO();
+	    final UserSearchDTO userSearchDTO = new UserSearchDTO();
 	    userSearchDTO.setIds(userids);
-	    if (hotel.getSuperUser() != null && !hotel.getSuperUser().isEmpty())
+	    if (hotel.getSuperUser() != null && !hotel.getSuperUser().isEmpty()) {
 		hotel.getSuperUser().clear();
-	    hotel.setSuperUser(userDAO.findUsers(userSearchDTO));
+	    }
+	    hotel.setSuperUser(this.userDAO.findUsers(userSearchDTO));
 
 	    if (hotel.getId() == null) {
-		hotel = (Hotel) hotelDAO.save(hotel);
+		hotel = (Hotel) this.hotelDAO.save(hotel);
 	    } else {
-		hotel = (Hotel) hotelDAO.update(hotel);
+		hotel = (Hotel) this.hotelDAO.update(hotel);
 	    }
 
-	} catch (PersistenceException e) {
+	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
 	return hotel;

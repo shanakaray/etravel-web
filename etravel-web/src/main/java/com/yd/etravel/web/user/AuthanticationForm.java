@@ -14,29 +14,31 @@ public class AuthanticationForm extends BaseForm {
     private String password;
 
     public String getUsername() {
-	return username;
+	return this.username;
     }
 
-    public void setUsername(String username) {
+    public void setUsername(final String username) {
 	this.username = username;
     }
 
     public String getPassword() {
-	return password;
+	return this.password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(final String password) {
 	this.password = password;
     }
 
-    public void resetBean(ActionMapping mapping, HttpServletRequest request) {
+    @Override
+    public void resetBean(final ActionMapping mapping, final HttpServletRequest request) {
 	this.username = EMPTY_STRING;
 	this.password = EMPTY_STRING;
     }
 
-    public ActionErrors validateBean(ActionMapping mapping,
-	    HttpServletRequest request) {
-	ActionErrors errors = new ActionErrors();
+    @Override
+    public ActionErrors validateBean(final ActionMapping mapping,
+	    final HttpServletRequest request) {
+	final ActionErrors errors = new ActionErrors();
 
 	if (StringUtils.isEmpty(this.username)) {
 	    addErrors(errors, "etravel.error.username.required");

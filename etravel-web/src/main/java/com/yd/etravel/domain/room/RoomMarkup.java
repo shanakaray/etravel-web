@@ -20,18 +20,18 @@ public class RoomMarkup extends BaseObject {
     private Markup markup;
 
     public Room getRoom() {
-	return room;
+	return this.room;
     }
 
-    public void setRoom(Room room) {
+    public void setRoom(final Room room) {
 	this.room = room;
     }
 
     public Markup getMarkup() {
-	return markup;
+	return this.markup;
     }
 
-    public void setMarkup(Markup markup) {
+    public void setMarkup(final Markup markup) {
 	this.markup = markup;
     }
 

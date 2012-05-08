@@ -45,14 +45,14 @@ public class SearchForm extends BaseForm {
      * @return the hotelId
      */
     public Long getHotelId() {
-	return hotelId;
+	return this.hotelId;
     }
 
     /**
      * @param hotelId
      *            the hotelId to set
      */
-    public void setHotelId(Long hotelId) {
+    public void setHotelId(final Long hotelId) {
 	this.hotelId = hotelId;
     }
 
@@ -60,14 +60,14 @@ public class SearchForm extends BaseForm {
      * @return the hotelName
      */
     public String getHotelName() {
-	return hotelName;
+	return this.hotelName;
     }
 
     /**
      * @param hotelName
      *            the hotelName to set
      */
-    public void setHotelName(String hotelName) {
+    public void setHotelName(final String hotelName) {
 	this.hotelName = hotelName;
     }
 
@@ -75,14 +75,14 @@ public class SearchForm extends BaseForm {
      * @return the checkIn
      */
     public String getCheckIn() {
-	return checkIn;
+	return this.checkIn;
     }
 
     /**
      * @param checkIn
      *            the checkIn to set
      */
-    public void setCheckIn(String checkIn) {
+    public void setCheckIn(final String checkIn) {
 	this.checkIn = checkIn;
     }
 
@@ -90,14 +90,14 @@ public class SearchForm extends BaseForm {
      * @return the checkOut
      */
     public String getCheckOut() {
-	return checkOut;
+	return this.checkOut;
     }
 
     /**
      * @param checkOut
      *            the checkOut to set
      */
-    public void setCheckOut(String checkOut) {
+    public void setCheckOut(final String checkOut) {
 	this.checkOut = checkOut;
     }
 
@@ -105,14 +105,14 @@ public class SearchForm extends BaseForm {
      * @return the searchResultsDTO
      */
     public SearchResultsDTO getSearchResultsDTO() {
-	return searchResultsDTO;
+	return this.searchResultsDTO;
     }
 
     /**
      * @param searchResultsDTO
      *            the searchResultsDTO to set
      */
-    public void setSearchResultsDTO(SearchResultsDTO searchResultsDTO) {
+    public void setSearchResultsDTO(final SearchResultsDTO searchResultsDTO) {
 	this.searchResultsDTO = searchResultsDTO;
     }
 
@@ -120,14 +120,14 @@ public class SearchForm extends BaseForm {
      * @return the allHotel
      */
     public List<Hotel> getAllHotel() {
-	return allHotel;
+	return this.allHotel;
     }
 
     /**
      * @param allHotel
      *            the allHotel to set
      */
-    public void setAllHotel(List<Hotel> allHotel) {
+    public void setAllHotel(final List<Hotel> allHotel) {
 	this.allHotel = allHotel;
     }
 
@@ -148,25 +148,25 @@ public class SearchForm extends BaseForm {
      * .ActionMapping, javax.servlet.http.HttpServletRequest)
      */
     @Override
-    public void resetBean(ActionMapping mapping, HttpServletRequest request) {
-	allRoom = Collections.EMPTY_LIST;
-	roomId = -1l;
+    public void resetBean(final ActionMapping mapping, final HttpServletRequest request) {
+	this.allRoom = Collections.EMPTY_LIST;
+	this.roomId = -1l;
 	this.hotelId = -1l;
     }
 
     public Long getRoomId() {
-	return roomId;
+	return this.roomId;
     }
 
-    public void setRoomId(Long roomId) {
+    public void setRoomId(final Long roomId) {
 	this.roomId = roomId;
     }
 
     public List<Room> getAllRoom() {
-	return allRoom;
+	return this.allRoom;
     }
 
-    public void setAllRoom(List<Room> allRoom) {
+    public void setAllRoom(final List<Room> allRoom) {
 	this.allRoom = allRoom;
     }
 
@@ -178,16 +178,16 @@ public class SearchForm extends BaseForm {
      * .ActionMapping, javax.servlet.http.HttpServletRequest)
      */
     @Override
-    public ActionErrors validateBean(ActionMapping mapping,
-	    HttpServletRequest request) {
-	ActionErrors errors = new ActionErrors();
+    public ActionErrors validateBean(final ActionMapping mapping,
+	    final HttpServletRequest request) {
+	final ActionErrors errors = new ActionErrors();
 
 	if (StringUtils.isEmpty(this.checkIn)
 		|| StringUtils.isEmpty(this.checkOut)) {
 	    addErrors(errors, "etravel.error.search.data.empty");
 	} else {
-	    Date checkInDate = DateUtil.parse(this.checkIn);
-	    Date checkOutDate = DateUtil.parse(this.checkOut);
+	    final Date checkInDate = DateUtil.parse(this.checkIn);
+	    final Date checkOutDate = DateUtil.parse(this.checkOut);
 
 	    if (checkInDate.getTime() >= checkOutDate.getTime()) {
 		addErrors(errors, "etravel.error.search.data.empty");
@@ -201,30 +201,30 @@ public class SearchForm extends BaseForm {
      * @return the id
      */
     public Long getId() {
-	return id;
+	return this.id;
     }
 
     /**
      * @param id
      *            the id to set
      */
-    public void setId(Long id) {
+    public void setId(final Long id) {
 	this.id = id;
     }
 
     public String[] getCommets() {
-	return commets;
+	return this.commets;
     }
 
-    public void setCommets(String[] commets) {
+    public void setCommets(final String[] commets) {
 	this.commets = commets;
     }
 
     public Long[] getExtraItemId() {
-	return extraItemId;
+	return this.extraItemId;
     }
 
-    public void setExtraItemId(Long[] extraItemId) {
+    public void setExtraItemId(final Long[] extraItemId) {
 	this.extraItemId = extraItemId;
     }
 

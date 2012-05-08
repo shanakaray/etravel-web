@@ -78,6 +78,7 @@ public class SearchDAO extends BaseDAO implements ISearchDAO {
 	// TODO Auto-generated constructor stub
     }
 
+    @Override
     public List<RoomAvailability> findRooms(
 	    final SearchRequestDTO searchRequestDTO)
 	    throws PersistenceException {
@@ -94,9 +95,9 @@ public class SearchDAO extends BaseDAO implements ISearchDAO {
 		FIND_ROOMS.append(" AND roomType.id=:rid ");
 	    }
 
-	    Session session = getHibernateTemplate().getSessionFactory()
+	    final Session session = getHibernateTemplate().getSessionFactory()
 		    .getCurrentSession();
-	    Query query = session.createQuery(FIND_ROOMS.toString());
+	    final Query query = session.createQuery(FIND_ROOMS.toString());
 	    query.setParameter(0, searchRequestDTO.getHotelId());
 	    query.setParameter(1, searchRequestDTO.getCheckIn());
 	    query.setParameter(2, searchRequestDTO.getCheckOut());
@@ -104,43 +105,45 @@ public class SearchDAO extends BaseDAO implements ISearchDAO {
 		query.setParameter("rid", searchRequestDTO.getRoomTypeId());
 	    }
 	    return query.list();
-	} catch (HibernateException e) {
+	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 	}
     }
 
+    @Override
     public List<RoomAvailability> findRoomsByCheckInDate(
 	    final SearchRequestDTO searchRequestDTO)
 	    throws PersistenceException {
 	try {
 
-	    Session session = getHibernateTemplate().getSessionFactory()
+	    final Session session = getHibernateTemplate().getSessionFactory()
 		    .getCurrentSession();
-	    Query query = session.createQuery(FIND_ROOMS_BY_CHECK_IN_DATE
+	    final Query query = session.createQuery(FIND_ROOMS_BY_CHECK_IN_DATE
 		    .toString());
 	    query.setParameter(0, searchRequestDTO.getHotelId());
 	    query.setParameter(1, searchRequestDTO.getCheckIn());
 	    query.setParameter(2, searchRequestDTO.getCheckIn());
 	    return query.list();
-	} catch (HibernateException e) {
+	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 	}
     }
 
+    @Override
     public List<RoomAvailability> findRoomsByCheckOutDate(
 	    final SearchRequestDTO searchRequestDTO)
 	    throws PersistenceException {
 	try {
 
-	    Session session = getHibernateTemplate().getSessionFactory()
+	    final Session session = getHibernateTemplate().getSessionFactory()
 		    .getCurrentSession();
-	    Query query = session.createQuery(FIND_ROOMS_BY_CHECK_OUT_DATE
+	    final Query query = session.createQuery(FIND_ROOMS_BY_CHECK_OUT_DATE
 		    .toString());
 	    query.setParameter(0, searchRequestDTO.getHotelId());
 	    query.setParameter(1, searchRequestDTO.getCheckOut());
 	    query.setParameter(2, searchRequestDTO.getCheckOut());
 	    return query.list();
-	} catch (HibernateException e) {
+	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 	}
     }

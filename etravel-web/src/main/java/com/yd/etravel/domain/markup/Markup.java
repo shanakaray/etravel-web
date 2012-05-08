@@ -33,50 +33,52 @@ public class Markup extends BaseObject {
     private String status;
 
     public String getMarCode() {
-	return marCode;
+	return this.marCode;
     }
 
-    public void setMarCode(String marCode) {
+    public void setMarCode(final String marCode) {
 	this.marCode = marCode;
     }
 
     public String getMarName() {
-	return marName;
+	return this.marName;
     }
 
-    public void setMarName(String marName) {
+    public void setMarName(final String marName) {
 	this.marName = marName;
     }
 
     public String getComment() {
-	return comment;
+	return this.comment;
     }
 
-    public void setComment(String comment) {
+    public void setComment(final String comment) {
 	this.comment = comment;
     }
 
     public BigDecimal getMarValue() {
-	return marValue;
+	return this.marValue;
     }
 
-    public void setMarValue(BigDecimal marValue) {
+    public void setMarValue(final BigDecimal marValue) {
 	this.marValue = marValue;
     }
 
     public BigDecimal getMarPercenatge() {
-	return marPercenatge;
+	return this.marPercenatge;
     }
 
-    public void setMarPercenatge(BigDecimal marPercenatge) {
+    public void setMarPercenatge(final BigDecimal marPercenatge) {
 	this.marPercenatge = marPercenatge;
     }
 
+    @Override
     public String getStatus() {
-	return status;
+	return this.status;
     }
 
-    public void setStatus(String status) {
+    @Override
+    public void setStatus(final String status) {
 	this.status = status;
     }
 

@@ -23,26 +23,26 @@ public class RoomSeasonalRate extends BaseObject {
     private BigDecimal totalCost;
 
     public Season getSeason() {
-	return season;
+	return this.season;
     }
 
-    public void setSeason(Season season) {
+    public void setSeason(final Season season) {
 	this.season = season;
     }
 
     public Room getRoom() {
-	return room;
+	return this.room;
     }
 
-    public void setRoom(Room room) {
+    public void setRoom(final Room room) {
 	this.room = room;
     }
 
     public BigDecimal getTotalCost() {
-	return totalCost;
+	return this.totalCost;
     }
 
-    public void setTotalCost(BigDecimal totalCost) {
+    public void setTotalCost(final BigDecimal totalCost) {
 	this.totalCost = totalCost;
     }
 

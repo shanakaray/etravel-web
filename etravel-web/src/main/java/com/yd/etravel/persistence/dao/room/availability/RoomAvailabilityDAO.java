@@ -59,32 +59,34 @@ public class RoomAvailabilityDAO extends BaseDAO implements
     public RoomAvailabilityDAO() {
     }
 
+    @Override
     public boolean isDataRangeValid(final Long roomId, final Date fromDate,
 	    final Date toDate) throws PersistenceException {
 	try {
 
-	    Session session = getHibernateTemplate().getSessionFactory()
+	    final Session session = getHibernateTemplate().getSessionFactory()
 		    .getCurrentSession();
-	    Query query = session.createQuery(IS_DATE_RANGE_VALID.toString());
+	    final Query query = session.createQuery(IS_DATE_RANGE_VALID.toString());
 	    query.setParameter(0, fromDate);
 	    query.setParameter(1, fromDate);
 	    query.setParameter(2, toDate);
 	    query.setParameter(3, toDate);
 	    query.setParameter(4, roomId);
 
-	    return (query.list().isEmpty());
-	} catch (HibernateException e) {
+	    return query.list().isEmpty();
+	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 	}
     }
 
+    @Override
     @Deprecated
     /**
      * use List<RoomAvailabilityDTO> findAllRoomAvailabilityDTO(Long hotelId)
      * instead
      */
     public List<RoomAvailability> findAllRoomAvailabilityWithRoomAndOccu(
-	    Long hotelId) throws PersistenceException {
+	    final Long hotelId) throws PersistenceException {
 	try {
 	    // final StringBuilder sb = new StringBuilder(
 	    // "SELECT roomAvailability FROM RoomAvailability as
@@ -100,19 +102,19 @@ public class RoomAvailabilityDAO extends BaseDAO implements
 		    .append("join fetch  roomAvailability.room as room join fetch room.roomType as roomType ")
 		    .append("join fetch room.hotel as hot WHERE 1=1 ");
 
-	    Session session = getHibernateTemplate().getSessionFactory()
+	    final Session session = getHibernateTemplate().getSessionFactory()
 		    .getCurrentSession();
 
 	    if (hotelId != null) {
 		sb.append(" AND hot.id=:hid ");
 	    }
-	    Query query = session.createQuery(sb.toString());
+	    final Query query = session.createQuery(sb.toString());
 	    if (hotelId != null) {
 		query.setParameter("hid", hotelId);
 	    }
 
 	    return query.list();
-	} catch (HibernateException e) {
+	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 	}
     }
@@ -121,8 +123,9 @@ public class RoomAvailabilityDAO extends BaseDAO implements
 	 * 
 	 * 
 	 */
+    @Override
     public List<RoomAvailabilityDTO> findAllRoomAvailabilityDTO(
-	    RoomAvailabilityDTO dto) throws PersistenceException {
+	    final RoomAvailabilityDTO dto) throws PersistenceException {
 	try {
 
 	    final StringBuilder sb = new StringBuilder("SELECT new ")
@@ -134,7 +137,7 @@ public class RoomAvailabilityDAO extends BaseDAO implements
 		    .append("join ra.room as room join room.roomType as type ")
 		    .append("join room.hotel as hot WHERE 1=1 ");
 
-	    Session session = getHibernateTemplate().getSessionFactory()
+	    final Session session = getHibernateTemplate().getSessionFactory()
 		    .getCurrentSession();
 
 	    if (dto.getHotelId() != null) {
@@ -148,7 +151,7 @@ public class RoomAvailabilityDAO extends BaseDAO implements
 		sb.append(" OR ra.fromDate<=:tdate) ");
 	    }
 
-	    Query query = session.createQuery(sb.toString());
+	    final Query query = session.createQuery(sb.toString());
 	    if (dto.getHotelId() != null) {
 		query.setParameter("hid", dto.getHotelId());
 	    }
@@ -160,90 +163,95 @@ public class RoomAvailabilityDAO extends BaseDAO implements
 	    }
 
 	    return query.list();
-	} catch (HibernateException e) {
+	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 	}
     }
 
     // Daily Availabilty
 
-    public List<RoomDailyAvailability> findAllRoomDailyAvailability(Long id)
+    @Override
+    public List<RoomDailyAvailability> findAllRoomDailyAvailability(final Long id)
 	    throws PersistenceException {
 	try {
-	    Session session = getHibernateTemplate().getSessionFactory()
+	    final Session session = getHibernateTemplate().getSessionFactory()
 		    .getCurrentSession();
-	    Query query = session
+	    final Query query = session
 		    .createQuery(FIND_ALL_DAILY_ROOM_AVAILABILITY_BY_ID
 			    .toString());
 	    query.setParameter(0, id);
 
-	    List list = query.list();
+	    final List list = query.list();
 
 	    return list;
 
-	} catch (HibernateException e) {
+	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 	}
     }
 
+    @Override
     public List<RoomDailyAvailability> findAllRoomDailyAvailability()
 	    throws PersistenceException {
 	try {
-	    Session session = getHibernateTemplate().getSessionFactory()
+	    final Session session = getHibernateTemplate().getSessionFactory()
 		    .getCurrentSession();
-	    Query query = session.createQuery(FIND_ALL_DAILY_ROOM_AVAILABILITY
+	    final Query query = session.createQuery(FIND_ALL_DAILY_ROOM_AVAILABILITY
 		    .toString());
 
 	    return query.list();
 
-	} catch (HibernateException e) {
+	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 	}
     }
 
+    @Override
     public List<RoomDailyAvailability> findAllRoomDailyAvailabilityByRoomAvailabilityId(
-	    Long id) throws PersistenceException {
+	    final Long id) throws PersistenceException {
 	try {
-	    Session session = getHibernateTemplate().getSessionFactory()
+	    final Session session = getHibernateTemplate().getSessionFactory()
 		    .getCurrentSession();
-	    Query query = session
+	    final Query query = session
 		    .createQuery(FIND_ALL_DAILY_ROOM_AVAILABILITY_BY_ROOM_AVAILABILITY_ID
 			    .toString());
 	    query.setParameter(0, id);
 
 	    return query.list();
 
-	} catch (HibernateException e) {
+	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 	}
     }
 
+    @Override
     public RoomAvailability findRoomAvailabilityById(final Long id)
 	    throws ServiceException, PersistenceException {
 	try {
-	    Session session = getHibernateTemplate().getSessionFactory()
+	    final Session session = getHibernateTemplate().getSessionFactory()
 		    .getCurrentSession();
-	    Query query = session
+	    final Query query = session
 		    .createQuery(FIND_ALL_ROOM_AVAILABILITY_WITH_ROOM_AND_ROOM_TYPE_BY_ID
 			    .toString());
 	    query.setParameter(0, id);
 
-	    List<RoomAvailability> list = query.list();
+	    final List<RoomAvailability> list = query.list();
 	    return !list.isEmpty() ? (RoomAvailability) list.get(0)
 		    : new RoomAvailability();
 
-	} catch (HibernateException e) {
+	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 
 	}
     }
 
+    @Override
     public List<RoomDailyAvailability> findAllRoomDailyAvailabilityByRoomAvailabilityIdAndDateRange(
-	    Long id, Date checkIn, Date checkOut) throws PersistenceException {
+	    final Long id, final Date checkIn, final Date checkOut) throws PersistenceException {
 	try {
-	    Session session = getHibernateTemplate().getSessionFactory()
+	    final Session session = getHibernateTemplate().getSessionFactory()
 		    .getCurrentSession();
-	    Query query = session
+	    final Query query = session
 		    .createQuery(FIND_ALL_DAILY_ROOM_AVAILABILITY_BY_ROOM_AVAILABILITY_ID_AND_DATE_RANGE
 			    .toString());
 	    query.setParameter(0, id);
@@ -253,12 +261,13 @@ public class RoomAvailabilityDAO extends BaseDAO implements
 
 	    return query.list();
 
-	} catch (HibernateException e) {
+	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 	}
     }
 
-    public List<DailyAvailabilityDTO> findDailyAvailability(Long id)
+    @Override
+    public List<DailyAvailabilityDTO> findDailyAvailability(final Long id)
 	    throws PersistenceException {
 	final StringBuilder sb = new StringBuilder(
 		"SELECT new com.yd.etravel.domain.custom.room.availability.DailyAvailabilityDTO( "
@@ -277,16 +286,16 @@ public class RoomAvailabilityDAO extends BaseDAO implements
 	sb.append(" order by ra.createdDate");
 
 	try {
-	    Session session = getHibernateTemplate().getSessionFactory()
+	    final Session session = getHibernateTemplate().getSessionFactory()
 		    .getCurrentSession();
-	    Query query = session.createQuery(sb.toString());
+	    final Query query = session.createQuery(sb.toString());
 	    if (id != null) {
 		query.setParameter(0, id);
 	    }
 
 	    return query.list();
 
-	} catch (HibernateException e) {
+	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 	}
     }

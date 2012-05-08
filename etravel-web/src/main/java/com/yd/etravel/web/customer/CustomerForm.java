@@ -35,82 +35,82 @@ public class CustomerForm extends BaseForm {
     }
 
     public String getAddress() {
-	return address;
+	return this.address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(final String address) {
 	this.address = address;
     }
 
     public String getContact() {
-	return contact;
+	return this.contact;
     }
 
-    public void setContact(String contact) {
+    public void setContact(final String contact) {
 	this.contact = contact;
     }
 
     public String getEmail() {
-	return email;
+	return this.email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(final String email) {
 	this.email = email;
     }
 
     public String getFirstName() {
-	return firstName;
+	return this.firstName;
     }
 
-    public void setFirstName(String firstName) {
+    public void setFirstName(final String firstName) {
 	this.firstName = firstName;
     }
 
     public String getLastName() {
-	return lastName;
+	return this.lastName;
     }
 
-    public void setLastName(String lastName) {
+    public void setLastName(final String lastName) {
 	this.lastName = lastName;
     }
 
     public String getNic() {
-	return nic;
+	return this.nic;
     }
 
-    public void setNic(String nic) {
+    public void setNic(final String nic) {
 	this.nic = nic;
     }
 
     public String getCusUsername() {
-	return cusUsername;
+	return this.cusUsername;
     }
 
-    public void setCusUsername(String cusUsername) {
+    public void setCusUsername(final String cusUsername) {
 	this.cusUsername = cusUsername;
     }
 
     public String getCusPassword() {
-	return cusPassword;
+	return this.cusPassword;
     }
 
-    public void setCusPassword(String cusPassword) {
+    public void setCusPassword(final String cusPassword) {
 	this.cusPassword = cusPassword;
     }
 
     public Long getId() {
-	return id;
+	return this.id;
     }
 
-    public void setId(Long id) {
+    public void setId(final Long id) {
 	this.id = id;
     }
 
     public String getRepassword() {
-	return repassword;
+	return this.repassword;
     }
 
-    public void setRepassword(String repassword) {
+    public void setRepassword(final String repassword) {
 	this.repassword = repassword;
     }
 
@@ -122,7 +122,7 @@ public class CustomerForm extends BaseForm {
      * .ActionMapping, javax.servlet.http.HttpServletRequest)
      */
     @Override
-    public void resetBean(ActionMapping mapping, HttpServletRequest request) {
+    public void resetBean(final ActionMapping mapping, final HttpServletRequest request) {
 	this.address = EMPTY_STRING;
 	this.contact = EMPTY_STRING;
 	this.email = EMPTY_STRING;
@@ -143,9 +143,9 @@ public class CustomerForm extends BaseForm {
      * .ActionMapping, javax.servlet.http.HttpServletRequest)
      */
     @Override
-    public ActionErrors validateBean(ActionMapping mapping,
-	    HttpServletRequest request) {
-	ActionErrors errors = new ActionErrors();
+    public ActionErrors validateBean(final ActionMapping mapping,
+	    final HttpServletRequest request) {
+	final ActionErrors errors = new ActionErrors();
 
 	if (StringUtils.isEmpty(this.firstName)) {
 	    addErrors(errors, "etravel.error.customer.firstname.required");
@@ -181,7 +181,7 @@ public class CustomerForm extends BaseForm {
 	    addErrors(errors, "etravel.error.pw.length");
 	    this.cusPassword = EMPTY_STRING;
 	    this.repassword = EMPTY_STRING;
-	} else if (!this.cusPassword.equals(repassword)) {
+	} else if (!this.cusPassword.equals(this.repassword)) {
 	    addErrors(errors, "etravel.error.pw.notmached");
 	    this.cusPassword = EMPTY_STRING;
 	    this.repassword = EMPTY_STRING;

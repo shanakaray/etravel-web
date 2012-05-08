@@ -47,8 +47,8 @@ public class BookingReportAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward add(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward add(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	// TODO Auto-generated method stub
 	return null;
@@ -63,8 +63,8 @@ public class BookingReportAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward back(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward back(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	// TODO Auto-generated method stub
 	return null;
@@ -80,8 +80,8 @@ public class BookingReportAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    public ActionForward create(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    public ActionForward create(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	// TODO Auto-generated method stub
 	return null;
@@ -97,8 +97,8 @@ public class BookingReportAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward delete(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward delete(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	// TODO Auto-generated method stub
 	return null;
@@ -113,8 +113,8 @@ public class BookingReportAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward edit(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward edit(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	// TODO Auto-generated method stub
 	return null;
@@ -129,11 +129,11 @@ public class BookingReportAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward find(ActionMapping mapping, ActionForm actionForm,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward find(final ActionMapping mapping, final ActionForm actionForm,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	final BookingReportForm reportForm = (BookingReportForm) actionForm;
-	BookingReportSearchDTO bookingDto = new BookingReportSearchDTO();
+	final BookingReportSearchDTO bookingDto = new BookingReportSearchDTO();
 	bookingDto
 		.setRoomId(reportForm.getRoomId().longValue() > 0 ? reportForm
 			.getRoomId() : null);
@@ -145,7 +145,7 @@ public class BookingReportAction extends BaseAction {
 		.getBookedToString()) ? null : DateUtil.parse(reportForm
 		.getBookedToString()));
 	bookingDto.setHotelId(reportForm.getHotelSet());
-	IUserProfile profile = getUserProfile(request);
+	final IUserProfile profile = getUserProfile(request);
 	filUpSelects(reportForm, profile);
 
 	if (profile.getRoles().contains(IUserRoles.CUSTOMER_ROLE_NAME)) {
@@ -168,7 +168,7 @@ public class BookingReportAction extends BaseAction {
 
 	if (reportForm.getHotelId() != null
 		&& reportForm.getHotelId().longValue() > 0) {
-	    List<Room> rooms = getRoomManager().findAllRoomWithRoomType(
+	    final List<Room> rooms = getRoomManager().findAllRoomWithRoomType(
 		    reportForm.getHotelId());
 	    reportForm.setAllRoom(rooms);
 	}
@@ -186,8 +186,8 @@ public class BookingReportAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward forward(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward forward(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	// TODO Auto-generated method stub
 	return null;
@@ -202,17 +202,17 @@ public class BookingReportAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward init(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward init(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
-	BookingReportForm reportForm = (BookingReportForm) form;
-	IUserProfile profile = getUserProfile(request);
+	final BookingReportForm reportForm = (BookingReportForm) form;
+	final IUserProfile profile = getUserProfile(request);
 
 	filUpSelects(reportForm, profile);
 
 	if (reportForm.getBookingList() == null
 		|| reportForm.getBookingList().isEmpty()) {
-	    BookingReportSearchDTO bookinDto = new BookingReportSearchDTO();
+	    final BookingReportSearchDTO bookinDto = new BookingReportSearchDTO();
 
 	    if (profile.getRoles().contains(IUserRoles.CUSTOMER_ROLE_NAME)) {
 		bookinDto.setBookedBy(profile.getId());
@@ -221,13 +221,14 @@ public class BookingReportAction extends BaseAction {
 	    if (profile
 		    .hasFunction(IUserFunctions.BOOKINGREPORT_ASSIGNHOTELS_ONLY)) {
 		bookinDto.setHotelId(profile.getAssignedHotels().keySet());
-		if (!profile.getAssignedHotels().isEmpty())
+		if (!profile.getAssignedHotels().isEmpty()) {
 		    reportForm.setBookingList(getBookingManager()
 			    .findBookingDetail(bookinDto));
-	    } else
-
+		}
+	    } else {
 		reportForm.setBookingList(getBookingManager()
 			.findBookingDetail(bookinDto));
+	    }
 	}
 
 	return mapping.findForward(SUCCESS);
@@ -244,7 +245,7 @@ public class BookingReportAction extends BaseAction {
 
 	if (reportForm.getHotelId() != null
 		&& reportForm.getHotelId().longValue() > 0) {
-	    List<Room> roomList = getRoomManager().findAllRoomWithRoomType(
+	    final List<Room> roomList = getRoomManager().findAllRoomWithRoomType(
 		    reportForm.getHotelId());
 	    reportForm.setAllRoom(roomList);
 	}
@@ -260,8 +261,8 @@ public class BookingReportAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    public ActionForward process(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    public ActionForward process(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	// TODO Auto-generated method stub
 	return null;
@@ -276,8 +277,8 @@ public class BookingReportAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward save(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward save(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	// TODO Auto-generated method stub
 	return null;
@@ -292,8 +293,8 @@ public class BookingReportAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward send(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward send(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	return null;
     }
@@ -307,15 +308,15 @@ public class BookingReportAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward sort(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    protected ActionForward sort(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	return null;
     }
 
     @Override
-    public ActionForward search(ActionMapping mapping, ActionForm form,
-	    HttpServletRequest request, HttpServletResponse response)
+    public ActionForward search(final ActionMapping mapping, final ActionForm form,
+	    final HttpServletRequest request, final HttpServletResponse response)
 	    throws Exception {
 	// TODO Auto-generated method stub
 	return null;

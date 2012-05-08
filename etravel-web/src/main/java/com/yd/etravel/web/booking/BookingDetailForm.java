@@ -36,26 +36,26 @@ public class BookingDetailForm extends BaseForm {
     }
 
     public Long getBookingId() {
-	return bookingId;
+	return this.bookingId;
     }
 
-    public void setBookingId(Long bookingId) {
+    public void setBookingId(final Long bookingId) {
 	this.bookingId = bookingId;
     }
 
     public List<ExtraItemBooking> getItemBookingList() {
-	return itemBookingList;
+	return this.itemBookingList;
     }
 
-    public void setItemBookingList(List<ExtraItemBooking> itemBookingList) {
+    public void setItemBookingList(final List<ExtraItemBooking> itemBookingList) {
 	this.itemBookingList = itemBookingList;
     }
 
     public BookingReportDTO getBookingReportDTO() {
-	return bookingReportDTO;
+	return this.bookingReportDTO;
     }
 
-    public void setBookingReportDTO(BookingReportDTO bookingReportDTO) {
+    public void setBookingReportDTO(final BookingReportDTO bookingReportDTO) {
 	this.bookingReportDTO = bookingReportDTO;
     }
 
@@ -67,7 +67,7 @@ public class BookingDetailForm extends BaseForm {
      * .ActionMapping, javax.servlet.http.HttpServletRequest)
      */
     @Override
-    public void resetBean(ActionMapping mapping, HttpServletRequest request) {
+    public void resetBean(final ActionMapping mapping, final HttpServletRequest request) {
 	this.bookingId = -1L;
 	this.itemBookingList = Collections.EMPTY_LIST;
 	this.bookingReportDTO = null;
@@ -81,8 +81,8 @@ public class BookingDetailForm extends BaseForm {
      * .ActionMapping, javax.servlet.http.HttpServletRequest)
      */
     @Override
-    public ActionErrors validateBean(ActionMapping mapping,
-	    HttpServletRequest request) {
+    public ActionErrors validateBean(final ActionMapping mapping,
+	    final HttpServletRequest request) {
 	// TODO Auto-generated method stub
 	return null;
     }

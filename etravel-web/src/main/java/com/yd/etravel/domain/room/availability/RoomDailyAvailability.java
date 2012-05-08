@@ -29,46 +29,46 @@ public class RoomDailyAvailability extends BaseObject {
     private RoomAvailability roomAvailability;
 
     public Date getDate() {
-	return date;
+	return this.date;
     }
 
     public String getDateString() {
-	return DateUtil.format(date);
+	return DateUtil.format(this.date);
     }
 
-    public void setDate(Date date) {
+    public void setDate(final Date date) {
 	this.date = date;
     }
 
     public Integer getAllocatedUnit() {
-	return allocatedUnit;
+	return this.allocatedUnit;
     }
 
-    public void setAllocatedUnit(Integer allocatedUnit) {
+    public void setAllocatedUnit(final Integer allocatedUnit) {
 	this.allocatedUnit = allocatedUnit;
     }
 
     public Integer getAvailabalUnit() {
-	return availabalUnit;
+	return this.availabalUnit;
     }
 
-    public void addAvailabalUnit(int val) {
+    public void addAvailabalUnit(final int val) {
 	this.availabalUnit += val;
     }
 
-    public void subAvailabalUnit(int val) {
+    public void subAvailabalUnit(final int val) {
 	this.availabalUnit -= val;
     }
 
-    public void setAvailabalUnit(Integer availabalUnit) {
+    public void setAvailabalUnit(final Integer availabalUnit) {
 	this.availabalUnit = availabalUnit;
     }
 
     public RoomAvailability getRoomAvailability() {
-	return roomAvailability;
+	return this.roomAvailability;
     }
 
-    public void setRoomAvailability(RoomAvailability roomAvailability) {
+    public void setRoomAvailability(final RoomAvailability roomAvailability) {
 	this.roomAvailability = roomAvailability;
     }
 

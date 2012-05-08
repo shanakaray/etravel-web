@@ -35,15 +35,15 @@ public class IpgForm extends BaseForm {
      * @param input - byte array containing the input data @return String
      * containing the output String
      */
-    static String hex(byte[] input) {
+    static String hex(final byte[] input) {
 	// create a StringBuffer 2x the size of the hash array
-	StringBuffer sb = new StringBuffer(input.length * 2);
+	final StringBuffer sb = new StringBuffer(input.length * 2);
 
 	// retrieve the byte array data, convert it to hex
 	// and add it to the StringBuffer
-	for (int i = 0; i < input.length; i++) {
-	    sb.append(HEX_TABLE[(input[i] >> 4) & 0xf]);
-	    sb.append(HEX_TABLE[input[i] & 0xf]);
+	for (final byte element : input) {
+	    sb.append(HEX_TABLE[element >> 4 & 0xf]);
+	    sb.append(HEX_TABLE[element & 0xf]);
 	}
 	return sb.toString();
     }
@@ -56,7 +56,7 @@ public class IpgForm extends BaseForm {
      * @param in String containing the data String @return String containing the
      * output String
      */
-    private static String null2unknown(String in) {
+    private static String null2unknown(final String in) {
 	if (in == null || in.length() == 0) {
 	    return "No Value Returned";
 	} else {
@@ -94,7 +94,7 @@ public class IpgForm extends BaseForm {
      *            String containing the vpc_AVSResultCode
      * @return description String containing the appropriate description
      */
-    private String displayAVSResponse(String vAVSResultCode) {
+    private String displayAVSResponse(final String vAVSResultCode) {
 
 	String result = "";
 	if (vAVSResultCode != null || vAVSResultCode.length() == 0) {
@@ -104,7 +104,7 @@ public class IpgForm extends BaseForm {
 		result = "AVS not supported or there was no AVS data provided";
 	    } else {
 		// Java cannot switch on a string so turn everything to a char
-		char input = vAVSResultCode.charAt(0);
+		final char input = vAVSResultCode.charAt(0);
 
 		switch (input) {
 		case 'X':
@@ -163,7 +163,7 @@ public class IpgForm extends BaseForm {
      *            String containing the vpc_CSCResultCode
      * @return description String containing the appropriate description
      */
-    private String displayCSCResponse(String vCSCResultCode) {
+    private String displayCSCResponse(final String vCSCResultCode) {
 
 	String result = "";
 	if (vCSCResultCode != null || vCSCResultCode.length() == 0) {
@@ -173,7 +173,7 @@ public class IpgForm extends BaseForm {
 		result = "CSC not supported or there was no CSC data provided";
 	    } else {
 		// Java cannot switch on a string so turn everything to a char
-		char input = vCSCResultCode.charAt(0);
+		final char input = vCSCResultCode.charAt(0);
 
 		switch (input) {
 		case 'M':
@@ -203,7 +203,7 @@ public class IpgForm extends BaseForm {
     }
 
     public String getAgainLink() {
-	return AgainLink;
+	return this.AgainLink;
     }
 
     // ----------------------------------------------------------------------------
@@ -215,7 +215,7 @@ public class IpgForm extends BaseForm {
      * @param vResponseCode String containing the vpc_TxnResponseCode @return
      * description String containing the appropriate description
      */
-    private String getResponseDescription(String vResponseCode) {
+    private String getResponseDescription(final String vResponseCode) {
 
 	String result = "";
 
@@ -223,7 +223,7 @@ public class IpgForm extends BaseForm {
 	if (vResponseCode.trim().length() > 0) {
 
 	    // Java cannot switch on a string so turn everything to a char
-	    char input = vResponseCode.trim().charAt(0);
+	    final char input = vResponseCode.trim().charAt(0);
 
 	    switch (input) {
 	    case '0':
@@ -309,13 +309,13 @@ public class IpgForm extends BaseForm {
     } //
 
     public String getResponseDesc() {
-	return getResponseDescription(vpc_TxnResponseCode);
+	return getResponseDescription(this.vpc_TxnResponseCode);
     }
 
     public String getTxStatus() {
-	return StringUtils.isNotEmpty(vpc_TxnResponseCode)
+	return StringUtils.isNotEmpty(this.vpc_TxnResponseCode)
 		&& ServiceHelper.getInstance().getIpgUtil().getSuccessCode()
-			.equals(vpc_TxnResponseCode.trim()) ? "Successful"
+			.equals(this.vpc_TxnResponseCode.trim()) ? "Successful"
 		: "Failed";
     }
 
@@ -329,7 +329,7 @@ public class IpgForm extends BaseForm {
      *            String containing the status code
      * @return description String containing the appropriate description
      */
-    private String getStatusDescription(String vStatus) {
+    private String getStatusDescription(final String vStatus) {
 
 	String result = "";
 	if (vStatus != null && !vStatus.equals("")) {
@@ -341,7 +341,7 @@ public class IpgForm extends BaseForm {
 
 		// Java cannot switch on a string so turn everything to a
 		// character
-		char input = vStatus.charAt(0);
+		final char input = vStatus.charAt(0);
 
 		switch (input) {
 		case 'Y':
@@ -391,141 +391,141 @@ public class IpgForm extends BaseForm {
     // ----------------------------------------------------------------------------
 
     public String getVpc_3DSECI() {
-	return vpc_3DSECI;
+	return this.vpc_3DSECI;
     }
 
     // ----------------------------------------------------------------------------
 
     public String getVpc_3DSenrolled() {
-	return vpc_3DSenrolled;
+	return this.vpc_3DSenrolled;
     }
 
     public String getVpc_3DSstatus() {
-	return vpc_3DSstatus;
+	return this.vpc_3DSstatus;
     }
 
     public String getVpc_3DSXID() {
-	return vpc_3DSXID;
+	return this.vpc_3DSXID;
     }
 
     public String getVpc_AcqAVSRespCode() {
-	return vpc_AcqAVSRespCode;
+	return this.vpc_AcqAVSRespCode;
     }
 
     public String getVpc_AcqCSCRespCode() {
-	return vpc_AcqCSCRespCode;
+	return this.vpc_AcqCSCRespCode;
     }
 
     public String getVpc_AcqResponseCode() {
-	return vpc_AcqResponseCode;
+	return this.vpc_AcqResponseCode;
     }
 
     public String getVpc_Amount() {
-	return vpc_Amount;
+	return this.vpc_Amount;
     }
 
     public String getVpc_AuthorizeId() {
-	return vpc_AuthorizeId;
+	return this.vpc_AuthorizeId;
     }
 
     public String getVpc_AVS_City() {
-	return vpc_AVS_City;
+	return this.vpc_AVS_City;
     }
 
     public String getVpc_AVS_Country() {
-	return vpc_AVS_Country;
+	return this.vpc_AVS_Country;
     }
 
     public String getVpc_AVS_PostCode() {
-	return vpc_AVS_PostCode;
+	return this.vpc_AVS_PostCode;
     }
 
     public String getVpc_AVS_StateProv() {
-	return vpc_AVS_StateProv;
+	return this.vpc_AVS_StateProv;
     }
 
     public String getVpc_AVS_Street01() {
-	return vpc_AVS_Street01;
+	return this.vpc_AVS_Street01;
     }
 
     public String getVpc_AVSRequestCode() {
-	return vpc_AVSRequestCode;
+	return this.vpc_AVSRequestCode;
     }
 
     public String getVpc_AVSResultCode() {
-	return vpc_AVSResultCode;
+	return this.vpc_AVSResultCode;
     }
 
     public String getVpc_BatchNo() {
-	return vpc_BatchNo;
+	return this.vpc_BatchNo;
     }
 
     public String getVpc_Card() {
-	return vpc_Card;
+	return this.vpc_Card;
     }
 
     public String getVpc_Command() {
-	return vpc_Command;
+	return this.vpc_Command;
     }
 
     public String getVpc_CSCRequestCode() {
-	return vpc_CSCRequestCode;
+	return this.vpc_CSCRequestCode;
     }
 
     public String getVpc_CSCResultCode() {
-	return vpc_CSCResultCode;
+	return this.vpc_CSCResultCode;
     }
 
     public String getVpc_Locale() {
-	return vpc_Locale;
+	return this.vpc_Locale;
     }
 
     public String getVpc_Merchant() {
-	return vpc_Merchant;
+	return this.vpc_Merchant;
     }
 
     public String getVpc_MerchTxnRef() {
-	return vpc_MerchTxnRef;
+	return this.vpc_MerchTxnRef;
     }
 
     public String getVpc_Message() {
-	return vpc_Message;
+	return this.vpc_Message;
     }
 
     public String getVpc_OrderInfo() {
-	return vpc_OrderInfo;
+	return this.vpc_OrderInfo;
     }
 
     public String getVpc_ReceiptNo() {
-	return vpc_ReceiptNo;
+	return this.vpc_ReceiptNo;
     }
 
     public String getVpc_TransactionNo() {
-	return vpc_TransactionNo;
+	return this.vpc_TransactionNo;
     }
 
     public String getVpc_TxnResponseCode() {
-	return vpc_TxnResponseCode;
+	return this.vpc_TxnResponseCode;
     }
 
     public String getVpc_VerSecurityLevel() {
-	return vpc_VerSecurityLevel;
+	return this.vpc_VerSecurityLevel;
     }
 
     public String getVpc_Version() {
-	return vpc_Version;
+	return this.vpc_Version;
     }
 
     public String getVpc_VerStatus() {
-	return vpc_VerStatus;
+	return this.vpc_VerStatus;
     }
 
     public String getVpc_VerToken() {
-	return vpc_VerToken;
+	return this.vpc_VerToken;
     }
 
     public String getVpc_VerType() {
-	return vpc_VerType;
+	return this.vpc_VerType;
     }
 
     /**
@@ -535,23 +535,23 @@ public class IpgForm extends BaseForm {
      *            is a map of all the incoming hey-value pairs from the VPC
      * @return is the hash being returned for comparison to the incoming hash
      */
-    private String hashAllFields(java.util.Map fields) {
+    private String hashAllFields(final java.util.Map fields) {
 
 	// create a list and sort it
-	List fieldNames = new ArrayList(fields.keySet());
+	final List fieldNames = new ArrayList(fields.keySet());
 	Collections.sort(fieldNames);
 
 	// create a buffer for the md5 input and add the secure secret first
-	StringBuffer buf = new StringBuffer();
+	final StringBuffer buf = new StringBuffer();
 	buf.append(SECURE_SECRET);
 
 	// iterate through the list and add the remaining field values
-	Iterator itr = fieldNames.iterator();
+	final Iterator itr = fieldNames.iterator();
 
 	while (itr.hasNext()) {
-	    String fieldName = (String) itr.next();
-	    String fieldValue = (String) fields.get(fieldName);
-	    if ((fieldValue != null) && (fieldValue.length() > 0)) {
+	    final String fieldName = (String) itr.next();
+	    final String fieldValue = (String) fields.get(fieldName);
+	    if (fieldValue != null && fieldValue.length() > 0) {
 		buf.append(fieldValue);
 	    }
 	}
@@ -563,7 +563,7 @@ public class IpgForm extends BaseForm {
 	try {
 	    md5 = MessageDigest.getInstance("MD5");
 	    ba = md5.digest(buf.toString().getBytes("UTF-8"));
-	} catch (Exception e) {
+	} catch (final Exception e) {
 	} // wont happen
 
 	return hex(ba);
@@ -578,182 +578,182 @@ public class IpgForm extends BaseForm {
      * .ActionMapping, javax.servlet.http.HttpServletRequest)
      */
     @Override
-    public void resetBean(ActionMapping mapping, HttpServletRequest request) {
-	AgainLink = EMPTY_STRING;
-	vpc_Amount = EMPTY_STRING;
-	vpc_Locale = EMPTY_STRING;
-	vpc_BatchNo = EMPTY_STRING;
-	vpc_Command = EMPTY_STRING;
-	vpc_Message = EMPTY_STRING;
-	vpc_Version = EMPTY_STRING;
-	vpc_Card = EMPTY_STRING;
-	vpc_OrderInfo = EMPTY_STRING;
-	vpc_ReceiptNo = EMPTY_STRING;
-	vpc_Merchant = EMPTY_STRING;
-	vpc_MerchTxnRef = EMPTY_STRING;
-	vpc_AuthorizeId = EMPTY_STRING;
-	vpc_TransactionNo = EMPTY_STRING;
-	vpc_AcqResponseCode = EMPTY_STRING;
-	vpc_TxnResponseCode = EMPTY_STRING;
-	vpc_CSCResultCode = EMPTY_STRING;
-	vpc_CSCRequestCode = EMPTY_STRING;
-	vpc_AcqCSCRespCode = EMPTY_STRING;
-	vpc_AVS_City = EMPTY_STRING;
-	vpc_AVS_Country = EMPTY_STRING;
-	vpc_AVS_Street01 = EMPTY_STRING;
-	vpc_AVS_PostCode = EMPTY_STRING;
-	vpc_AVS_StateProv = EMPTY_STRING;
-	vpc_AVSResultCode = EMPTY_STRING;
-	vpc_AVSRequestCode = EMPTY_STRING;
-	vpc_AcqAVSRespCode = EMPTY_STRING;
-	vpc_VerType = EMPTY_STRING;
-	vpc_VerStatus = EMPTY_STRING;
-	vpc_VerToken = EMPTY_STRING;
-	vpc_VerSecurityLevel = EMPTY_STRING;
-	vpc_3DSenrolled = EMPTY_STRING;
-	vpc_3DSXID = EMPTY_STRING;
-	vpc_3DSECI = EMPTY_STRING;
-	vpc_3DSstatus = EMPTY_STRING;
+    public void resetBean(final ActionMapping mapping, final HttpServletRequest request) {
+	this.AgainLink = EMPTY_STRING;
+	this.vpc_Amount = EMPTY_STRING;
+	this.vpc_Locale = EMPTY_STRING;
+	this.vpc_BatchNo = EMPTY_STRING;
+	this.vpc_Command = EMPTY_STRING;
+	this.vpc_Message = EMPTY_STRING;
+	this.vpc_Version = EMPTY_STRING;
+	this.vpc_Card = EMPTY_STRING;
+	this.vpc_OrderInfo = EMPTY_STRING;
+	this.vpc_ReceiptNo = EMPTY_STRING;
+	this.vpc_Merchant = EMPTY_STRING;
+	this.vpc_MerchTxnRef = EMPTY_STRING;
+	this.vpc_AuthorizeId = EMPTY_STRING;
+	this.vpc_TransactionNo = EMPTY_STRING;
+	this.vpc_AcqResponseCode = EMPTY_STRING;
+	this.vpc_TxnResponseCode = EMPTY_STRING;
+	this.vpc_CSCResultCode = EMPTY_STRING;
+	this.vpc_CSCRequestCode = EMPTY_STRING;
+	this.vpc_AcqCSCRespCode = EMPTY_STRING;
+	this.vpc_AVS_City = EMPTY_STRING;
+	this.vpc_AVS_Country = EMPTY_STRING;
+	this.vpc_AVS_Street01 = EMPTY_STRING;
+	this.vpc_AVS_PostCode = EMPTY_STRING;
+	this.vpc_AVS_StateProv = EMPTY_STRING;
+	this.vpc_AVSResultCode = EMPTY_STRING;
+	this.vpc_AVSRequestCode = EMPTY_STRING;
+	this.vpc_AcqAVSRespCode = EMPTY_STRING;
+	this.vpc_VerType = EMPTY_STRING;
+	this.vpc_VerStatus = EMPTY_STRING;
+	this.vpc_VerToken = EMPTY_STRING;
+	this.vpc_VerSecurityLevel = EMPTY_STRING;
+	this.vpc_3DSenrolled = EMPTY_STRING;
+	this.vpc_3DSXID = EMPTY_STRING;
+	this.vpc_3DSECI = EMPTY_STRING;
+	this.vpc_3DSstatus = EMPTY_STRING;
 
     }
 
-    public void setAgainLink(String againLink) {
-	AgainLink = againLink;
+    public void setAgainLink(final String againLink) {
+	this.AgainLink = againLink;
     }
 
-    public void setVpc_3DSECI(String vpc_3DSECI) {
+    public void setVpc_3DSECI(final String vpc_3DSECI) {
 	this.vpc_3DSECI = vpc_3DSECI;
     }
 
-    public void setVpc_3DSenrolled(String vpc_3DSenrolled) {
+    public void setVpc_3DSenrolled(final String vpc_3DSenrolled) {
 	this.vpc_3DSenrolled = vpc_3DSenrolled;
     }
 
-    public void setVpc_3DSstatus(String vpc_3DSstatus) {
+    public void setVpc_3DSstatus(final String vpc_3DSstatus) {
 	this.vpc_3DSstatus = vpc_3DSstatus;
     }
 
-    public void setVpc_3DSXID(String vpc_3DSXID) {
+    public void setVpc_3DSXID(final String vpc_3DSXID) {
 	this.vpc_3DSXID = vpc_3DSXID;
     }
 
-    public void setVpc_AcqAVSRespCode(String vpc_AcqAVSRespCode) {
+    public void setVpc_AcqAVSRespCode(final String vpc_AcqAVSRespCode) {
 	this.vpc_AcqAVSRespCode = vpc_AcqAVSRespCode;
     }
 
-    public void setVpc_AcqCSCRespCode(String vpc_AcqCSCRespCode) {
+    public void setVpc_AcqCSCRespCode(final String vpc_AcqCSCRespCode) {
 	this.vpc_AcqCSCRespCode = vpc_AcqCSCRespCode;
     }
 
-    public void setVpc_AcqResponseCode(String vpc_AcqResponseCode) {
+    public void setVpc_AcqResponseCode(final String vpc_AcqResponseCode) {
 	this.vpc_AcqResponseCode = vpc_AcqResponseCode;
     }
 
-    public void setVpc_Amount(String vpc_Amount) {
+    public void setVpc_Amount(final String vpc_Amount) {
 	this.vpc_Amount = vpc_Amount;
     }
 
-    public void setVpc_AuthorizeId(String vpc_AuthorizeId) {
+    public void setVpc_AuthorizeId(final String vpc_AuthorizeId) {
 	this.vpc_AuthorizeId = vpc_AuthorizeId;
     }
 
-    public void setVpc_AVS_City(String vpc_AVS_City) {
+    public void setVpc_AVS_City(final String vpc_AVS_City) {
 	this.vpc_AVS_City = vpc_AVS_City;
     }
 
-    public void setVpc_AVS_Country(String vpc_AVS_Country) {
+    public void setVpc_AVS_Country(final String vpc_AVS_Country) {
 	this.vpc_AVS_Country = vpc_AVS_Country;
     }
 
-    public void setVpc_AVS_PostCode(String vpc_AVS_PostCode) {
+    public void setVpc_AVS_PostCode(final String vpc_AVS_PostCode) {
 	this.vpc_AVS_PostCode = vpc_AVS_PostCode;
     }
 
-    public void setVpc_AVS_StateProv(String vpc_AVS_StateProv) {
+    public void setVpc_AVS_StateProv(final String vpc_AVS_StateProv) {
 	this.vpc_AVS_StateProv = vpc_AVS_StateProv;
     }
 
-    public void setVpc_AVS_Street01(String vpc_AVS_Street01) {
+    public void setVpc_AVS_Street01(final String vpc_AVS_Street01) {
 	this.vpc_AVS_Street01 = vpc_AVS_Street01;
     }
 
-    public void setVpc_AVSRequestCode(String vpc_AVSRequestCode) {
+    public void setVpc_AVSRequestCode(final String vpc_AVSRequestCode) {
 	this.vpc_AVSRequestCode = vpc_AVSRequestCode;
     }
 
-    public void setVpc_AVSResultCode(String vpc_AVSResultCode) {
+    public void setVpc_AVSResultCode(final String vpc_AVSResultCode) {
 	this.vpc_AVSResultCode = vpc_AVSResultCode;
     }
 
-    public void setVpc_BatchNo(String vpc_BatchNo) {
+    public void setVpc_BatchNo(final String vpc_BatchNo) {
 	this.vpc_BatchNo = vpc_BatchNo;
     }
 
-    public void setVpc_Card(String vpc_Card) {
+    public void setVpc_Card(final String vpc_Card) {
 	this.vpc_Card = vpc_Card;
     }
 
-    public void setVpc_Command(String vpc_Command) {
+    public void setVpc_Command(final String vpc_Command) {
 	this.vpc_Command = vpc_Command;
     }
 
-    public void setVpc_CSCRequestCode(String vpc_CSCRequestCode) {
+    public void setVpc_CSCRequestCode(final String vpc_CSCRequestCode) {
 	this.vpc_CSCRequestCode = vpc_CSCRequestCode;
     }
 
-    public void setVpc_CSCResultCode(String vpc_CSCResultCode) {
+    public void setVpc_CSCResultCode(final String vpc_CSCResultCode) {
 	this.vpc_CSCResultCode = vpc_CSCResultCode;
     }
 
-    public void setVpc_Locale(String vpc_Locale) {
+    public void setVpc_Locale(final String vpc_Locale) {
 	this.vpc_Locale = vpc_Locale;
     }
 
-    public void setVpc_Merchant(String vpc_Merchant) {
+    public void setVpc_Merchant(final String vpc_Merchant) {
 	this.vpc_Merchant = vpc_Merchant;
     }
 
-    public void setVpc_MerchTxnRef(String vpc_MerchTxnRef) {
+    public void setVpc_MerchTxnRef(final String vpc_MerchTxnRef) {
 	this.vpc_MerchTxnRef = vpc_MerchTxnRef;
     }
 
-    public void setVpc_Message(String vpc_Message) {
+    public void setVpc_Message(final String vpc_Message) {
 	this.vpc_Message = vpc_Message;
     }
 
-    public void setVpc_OrderInfo(String vpc_OrderInfo) {
+    public void setVpc_OrderInfo(final String vpc_OrderInfo) {
 	this.vpc_OrderInfo = vpc_OrderInfo;
     }
 
-    public void setVpc_ReceiptNo(String vpc_ReceiptNo) {
+    public void setVpc_ReceiptNo(final String vpc_ReceiptNo) {
 	this.vpc_ReceiptNo = vpc_ReceiptNo;
     }
 
-    public void setVpc_TransactionNo(String vpc_TransactionNo) {
+    public void setVpc_TransactionNo(final String vpc_TransactionNo) {
 	this.vpc_TransactionNo = vpc_TransactionNo;
     }
 
-    public void setVpc_TxnResponseCode(String vpc_TxnResponseCode) {
+    public void setVpc_TxnResponseCode(final String vpc_TxnResponseCode) {
 	this.vpc_TxnResponseCode = vpc_TxnResponseCode;
     }
 
-    public void setVpc_VerSecurityLevel(String vpc_VerSecurityLevel) {
+    public void setVpc_VerSecurityLevel(final String vpc_VerSecurityLevel) {
 	this.vpc_VerSecurityLevel = vpc_VerSecurityLevel;
     }
 
-    public void setVpc_Version(String vpc_Version) {
+    public void setVpc_Version(final String vpc_Version) {
 	this.vpc_Version = vpc_Version;
     }
 
-    public void setVpc_VerStatus(String vpc_VerStatus) {
+    public void setVpc_VerStatus(final String vpc_VerStatus) {
 	this.vpc_VerStatus = vpc_VerStatus;
     }
 
-    public void setVpc_VerToken(String vpc_VerToken) {
+    public void setVpc_VerToken(final String vpc_VerToken) {
 	this.vpc_VerToken = vpc_VerToken;
     }
 
-    public void setVpc_VerType(String vpc_VerType) {
+    public void setVpc_VerType(final String vpc_VerType) {
 	this.vpc_VerType = vpc_VerType;
     }
 
@@ -765,8 +765,8 @@ public class IpgForm extends BaseForm {
      * .ActionMapping, javax.servlet.http.HttpServletRequest)
      */
     @Override
-    public ActionErrors validateBean(ActionMapping mapping,
-	    HttpServletRequest request) {
+    public ActionErrors validateBean(final ActionMapping mapping,
+	    final HttpServletRequest request) {
 	// TODO Auto-generated method stub
 	return null;
     }
