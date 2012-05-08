@@ -48,7 +48,7 @@ public class BookingDetailForm extends BaseForm {
     }
 
     public void setItemBookingList(List<ExtraItemBooking> itemBookingList) {
-	itemBookingList = itemBookingList;
+	this.itemBookingList = itemBookingList;
     }
 
     public BookingReportDTO getBookingReportDTO() {

@@ -1,6 +1,5 @@
 package com.yd.etravel.service.extraitem;
 
-import java.util.Collections;
 import java.util.List;
 
 import com.yd.etravel.domain.booking.ExtraItemBooking;
@@ -39,23 +38,19 @@ public class ExtraItemManagerImpl implements IExtraItemManager {
     }
 
     public List<ExtraItem> findAllActiveExtraItems() throws ServiceException {
-	List<ExtraItem> list = Collections.EMPTY_LIST;
 	try {
-	    list = this.itemDAO.findAllActive(ExtraItem.class);
+	    return this.itemDAO.findAllActive(ExtraItem.class);
 	} catch (PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
-	return list;
     }
 
     public List<ExtraItem> findAllExtraItem() throws ServiceException {
-	List<ExtraItem> list = Collections.EMPTY_LIST;
 	try {
-	    list = this.itemDAO.findAll(ExtraItem.class);
+	    return this.itemDAO.findAll(ExtraItem.class);
 	} catch (PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
-	return list;
     }
 
     public ExtraItem findExtraItemById(Long id) throws ServiceException {
@@ -90,24 +85,20 @@ public class ExtraItemManagerImpl implements IExtraItemManager {
 
     public List<ExtraItemBooking> findByBookingId(Long bookingId)
 	    throws ServiceException {
-	List<ExtraItemBooking> list = Collections.EMPTY_LIST;
 	try {
-	    list = this.itemDAO.findByBookingId(bookingId);
+	    return this.itemDAO.findByBookingId(bookingId);
 	} catch (PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
-	return list;
     }
 
     public List<ExtraItem> findExtraItemsByHotel(Long hotelId)
 	    throws ServiceException {
-	List<ExtraItem> list = Collections.EMPTY_LIST;
 	try {
-	    list = this.itemDAO.findAllByHotelId(hotelId);
+	    return this.itemDAO.findAllByHotelId(hotelId);
 	} catch (PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
-	return list;
     }
 
 }

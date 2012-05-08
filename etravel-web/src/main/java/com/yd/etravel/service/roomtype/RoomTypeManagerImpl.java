@@ -1,6 +1,5 @@
 package com.yd.etravel.service.roomtype;
 
-import java.util.Collections;
 import java.util.List;
 
 import com.yd.etravel.domain.roomtype.RoomType;
@@ -69,14 +68,11 @@ public class RoomTypeManagerImpl implements IRoomTypeManager {
     }
 
     public List<RoomType> findAllRoomType() throws ServiceException {
-	List<RoomType> list = Collections.EMPTY_LIST;
 	try {
-	    list = roomTypeDAO.findAll(RoomType.class);
-
+	    return roomTypeDAO.findAll(RoomType.class);
 	} catch (PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
-	return list;
     }
 
     /*
@@ -85,12 +81,10 @@ public class RoomTypeManagerImpl implements IRoomTypeManager {
      * @see com.yd.etravel.service.hotel.IHotelManager#findAllActiveHotels()
      */
     public List<RoomType> findAllActiveRoomType() throws ServiceException {
-	List<RoomType> list = Collections.EMPTY_LIST;
 	try {
-	    list = roomTypeDAO.findAllActive(RoomType.class);
+	    return roomTypeDAO.findAllActive(RoomType.class);
 	} catch (PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
-	return list;
     }
 }

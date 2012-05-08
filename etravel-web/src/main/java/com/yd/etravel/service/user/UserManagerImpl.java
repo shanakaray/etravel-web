@@ -4,7 +4,6 @@
 package com.yd.etravel.service.user;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -224,14 +223,12 @@ public class UserManagerImpl implements IUserManager {
     }
 
     public List<Role> findAllActiveRoles() throws ServiceException {
-	List<Role> list = Collections.EMPTY_LIST;
 	try {
-	    list = userDAO.findAllActive(Role.class);
+	    return userDAO.findAllActive(Role.class);
 
 	} catch (PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
-	return list;
     }
 
     public Role findRoleById(Long id) throws ServiceException {
@@ -247,14 +244,12 @@ public class UserManagerImpl implements IUserManager {
     }
 
     public List<Role> findAllRoles() throws ServiceException {
-	List<Role> list = Collections.EMPTY_LIST;
 	try {
-	    list = userDAO.findAll(Role.class);
+	    return userDAO.findAll(Role.class);
 
 	} catch (PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
-	return list;
     }
 
     public int deleteRole(Long id) throws ServiceException {
@@ -270,14 +265,12 @@ public class UserManagerImpl implements IUserManager {
 
     public List<User> findUsers(UserSearchDTO userSearchDTO)
 	    throws ServiceException {
-	List<User> list = Collections.EMPTY_LIST;
 	try {
-	    list = userDAO.findUsers(userSearchDTO);
+	    return  userDAO.findUsers(userSearchDTO);
 
 	} catch (PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
-	return list;
     }
 
     public User findUserById(Long id) throws ServiceException {

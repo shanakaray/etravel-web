@@ -1,6 +1,5 @@
 package com.yd.etravel.service.room;
 
-import java.util.Collections;
 import java.util.List;
 
 import com.yd.etravel.domain.custom.room.RoomSearchDTO;
@@ -39,14 +38,12 @@ public class RoomManagerImpl implements IRoomManager {
     }
 
     public List<Room> findAllRooms() throws ServiceException {
-	List<Room> list = Collections.EMPTY_LIST;
 	try {
-	    list = roomDAO.findAll(Room.class);
+	    return roomDAO.findAll(Room.class);
 	} catch (PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
 
-	return list;
     }
 
     public Room findRoomById(Long id) throws ServiceException {
@@ -62,15 +59,13 @@ public class RoomManagerImpl implements IRoomManager {
 
     public List<Room> findRooms(RoomSearchDTO roomSearchDTO)
 	    throws ServiceException {
-	List<Room> list = Collections.EMPTY_LIST;
 	try {
-	    list = roomDAO.findRooms(roomSearchDTO);
+	    return roomDAO.findRooms(roomSearchDTO);
 
 	} catch (PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
 
-	return list;
     }
 
     public Room saveRoom(Room room) throws ServiceException {
@@ -102,26 +97,22 @@ public class RoomManagerImpl implements IRoomManager {
      * @see com.yd.etravel.service.hotel.IHotelManager#findAllActiveHotels()
      */
     public List<Room> findAllActiveRoom() throws ServiceException {
-	List<Room> list = Collections.EMPTY_LIST;
 	try {
-	    list = roomDAO.findAllActive(Room.class);
+	    return roomDAO.findAllActive(Room.class);
 	} catch (PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
-	return list;
     }
 
     public List<Room> findAllRoomWithRoomType(Long hotelid)
 	    throws ServiceException {
-	List<Room> list = Collections.EMPTY_LIST;
 	try {
-	    list = roomDAO.findAllRoomWithRoomType(hotelid);
+	    return roomDAO.findAllRoomWithRoomType(hotelid);
 
 	} catch (PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
 
-	return list;
     }
 
 }

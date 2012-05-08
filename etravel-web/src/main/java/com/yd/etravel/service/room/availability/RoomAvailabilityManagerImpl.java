@@ -1,7 +1,6 @@
 package com.yd.etravel.service.room.availability;
 
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -174,14 +173,11 @@ public class RoomAvailabilityManagerImpl implements IRoomAvailabilityManager {
 
     public List<RoomAvailability> findAllRoomAvailability()
 	    throws ServiceException {
-	List<RoomAvailability> list = Collections.EMPTY_LIST;
 	try {
-	    list = roomAvailabilityDAO.findAll(RoomAvailability.class);
-
+	    return roomAvailabilityDAO.findAll(RoomAvailability.class);
 	} catch (PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
-	return list;
     }
 
     @Deprecated
@@ -191,41 +187,33 @@ public class RoomAvailabilityManagerImpl implements IRoomAvailabilityManager {
      */
     public List<RoomAvailability> findAllRoomAvailabilityWithRoomAndOccu(
 	    Long hotelId) throws ServiceException {
-	List<RoomAvailability> list = Collections.EMPTY_LIST;
 	try {
-	    list = roomAvailabilityDAO
+	    return roomAvailabilityDAO
 		    .findAllRoomAvailabilityWithRoomAndOccu(hotelId);
 
 	} catch (PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
-	return list;
     }
 
     public List<RoomDailyAvailability> findAllRoomDailyAvailability(Long id)
 	    throws ServiceException {
-	List<RoomDailyAvailability> list = Collections.EMPTY_LIST;
 	try {
-	    list = roomAvailabilityDAO.findAllRoomDailyAvailability(id);
+	    return roomAvailabilityDAO.findAllRoomDailyAvailability(id);
 
 	} catch (PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
-	return list;
-
     }
 
     public List<RoomDailyAvailability> findAllRoomDailyAvailability()
 	    throws ServiceException {
-	List<RoomDailyAvailability> list = Collections.EMPTY_LIST;
 	try {
-	    list = roomAvailabilityDAO.findAllRoomDailyAvailability();
+	    return roomAvailabilityDAO.findAllRoomDailyAvailability();
 
 	} catch (PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
-	return list;
-
     }
 
     public RoomAvailability findRoomAvailabilityWithRoomInfoById(Long id)
@@ -241,27 +229,22 @@ public class RoomAvailabilityManagerImpl implements IRoomAvailabilityManager {
 
     public List<RoomAvailabilityDTO> findAllRoomAvailabilityDTO(
 	    RoomAvailabilityDTO dto) throws ServiceException {
-	List<RoomAvailabilityDTO> list = Collections.EMPTY_LIST;
 	try {
-
-	    list = roomAvailabilityDAO.findAllRoomAvailabilityDTO(dto);
+	    return roomAvailabilityDAO.findAllRoomAvailabilityDTO(dto);
 
 	} catch (PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
-	return list;
     }
 
     public List<DailyAvailabilityDTO> findDailyAvailability(Long id)
 	    throws ServiceException {
-	List<DailyAvailabilityDTO> list = Collections.EMPTY_LIST;
 	try {
-	    list = roomAvailabilityDAO.findDailyAvailability(id);
+	    return roomAvailabilityDAO.findDailyAvailability(id);
 
 	} catch (PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
-	return list;
     }
 
 }
