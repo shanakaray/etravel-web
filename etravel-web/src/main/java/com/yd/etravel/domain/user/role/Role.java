@@ -20,11 +20,9 @@ import com.yd.etravel.domain.common.BaseObject;
 @Table(name = "T_ROLE")
 public class Role extends BaseObject {
 
-    @ManyToMany( cascade = { ALL } )
-    @JoinTable( name="T_ROLE_T_FUNC",
-         joinColumns = @JoinColumn(name = "T_ROLE_ID", nullable = false),
-         inverseJoinColumns = @JoinColumn(name = "FUNCTION_ID", nullable = false),
-         uniqueConstraints = @UniqueConstraint (columnNames = { "T_ROLE_ID", "FUNCTION_ID" }))
+    @ManyToMany(cascade = { ALL })
+    @JoinTable(name = "T_ROLE_T_FUNC", joinColumns = @JoinColumn(name = "T_ROLE_ID", nullable = false), inverseJoinColumns = @JoinColumn(name = "FUNCTION_ID", nullable = false), uniqueConstraints = @UniqueConstraint(columnNames = {
+	    "T_ROLE_ID", "FUNCTION_ID" }))
     private List<Function> function;
 
     public Role(final String name) {
@@ -60,7 +58,7 @@ public class Role extends BaseObject {
 
     public boolean hasFunctionId(final Long key) {
 	for (final Function function : getFunction()) {
-	    if (function.getId().equals( key) ) {
+	    if (function.getId().equals(key)) {
 		return true;
 	    }
 	}

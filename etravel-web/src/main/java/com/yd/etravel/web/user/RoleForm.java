@@ -82,7 +82,8 @@ public class RoleForm extends BaseForm {
      * .ActionMapping, javax.servlet.http.HttpServletRequest)
      */
     @Override
-    public void resetBean(final ActionMapping mapping, final HttpServletRequest request) {
+    public void resetBean(final ActionMapping mapping,
+	    final HttpServletRequest request) {
 	this.name = ICommon.EMPTY_STRING;
 	this.discription = ICommon.EMPTY_STRING;
 	this.active = false;

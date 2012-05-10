@@ -8,17 +8,14 @@ import java.util.List;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
-import org.hibernate.Session;
+import org.springframework.stereotype.Repository;
 
 import com.yd.etravel.domain.season.RoomSeasonalRate;
 import com.yd.etravel.domain.season.Season;
 import com.yd.etravel.persistence.dao.common.BaseDAO;
 import com.yd.etravel.persistence.exception.PersistenceException;
 
-/**
- * @author Dharsahana
- * 
- */
+@Repository
 public class SeasonDAO extends BaseDAO implements ISeasonDAO {
 
     final static StringBuilder IS_SEASON_NAME_EXIST = new StringBuilder(
@@ -37,8 +34,6 @@ public class SeasonDAO extends BaseDAO implements ISeasonDAO {
     final static StringBuilder FIND_ALL_SEASON_WITH_HOTEL = new StringBuilder(
 	    "SELECT season FROM com.yd.etravel.domain.season.Season as season join fetch  season.hotel as hotel");
 
-    // Seasonal Rate
-
     final static StringBuilder IS_SEASONAL_RATE_EXIST = new StringBuilder(
 	    "SELECT roomSeasonalRate FROM com.yd.etravel.domain.season.RoomSeasonalRate as roomSeasonalRate"
 		    + " join roomSeasonalRate.season as season join roomSeasonalRate.room as room "
@@ -49,20 +44,15 @@ public class SeasonDAO extends BaseDAO implements ISeasonDAO {
 		    + "join fetch  roomSeasonalRate.season as season join fetch  roomSeasonalRate.room as room "
 		    + " where room.id=?");
 
-    /**
-	 * 
-	 */
     public SeasonDAO() {
-	// TODO Auto-generated constructor stub
     }
 
     @Override
     public boolean isSeasonNameExist(final String seasonName)
 	    throws PersistenceException {
 	try {
-	    final Session session = getHibernateTemplate().getSessionFactory()
-		    .getCurrentSession();
-	    final Query query = session.createQuery(IS_SEASON_NAME_EXIST.toString());
+	    final Query query = getCurrentSession().createQuery(
+		    IS_SEASON_NAME_EXIST.toString());
 	    query.setParameter("name", seasonName);
 	    return !query.list().isEmpty();
 	} catch (final HibernateException e) {
@@ -74,9 +64,8 @@ public class SeasonDAO extends BaseDAO implements ISeasonDAO {
     public boolean isSeasonCodeExist(final String seasonCode)
 	    throws PersistenceException {
 	try {
-	    final Session session = getHibernateTemplate().getSessionFactory()
-		    .getCurrentSession();
-	    final Query query = session.createQuery(IS_SEASON_CODE_EXIST.toString());
+	    final Query query = getCurrentSession().createQuery(
+		    IS_SEASON_CODE_EXIST.toString());
 	    query.setParameter("code", seasonCode);
 	    return !query.list().isEmpty();
 	} catch (final HibernateException e) {
@@ -89,9 +78,8 @@ public class SeasonDAO extends BaseDAO implements ISeasonDAO {
 	    final Date toDate) throws PersistenceException {
 	try {
 
-	    final Session session = getHibernateTemplate().getSessionFactory()
-		    .getCurrentSession();
-	    final Query query = session.createQuery(IS_DATE_RANGE_VALID.toString());
+	    final Query query = getCurrentSession().createQuery(
+		    IS_DATE_RANGE_VALID.toString());
 	    query.setParameter(0, fromDate);
 	    query.setParameter(1, fromDate);
 	    query.setParameter(2, toDate);
@@ -119,10 +107,8 @@ public class SeasonDAO extends BaseDAO implements ISeasonDAO {
     public boolean isSeasonalRateExist(final RoomSeasonalRate roomSeasonalRate)
 	    throws PersistenceException {
 	try {
-	    final Session session = getHibernateTemplate().getSessionFactory()
-		    .getCurrentSession();
-	    final Query query = session
-		    .createQuery(IS_SEASONAL_RATE_EXIST.toString());
+	    final Query query = getCurrentSession().createQuery(
+		    IS_SEASONAL_RATE_EXIST.toString());
 	    query.setParameter(0, roomSeasonalRate.getSeason().getId());
 	    query.setParameter(1, roomSeasonalRate.getRoom().getId());
 	    return query.list().isEmpty();
@@ -131,7 +117,6 @@ public class SeasonDAO extends BaseDAO implements ISeasonDAO {
 	}
     }
 
-    // Seasonal rate
     @Override
     public List<RoomSeasonalRate> findAllRoomSeasonalRateWithRoomAndSeason(
 	    final Long hotelid) throws PersistenceException {
@@ -146,9 +131,7 @@ public class SeasonDAO extends BaseDAO implements ISeasonDAO {
 	    if (hotelid != null) {
 		sb.append(" and hot.id=:id");
 	    }
-	    final Session session = getHibernateTemplate().getSessionFactory()
-		    .getCurrentSession();
-	    final Query query = session.createQuery(sb.toString());
+	    final Query query = getCurrentSession().createQuery(sb.toString());
 
 	    if (hotelid != null) {
 		query.setParameter("id", hotelid);
@@ -165,11 +148,8 @@ public class SeasonDAO extends BaseDAO implements ISeasonDAO {
 	    throws PersistenceException {
 	try {
 
-	    final Session session = getHibernateTemplate().getSessionFactory()
-		    .getCurrentSession();
-	    final Query query = session
-		    .createQuery(FIND_ALL_ROOM_SEASONAL_RATE_BY_ROOM_ID
-			    .toString());
+	    final Query query = getCurrentSession().createQuery(
+		    FIND_ALL_ROOM_SEASONAL_RATE_BY_ROOM_ID.toString());
 	    query.setParameter(0, roomId);
 
 	    return query.list();
@@ -190,9 +170,7 @@ public class SeasonDAO extends BaseDAO implements ISeasonDAO {
 		sb.append(" AND hot.id=:hid");
 	    }
 
-	    final Session session = getHibernateTemplate().getSessionFactory()
-		    .getCurrentSession();
-	    final Query query = session.createQuery(sb.toString());
+	    final Query query = getCurrentSession().createQuery(sb.toString());
 
 	    if (hotelId != null) {
 		query.setParameter("hid", hotelId);
@@ -212,9 +190,7 @@ public class SeasonDAO extends BaseDAO implements ISeasonDAO {
 		    "SELECT roomSeasonalRate FROM com.yd.etravel.domain.season.RoomSeasonalRate as roomSeasonalRate "
 			    + "join fetch  roomSeasonalRate.season as season join fetch roomSeasonalRate.room as room join fetch room.hotel as hot "
 			    + "where roomSeasonalRate.id=:id ");
-	    final Session session = getHibernateTemplate().getSessionFactory()
-		    .getCurrentSession();
-	    final Query query = session.createQuery(sb.toString());
+	    final Query query = getCurrentSession().createQuery(sb.toString());
 	    query.setParameter("id", id);
 	    final List<RoomSeasonalRate> list = query.list();
 	    return list.isEmpty() ? null : (RoomSeasonalRate) list.get(0);

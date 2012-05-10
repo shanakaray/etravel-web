@@ -34,7 +34,7 @@ public interface IBaseDAO {
 
     public List findAll(Class cls, Long[] id) throws PersistenceException;
 
-    public int deleteAny(Class cls, Long id) throws PersistenceException;
+    public int deleteAny(Long id, Class cla) throws PersistenceException;
 
     public int deleteAny(Class cls, Long[] id) throws PersistenceException;
 }

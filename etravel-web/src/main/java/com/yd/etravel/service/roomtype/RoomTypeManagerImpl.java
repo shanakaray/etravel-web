@@ -2,26 +2,28 @@ package com.yd.etravel.service.roomtype;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.yd.etravel.domain.roomtype.RoomType;
 import com.yd.etravel.persistence.dao.roomtype.IRoomTypeDAO;
 import com.yd.etravel.persistence.exception.PersistenceException;
 import com.yd.etravel.service.exception.ServiceException;
 import com.yd.etravel.service.message.ValidationHelper;
 
-/**
- * 
- * 
- * @author Dharshana
- * 
- */
+@Service(value = "roomTypeService")
+@Transactional(propagation = Propagation.SUPPORTS)
 public class RoomTypeManagerImpl implements IRoomTypeManager {
-
+    @Autowired(required = true)
     private IRoomTypeDAO roomTypeDAO;
 
     public void setRoomTypeDAO(final IRoomTypeDAO roomTypeDAO) {
 	this.roomTypeDAO = roomTypeDAO;
     }
 
+    @Transactional
     @Override
     public RoomType save(final RoomType roomType) throws ServiceException {
 	try {
@@ -58,11 +60,12 @@ public class RoomTypeManagerImpl implements IRoomTypeManager {
 	return roomType;
     }
 
+    @Transactional
     @Override
     public int deleteRoomType(final Long id) throws ServiceException {
 	int flag = 0;
 	try {
-	    flag = this.roomTypeDAO.deleteAny(RoomType.class, id);
+	    flag = this.roomTypeDAO.deleteAny(id, null);
 
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
@@ -79,11 +82,6 @@ public class RoomTypeManagerImpl implements IRoomTypeManager {
 	}
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.yd.etravel.service.hotel.IHotelManager#findAllActiveHotels()
-     */
     @Override
     public List<RoomType> findAllActiveRoomType() throws ServiceException {
 	try {

@@ -8,7 +8,7 @@ import java.util.List;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
-import org.hibernate.Session;
+import org.springframework.stereotype.Repository;
 
 import com.yd.etravel.domain.custom.room.availability.DailyAvailabilityDTO;
 import com.yd.etravel.domain.custom.room.availability.RoomAvailabilityDTO;
@@ -18,10 +18,7 @@ import com.yd.etravel.persistence.dao.common.BaseDAO;
 import com.yd.etravel.persistence.exception.PersistenceException;
 import com.yd.etravel.service.exception.ServiceException;
 
-/**
- * @author Dharsahana
- * 
- */
+@Repository
 public class RoomAvailabilityDAO extends BaseDAO implements
 	IRoomAvailabilityDAO {
 
@@ -64,9 +61,8 @@ public class RoomAvailabilityDAO extends BaseDAO implements
 	    final Date toDate) throws PersistenceException {
 	try {
 
-	    final Session session = getHibernateTemplate().getSessionFactory()
-		    .getCurrentSession();
-	    final Query query = session.createQuery(IS_DATE_RANGE_VALID.toString());
+	    final Query query = getCurrentSession().createQuery(
+		    IS_DATE_RANGE_VALID.toString());
 	    query.setParameter(0, fromDate);
 	    query.setParameter(1, fromDate);
 	    query.setParameter(2, toDate);
@@ -88,27 +84,16 @@ public class RoomAvailabilityDAO extends BaseDAO implements
     public List<RoomAvailability> findAllRoomAvailabilityWithRoomAndOccu(
 	    final Long hotelId) throws PersistenceException {
 	try {
-	    // final StringBuilder sb = new StringBuilder(
-	    // "SELECT roomAvailability FROM RoomAvailability as
-	    // roomAvailability ")
-	    // .append("join fetch roomAvailability.room as room join fetch
-	    // room.roomType as roomType " )
-	    // .append("join fetch roomAvailability.occupancy as occupancy join
-	    // room.hotel as hot WHERE 1=1 ");
-
 	    final StringBuilder sb = new StringBuilder(
 
 	    "SELECT roomAvailability FROM RoomAvailability as roomAvailability ")
 		    .append("join fetch  roomAvailability.room as room join fetch room.roomType as roomType ")
 		    .append("join fetch room.hotel as hot WHERE 1=1 ");
 
-	    final Session session = getHibernateTemplate().getSessionFactory()
-		    .getCurrentSession();
-
 	    if (hotelId != null) {
 		sb.append(" AND hot.id=:hid ");
 	    }
-	    final Query query = session.createQuery(sb.toString());
+	    final Query query = getCurrentSession().createQuery(sb.toString());
 	    if (hotelId != null) {
 		query.setParameter("hid", hotelId);
 	    }
@@ -137,9 +122,6 @@ public class RoomAvailabilityDAO extends BaseDAO implements
 		    .append("join ra.room as room join room.roomType as type ")
 		    .append("join room.hotel as hot WHERE 1=1 ");
 
-	    final Session session = getHibernateTemplate().getSessionFactory()
-		    .getCurrentSession();
-
 	    if (dto.getHotelId() != null) {
 		sb.append(" AND hot.id=:hid ");
 	    }
@@ -151,7 +133,7 @@ public class RoomAvailabilityDAO extends BaseDAO implements
 		sb.append(" OR ra.fromDate<=:tdate) ");
 	    }
 
-	    final Query query = session.createQuery(sb.toString());
+	    final Query query = getCurrentSession().createQuery(sb.toString());
 	    if (dto.getHotelId() != null) {
 		query.setParameter("hid", dto.getHotelId());
 	    }
@@ -171,14 +153,11 @@ public class RoomAvailabilityDAO extends BaseDAO implements
     // Daily Availabilty
 
     @Override
-    public List<RoomDailyAvailability> findAllRoomDailyAvailability(final Long id)
-	    throws PersistenceException {
+    public List<RoomDailyAvailability> findAllRoomDailyAvailability(
+	    final Long id) throws PersistenceException {
 	try {
-	    final Session session = getHibernateTemplate().getSessionFactory()
-		    .getCurrentSession();
-	    final Query query = session
-		    .createQuery(FIND_ALL_DAILY_ROOM_AVAILABILITY_BY_ID
-			    .toString());
+	    final Query query = getCurrentSession().createQuery(
+		    FIND_ALL_DAILY_ROOM_AVAILABILITY_BY_ID.toString());
 	    query.setParameter(0, id);
 
 	    final List list = query.list();
@@ -194,10 +173,8 @@ public class RoomAvailabilityDAO extends BaseDAO implements
     public List<RoomDailyAvailability> findAllRoomDailyAvailability()
 	    throws PersistenceException {
 	try {
-	    final Session session = getHibernateTemplate().getSessionFactory()
-		    .getCurrentSession();
-	    final Query query = session.createQuery(FIND_ALL_DAILY_ROOM_AVAILABILITY
-		    .toString());
+	    final Query query = getCurrentSession().createQuery(
+		    FIND_ALL_DAILY_ROOM_AVAILABILITY.toString());
 
 	    return query.list();
 
@@ -210,10 +187,8 @@ public class RoomAvailabilityDAO extends BaseDAO implements
     public List<RoomDailyAvailability> findAllRoomDailyAvailabilityByRoomAvailabilityId(
 	    final Long id) throws PersistenceException {
 	try {
-	    final Session session = getHibernateTemplate().getSessionFactory()
-		    .getCurrentSession();
-	    final Query query = session
-		    .createQuery(FIND_ALL_DAILY_ROOM_AVAILABILITY_BY_ROOM_AVAILABILITY_ID
+	    final Query query = getCurrentSession().createQuery(
+		    FIND_ALL_DAILY_ROOM_AVAILABILITY_BY_ROOM_AVAILABILITY_ID
 			    .toString());
 	    query.setParameter(0, id);
 
@@ -228,10 +203,8 @@ public class RoomAvailabilityDAO extends BaseDAO implements
     public RoomAvailability findRoomAvailabilityById(final Long id)
 	    throws ServiceException, PersistenceException {
 	try {
-	    final Session session = getHibernateTemplate().getSessionFactory()
-		    .getCurrentSession();
-	    final Query query = session
-		    .createQuery(FIND_ALL_ROOM_AVAILABILITY_WITH_ROOM_AND_ROOM_TYPE_BY_ID
+	    final Query query = getCurrentSession().createQuery(
+		    FIND_ALL_ROOM_AVAILABILITY_WITH_ROOM_AND_ROOM_TYPE_BY_ID
 			    .toString());
 	    query.setParameter(0, id);
 
@@ -247,17 +220,15 @@ public class RoomAvailabilityDAO extends BaseDAO implements
 
     @Override
     public List<RoomDailyAvailability> findAllRoomDailyAvailabilityByRoomAvailabilityIdAndDateRange(
-	    final Long id, final Date checkIn, final Date checkOut) throws PersistenceException {
+	    final Long id, final Date checkIn, final Date checkOut)
+	    throws PersistenceException {
 	try {
-	    final Session session = getHibernateTemplate().getSessionFactory()
-		    .getCurrentSession();
-	    final Query query = session
-		    .createQuery(FIND_ALL_DAILY_ROOM_AVAILABILITY_BY_ROOM_AVAILABILITY_ID_AND_DATE_RANGE
+	    final Query query = getCurrentSession().createQuery(
+		    FIND_ALL_DAILY_ROOM_AVAILABILITY_BY_ROOM_AVAILABILITY_ID_AND_DATE_RANGE
 			    .toString());
 	    query.setParameter(0, id);
 	    query.setParameter(1, checkIn);
 	    query.setParameter(2, checkOut);
-
 
 	    return query.list();
 
@@ -286,9 +257,7 @@ public class RoomAvailabilityDAO extends BaseDAO implements
 	sb.append(" order by ra.createdDate");
 
 	try {
-	    final Session session = getHibernateTemplate().getSessionFactory()
-		    .getCurrentSession();
-	    final Query query = session.createQuery(sb.toString());
+	    final Query query = getCurrentSession().createQuery(sb.toString());
 	    if (id != null) {
 		query.setParameter(0, id);
 	    }

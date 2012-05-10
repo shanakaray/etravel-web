@@ -2,6 +2,11 @@ package com.yd.etravel.service.room;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.yd.etravel.domain.custom.room.RoomSearchDTO;
 import com.yd.etravel.domain.room.Room;
 import com.yd.etravel.persistence.dao.room.IRoomDAO;
@@ -15,8 +20,10 @@ import com.yd.etravel.service.message.ValidationHelper;
  *         com.yd.etravel.service.room.RoomManagerImpl
  * 
  */
+@Service(value = "roomService")
+@Transactional(propagation = Propagation.SUPPORTS)
 public class RoomManagerImpl implements IRoomManager {
-
+    @Autowired(required = true)
     private IRoomDAO roomDAO;
 
     public IRoomDAO getRoomDAO() {
@@ -27,11 +34,12 @@ public class RoomManagerImpl implements IRoomManager {
 	this.roomDAO = roomDAO;
     }
 
+    @Transactional
     @Override
     public int deleteRoom(final Long id) throws ServiceException {
 	int val = 0;
 	try {
-	    val = this.roomDAO.deleteAny(Room.class, id);
+	    val = this.roomDAO.deleteAny(id, null);
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
@@ -72,12 +80,13 @@ public class RoomManagerImpl implements IRoomManager {
 
     }
 
+    @Transactional
     @Override
     public Room saveRoom(Room room) throws ServiceException {
 	try {
 
-	    if (this.roomDAO.isExist(room.getHotel().getId(), room.getRoomType()
-		    .getId(), room.getId())) {
+	    if (this.roomDAO.isExist(room.getHotel().getId(), room
+		    .getRoomType().getId(), room.getId())) {
 		throw new ServiceException(
 			ValidationHelper
 				.getMessageHolder("etravel.hotel.room.exist"));
@@ -96,11 +105,6 @@ public class RoomManagerImpl implements IRoomManager {
 	return room;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.yd.etravel.service.hotel.IHotelManager#findAllActiveHotels()
-     */
     @Override
     public List<Room> findAllActiveRoom() throws ServiceException {
 	try {

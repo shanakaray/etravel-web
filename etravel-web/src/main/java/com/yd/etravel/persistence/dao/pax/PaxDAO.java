@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
-import org.hibernate.Session;
+import org.springframework.stereotype.Repository;
 
 import com.yd.etravel.domain.custom.pax.PaxSearchDTO;
 import com.yd.etravel.domain.hotel.Pax;
@@ -16,15 +16,9 @@ import com.yd.etravel.persistence.exception.PersistenceException;
  *         com.yd.etravel.persistence.dao.pax.PaxDAO
  * 
  */
+@Repository
 public class PaxDAO extends BaseDAO implements IPaxDAO {
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * com.yd.etravel.persistence.dao.pax.IPaxDAO.isPaxTypeExist(java.lang.Long
-     * , java.lang.String)
-     */
     @Override
     public boolean isPaxTypeExist(final Long hotelId, final Long id)
 	    throws PersistenceException {
@@ -37,9 +31,8 @@ public class PaxDAO extends BaseDAO implements IPaxDAO {
 		IS_PAX_TYPE_EXIST.append(" AND pax.id != :id");
 	    }
 
-	    final Session session = getHibernateTemplate().getSessionFactory()
-		    .getCurrentSession();
-	    final Query query = session.createQuery(IS_PAX_TYPE_EXIST.toString());
+	    final Query query = getCurrentSession().createQuery(
+		    IS_PAX_TYPE_EXIST.toString());
 	    query.setParameter("hid", hotelId);
 
 	    if (id != null) {
@@ -57,9 +50,6 @@ public class PaxDAO extends BaseDAO implements IPaxDAO {
 	try {
 	    final StringBuilder sb = new StringBuilder(
 		    "select pax from Pax as pax where 1=1 ");
-	    final Session session = getHibernateTemplate().getSessionFactory()
-		    .getCurrentSession();
-
 	    if (paxSearchDTO.getType() != null) {
 		sb.append(" and pax.type=:type ");
 	    }
@@ -68,7 +58,7 @@ public class PaxDAO extends BaseDAO implements IPaxDAO {
 		sb.append(" and pax.hotel.id=:hid ");
 	    }
 
-	    final Query query = session.createQuery(sb.toString());
+	    final Query query = getCurrentSession().createQuery(sb.toString());
 
 	    if (paxSearchDTO.getType() != null) {
 		query.setParameter("type", paxSearchDTO.getType());

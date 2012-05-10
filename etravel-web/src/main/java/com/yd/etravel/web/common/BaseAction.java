@@ -69,9 +69,9 @@ public abstract class BaseAction extends Action implements
     }
 
     @Override
-    public ActionForward execute(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    public ActionForward execute(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	ActionForward actionForward = null;
 	final BaseForm baseForm = (BaseForm) form;
 	try {
@@ -79,8 +79,8 @@ public abstract class BaseAction extends Action implements
 	    this.actionMessages.clear();
 
 	    if (request.getSession().getAttribute(IUser.USER_PROFILE) != null) {
-		final IUserProfile profile = (IUserProfile) request.getSession()
-			.getAttribute(IUser.USER_PROFILE);
+		final IUserProfile profile = (IUserProfile) request
+			.getSession().getAttribute(IUser.USER_PROFILE);
 		Thread.currentThread().setName(profile.getUsername());
 	    }
 
@@ -192,8 +192,8 @@ public abstract class BaseAction extends Action implements
 		}
 
 		for (final Message message : msgList) {
-		    this.actionMessages.add(Globals.ERROR_KEY, new ActionMessage(
-			    message.getKey()));
+		    this.actionMessages.add(Globals.ERROR_KEY,
+			    new ActionMessage(message.getKey()));
 		}
 		LOG.info(e.getMessage());
 	    }
@@ -214,11 +214,12 @@ public abstract class BaseAction extends Action implements
 	return actionForward;
     }
 
-    private boolean historyCheck(final BaseForm baseForm, final HttpServletRequest request) {
-	final long historyVal = request.getSession()
-		.getAttribute(IUser.HISTORY_TOKEN) != null ? Long
-		.valueOf(request.getSession().getAttribute(IUser.HISTORY_TOKEN)
-			.toString()) : 0l;
+    private boolean historyCheck(final BaseForm baseForm,
+	    final HttpServletRequest request) {
+	final long historyVal = request.getSession().getAttribute(
+		IUser.HISTORY_TOKEN) != null ? Long.valueOf(request
+		.getSession().getAttribute(IUser.HISTORY_TOKEN).toString())
+		: 0l;
 	if (baseForm.getTjwToken() > 0 && baseForm.getTjwToken() != historyVal) {
 	    return false;
 	}
@@ -226,7 +227,8 @@ public abstract class BaseAction extends Action implements
 	return true;
     }
 
-    protected boolean hasAccess(final String function, final HttpServletRequest request) {
+    protected boolean hasAccess(final String function,
+	    final HttpServletRequest request) {
 	final IUserProfile profile = getUserProfile(request);
 	if (profile != null) {
 	    return profile.hasFunction(function);
@@ -234,7 +236,8 @@ public abstract class BaseAction extends Action implements
 	return false;
     }
 
-    private void setHistoryToken(final BaseForm baseForm, final HttpServletRequest request) {
+    private void setHistoryToken(final BaseForm baseForm,
+	    final HttpServletRequest request) {
 	final long historyVal = System.nanoTime();
 	request.getSession().setAttribute(IUser.HISTORY_TOKEN, historyVal);
 	baseForm.setTjwToken(historyVal);
@@ -293,7 +296,8 @@ public abstract class BaseAction extends Action implements
 	    ActionForm form, HttpServletRequest request,
 	    HttpServletResponse response) throws Exception;
 
-    protected void addActionMessages(final String key, final ActionMessage actionMessage) {
+    protected void addActionMessages(final String key,
+	    final ActionMessage actionMessage) {
 	this.actionMessages.add(key, actionMessage);
     }
 

@@ -38,9 +38,9 @@ public class RoomAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward add(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward add(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	// TODO Auto-generated method stub
 	return null;
     }
@@ -54,9 +54,9 @@ public class RoomAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward back(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward back(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	// TODO Auto-generated method stub
 	return null;
     }
@@ -71,9 +71,9 @@ public class RoomAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    public ActionForward create(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    public ActionForward create(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	final RoomForm roomForm = (RoomForm) form;
 	boolean isnew = true;
 	roomForm.setHotelList(getHotelManager().findAllActiveHotels());
@@ -112,9 +112,9 @@ public class RoomAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward delete(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward delete(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	final RoomForm roomForm = (RoomForm) form;
 	getRoomManager().deleteRoom(roomForm.getId());
 	addInfoMessages(COM_DELETE_MSG);
@@ -130,9 +130,9 @@ public class RoomAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward edit(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward edit(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	final RoomForm roomForm = (RoomForm) form;
 
 	roomForm.setHotelList(getHotelManager().findAllActiveHotels());
@@ -159,9 +159,9 @@ public class RoomAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward find(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward find(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	// TODO Auto-generated method stub
 	return null;
     }
@@ -176,9 +176,9 @@ public class RoomAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward forward(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward forward(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	return init(mapping, form, request, response);
     }
 
@@ -191,9 +191,9 @@ public class RoomAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward init(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward init(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	final RoomForm roomForm = (RoomForm) form;
 	roomForm.setHotelList(getHotelManager().findAllActiveHotels());
 	roomForm.setRoomTypeList(getRoomTypeManager().findAllActiveRoomType());
@@ -213,16 +213,17 @@ public class RoomAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    public ActionForward process(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    public ActionForward process(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	final RoomForm roomForm = (RoomForm) form;
 	roomForm.setHotelList(getHotelManager().findAllActiveHotels());
 	roomForm.setRoomTypeList(getRoomTypeManager().findAllActiveRoomType());
 
 	final RoomSearchDTO searchDTO = new RoomSearchDTO();
-	searchDTO.setHotelId(roomForm.getHotelId() != null && roomForm
-		.getHotelId().longValue() > 0 ? roomForm.getHotelId() : null);
+	searchDTO.setHotelId(roomForm.getHotelId() != null
+		&& roomForm.getHotelId().longValue() > 0 ? roomForm
+		.getHotelId() : null);
 	roomForm.setRoomList(getRoomManager().findRooms(searchDTO));
 	return mapping.findForward(SUCCESS);
     }
@@ -236,9 +237,9 @@ public class RoomAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward save(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward save(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	return mapping.findForward(SUCCESS);
     }
 
@@ -251,9 +252,9 @@ public class RoomAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward send(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward send(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	// TODO Auto-generated method stub
 	return null;
     }
@@ -267,17 +268,17 @@ public class RoomAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward sort(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward sort(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	// TODO Auto-generated method stub
 	return null;
     }
 
     @Override
-    public ActionForward search(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    public ActionForward search(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	// TODO Auto-generated method stub
 	return null;
     }

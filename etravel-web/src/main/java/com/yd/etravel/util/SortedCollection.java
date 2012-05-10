@@ -110,9 +110,9 @@ public class SortedCollection {
      * @throws UnableToSortException
      * @throws Exception
      */
-    @SuppressWarnings(value = { })
-    public static Collection orderByField(final Collection list, final String field,
-	    final boolean assendingOrder) throws Exception {
+    @SuppressWarnings(value = {})
+    public static Collection orderByField(final Collection list,
+	    final String field, final boolean assendingOrder) throws Exception {
 	final ArrayList sortedList = new ArrayList(0);
 	try {
 	    SortedCollection sortColl = new SortedCollection();
@@ -190,7 +190,8 @@ public class SortedCollection {
 	return sortedList;
     }
 
-    public Object getObject(final Object obj, final String fld) throws Exception {
+    public Object getObject(final Object obj, final String fld)
+	    throws Exception {
 	Object fldObj = new Object();
 	try {
 	    final String methodName = "get" + fld.substring(0, 1).toUpperCase()
@@ -217,8 +218,8 @@ public class SortedCollection {
 	    }
 	} catch (final NoSuchMethodException e) {
 	    try {
-		final String methodName = "is" + fld.substring(0, 1).toUpperCase()
-			+ fld.substring(1);
+		final String methodName = "is"
+			+ fld.substring(0, 1).toUpperCase() + fld.substring(1);
 		if (obj != null) {
 		    fldObj = obj.getClass().getMethod(methodName, null)
 			    .invoke(obj, null);

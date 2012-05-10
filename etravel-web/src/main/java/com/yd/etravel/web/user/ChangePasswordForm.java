@@ -62,7 +62,8 @@ public class ChangePasswordForm extends BaseForm {
      * .ActionMapping, javax.servlet.http.HttpServletRequest)
      */
     @Override
-    public void resetBean(final ActionMapping mapping, final HttpServletRequest request) {
+    public void resetBean(final ActionMapping mapping,
+	    final HttpServletRequest request) {
 	this.oldPw = EMPTY_STRING;
 	this.newPw = EMPTY_STRING;
 	this.newRepPw = EMPTY_STRING;

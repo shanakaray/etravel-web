@@ -20,7 +20,6 @@ public class HotelBooking extends BaseObject {
     @ManyToOne
     private Hotel hotel;
 
-
     @Column
     private Date checkInDate;
 
@@ -101,9 +100,11 @@ public class HotelBooking extends BaseObject {
 	calendar2.setTime(this.checkInDate);
 	calendar2.getTime();
 
-	final long diff = calendar1.getTimeInMillis() - calendar2.getTimeInMillis();
+	final long diff = calendar1.getTimeInMillis()
+		- calendar2.getTimeInMillis();
 
-	final int noOfNights = Long.valueOf(diff / (24 * 60 * 60 * 1000)).intValue();
+	final int noOfNights = Long.valueOf(diff / (24 * 60 * 60 * 1000))
+		.intValue();
 
 	return noOfNights;
     }

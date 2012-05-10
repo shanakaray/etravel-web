@@ -2,6 +2,11 @@ package com.yd.etravel.service.extraitem;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.yd.etravel.domain.booking.ExtraItemBooking;
 import com.yd.etravel.domain.extraitem.ExtraItem;
 import com.yd.etravel.persistence.dao.extraitem.IExtraItemDAO;
@@ -13,10 +18,11 @@ import com.yd.etravel.service.message.ValidationHelper;
  * 
  * @author : Yohan Ranasinghe. Created Date : Feb 14, 2009 : 4:43:03 PM Type :
  *         com.yd.etravel.service.extraitem.ExtraItemManagerImpl
- * 
  */
+@Service(value = "itemService")
+@Transactional(propagation = Propagation.SUPPORTS)
 public class ExtraItemManagerImpl implements IExtraItemManager {
-
+    @Autowired(required = true)
     private IExtraItemDAO itemDAO;
 
     public IExtraItemDAO getItemDAO() {
@@ -27,11 +33,15 @@ public class ExtraItemManagerImpl implements IExtraItemManager {
 	this.itemDAO = itemDAO;
     }
 
+    @Transactional
     @Override
     public int deleteExtraItem(final Long id) throws ServiceException {
-	int val = 0;
+	final int val = 0;
 	try {
-	    val = this.itemDAO.deleteAny(ExtraItem.class, id);
+	    final ExtraItem extraItem = (ExtraItem) this.itemDAO.findById(
+		    ExtraItem.class, id);
+	    extraItem.getHotel().clear();
+	    this.itemDAO.delete(extraItem);
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
@@ -69,10 +79,12 @@ public class ExtraItemManagerImpl implements IExtraItemManager {
 	return extraItem;
     }
 
+    @Transactional
     @Override
     public ExtraItem saveExtraItem(ExtraItem item) throws ServiceException {
 	try {
-	    if (this.itemDAO.isExist(item.getName(), item.getCode(), item.getId())) {
+	    if (this.itemDAO.isExist(item.getName(), item.getCode(),
+		    item.getId())) {
 		throw new ServiceException(
 			ValidationHelper
 				.getMessageHolder("etravel.hotel.extraitem.exist"));

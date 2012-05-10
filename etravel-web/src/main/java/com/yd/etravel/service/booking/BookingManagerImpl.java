@@ -9,6 +9,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.yd.etravel.domain.booking.Booking;
 import com.yd.etravel.domain.booking.ExtraItemBooking;
 import com.yd.etravel.domain.booking.HotelBooking;
@@ -32,18 +37,19 @@ import com.yd.etravel.util.IConstants.IBooking;
 import com.yd.etravel.util.StringUtils;
 import com.yd.etravel.util.mail.MailMessage;
 
-/**
- * 
- * @author Dharsahana
- * 
- */
+@Service(value = "bookingService")
+@Transactional(propagation = Propagation.SUPPORTS)
 public class BookingManagerImpl implements IBookingManager {
-
+    @Autowired(required = true)
     private IBookingDAO bookingDAO;
+    @Autowired(required = true)
     private IExtraItemDAO extraItemDAO;
+    @Autowired(required = true)
     private IRoomAvailabilityDAO roomAvailabilityDAO;
+    @Autowired(required = true)
     private IUserDAO userDAO;
-    private MailMessage bookingMessage;
+    private MailMessage bookingOverDueNotification;
+    @Autowired(required = true)
     private MailMessage bookingConfirmation;
     private int onlineExpire;
     private int onrequestExpire;
@@ -80,7 +86,8 @@ public class BookingManagerImpl implements IBookingManager {
 	this.extraItemDAO = extraItemDAO;
     }
 
-    public void setRoomAvailabilityDAO(final IRoomAvailabilityDAO roomAvailabilityDAO) {
+    public void setRoomAvailabilityDAO(
+	    final IRoomAvailabilityDAO roomAvailabilityDAO) {
 	this.roomAvailabilityDAO = roomAvailabilityDAO;
     }
 
@@ -88,14 +95,7 @@ public class BookingManagerImpl implements IBookingManager {
 	this.userDAO = userDAO;
     }
 
-    public MailMessage getBookingMessage() {
-	return this.bookingMessage;
-    }
-
-    public void setBookingMessage(final MailMessage bookingMessage) {
-	this.bookingMessage = bookingMessage;
-    }
-
+    @Transactional
     @Override
     public BookingDTO save(final BookingDTO bookingDTO) throws ServiceException {
 	try {
@@ -117,8 +117,8 @@ public class BookingManagerImpl implements IBookingManager {
 
 	    // Save booking
 
-	    Booking booking = (Booking) this.bookingDAO
-		    .save(bookingDTO.getBooking());
+	    Booking booking = (Booking) this.bookingDAO.save(bookingDTO
+		    .getBooking());
 
 	    if (StringUtils.isEmpty(booking.getCode())) {
 		final StringBuilder sb = new StringBuilder().append('B');
@@ -157,8 +157,8 @@ public class BookingManagerImpl implements IBookingManager {
 		    IBooking.BOOKING_PAYMENT_METHOD_CASH_DES)) {
 		bookingDTO.getPayment().setBooking(booking);
 
-		final Payment payment = (Payment) this.bookingDAO.save(bookingDTO
-			.getPayment());
+		final Payment payment = (Payment) this.bookingDAO
+			.save(bookingDTO.getPayment());
 		bookingDTO.setPayment(payment);
 
 	    }
@@ -185,11 +185,12 @@ public class BookingManagerImpl implements IBookingManager {
 
 	    if (booking.getPaymentMethod().equals(
 		    IBooking.BOOKING_PAYMENT_METHOD_CASH_DES)) {
-		final User bookingUser= (User) this.userDAO.findBySample( booking.getBookingUser() ).get(0);
+		final User bookingUser = (User) this.userDAO.findBySample(
+			booking.getBookingUser()).get(0);
 		bookingUser.getFunctionSet();
 		sendConfirmation(
-			new UserHelper().getUserProfile(null,bookingUser
-				), roomBooking);
+			new UserHelper().getUserProfile(null, bookingUser),
+			roomBooking);
 	    }
 
 	} catch (final PersistenceException e) {
@@ -198,7 +199,8 @@ public class BookingManagerImpl implements IBookingManager {
 	return bookingDTO;
     }
 
-    private void sendConfirmation(final IUserProfile profile, final RoomBooking booking) {
+    private void sendConfirmation(final IUserProfile profile,
+	    final RoomBooking booking) {
 
 	this.bookingConfirmation.setParam(booking.getParams());
 	this.bookingConfirmation.addParam(profile.getParams());
@@ -207,8 +209,8 @@ public class BookingManagerImpl implements IBookingManager {
     }
 
     private boolean checkAvailability(
-	    final List<RoomDailyAvailability> roomDailyAvList, final Integer room)
-	    throws PersistenceException {
+	    final List<RoomDailyAvailability> roomDailyAvList,
+	    final Integer room) throws PersistenceException {
 	boolean flag = true;
 
 	for (final RoomDailyAvailability roomDailyAva : roomDailyAvList) {
@@ -247,8 +249,8 @@ public class BookingManagerImpl implements IBookingManager {
     }
 
     @Override
-    public List<BookingReportDTO> findBookingDetail(final BookingReportSearchDTO dto)
-	    throws ServiceException {
+    public List<BookingReportDTO> findBookingDetail(
+	    final BookingReportSearchDTO dto) throws ServiceException {
 	try {
 	    return this.bookingDAO.findBookingDetail(dto);
 	} catch (final PersistenceException e) {
@@ -257,8 +259,8 @@ public class BookingManagerImpl implements IBookingManager {
     }
 
     private ArrayList<ExtraItemBooking> addExtraItem(
-	    final ArrayList<ExtraItemBooking> arraListList, final Booking booking)
-	    throws PersistenceException {
+	    final ArrayList<ExtraItemBooking> arraListList,
+	    final Booking booking) throws PersistenceException {
 
 	for (ExtraItemBooking extraItemBooking : arraListList) {
 	    extraItemBooking.setBooking(booking);
@@ -277,11 +279,13 @@ public class BookingManagerImpl implements IBookingManager {
     /**
      * uses to confirm bookings(on_request) once got payment to payed
      */
+    @Transactional
     @Override
-    public RoomBooking saveBookingConfirm(final String bookingid, final BigDecimal ammount)
-	    throws ServiceException {
+    public RoomBooking saveBookingConfirm(final String bookingid,
+	    final BigDecimal ammount) throws ServiceException {
 	try {
-	    final RoomBooking roomBooking = this.bookingDAO.findRoomBooking(bookingid);
+	    final RoomBooking roomBooking = this.bookingDAO
+		    .findRoomBooking(bookingid);
 
 	    final Booking booking = roomBooking.getHotelBooking().getBooking();
 
@@ -311,7 +315,8 @@ public class BookingManagerImpl implements IBookingManager {
     public RoomBooking findRoomBooking(final String bookingid)
 	    throws ServiceException {
 	try {
-	    final RoomBooking roomBooking = this.bookingDAO.findRoomBooking(bookingid);
+	    final RoomBooking roomBooking = this.bookingDAO
+		    .findRoomBooking(bookingid);
 	    return roomBooking;
 
 	} catch (final PersistenceException e) {
@@ -319,13 +324,15 @@ public class BookingManagerImpl implements IBookingManager {
 	}
     }
 
+    @Transactional
     @Override
     public void saveFailedOnRequestBookings() throws ServiceException {
 	try {
 
-	    final List<RoomBooking> bookingList = this.bookingDAO.findExpiredBookings(
-		    new Date(), IBooking.BOOKING_SATATUS_ON_REQUEST,
-		    IBooking.BOOKING_PAYMENT_METHOD_ON_REQUEST_DES);
+	    final List<RoomBooking> bookingList = this.bookingDAO
+		    .findExpiredBookings(new Date(),
+			    IBooking.BOOKING_SATATUS_ON_REQUEST,
+			    IBooking.BOOKING_PAYMENT_METHOD_ON_REQUEST_DES);
 
 	    if (bookingList != null && !bookingList.isEmpty()) {
 		final Map<String, IUserProfile> userMap = findUserMap(bookingList);
@@ -339,13 +346,15 @@ public class BookingManagerImpl implements IBookingManager {
 
     }
 
+    @Transactional
     @Override
     public void saveFailedOnlineBookings() throws ServiceException {
 	try {
 
-	    final List<RoomBooking> bookingList = this.bookingDAO.findExpiredBookings(
-		    new Date(), IBooking.BOOKING_SATATUS_ON_REQUEST,
-		    IBooking.BOOKING_PAYMENT_METHOD_ONLINE_DES);
+	    final List<RoomBooking> bookingList = this.bookingDAO
+		    .findExpiredBookings(new Date(),
+			    IBooking.BOOKING_SATATUS_ON_REQUEST,
+			    IBooking.BOOKING_PAYMENT_METHOD_ONLINE_DES);
 
 	    if (bookingList != null && !bookingList.isEmpty()) {
 		final Map<String, IUserProfile> userMap = findUserMap(bookingList);
@@ -359,25 +368,28 @@ public class BookingManagerImpl implements IBookingManager {
 
     }
 
-    private void sendCancelNotification(final Map<String, IUserProfile> userMap,
+    private void sendCancelNotification(
+	    final Map<String, IUserProfile> userMap,
 	    final List<RoomBooking> bookingList) {
-	for (final RoomBooking hb : bookingList) {
-	    this.bookingMessage.setParam(hb.getParams());
-	    this.bookingMessage.addParam(userMap.get(
-		    hb.getHotelBooking().getBooking().getBookingUser()
+	for (final RoomBooking roomBooking : bookingList) {
+	    this.bookingOverDueNotification.setParam(roomBooking.getParams());
+	    this.bookingOverDueNotification.addParam(userMap.get(
+		    roomBooking.getHotelBooking().getBooking().getBookingUser()
 			    .getName()).getParams());
-	    this.bookingMessage.sendMail();
+	    this.bookingOverDueNotification.sendMail();
 	}
     }
 
-    private Map<String, IUserProfile> findUserMap(final List<RoomBooking> bookingList)
+    private Map<String, IUserProfile> findUserMap(
+	    final List<RoomBooking> bookingList)
 
     throws ServiceException {
 	final Map<String, IUserProfile> map = new HashMap<String, IUserProfile>();
 	try {
 	    final UserHelper helper = new UserHelper();
 	    for (final RoomBooking b : bookingList) {
-		final User user = b.getHotelBooking().getBooking().getBookingUser();
+		final User user = b.getHotelBooking().getBooking()
+			.getBookingUser();
 		if (StringUtils.isNotEmpty(user)) {
 		    map.put(user.getName(), helper.getUserProfile(null, user));
 		}
@@ -389,6 +401,7 @@ public class BookingManagerImpl implements IBookingManager {
 	return map;
     }
 
+    @Transactional
     @Override
     public void saveCancelBooking(final List<RoomBooking> bookingList)
 	    throws ServiceException {
@@ -419,9 +432,9 @@ public class BookingManagerImpl implements IBookingManager {
 	    final List<RoomDailyAvailability> availList, final Integer room)
 	    throws PersistenceException {
 	final boolean flag = true;
-	for (final RoomDailyAvailability rd : availList) {
-	    rd.addAvailabalUnit(room);
-	    this.roomAvailabilityDAO.update(rd);
+	for (final RoomDailyAvailability roomDailyAvil : availList) {
+	    roomDailyAvil.addAvailabalUnit(room);
+	    this.roomAvailabilityDAO.update(roomDailyAvil);
 	}
 	return flag;
     }

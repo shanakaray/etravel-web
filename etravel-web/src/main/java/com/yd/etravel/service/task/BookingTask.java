@@ -5,6 +5,7 @@ package com.yd.etravel.service.task;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.yd.etravel.service.booking.IBookingManager;
 
@@ -15,7 +16,7 @@ import com.yd.etravel.service.booking.IBookingManager;
  * 
  */
 public class BookingTask implements ITask {
-
+    @Autowired(required = true)
     private IBookingManager bookingManager;
     protected static final Log log = LogFactory.getLog(BookingTask.class);
 
@@ -27,18 +28,9 @@ public class BookingTask implements ITask {
 	this.bookingManager = bookingManager;
     }
 
-    /**
-	 * 
-	 */
     public BookingTask() {
-	// TODO Auto-generated constructor stub
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.yd.etravel.service.task.ITask#runTask()
-     */
     @Override
     public void runTask() {
 	try {

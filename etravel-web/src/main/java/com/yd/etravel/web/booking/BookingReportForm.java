@@ -153,7 +153,8 @@ public class BookingReportForm extends BaseForm {
     }
 
     @Override
-    public void resetBean(final ActionMapping mapping, final HttpServletRequest request) {
+    public void resetBean(final ActionMapping mapping,
+	    final HttpServletRequest request) {
 	this.bookingList = Collections.EMPTY_LIST;
 	this.hotelList = Collections.EMPTY_LIST;
 	this.allRoom = Collections.EMPTY_LIST;

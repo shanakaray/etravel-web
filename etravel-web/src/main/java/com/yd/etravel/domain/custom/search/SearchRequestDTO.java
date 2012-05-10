@@ -124,8 +124,10 @@ public class SearchRequestDTO {
 	calendar2.setTime(getCheckIn());
 	calendar2.getTime();
 
-	final long diff = calendar1.getTimeInMillis() - calendar2.getTimeInMillis();
-	final int noOfNights = new Long(diff / (24 * 60 * 60 * 1000)).intValue();
+	final long diff = calendar1.getTimeInMillis()
+		- calendar2.getTimeInMillis();
+	final int noOfNights = new Long(diff / (24 * 60 * 60 * 1000))
+		.intValue();
 	return noOfNights;
     }
 

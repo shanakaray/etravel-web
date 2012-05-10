@@ -129,7 +129,8 @@ public class FunctionForm extends BaseForm {
     }
 
     @Override
-    public void resetBean(final ActionMapping mapping, final HttpServletRequest request) {
+    public void resetBean(final ActionMapping mapping,
+	    final HttpServletRequest request) {
 	this.fuctionList = Collections.EMPTY_LIST;
 	this.roleId = -1l;
 	this.functionIds = new Long[0];

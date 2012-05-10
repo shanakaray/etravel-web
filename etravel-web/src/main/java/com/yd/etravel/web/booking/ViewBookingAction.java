@@ -30,9 +30,9 @@ public class ViewBookingAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward add(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward add(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	// TODO Auto-generated method stub
 	return null;
     }
@@ -46,9 +46,9 @@ public class ViewBookingAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward back(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward back(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	// TODO Auto-generated method stub
 	return null;
     }
@@ -63,9 +63,9 @@ public class ViewBookingAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    public ActionForward create(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    public ActionForward create(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	// TODO Auto-generated method stub
 
 	return mapping.findForward(SUCCESS);
@@ -81,9 +81,9 @@ public class ViewBookingAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward delete(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward delete(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	// TODO Auto-generated method stub
 	return null;
     }
@@ -97,9 +97,9 @@ public class ViewBookingAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward edit(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward edit(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	// TODO Auto-generated method stub
 	return null;
     }
@@ -113,9 +113,9 @@ public class ViewBookingAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward find(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward find(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 
 	// country list should load here
 
@@ -132,9 +132,9 @@ public class ViewBookingAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward forward(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward forward(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	// TODO Auto-generated method stub
 	return null;
     }
@@ -148,14 +148,15 @@ public class ViewBookingAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward init(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward init(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	// TODO Auto-generated method stub
 	final BookingForm bookingForm = (BookingForm) form;
 	bookingForm.reset(mapping, request);
 
-	final List<RoomBooking> bookingList = getBookingManager().findAllBooking();
+	final List<RoomBooking> bookingList = getBookingManager()
+		.findAllBooking();
 	request.getSession().setAttribute("bookingList", bookingList);
 	return mapping.findForward(SUCCESS);
     }
@@ -170,9 +171,9 @@ public class ViewBookingAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    public ActionForward process(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    public ActionForward process(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	// TODO Auto-generated method stub
 
 	return mapping.findForward(SUCCESS);
@@ -187,9 +188,9 @@ public class ViewBookingAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward save(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward save(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	// TODO Auto-generated method stub
 	return null;
     }
@@ -203,9 +204,9 @@ public class ViewBookingAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward send(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward send(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	// TODO Auto-generated method stub
 	return null;
     }
@@ -219,17 +220,17 @@ public class ViewBookingAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward sort(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward sort(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	// TODO Auto-generated method stub
 	return null;
     }
 
     @Override
-    public ActionForward search(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    public ActionForward search(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	// TODO Auto-generated method stub
 	return null;
     }

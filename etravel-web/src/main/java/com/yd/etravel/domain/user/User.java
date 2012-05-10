@@ -14,6 +14,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
 import com.yd.etravel.domain.common.BaseObject;
 import com.yd.etravel.domain.user.role.Role;
 import com.yd.etravel.util.PasswordEncrypt;
@@ -22,11 +23,9 @@ import com.yd.etravel.util.PasswordEncrypt;
 @Table(name = "T_USER")
 public class User extends BaseObject {
 
-   @ManyToMany( cascade = { javax.persistence.CascadeType.ALL } )
-   @JoinTable(
-        joinColumns = @JoinColumn(name = "USER_ID", nullable = false),
-        inverseJoinColumns = @JoinColumn(name = "ROLE_ID", nullable = false),
-        uniqueConstraints = @UniqueConstraint (columnNames = { "USER_ID", "ROLE_ID" }))
+    @ManyToMany(cascade = { javax.persistence.CascadeType.ALL })
+    @JoinTable(joinColumns = @JoinColumn(name = "USER_ID", nullable = false), inverseJoinColumns = @JoinColumn(name = "ROLE_ID", nullable = false), uniqueConstraints = @UniqueConstraint(columnNames = {
+	    "USER_ID", "ROLE_ID" }))
     private List<Role> roles;
 
     @Column

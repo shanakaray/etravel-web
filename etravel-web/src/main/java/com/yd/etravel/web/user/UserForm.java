@@ -162,7 +162,8 @@ public class UserForm extends BaseForm {
     }
 
     @Override
-    public void resetBean(final ActionMapping mapping, final HttpServletRequest request) {
+    public void resetBean(final ActionMapping mapping,
+	    final HttpServletRequest request) {
 
 	this.id = 0L;
 	this.user = new User();
@@ -194,8 +195,7 @@ public class UserForm extends BaseForm {
 	    this.user.setEmail(EMPTY_STRING);
 	}
 
-	if (this.passwordReset
-		|| getId() == null || getId().longValue() <= 0) {
+	if (this.passwordReset || getId() == null || getId().longValue() <= 0) {
 	    if (StringUtils.isEmpty(this.user.getPassword())) {
 		addErrors(errors, "etravel.error.pw.required");
 	    } else if (!this.user.getPassword().equals(this.repassword)) {

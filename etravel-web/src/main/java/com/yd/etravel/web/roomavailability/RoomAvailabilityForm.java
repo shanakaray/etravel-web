@@ -243,7 +243,8 @@ public class RoomAvailabilityForm extends BaseForm {
     }
 
     @Override
-    public void resetBean(final ActionMapping mapping, final HttpServletRequest request) {
+    public void resetBean(final ActionMapping mapping,
+	    final HttpServletRequest request) {
 	this.allRoomAvailability = Collections.EMPTY_LIST;
 	this.allRoom = Collections.EMPTY_LIST;
 	// allOccupancy = Collections.EMPTY_LIST;

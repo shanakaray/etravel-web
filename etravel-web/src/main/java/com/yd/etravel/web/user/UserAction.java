@@ -27,33 +27,33 @@ public class UserAction extends BaseAction {
     }
 
     @Override
-    public ActionForward process(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    public ActionForward process(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 
 	return null;
     }
 
     @Override
-    protected ActionForward add(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward add(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	// TODO Auto-generated method stub
 	return null;
     }
 
     @Override
-    protected ActionForward back(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward back(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	// TODO Auto-generated method stub
 	return null;
     }
 
     @Override
-    protected ActionForward delete(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward delete(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	final UserForm userForm = (UserForm) form;
 	getUserManager().deleteUser(userForm.getId());
 	addInfoMessages(COM_DELETE_MSG);
@@ -61,9 +61,9 @@ public class UserAction extends BaseAction {
     }
 
     @Override
-    protected ActionForward edit(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward edit(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	final UserForm userForm = (UserForm) form;
 
 	init(mapping, form, request, response);
@@ -78,24 +78,24 @@ public class UserAction extends BaseAction {
     }
 
     @Override
-    protected ActionForward find(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward find(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	return null;
     }
 
     @Override
-    protected ActionForward forward(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward forward(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	init(mapping, form, request, response);
 	return mapping.findForward(SUCCESS);
     }
 
     @Override
-    protected ActionForward init(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward init(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	final UserForm userForm = (UserForm) form;
 	userForm.setAllRoles(getUserManager().findAllActiveRoles());
 	userForm.setAllUsers(getUserManager().findUsers(new UserSearchDTO()));
@@ -103,30 +103,30 @@ public class UserAction extends BaseAction {
     }
 
     @Override
-    protected ActionForward save(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward save(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	return mapping.findForward(SUCCESS);
     }
 
     @Override
-    protected ActionForward send(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward send(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	return null;
     }
 
     @Override
-    protected ActionForward sort(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward sort(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	return null;
     }
 
     @Override
-    public ActionForward create(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    public ActionForward create(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 
 	final UserForm userForm = (UserForm) form;
 	User user = null;
@@ -165,9 +165,9 @@ public class UserAction extends BaseAction {
     }
 
     @Override
-    public ActionForward search(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    public ActionForward search(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	// TODO Auto-generated method stub
 	return null;
     }

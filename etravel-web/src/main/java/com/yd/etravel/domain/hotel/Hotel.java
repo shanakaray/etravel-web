@@ -141,8 +141,8 @@ public class Hotel extends BaseObject {
 
     public Long[] getUserIds() {
 	final Set<Long> userIds = new HashSet<Long>();
-	for (final User u : getSuperUser()) {
-	    userIds.add(u.getId());
+	for (final User user : getSuperUser()) {
+	    userIds.add(user.getId());
 	}
 
 	return userIds.toArray(new Long[0]);

@@ -2,6 +2,11 @@ package com.yd.etravel.service.occupancy;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.yd.etravel.domain.occupancy.Occupancy;
 import com.yd.etravel.domain.roomtype.RoomType;
 import com.yd.etravel.persistence.dao.occupancy.IOccupancyDAO;
@@ -10,14 +15,12 @@ import com.yd.etravel.persistence.exception.PersistenceException;
 import com.yd.etravel.service.exception.ServiceException;
 import com.yd.etravel.service.message.ValidationHelper;
 
-/**
- * 
- * @author Dharshana
- * 
- */
+@Service(value = "occupancyService")
+@Transactional(propagation = Propagation.SUPPORTS)
 public class OccupancyManagerImpl implements IOccupancyManager {
-
+    @Autowired(required = true)
     private IOccupancyDAO occupancyDAO;
+    @Autowired(required = true)
     private IRoomTypeDAO roomTypeDAO;
 
     public void setOccupancyDAO(final IOccupancyDAO occupancyDAO) {
@@ -28,6 +31,7 @@ public class OccupancyManagerImpl implements IOccupancyManager {
 	this.roomTypeDAO = roomTypeDAO;
     }
 
+    @Transactional
     @Override
     public Occupancy save(final Occupancy occupancy) throws ServiceException {
 	try {
@@ -48,8 +52,9 @@ public class OccupancyManagerImpl implements IOccupancyManager {
 
 		} else {
 
-		    final RoomType roomType = (RoomType) this.roomTypeDAO.findById(
-			    RoomType.class, occupancy.getRoomType().getId());
+		    final RoomType roomType = (RoomType) this.roomTypeDAO
+			    .findById(RoomType.class, occupancy.getRoomType()
+				    .getId());
 
 		    occupancy.setRoomType(roomType);
 
@@ -75,7 +80,8 @@ public class OccupancyManagerImpl implements IOccupancyManager {
     public Occupancy findOccupancyById(final Long id) throws ServiceException {
 	Occupancy occupancy = null;
 	try {
-	    occupancy = (Occupancy) this.occupancyDAO.findById(Occupancy.class, id);
+	    occupancy = (Occupancy) this.occupancyDAO.findById(Occupancy.class,
+		    id);
 
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
@@ -83,11 +89,12 @@ public class OccupancyManagerImpl implements IOccupancyManager {
 	return occupancy;
     }
 
+    @Transactional
     @Override
     public int deleteOccupancy(final Long id) throws ServiceException {
 	int flag = 0;
 	try {
-	    flag = this.occupancyDAO.deleteAny(Occupancy.class, id);
+	    flag = this.occupancyDAO.deleteAny(id, null);
 
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
@@ -109,19 +116,13 @@ public class OccupancyManagerImpl implements IOccupancyManager {
     public List<Occupancy> findAllOccupancyWithRoomType()
 	    throws ServiceException {
 	try {
-	    return this.occupancyDAO
-		    .findAllOccupancyWithRoomType();
+	    return this.occupancyDAO.findAllOccupancyWithRoomType();
 
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.yd.etravel.service.hotel.IHotelManager#findAllActiveHotels()
-     */
     @Override
     public List<Occupancy> findAllActiveOccupancy() throws ServiceException {
 	try {
@@ -131,11 +132,6 @@ public class OccupancyManagerImpl implements IOccupancyManager {
 	}
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.yd.etravel.service.hotel.IHotelManager#findAllActiveHotels()
-     */
     @Override
     public List<Occupancy> findAllOccupancyByRoomType(final Long roomTypeId)
 	    throws ServiceException {

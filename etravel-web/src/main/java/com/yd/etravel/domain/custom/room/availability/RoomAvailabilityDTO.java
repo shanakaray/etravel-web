@@ -35,9 +35,10 @@ public class RoomAvailabilityDTO {
     public RoomAvailabilityDTO() {
     }
 
-    public RoomAvailabilityDTO(final Long id, final Long roomId, final Long roomTypeId,
-	    final Long hotelId, final String hotelName, final String roomName,
-	    final String roomTypeName, final Date fromDate, final Date toDate, final int unit,
+    public RoomAvailabilityDTO(final Long id, final Long roomId,
+	    final Long roomTypeId, final Long hotelId, final String hotelName,
+	    final String roomName, final String roomTypeName,
+	    final Date fromDate, final Date toDate, final int unit,
 	    // int availableUnit
 	    final Boolean active) {
 	this.id = id;
@@ -162,7 +163,8 @@ public class RoomAvailabilityDTO {
     public int hashCode() {
 	final int prime = 31;
 	int result = 1;
-	result = prime * result + (this.hotelId == null ? 0 : this.hotelId.hashCode());
+	result = prime * result
+		+ (this.hotelId == null ? 0 : this.hotelId.hashCode());
 	result = prime * result
 		+ (this.roomTypeId == null ? 0 : this.roomTypeId.hashCode());
 	return result;

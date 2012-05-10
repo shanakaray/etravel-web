@@ -7,6 +7,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.yd.etravel.domain.custom.user.UserSearchDTO;
 import com.yd.etravel.domain.hotel.Hotel;
 import com.yd.etravel.domain.user.User;
@@ -30,6 +35,8 @@ import com.yd.etravel.util.mail.MailMessage;
  *         com.yd.etravel.service.user.UserManagerImpl
  * 
  */
+@Service(value = "userService")
+@Transactional(propagation = Propagation.SUPPORTS)
 public class UserManagerImpl implements IUserManager {
 
     private static List<String> ACCESS_USER_ROLES = new ArrayList<String>();
@@ -42,8 +49,10 @@ public class UserManagerImpl implements IUserManager {
 	ACCESS_CUSTOMER_ROLES.add(IConstants.IUserRoles.AGENT_ROLE_NAME);
     }
 
+    @Autowired(required = true)
     private IUserDAO userDAO;
-    private MailMessage mailMessage;
+    @Autowired(required = true)
+    private MailMessage userNotificationMail;
 
     public IUserProfile getProfile() {
 	return new UserProfile();
@@ -53,12 +62,12 @@ public class UserManagerImpl implements IUserManager {
 	this.userDAO = userDAO;
     }
 
-    public MailMessage getMailMessage() {
-	return this.mailMessage;
+    public MailMessage getUserNotificationMail() {
+	return this.userNotificationMail;
     }
 
-    public void setMailMessage(final MailMessage mailMessage) {
-	this.mailMessage = mailMessage;
+    public void setUserNotificationMail(final MailMessage userNotificationMail) {
+	this.userNotificationMail = userNotificationMail;
     }
 
     @Override
@@ -77,7 +86,8 @@ public class UserManagerImpl implements IUserManager {
 			.getUserProfile(userProfile, user);
 	    }
 
-	    final List<Hotel> hlist = this.userDAO.findAssignedHotels(user.getId());
+	    final List<Hotel> hlist = this.userDAO.findAssignedHotels(user
+		    .getId());
 	    for (final Hotel h : hlist) {
 		userProfile.putHotel(h.getId(), h.getName());
 	    }
@@ -121,6 +131,7 @@ public class UserManagerImpl implements IUserManager {
 	return userProfile;
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public User save(final User user, final Long[] ids) throws ServiceException {
 	try {
@@ -150,6 +161,7 @@ public class UserManagerImpl implements IUserManager {
 	return user;
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public User save(final User user) throws ServiceException {
 	try {
@@ -172,6 +184,7 @@ public class UserManagerImpl implements IUserManager {
 	return user;
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public IUserProfile saveCustomer(User user) throws ServiceException {
 
@@ -195,8 +208,8 @@ public class UserManagerImpl implements IUserManager {
 	    user.encriptPW();
 	    if (user.getId() == null) {
 		user = (User) this.userDAO.save(user);
-		this.mailMessage.setParam(userProfile.getParams());
-		this.mailMessage.sendMail();
+		this.userNotificationMail.setParam(userProfile.getParams());
+		this.userNotificationMail.sendMail();
 	    } else {
 		user = (User) this.userDAO.update(user);
 	    }
@@ -209,6 +222,7 @@ public class UserManagerImpl implements IUserManager {
 	return userProfile;
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public Role saveUserRole(final Role role) throws ServiceException {
 	try {
@@ -261,11 +275,12 @@ public class UserManagerImpl implements IUserManager {
 	}
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public int deleteRole(final Long id) throws ServiceException {
 	int flag = 0;
 	try {
-	    flag = this.userDAO.deleteAny(Role.class, id);
+	    flag = this.userDAO.deleteAny(id, null);
 
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
@@ -277,7 +292,7 @@ public class UserManagerImpl implements IUserManager {
     public List<User> findUsers(final UserSearchDTO userSearchDTO)
 	    throws ServiceException {
 	try {
-	    return  this.userDAO.findUsers(userSearchDTO);
+	    return this.userDAO.findUsers(userSearchDTO);
 
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
@@ -306,6 +321,7 @@ public class UserManagerImpl implements IUserManager {
 
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public int deleteUser(final Long id) throws ServiceException {
 	int flag = 0;
@@ -329,7 +345,8 @@ public class UserManagerImpl implements IUserManager {
     }
 
     @Override
-    public List<Function> findFindByRoleId(final Long id) throws ServiceException {
+    public List<Function> findFindByRoleId(final Long id)
+	    throws ServiceException {
 	try {
 	    final List<Function> list = this.userDAO.findFunctionByRoleId(id);
 	    return list;
@@ -338,14 +355,16 @@ public class UserManagerImpl implements IUserManager {
 	}
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
-    public void saveUserRoleFunctions(final Long roleId, final List<Long> functionIds)
-	    throws ServiceException {
+    public void saveUserRoleFunctions(final Long roleId,
+	    final List<Long> functionIds) throws ServiceException {
 	try {
 
 	    final Role role = (Role) this.userDAO.findById(Role.class, roleId);
 	    role.getFunction().size();
-	    for (final Iterator<Function> funcIt = role.getFunction().iterator(); funcIt.hasNext();) {
+	    for (final Iterator<Function> funcIt = role.getFunction()
+		    .iterator(); funcIt.hasNext();) {
 		if (!functionIds.contains(funcIt.next().getId())) {
 		    funcIt.remove();
 		}
@@ -353,7 +372,9 @@ public class UserManagerImpl implements IUserManager {
 
 	    for (final Long fid : functionIds) {
 		if (!role.hasFunctionId(fid)) {
-		    role.getFunction().add((Function) this.userDAO.findById(Function.class, fid));
+		    role.getFunction().add(
+			    (Function) this.userDAO.findById(Function.class,
+				    fid));
 		}
 	    }
 
@@ -383,9 +404,10 @@ public class UserManagerImpl implements IUserManager {
 	return profile;
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
-    public void saveUserPassWord(final Long userId, final String oldPw, final String newPw)
-	    throws ServiceException {
+    public void saveUserPassWord(final Long userId, final String oldPw,
+	    final String newPw) throws ServiceException {
 	try {
 	    final User usr = this.userDAO.findById(userId);
 

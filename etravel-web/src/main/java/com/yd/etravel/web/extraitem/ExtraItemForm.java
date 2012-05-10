@@ -126,7 +126,8 @@ public class ExtraItemForm extends BaseForm {
     }
 
     @Override
-    public void resetBean(final ActionMapping mapping, final HttpServletRequest request) {
+    public void resetBean(final ActionMapping mapping,
+	    final HttpServletRequest request) {
 	this.hotelList = Collections.EMPTY_LIST;
 	this.extraItemList = Collections.EMPTY_LIST;
 	this.currencyList = new ArrayList<String>();

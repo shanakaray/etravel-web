@@ -2,6 +2,11 @@ package com.yd.etravel.service.pax;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.yd.etravel.domain.custom.pax.PaxSearchDTO;
 import com.yd.etravel.domain.hotel.Pax;
 import com.yd.etravel.persistence.dao.pax.IPaxDAO;
@@ -14,19 +19,23 @@ import com.yd.etravel.service.message.ValidationHelper;
  *         com.yd.etravel.service.pax.PaxManagerImpl
  * 
  */
-public class PaxManagerImpl implements IPaxManager {
 
+@Service(value = "paxService")
+@Transactional(propagation = Propagation.SUPPORTS)
+public class PaxManagerImpl implements IPaxManager {
+    @Autowired(required = true)
     private IPaxDAO paxDAO;
 
     public void setPaxDAO(final IPaxDAO paxDAO) {
 	this.paxDAO = paxDAO;
     }
 
+    @Transactional
     @Override
     public int deletePax(final Long id) throws ServiceException {
 	int count = 0;
 	try {
-	    count = this.paxDAO.deleteAny(Pax.class, id);
+	    count = this.paxDAO.deleteAny(id, null);
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
@@ -76,6 +85,7 @@ public class PaxManagerImpl implements IPaxManager {
 
     }
 
+    @Transactional
     @Override
     public Pax savePax(Pax pax) throws ServiceException {
 	try {
@@ -99,7 +109,8 @@ public class PaxManagerImpl implements IPaxManager {
     }
 
     @Override
-    public List<Pax> findPax(final PaxSearchDTO paxSearchDTO) throws ServiceException {
+    public List<Pax> findPax(final PaxSearchDTO paxSearchDTO)
+	    throws ServiceException {
 	try {
 	    return this.paxDAO.findPax(paxSearchDTO);
 	} catch (final PersistenceException e) {

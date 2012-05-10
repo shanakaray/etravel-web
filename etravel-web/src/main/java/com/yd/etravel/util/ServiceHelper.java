@@ -33,7 +33,8 @@ public final class ServiceHelper implements IServiceNames {
 	return this.applicationContext;
     }
 
-    public void setApplicationContext(final WebApplicationContext applicationContext) {
+    public void setApplicationContext(
+	    final WebApplicationContext applicationContext) {
 	this.applicationContext = applicationContext;
     }
 

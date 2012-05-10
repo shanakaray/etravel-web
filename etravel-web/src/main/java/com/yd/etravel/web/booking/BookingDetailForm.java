@@ -67,7 +67,8 @@ public class BookingDetailForm extends BaseForm {
      * .ActionMapping, javax.servlet.http.HttpServletRequest)
      */
     @Override
-    public void resetBean(final ActionMapping mapping, final HttpServletRequest request) {
+    public void resetBean(final ActionMapping mapping,
+	    final HttpServletRequest request) {
 	this.bookingId = -1L;
 	this.itemBookingList = Collections.EMPTY_LIST;
 	this.bookingReportDTO = null;

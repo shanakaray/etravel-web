@@ -1,7 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+           http://www.springframework.org/schema/tx
+   		   http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+	<context:annotation-config />
+	<context:component-scan base-package="com.yd.etravel" />
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
 		<property name="dataSource">
@@ -18,8 +32,10 @@
 				<value>com.yd.etravel.domain.season.RoomSeasonalRate</value>
 				<value>com.yd.etravel.domain.room.Room</value>
 				<value>com.yd.etravel.domain.hotel.Pax</value>
-				<value>com.yd.etravel.domain.room.availability.RoomAvailability</value>
-				<value>com.yd.etravel.domain.room.availability.RoomDailyAvailability</value>
+				<value>com.yd.etravel.domain.room.availability.RoomAvailability
+				</value>
+				<value>com.yd.etravel.domain.room.availability.RoomDailyAvailability
+				</value>
 				<value>com.yd.etravel.domain.extraitem.ExtraItem</value>
 				<value>com.yd.etravel.domain.booking.Booking</value>
 				<value>com.yd.etravel.domain.booking.HotelBooking</value>
@@ -57,204 +73,13 @@
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="${hibernate.connection.driver_class}" />
-		<property name="url"
-			value="${hibernate.connection.url}" />
+		<property name="url" value="${hibernate.connection.url}" />
 		<property name="username" value="${hibernate.connection.username}" />
 		<property name="password" value="${hibernate.connection.password}" />
 	</bean>
 	<!-- Transaction manager for a single Hibernate SessionFactory (alternative 
 		to JTA) -->
-	<bean id="hibTransactionManager"
-		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
-		<property name="sessionFactory">
-			<ref local="sessionFactory" />
-		</property>
-	</bean>
-	<!-- ***** proxyService ***** -->
-	<bean id="userService"
-		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
-		<property name="transactionManager">
-			<ref local="hibTransactionManager" />
-		</property>
-		<property name="target">
-			<ref local="userTarget" />
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="authanticate*">PROPAGATION_SUPPORTS</prop>
-				<prop key="find*">PROPAGATION_SUPPORTS</prop>
-				<prop key="save*">PROPAGATION_REQUIRED,-ServiceException</prop>
-				<prop key="delete*">PROPAGATION_REQUIRED,-ServiceException</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="seasonService"
-		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
-		<property name="transactionManager">
-			<ref local="hibTransactionManager" />
-		</property>
-		<property name="target">
-			<ref local="seasonTarget" />
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="find*">PROPAGATION_SUPPORTS</prop>
-				<prop key="save*">PROPAGATION_REQUIRED,-ServiceException</prop>
-				<prop key="delete*">PROPAGATION_REQUIRED,-ServiceException</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="hotelService"
-		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
-		<property name="transactionManager">
-			<ref local="hibTransactionManager" />
-		</property>
-		<property name="target">
-			<ref local="hotelTarget" />
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="find*">PROPAGATION_SUPPORTS</prop>
-				<prop key="save*">PROPAGATION_REQUIRED,-ServiceException</prop>
-				<prop key="delete*">PROPAGATION_REQUIRED,-ServiceException</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="roomTypeService"
-		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
-		<property name="transactionManager">
-			<ref local="hibTransactionManager" />
-		</property>
-		<property name="target">
-			<ref local="roomTypeTarget" />
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="find*">PROPAGATION_SUPPORTS</prop>
-				<prop key="save*">PROPAGATION_REQUIRED,-ServiceException</prop>
-				<prop key="delete*">PROPAGATION_REQUIRED,-ServiceException</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="occupancyService"
-		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
-		<property name="transactionManager">
-			<ref local="hibTransactionManager" />
-		</property>
-		<property name="target">
-			<ref local="occupancyTarget" />
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="find*">PROPAGATION_SUPPORTS</prop>
-				<prop key="save*">PROPAGATION_REQUIRED,-ServiceException</prop>
-				<prop key="delete*">PROPAGATION_REQUIRED,-ServiceException</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="paxService"
-		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
-		<property name="transactionManager">
-			<ref local="hibTransactionManager" />
-		</property>
-		<property name="target">
-			<ref local="paxTarget" />
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="find*">PROPAGATION_SUPPORTS</prop>
-				<prop key="save*">PROPAGATION_REQUIRED,-ServiceException</prop>
-				<prop key="delete*">PROPAGATION_REQUIRED,-ServiceException</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="roomAvailabilityService"
-		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
-		<property name="transactionManager">
-			<ref local="hibTransactionManager" />
-		</property>
-		<property name="target">
-			<ref local="roomAvailabilityTarget" />
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="find*">PROPAGATION_SUPPORTS</prop>
-				<prop key="save*">PROPAGATION_REQUIRED,-ServiceException</prop>
-				<prop key="delete*">PROPAGATION_REQUIRED,-ServiceException</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="roomService"
-		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
-		<property name="transactionManager">
-			<ref local="hibTransactionManager" />
-		</property>
-		<property name="target">
-			<ref local="roomTarget" />
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="find*">PROPAGATION_SUPPORTS</prop>
-				<prop key="save*">PROPAGATION_REQUIRED,-ServiceException</prop>
-				<prop key="delete*">PROPAGATION_REQUIRED,-ServiceException</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="searchService"
-		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
-		<property name="transactionManager">
-			<ref local="hibTransactionManager" />
-		</property>
-		<property name="target">
-			<ref local="searchTarget" />
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="find*">PROPAGATION_SUPPORTS</prop>
-				<prop key="search*">PROPAGATION_SUPPORTS</prop>
-				<prop key="save*">PROPAGATION_REQUIRED,-ServiceException</prop>
-				<prop key="delete*">PROPAGATION_REQUIRED,-ServiceException</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="itemService"
-		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
-		<property name="transactionManager">
-			<ref local="hibTransactionManager" />
-		</property>
-		<property name="target">
-			<ref local="itemTarget" />
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="find*">PROPAGATION_SUPPORTS</prop>
-				<prop key="search*">PROPAGATION_SUPPORTS</prop>
-				<prop key="save*">PROPAGATION_REQUIRED,-ServiceException</prop>
-				<prop key="delete*">PROPAGATION_REQUIRED,-ServiceException</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="bookingService"
-		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
-		<property name="transactionManager">
-			<ref local="hibTransactionManager" />
-		</property>
-		<property name="target">
-			<ref local="bookingTarget" />
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="find*">PROPAGATION_SUPPORTS</prop>
-				<prop key="search*">PROPAGATION_SUPPORTS</prop>
-				<prop key="save*">PROPAGATION_REQUIRED,-ServiceException</prop>
-				<prop key="delete*">PROPAGATION_REQUIRED,-ServiceException</prop>
-			</props>
-		</property>
-	</bean>
 	<bean id="bookingTask" class="com.yd.etravel.service.task.BookingTask">
-		<property name="bookingManager">
-			<ref local="bookingService" />
-		</property>
 	</bean>
 	<bean id="jobDetail"
 		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
@@ -314,165 +139,6 @@
 		<property name="subject" value="Booking Confirmation" />
 		<property name="from" value="anilanaresorts@gmail.com" />
 		<property name="cc" value="sales@anilana.com" />
-	</bean>
-	<!-- business object implementation -->
-	<bean id="userTarget" class="com.yd.etravel.service.user.UserManagerImpl">
-		<property name="userDAO">
-			<ref local="userDAOTarget" />
-		</property>
-		<property name="mailMessage">
-			<ref local="userMailTarget" />
-		</property>
-	</bean>
-	<bean id="seasonTarget" class="com.yd.etravel.service.season.SeasonManagerImpl">
-		<property name="seasonDAO">
-			<ref local="seasonDAOTarget" />
-		</property>
-		<property name="hotelDAO">
-			<ref local="hotelDAOTarget" />
-		</property>
-	</bean>
-	<bean id="hotelTarget" class="com.yd.etravel.service.hotel.HotelManagerImpl">
-		<property name="hotelDAO">
-			<ref local="hotelDAOTarget" />
-		</property>
-		<property name="userDAO">
-			<ref local="userDAOTarget" />
-		</property>
-	</bean>
-	<bean id="roomTypeTarget" class="com.yd.etravel.service.roomtype.RoomTypeManagerImpl">
-		<property name="roomTypeDAO">
-			<ref local="roomTypeDAOTarget" />
-		</property>
-	</bean>
-	<bean id="paxTarget" class="com.yd.etravel.service.pax.PaxManagerImpl">
-		<property name="paxDAO">
-			<ref local="paxDAOTarget" />
-		</property>
-	</bean>
-	<bean id="roomTarget" class="com.yd.etravel.service.room.RoomManagerImpl">
-		<property name="roomDAO">
-			<ref local="roomDAOTarget" />
-		</property>
-	</bean>
-	<bean id="occupancyTarget" class="com.yd.etravel.service.occupancy.OccupancyManagerImpl">
-		<property name="occupancyDAO">
-			<ref local="occupancyDAOTarget" />
-		</property>
-		<property name="roomTypeDAO">
-			<ref local="roomTypeDAOTarget" />
-		</property>
-	</bean>
-	<bean id="roomAvailabilityTarget"
-		class="com.yd.etravel.service.room.availability.RoomAvailabilityManagerImpl">
-		<property name="roomAvailabilityDAO">
-			<ref local="roomAvailabilityDAOTarget" />
-		</property>
-		<property name="roomDAO">
-			<ref local="roomDAOTarget" />
-		</property>
-		<property name="occupancyDAO">
-			<ref local="occupancyDAOTarget" />
-		</property>
-	</bean>
-	<bean id="searchTarget" class="com.yd.etravel.service.search.SearchManagerImpl">
-		<property name="searchDAO">
-			<ref local="searchDAOTarget" />
-		</property>
-		<property name="seasonDAO">
-			<ref local="seasonDAOTarget" />
-		</property>
-		<property name="roomAvailabilityDAO">
-			<ref local="roomAvailabilityDAOTarget" />
-		</property>
-	</bean>
-	<bean id="bookingTarget" class="com.yd.etravel.service.booking.BookingManagerImpl">
-		<property name="bookingDAO">
-			<ref local="bookingDAOTarget" />
-		</property>
-		<property name="extraItemDAO">
-			<ref local="itemDAOTarget" />
-		</property>
-		<property name="roomAvailabilityDAO">
-			<ref local="roomAvailabilityDAOTarget" />
-		</property>
-		<property name="userDAO">
-			<ref local="userDAOTarget" />
-		</property>
-		<property name="bookingMessage">
-			<ref local="bookingMailTarget" />
-		</property>
-		<property name="bookingConfirmation">
-			<ref local="bookingConfirmMailTarget" />
-		</property>
-		<property name="onlineExpire">
-			<value>48</value>
-		</property>
-		<property name="onrequestExpire">
-			<value>48</value>
-		</property>
-	</bean>
-	<bean id="itemTarget" class="com.yd.etravel.service.extraitem.ExtraItemManagerImpl">
-		<property name="itemDAO">
-			<ref local="itemDAOTarget" />
-		</property>
-	</bean>
-	<!--DAO implementations -->
-	<bean id="userDAOTarget" class="com.yd.etravel.persistence.dao.user.UserDAO">
-		<property name="sessionFactory">
-			<ref local="sessionFactory" />
-		</property>
-	</bean>
-	<bean id="seasonDAOTarget" class="com.yd.etravel.persistence.dao.season.SeasonDAO">
-		<property name="sessionFactory">
-			<ref local="sessionFactory" />
-		</property>
-	</bean>
-	<bean id="hotelDAOTarget" class="com.yd.etravel.persistence.dao.hotel.HotelDAO">
-		<property name="sessionFactory">
-			<ref local="sessionFactory" />
-		</property>
-	</bean>
-	<bean id="roomTypeDAOTarget" class="com.yd.etravel.persistence.dao.roomtype.RoomTypeDAO">
-		<property name="sessionFactory">
-			<ref local="sessionFactory" />
-		</property>
-	</bean>
-	<bean id="paxDAOTarget" class="com.yd.etravel.persistence.dao.pax.PaxDAO">
-		<property name="sessionFactory">
-			<ref local="sessionFactory" />
-		</property>
-	</bean>
-	<bean id="occupancyDAOTarget" class="com.yd.etravel.persistence.dao.occupancy.OccupancyDAO">
-		<property name="sessionFactory">
-			<ref local="sessionFactory" />
-		</property>
-	</bean>
-	<bean id="roomAvailabilityDAOTarget"
-		class="com.yd.etravel.persistence.dao.room.availability.RoomAvailabilityDAO">
-		<property name="sessionFactory">
-			<ref local="sessionFactory" />
-		</property>
-	</bean>
-	<bean id="roomDAOTarget" class="com.yd.etravel.persistence.dao.room.RoomDAO">
-		<property name="sessionFactory">
-			<ref local="sessionFactory" />
-		</property>
-	</bean>
-	<bean id="searchDAOTarget" class="com.yd.etravel.persistence.dao.search.SearchDAO">
-		<property name="sessionFactory">
-			<ref local="sessionFactory" />
-		</property>
-	</bean>
-	<bean id="itemDAOTarget" class="com.yd.etravel.persistence.dao.extraitem.ExtraItemDAO">
-		<property name="sessionFactory">
-			<ref local="sessionFactory" />
-		</property>
-	</bean>
-	<bean id="bookingDAOTarget" class="com.yd.etravel.persistence.dao.booking.BookingDAO">
-		<property name="sessionFactory">
-			<ref local="sessionFactory" />
-		</property>
 	</bean>
 	<!--User Profile implementations -->
 	<bean id="userProfileTarget" class="com.yd.etravel.service.util.UserProfile" />

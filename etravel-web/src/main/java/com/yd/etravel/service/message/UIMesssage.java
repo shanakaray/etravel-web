@@ -12,7 +12,8 @@ public class UIMesssage {
 	private final String bundle;
 	private final Object[] arguments;
 
-	public Message(final String key, final String bundle, final Object[] arguments) {
+	public Message(final String key, final String bundle,
+		final Object[] arguments) {
 	    this.key = key;
 	    this.bundle = bundle;
 	    this.arguments = arguments;
@@ -40,8 +41,8 @@ public class UIMesssage {
 	this.informations = new ArrayList<Message>();
     }
 
-    public UIMesssage(final String key, final String bundle, final Object[] arguments,
-	    final boolean message) {
+    public UIMesssage(final String key, final String bundle,
+	    final Object[] arguments, final boolean message) {
 	this.errors = new ArrayList<Message>();
 	this.informations = new ArrayList<Message>();
 	if (message) {
@@ -67,21 +68,23 @@ public class UIMesssage {
 	this.informations.add(index, message);
     }
 
-    public void addInformation(final String key, final String bundle, final Object arguments[]) {
+    public void addInformation(final String key, final String bundle,
+	    final Object arguments[]) {
 	this.informations.add(new Message(key, bundle, arguments));
     }
 
-    public void addInformation(final String key, final String bundle, final Object arguments[],
-	    final int index) {
+    public void addInformation(final String key, final String bundle,
+	    final Object arguments[], final int index) {
 	this.informations.add(index, new Message(key, bundle, arguments));
     }
 
-    public void addError(final String key, final String bundle, final Object arguments[]) {
+    public void addError(final String key, final String bundle,
+	    final Object arguments[]) {
 	this.errors.add(new Message(key, bundle, arguments));
     }
 
-    public void addError(final String key, final String bundle, final Object arguments[],
-	    final int index) {
+    public void addError(final String key, final String bundle,
+	    final Object arguments[], final int index) {
 	this.errors.add(index, new Message(key, bundle, arguments));
     }
 

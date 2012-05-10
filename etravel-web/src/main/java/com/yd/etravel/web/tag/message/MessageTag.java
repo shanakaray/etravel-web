@@ -26,8 +26,8 @@ public class MessageTag extends TagSupport {
     protected String renderTag() {
 	final StringBuffer buf = new StringBuffer("");
 	if (this.pageContext.getSession().getAttribute(ICommon.INFO_MSG_KEY) != null) {
-	    final List<String> msgList = (List<String>) this.pageContext.getSession()
-		    .getAttribute(ICommon.INFO_MSG_KEY);
+	    final List<String> msgList = (List<String>) this.pageContext
+		    .getSession().getAttribute(ICommon.INFO_MSG_KEY);
 	    for (final String string : msgList) {
 		buf.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>&#187;&nbsp;</strong>"
 			+ string + "<BR/>");

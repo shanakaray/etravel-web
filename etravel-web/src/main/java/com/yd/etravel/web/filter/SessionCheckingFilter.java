@@ -42,10 +42,12 @@ public class SessionCheckingFilter implements Filter {
     }
 
     @Override
-    public void doFilter(final ServletRequest request, final ServletResponse response,
-	    final FilterChain filterChain) throws IOException, ServletException {
+    public void doFilter(final ServletRequest request,
+	    final ServletResponse response, final FilterChain filterChain)
+	    throws IOException, ServletException {
 	final String URI = ((HttpServletRequest) request).getRequestURI();
-	final HttpSession session = ((HttpServletRequest) request).getSession(false);
+	final HttpSession session = ((HttpServletRequest) request)
+		.getSession(false);
 	final String[] valStrings = URI.split(APP_NAME);
 	String uriend = "";
 	if (valStrings != null) {
@@ -56,18 +58,18 @@ public class SessionCheckingFilter implements Filter {
 	    filterChain.doFilter(request, response);
 	    return;
 
-	} else if (URI.startsWith(APP_NAME+"/admin/")) {
+	} else if (URI.startsWith(APP_NAME + "/admin/")) {
 	    if (session == null
 		    || session.getAttribute(IConstants.IUser.USER_PROFILE) == null) {
-		((HttpServletResponse) response)
-			.sendRedirect(APP_NAME+"/admin/login.jsp");
+		((HttpServletResponse) response).sendRedirect(APP_NAME
+			+ "/admin/login.jsp");
 		return;
 	    }
-	} else if (URI.startsWith(APP_NAME+"/customer/")) {
+	} else if (URI.startsWith(APP_NAME + "/customer/")) {
 	    if (session == null
 		    || session.getAttribute(IConstants.IUser.USER_PROFILE) == null) {
-		((HttpServletResponse) response)
-			.sendRedirect(APP_NAME+"/customer/initCustomerCreate.do");
+		((HttpServletResponse) response).sendRedirect(APP_NAME
+			+ "/customer/initCustomerCreate.do");
 		return;
 	    } else {
 		filterChain.doFilter(request, response);
@@ -78,7 +80,6 @@ public class SessionCheckingFilter implements Filter {
 	return;
     }
 
-    
     @Override
     public void init(final FilterConfig config) throws ServletException {
 	this.config = config;

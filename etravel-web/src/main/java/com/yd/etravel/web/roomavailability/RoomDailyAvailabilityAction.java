@@ -37,9 +37,9 @@ public class RoomDailyAvailabilityAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward add(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward add(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	// TODO Auto-generated method stub
 	return null;
     }
@@ -53,9 +53,9 @@ public class RoomDailyAvailabilityAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward back(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward back(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	// TODO Auto-generated method stub
 	return null;
     }
@@ -70,9 +70,9 @@ public class RoomDailyAvailabilityAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    public ActionForward create(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    public ActionForward create(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	// TODO Auto-generated method stub
 
 	// TODO Auto-generated method stub
@@ -89,9 +89,9 @@ public class RoomDailyAvailabilityAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward delete(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward delete(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	// TODO Auto-generated method stub
 	return null;
     }
@@ -105,9 +105,9 @@ public class RoomDailyAvailabilityAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward edit(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward edit(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	// TODO Auto-generated method stub
 	return null;
     }
@@ -121,9 +121,9 @@ public class RoomDailyAvailabilityAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward find(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward find(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	final List<DailyAvailabilityDTO> allRoomDailyAvailability = getRoomAvailabilityManager()
 		.findDailyAvailability(null);
 	request.getSession().setAttribute("allRoomDailyAvailability",
@@ -142,9 +142,9 @@ public class RoomDailyAvailabilityAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward forward(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward forward(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	// TODO Auto-generated method stub
 	return null;
     }
@@ -158,9 +158,9 @@ public class RoomDailyAvailabilityAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward init(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward init(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 
 	return null;
     }
@@ -175,9 +175,9 @@ public class RoomDailyAvailabilityAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    public ActionForward process(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    public ActionForward process(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	// TODO Auto-generated method stub
 	return null;
     }
@@ -191,9 +191,9 @@ public class RoomDailyAvailabilityAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward save(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward save(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	// TODO Auto-generated method stub
 	return null;
     }
@@ -207,9 +207,9 @@ public class RoomDailyAvailabilityAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward send(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward send(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	// TODO Auto-generated method stub
 	return null;
     }
@@ -223,17 +223,17 @@ public class RoomDailyAvailabilityAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward sort(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward sort(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	// TODO Auto-generated method stub
 	return null;
     }
 
     @Override
-    public ActionForward search(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    public ActionForward search(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	// TODO Auto-generated method stub
 	return null;
     }

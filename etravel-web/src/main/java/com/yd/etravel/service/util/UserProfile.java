@@ -36,8 +36,8 @@ public class UserProfile implements IUserProfile {
 
     }
 
-    public UserProfile(final String username, final String firstname, final String lastname,
-	    final Set<String> roles) {
+    public UserProfile(final String username, final String firstname,
+	    final String lastname, final Set<String> roles) {
 	super();
 	this.username = username;
 	this.firstname = firstname;
@@ -58,7 +58,8 @@ public class UserProfile implements IUserProfile {
     @Override
     public String getFirstname() {
 	if (!StringUtils.isEmpty(this.firstname)) {
-	    String str = new String(new char[] { this.firstname.trim().charAt(0) });
+	    String str = new String(new char[] { this.firstname.trim()
+		    .charAt(0) });
 	    str = str.toUpperCase();
 	    return new StringBuilder(this.firstname.trim()).replace(0, 1, str)
 		    .toString();
@@ -75,7 +76,8 @@ public class UserProfile implements IUserProfile {
     @Override
     public String getLastname() {
 	if (!StringUtils.isEmpty(this.lastname)) {
-	    String str = new String(new char[] { this.lastname.trim().charAt(0) });
+	    String str = new String(
+		    new char[] { this.lastname.trim().charAt(0) });
 	    str = str.toUpperCase();
 	    return new StringBuilder(this.lastname.trim()).replace(0, 1, str)
 		    .toString();

@@ -148,7 +148,8 @@ public class SearchForm extends BaseForm {
      * .ActionMapping, javax.servlet.http.HttpServletRequest)
      */
     @Override
-    public void resetBean(final ActionMapping mapping, final HttpServletRequest request) {
+    public void resetBean(final ActionMapping mapping,
+	    final HttpServletRequest request) {
 	this.allRoom = Collections.EMPTY_LIST;
 	this.roomId = -1l;
 	this.hotelId = -1l;

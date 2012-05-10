@@ -43,9 +43,9 @@ public class SeasonAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward add(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward add(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	// TODO Auto-generated method stub
 	return null;
     }
@@ -59,9 +59,9 @@ public class SeasonAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward back(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward back(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	// TODO Auto-generated method stub
 	return null;
     }
@@ -76,9 +76,9 @@ public class SeasonAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    public ActionForward create(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    public ActionForward create(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	// TODO Auto-generated method stub
 
 	final SeasonForm seasonForm = (SeasonForm) form;
@@ -157,9 +157,9 @@ public class SeasonAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward delete(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward delete(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	final SeasonForm seasonForm = (SeasonForm) form;
 	getSeasonManager().deleteSeason(seasonForm.getId());
 	addInfoMessages(COM_DELETE_MSG);
@@ -175,12 +175,13 @@ public class SeasonAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward edit(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward edit(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	// TODO Auto-generated method stub
 	final SeasonForm seasonForm = (SeasonForm) form;
-	final Season season = getSeasonManager().findSeasonById(seasonForm.getId());
+	final Season season = getSeasonManager().findSeasonById(
+		seasonForm.getId());
 	seasonForm.setName(season.getName());
 	seasonForm.setComments(season.getComments());
 	seasonForm.setActive(season.isActive());
@@ -208,9 +209,9 @@ public class SeasonAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward find(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward find(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	// TODO Auto-generated method stub
 	return null;
     }
@@ -225,9 +226,9 @@ public class SeasonAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward forward(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward forward(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	final SeasonForm seasonForm = (SeasonForm) form;
 
 	seasonForm.setAllSeason(getSeasonManager().findAllSeasonWithHotel());
@@ -248,9 +249,9 @@ public class SeasonAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward init(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward init(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	final SeasonForm seasonForm = (SeasonForm) form;
 	seasonForm.reset(mapping, request);
 	seasonForm.setAllSeason(getSeasonManager().findAllSeasonWithHotel());
@@ -259,8 +260,7 @@ public class SeasonAction extends BaseAction {
 
 	allHotel = getHotelManager().findAllActiveHotels();
 
-	getSeasonManager()
-		.findAllSeasonWithHotel();
+	getSeasonManager().findAllSeasonWithHotel();
 	seasonForm.setAllSeason(getSeasonManager().findAllSeasonWithHotel());
 	seasonForm.setAllHotel(allHotel);
 	request.getSession().setAttribute("hotelId", "");
@@ -278,9 +278,9 @@ public class SeasonAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    public ActionForward process(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    public ActionForward process(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	// TODO Auto-generated method stub
 	return null;
     }
@@ -294,9 +294,9 @@ public class SeasonAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward save(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward save(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	// TODO Auto-generated method stub
 	return null;
     }
@@ -310,9 +310,9 @@ public class SeasonAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward send(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward send(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	// TODO Auto-generated method stub
 	return null;
     }
@@ -326,9 +326,9 @@ public class SeasonAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward sort(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward sort(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	// TODO Auto-generated method stub
 	return null;
     }
@@ -338,9 +338,9 @@ public class SeasonAction extends BaseAction {
     }
 
     @Override
-    public ActionForward search(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    public ActionForward search(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	// TODO Auto-generated method stub
 	return null;
     }

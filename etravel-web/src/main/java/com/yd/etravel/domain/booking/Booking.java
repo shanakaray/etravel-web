@@ -24,7 +24,6 @@ public class Booking extends BaseObject {
     @ForeignKey(name = "FK_AGENT")
     private User agent;
 
-
     @Column
     private String statusDes;
 
@@ -81,7 +80,6 @@ public class Booking extends BaseObject {
     public void setBookingUser(final User bookingUser) {
 	this.bookingUser = bookingUser;
     }
-
 
     public Date getDepatureDate() {
 	return this.depatureDate;
