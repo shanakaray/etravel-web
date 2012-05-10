@@ -40,9 +40,9 @@ public class SearchAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward add(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward add(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	// TODO Auto-generated method stub
 	return null;
     }
@@ -56,9 +56,9 @@ public class SearchAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward back(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward back(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	final SearchForm searchForm = (SearchForm) form;
 	final List<Hotel> allHotel = getHotelManager().findAllActiveHotels();
 	searchForm.setAllHotel(allHotel);
@@ -77,9 +77,9 @@ public class SearchAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    public ActionForward create(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    public ActionForward create(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	// TODO Auto-generated method stub
 	return null;
     }
@@ -94,9 +94,9 @@ public class SearchAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward delete(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward delete(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	// TODO Auto-generated method stub
 	return null;
     }
@@ -110,9 +110,9 @@ public class SearchAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward edit(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward edit(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	// TODO Auto-generated method stub
 	return null;
     }
@@ -126,9 +126,9 @@ public class SearchAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward find(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward find(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	final SearchForm searchForm = (SearchForm) form;
 
 	SearchResultsDTO searchResultsDTO = new SearchResultsDTO();
@@ -145,8 +145,6 @@ public class SearchAction extends BaseAction {
 
 	searchResultsDTO = getSearchManager().searchRoom(searchRequestDTO);
 
-
-	
 	if (searchResultsDTO.getRoomDTO() == null
 		|| searchResultsDTO.getRoomDTO().isEmpty()) {
 	    throw new ServiceException(
@@ -193,9 +191,9 @@ public class SearchAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward forward(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward forward(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	final SearchForm searchForm = (SearchForm) form;
 
 	if (searchForm.getId() == null || searchForm.getId().longValue() < 1) {
@@ -231,9 +229,9 @@ public class SearchAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward init(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward init(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	// TODO Auto-generated method stub
 	final SearchForm searchForm = (SearchForm) form;
 	// searchForm.reset(mapping, request);
@@ -245,8 +243,8 @@ public class SearchAction extends BaseAction {
 	if (searchForm.getHotelId() != null
 		&& searchForm.getHotelId().longValue() > 0) {
 
-	    final List<Room> roomList = getRoomManager().findAllRoomWithRoomType(
-		    searchForm.getHotelId());
+	    final List<Room> roomList = getRoomManager()
+		    .findAllRoomWithRoomType(searchForm.getHotelId());
 	    searchForm.setAllRoom(roomList);
 
 	}
@@ -264,9 +262,9 @@ public class SearchAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    public ActionForward process(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    public ActionForward process(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	// TODO Auto-generated method stub
 
 	final SearchForm searchForm = (SearchForm) form;
@@ -294,7 +292,8 @@ public class SearchAction extends BaseAction {
 
 	if (searchForm.getExtraItemId() != null) {
 	    for (int i = 0; i < searchForm.getExtraItemId().length; i++) {
-		for (final ExtraItemDTO edto : searchResultsDTO.getExtraItemDTO()) {
+		for (final ExtraItemDTO edto : searchResultsDTO
+			.getExtraItemDTO()) {
 
 		    if (edto.getExtraItem().getId().longValue() == searchForm
 			    .getExtraItemId()[i].longValue()) {
@@ -324,9 +323,9 @@ public class SearchAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward save(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward save(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	// TODO Auto-generated method stub
 	return null;
     }
@@ -340,9 +339,9 @@ public class SearchAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward send(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward send(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	// TODO Auto-generated method stub
 	return null;
     }
@@ -356,17 +355,17 @@ public class SearchAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward sort(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward sort(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	// TODO Auto-generated method stub
 	return null;
     }
 
     @Override
-    public ActionForward search(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    public ActionForward search(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	// TODO Auto-generated method stub
 	return null;
     }

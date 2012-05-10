@@ -7,8 +7,8 @@ import java.util.List;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
-import org.hibernate.Session;
 import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Repository;
 
 import com.yd.etravel.domain.booking.ExtraItemBooking;
 import com.yd.etravel.domain.extraitem.ExtraItem;
@@ -21,6 +21,7 @@ import com.yd.etravel.persistence.exception.PersistenceException;
  *         com.yd.etravel.persistence.dao.extraitem.ExtraItemDAO
  * 
  */
+@Repository
 public class ExtraItemDAO extends BaseDAO implements IExtraItemDAO {
 
     @Override
@@ -30,9 +31,7 @@ public class ExtraItemDAO extends BaseDAO implements IExtraItemDAO {
 	    final StringBuilder sb = new StringBuilder("SELECT obj FROM ")
 		    .append(" ExtraItemBooking as obj join fetch obj.extraItem join obj.booking bkg WHERE bkg.id = :id ");
 
-	    final Session session = getHibernateTemplate().getSessionFactory()
-		    .getCurrentSession();
-	    final Query query = session.createQuery(sb.toString());
+	    final Query query = getCurrentSession().createQuery(sb.toString());
 	    query.setParameter("id", bookingId);
 	    return query.list();
 
@@ -65,9 +64,7 @@ public class ExtraItemDAO extends BaseDAO implements IExtraItemDAO {
 			+ "OR UPPER(item.code)= UPPER(:code)");
 	    }
 
-	    final Session session = getHibernateTemplate().getSessionFactory()
-		    .getCurrentSession();
-	    final Query query = session.createQuery(sb.toString());
+	    final Query query = getCurrentSession().createQuery(sb.toString());
 	    query.setParameter("name", name);
 	    query.setParameter("code", code);
 	    if (id != null) {
@@ -81,15 +78,14 @@ public class ExtraItemDAO extends BaseDAO implements IExtraItemDAO {
     }
 
     @Override
-    public Object findById(final Class cls, final Long id) throws PersistenceException {
+    public Object findById(final Class cls, final Long id)
+	    throws PersistenceException {
 	try {
 	    final StringBuilder sb = new StringBuilder("SELECT obj FROM ")
 		    .append(cls.getName())
 		    .append(" as obj left join fetch obj.hotel WHERE obj.id = :id ");
 
-	    final Session session = getHibernateTemplate().getSessionFactory()
-		    .getCurrentSession();
-	    final Query query = session.createQuery(sb.toString());
+	    final Query query = getCurrentSession().createQuery(sb.toString());
 	    query.setParameter("id", id);
 	    final List results = query.list();
 	    return results.isEmpty() ? null : results.get(0);
@@ -109,37 +105,9 @@ public class ExtraItemDAO extends BaseDAO implements IExtraItemDAO {
 		    .append(ExtraItem.class.getName()).append(
 			    " as obj join fetch obj.hotel h WHERE h.id = :id ");
 
-	    final Session session = getHibernateTemplate().getSessionFactory()
-		    .getCurrentSession();
-	    final Query query = session.createQuery(sb.toString());
+	    final Query query = getCurrentSession().createQuery(sb.toString());
 	    query.setParameter("id", id);
 	    return query.list();
-
-	} catch (final HibernateException e) {
-	    throw new PersistenceException(e);
-	} catch (final DataAccessException e) {
-	    throw new PersistenceException(e);
-	}
-    }
-
-    @Override
-    public int deleteAny(final Class cls, final Long id) throws PersistenceException {
-	try {
-
-	    final StringBuilder sb = new StringBuilder("delete from ").append(
-		    cls.getName()).append(" as obj Where obj.id = (:id) ");
-	    final Session session = getHibernateTemplate().getSessionFactory()
-		    .getCurrentSession();
-
-	    final Query sqlQuery = session
-		    .createSQLQuery("delete from T_ITEM_HOTEL where FK_ITEM_ID=:id");
-	    sqlQuery.setParameter("id", id);
-	    sqlQuery.executeUpdate();
-
-	    final Query query = session.createQuery(sb.toString());
-	    query.setParameter("id", id);
-
-	    return query.executeUpdate();
 
 	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);

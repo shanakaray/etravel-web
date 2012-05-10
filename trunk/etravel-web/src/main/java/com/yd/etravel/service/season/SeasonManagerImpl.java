@@ -2,6 +2,11 @@ package com.yd.etravel.service.season;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.yd.etravel.domain.hotel.Hotel;
 import com.yd.etravel.domain.room.Room;
 import com.yd.etravel.domain.season.RoomSeasonalRate;
@@ -12,15 +17,12 @@ import com.yd.etravel.persistence.exception.PersistenceException;
 import com.yd.etravel.service.exception.ServiceException;
 import com.yd.etravel.service.message.ValidationHelper;
 
-/**
- * 
- * 
- * @author Dharsahana
- * 
- */
+@Service(value = "seasonService")
+@Transactional(propagation = Propagation.SUPPORTS)
 public class SeasonManagerImpl implements ISeasonManager {
-
+    @Autowired(required = true)
     private ISeasonDAO seasonDAO;
+    @Autowired(required = true)
     private IHotelDAO hotelDAO;
 
     public void setSeasonDAO(final ISeasonDAO seasonDAO) {
@@ -31,6 +33,7 @@ public class SeasonManagerImpl implements ISeasonManager {
 	this.hotelDAO = hotelDAO;
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public Season save(final Season season) throws ServiceException {
 	try {
@@ -41,36 +44,24 @@ public class SeasonManagerImpl implements ISeasonManager {
 				    .getMessageHolder("etravel.seasonName.exist"));
 		} else if (!this.seasonDAO.isDataRangeValid(season.getHotel()
 			.getId(), season.getFromDate(), season.getToDate())) {
-
 		    throw new ServiceException(
 			    ValidationHelper
 				    .getMessageHolder("etravel.season.dateRange.valid"));
 
 		} else {
 
-		    final Hotel hotel = (Hotel) this.hotelDAO.findById(Hotel.class, season
-			    .getHotel().getId());
-
+		    final Hotel hotel = (Hotel) this.hotelDAO.findById(
+			    Hotel.class, season.getHotel().getId());
 		    season.setHotel(hotel);
-
 		    this.seasonDAO.save(season);
 		}
 
 	    } else {
-		// if (!seasonDAO.isDataRangeValid(season.getHotel().getId(),
-		// season.getFromDate(),season.getToDate())) {
-		//
-		// throw new ServiceException(ValidationHelper
-		// .getMessageHolder("etravel.season.dateRange.valid"));
-		//
-		// } else {
-		final Hotel hotel = (Hotel) this.hotelDAO.findById(Hotel.class, season
-			.getHotel().getId());
+		final Hotel hotel = (Hotel) this.hotelDAO.findById(Hotel.class,
+			season.getHotel().getId());
 
 		season.setHotel(hotel);
 		this.seasonDAO.update(season);
-		// }
-
 	    }
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
@@ -90,11 +81,12 @@ public class SeasonManagerImpl implements ISeasonManager {
 	return season;
     }
 
+    @Transactional(propagation = Propagation.SUPPORTS)
     @Override
     public int deleteSeason(final Long id) throws ServiceException {
 	int flag = 0;
 	try {
-	    flag = this.seasonDAO.deleteAny(Season.class, id);
+	    flag = this.seasonDAO.deleteAny(id, null);
 
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
@@ -121,11 +113,6 @@ public class SeasonManagerImpl implements ISeasonManager {
 	}
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.yd.etravel.service.hotel.IHotelManager#findAllActiveHotels()
-     */
     @Override
     public List<Season> findAllActiveSeason() throws ServiceException {
 	try {
@@ -135,8 +122,7 @@ public class SeasonManagerImpl implements ISeasonManager {
 	}
     }
 
-    // / Seasonal Rate
-
+    @Transactional(propagation = Propagation.SUPPORTS)
     @Override
     public RoomSeasonalRate save(final RoomSeasonalRate roomSeasonalRate)
 	    throws ServiceException {
@@ -148,22 +134,19 @@ public class SeasonManagerImpl implements ISeasonManager {
 				    .getMessageHolder("etravel.seasonalRate.exist"));
 		} else {
 
-		    final Season season = (Season) this.seasonDAO.findById(Season.class,
-			    roomSeasonalRate.getSeason().getId());
+		    final Season season = (Season) this.seasonDAO.findById(
+			    Season.class, roomSeasonalRate.getSeason().getId());
 		    roomSeasonalRate.setSeason(season);
-
-		    final Room room = (Room) this.seasonDAO.findById(Room.class,
-			    roomSeasonalRate.getRoom().getId());
+		    final Room room = (Room) this.seasonDAO.findById(
+			    Room.class, roomSeasonalRate.getRoom().getId());
 		    roomSeasonalRate.setRoom(room);
-
 		    this.seasonDAO.save(roomSeasonalRate);
 		}
 	    } else {
 
-		final Season season = (Season) this.seasonDAO.findById(Season.class,
-			roomSeasonalRate.getSeason().getId());
+		final Season season = (Season) this.seasonDAO.findById(
+			Season.class, roomSeasonalRate.getSeason().getId());
 		roomSeasonalRate.setSeason(season);
-
 		final Room room = (Room) this.seasonDAO.findById(Room.class,
 			roomSeasonalRate.getRoom().getId());
 		roomSeasonalRate.setRoom(room);
@@ -182,18 +165,18 @@ public class SeasonManagerImpl implements ISeasonManager {
 	RoomSeasonalRate roomSeasonalRate = null;
 	try {
 	    roomSeasonalRate = this.seasonDAO.findById(id);
-
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
 	return roomSeasonalRate;
     }
 
+    @Transactional(propagation = Propagation.SUPPORTS)
     @Override
     public int deleteRoomSeasonalRate(final Long id) throws ServiceException {
 	int flag = 0;
 	try {
-	    flag = this.seasonDAO.deleteAny(RoomSeasonalRate.class, id);
+	    flag = this.seasonDAO.deleteAny(id, null);
 
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
@@ -216,7 +199,8 @@ public class SeasonManagerImpl implements ISeasonManager {
     public List<RoomSeasonalRate> findAllRoomSeasonalRateWithRoomAndSeason(
 	    final Long hotelId) throws ServiceException {
 	try {
-	    return this.seasonDAO.findAllRoomSeasonalRateWithRoomAndSeason(hotelId);
+	    return this.seasonDAO
+		    .findAllRoomSeasonalRateWithRoomAndSeason(hotelId);
 
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
@@ -224,7 +208,8 @@ public class SeasonManagerImpl implements ISeasonManager {
     }
 
     @Override
-    public List<Season> findSeasonByHotel(final Long hotelId) throws ServiceException {
+    public List<Season> findSeasonByHotel(final Long hotelId)
+	    throws ServiceException {
 	try {
 	    return this.seasonDAO.findSeasonByHotel(hotelId);
 

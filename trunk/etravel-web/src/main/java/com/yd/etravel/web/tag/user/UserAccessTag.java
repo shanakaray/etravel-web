@@ -64,8 +64,8 @@ public class UserAccessTag extends TagSupport {
 	final HttpServletRequest request = (HttpServletRequest) this.pageContext
 		.getRequest();
 	if (request.getSession(true).getAttribute(this.name) != null) {
-	    final IUserProfile profile = (IUserProfile) request.getSession(true)
-		    .getAttribute(getName());
+	    final IUserProfile profile = (IUserProfile) request
+		    .getSession(true).getAttribute(getName());
 	    return profile.hasFunction(this.property);
 	}
 

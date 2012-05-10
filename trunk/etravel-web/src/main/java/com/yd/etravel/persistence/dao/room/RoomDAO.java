@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
-import org.hibernate.Session;
+import org.springframework.stereotype.Repository;
 
 import com.yd.etravel.domain.custom.room.RoomSearchDTO;
 import com.yd.etravel.domain.room.Room;
@@ -19,11 +19,12 @@ import com.yd.etravel.persistence.exception.PersistenceException;
  *         com.yd.etravel.persistence.dao.room.RoomDAO
  * 
  */
+@Repository
 public class RoomDAO extends BaseDAO implements IRoomDAO {
 
     @Override
-    public boolean isExist(final Long hotelId, final Long roomTypeId, final Long id)
-	    throws PersistenceException {
+    public boolean isExist(final Long hotelId, final Long roomTypeId,
+	    final Long id) throws PersistenceException {
 	try {
 	    final StringBuilder IS_ROOM_EXIST = new StringBuilder(
 		    "SELECT room FROM Room as room where ")
@@ -33,9 +34,8 @@ public class RoomDAO extends BaseDAO implements IRoomDAO {
 		IS_ROOM_EXIST.append(" AND room.id != :id");
 	    }
 
-	    final Session session = getHibernateTemplate().getSessionFactory()
-		    .getCurrentSession();
-	    final Query query = session.createQuery(IS_ROOM_EXIST.toString());
+	    final Query query = getCurrentSession().createQuery(
+		    IS_ROOM_EXIST.toString());
 	    query.setParameter("hid", hotelId);
 	    query.setParameter("typeid", roomTypeId);
 
@@ -55,9 +55,6 @@ public class RoomDAO extends BaseDAO implements IRoomDAO {
 	try {
 	    final StringBuilder stringBuilder = new StringBuilder(
 		    " from Room as room where 1=1 ");
-	    final Session session = getHibernateTemplate().getSessionFactory()
-		    .getCurrentSession();
-
 	    if (roomSearchDTO.getHotelId() != null) {
 		stringBuilder.append(" and room.hotel.id=:hid ");
 	    }
@@ -66,7 +63,8 @@ public class RoomDAO extends BaseDAO implements IRoomDAO {
 		stringBuilder.append(" and room.roomType.id=:tid ");
 	    }
 
-	    final Query query = session.createQuery(stringBuilder.toString());
+	    final Query query = getCurrentSession().createQuery(
+		    stringBuilder.toString());
 
 	    if (roomSearchDTO.getHotelId() != null) {
 		query.setParameter("hid", roomSearchDTO.getHotelId());
@@ -96,8 +94,7 @@ public class RoomDAO extends BaseDAO implements IRoomDAO {
 		sb.append(" AND hot.id=:hid ");
 	    }
 
-	    final Query query = getHibernateTemplate().getSessionFactory()
-		    .getCurrentSession().createQuery(sb.toString());
+	    final Query query = getCurrentSession().createQuery(sb.toString());
 
 	    if (hotelId != null) {
 		query.setParameter("hid", hotelId);

@@ -2,6 +2,8 @@ package com.yd.etravel.util.mail.user;
 
 import javax.mail.MessagingException;
 
+import org.springframework.stereotype.Component;
+
 import com.yd.etravel.util.mail.MailMessage;
 
 /**
@@ -9,6 +11,7 @@ import com.yd.etravel.util.mail.MailMessage;
  * @author yora
  * 
  */
+@Component
 public class UserNotificationMail extends MailMessage {
 
     @Override

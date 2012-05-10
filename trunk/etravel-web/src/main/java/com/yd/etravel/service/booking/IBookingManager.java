@@ -12,10 +12,6 @@ import com.yd.etravel.domain.custom.booking.BookingReportDTO;
 import com.yd.etravel.domain.custom.booking.BookingReportSearchDTO;
 import com.yd.etravel.service.exception.ServiceException;
 
-/**
- * @author Dharsahana
- * 
- */
 public interface IBookingManager {
 
     public BookingDTO save(BookingDTO bookingDTO) throws ServiceException;

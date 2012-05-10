@@ -5,6 +5,11 @@ package com.yd.etravel.service.hotel;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.yd.etravel.domain.custom.user.UserSearchDTO;
 import com.yd.etravel.domain.hotel.Hotel;
 import com.yd.etravel.persistence.dao.hotel.IHotelDAO;
@@ -19,9 +24,14 @@ import com.yd.etravel.service.message.ValidationHelper;
  *         com.yd.etravel.service.hotel.HotelManagerImpl
  * 
  */
+@Service(value = "hotelService")
+@Transactional(propagation = Propagation.SUPPORTS)
 public class HotelManagerImpl implements IHotelManager {
 
+    @Autowired(required = true)
     private IHotelDAO hotelDAO;
+
+    @Autowired(required = true)
     private IUserDAO userDAO;
 
     public void setHotelDAO(final IHotelDAO hotelDAO) {
@@ -32,12 +42,7 @@ public class HotelManagerImpl implements IHotelManager {
 	this.userDAO = userDAO;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * com.yd.etravel.service.hotel.IHotelManager#deleteHotel(java.lang.Long)
-     */
+    @Transactional
     @Override
     public int deleteHotel(final Long id) throws ServiceException {
 	int val = 0;
@@ -104,13 +109,7 @@ public class HotelManagerImpl implements IHotelManager {
 	}
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * com.yd.etravel.service.hotel.IHotelManager#saveHotel(com.yd.etravel.domain
-     * .hotel.Hotel)
-     */
+    @Transactional
     @Override
     public Hotel saveHotel(Hotel hotel, final Long[] userids)
 	    throws ServiceException {

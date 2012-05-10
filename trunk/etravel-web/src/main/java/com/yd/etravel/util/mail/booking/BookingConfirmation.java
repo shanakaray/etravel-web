@@ -5,12 +5,11 @@ package com.yd.etravel.util.mail.booking;
 
 import javax.mail.MessagingException;
 
+import org.springframework.stereotype.Component;
+
 import com.yd.etravel.util.mail.MailMessage;
 
-/**
- * @author shanaka
- * 
- */
+@Component
 public class BookingConfirmation extends MailMessage {
 
     /**

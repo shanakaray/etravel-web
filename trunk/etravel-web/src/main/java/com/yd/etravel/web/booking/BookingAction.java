@@ -66,9 +66,9 @@ public class BookingAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward add(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward add(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	return null;
     }
 
@@ -81,9 +81,9 @@ public class BookingAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward back(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward back(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	return null;
     }
 
@@ -97,9 +97,9 @@ public class BookingAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    public ActionForward create(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    public ActionForward create(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	final BookingForm bookingForm = (BookingForm) form;
 	double payed = 0.0;
 	if (bookingForm.isRegisterd()) {
@@ -121,8 +121,9 @@ public class BookingAction extends BaseAction {
 	} else if (bookingForm.isGuest()) {
 
 	    final User user = new User();
-	    user.setId(bookingForm.getUid() != null && bookingForm.getUid()
-		    .longValue() > 0 ? bookingForm.getUid() : null);
+	    user.setId(bookingForm.getUid() != null
+		    && bookingForm.getUid().longValue() > 0 ? bookingForm
+		    .getUid() : null);
 	    user.setName(bookingForm.getCusUsername());
 	    user.setAddress(bookingForm.getAddress());
 	    user.setContact(bookingForm.getContact());
@@ -199,7 +200,8 @@ public class BookingAction extends BaseAction {
 		user.setLastName(bookingForm.getLastName());
 		user.setPassword(bookingForm.getCusPassword());
 		user.setActive(true);
-		final IUserProfile profile2 = getUserManager().saveCustomer(user);
+		final IUserProfile profile2 = getUserManager().saveCustomer(
+			user);
 		userId = profile2.getId();
 	    } else {
 		// selects a existing customer.
@@ -217,8 +219,8 @@ public class BookingAction extends BaseAction {
 
 	if (bookingForm.getAgentId() != null
 		&& bookingForm.getAgentId().longValue() > 0) {
-	    final User agent = getUserManager()
-		    .findUserById(bookingForm.getAgentId());
+	    final User agent = getUserManager().findUserById(
+		    bookingForm.getAgentId());
 	    booking.setAgent(agent);
 	}
 
@@ -367,9 +369,9 @@ public class BookingAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward delete(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward delete(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	return null;
     }
 
@@ -382,9 +384,9 @@ public class BookingAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward edit(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward edit(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	return null;
     }
 
@@ -397,9 +399,9 @@ public class BookingAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward find(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward find(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 
 	return mapping.findForward(SUCCESS);
     }
@@ -414,9 +416,9 @@ public class BookingAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward forward(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward forward(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	final BookingForm bookingForm = (BookingForm) form;
 	final RoomBooking booking = getBookingManager().findRoomBooking(
 		bookingForm.getBookingId());
@@ -434,9 +436,9 @@ public class BookingAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward init(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward init(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	final BookingForm bookingForm = (BookingForm) form;
 	bookingForm.reset(mapping, request);
 
@@ -478,9 +480,9 @@ public class BookingAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    public ActionForward process(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    public ActionForward process(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 
 	return mapping.findForward(SUCCESS);
     }
@@ -494,9 +496,9 @@ public class BookingAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward save(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward save(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	return null;
     }
 
@@ -509,9 +511,9 @@ public class BookingAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward send(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward send(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	return null;
     }
 
@@ -524,16 +526,16 @@ public class BookingAction extends BaseAction {
      * javax.servlet.http.HttpServletResponse)
      */
     @Override
-    protected ActionForward sort(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    protected ActionForward sort(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	return null;
     }
 
     @Override
-    public ActionForward search(final ActionMapping mapping, final ActionForm form,
-	    final HttpServletRequest request, final HttpServletResponse response)
-	    throws Exception {
+    public ActionForward search(final ActionMapping mapping,
+	    final ActionForm form, final HttpServletRequest request,
+	    final HttpServletResponse response) throws Exception {
 	// TODO Auto-generated method stub
 	return null;
     }

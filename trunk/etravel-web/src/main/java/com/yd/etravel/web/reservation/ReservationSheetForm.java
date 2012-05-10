@@ -109,8 +109,8 @@ public class ReservationSheetForm extends BaseForm {
     }
 
     public String getColur(final String bno) {
-	final Integer intg = Integer
-		.valueOf(String.valueOf(bno.charAt(bno.length() - 1)));
+	final Integer intg = Integer.valueOf(String.valueOf(bno.charAt(bno
+		.length() - 1)));
 	return colurCodes.get(intg);
     }
 
@@ -123,7 +123,8 @@ public class ReservationSheetForm extends BaseForm {
     }
 
     @Override
-    public void resetBean(final ActionMapping mapping, final HttpServletRequest request) {
+    public void resetBean(final ActionMapping mapping,
+	    final HttpServletRequest request) {
 	this.hotelList = Collections.EMPTY_LIST;
 	this.roomAvailabilitySet = Collections.EMPTY_SET;
 	this.bookingList = Collections.EMPTY_LIST;

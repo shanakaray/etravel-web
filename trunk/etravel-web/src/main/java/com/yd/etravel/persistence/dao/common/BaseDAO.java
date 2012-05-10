@@ -9,6 +9,8 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
@@ -23,11 +25,20 @@ import com.yd.etravel.persistence.exception.PersistenceException;
  */
 public class BaseDAO extends HibernateDaoSupport implements IBaseDAO {
 
+    @Autowired
+    public void init(final SessionFactory sessionFactory) {
+	setSessionFactory(sessionFactory);
+    }
+
+    protected org.hibernate.classic.Session getCurrentSession() {
+	return getHibernateTemplate().getSessionFactory().getCurrentSession();
+    }
+
     @Override
     public void delete(final Object object) throws PersistenceException {
 	try {
 
-	    getHibernateTemplate().delete(object);
+	    getCurrentSession().delete(object);
 
 	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
@@ -37,9 +48,10 @@ public class BaseDAO extends HibernateDaoSupport implements IBaseDAO {
     }
 
     @Override
-    public Object findById(final Class cls, final Long id) throws PersistenceException {
+    public Object findById(final Class cls, final Long id)
+	    throws PersistenceException {
 	try {
-	    return getHibernateTemplate().load(cls, id);
+	    return getCurrentSession().load(cls, id);
 	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 	} catch (final DataAccessException e) {
@@ -142,7 +154,8 @@ public class BaseDAO extends HibernateDaoSupport implements IBaseDAO {
     }
 
     @Override
-    public List findAll(final Class cls, final Long[] id) throws PersistenceException {
+    public List findAll(final Class cls, final Long[] id)
+	    throws PersistenceException {
 	try {
 	    final StringBuilder sb = new StringBuilder("SELECT obj FROM ")
 		    .append(cls.getName()).append(
@@ -164,7 +177,8 @@ public class BaseDAO extends HibernateDaoSupport implements IBaseDAO {
     }
 
     @Override
-    public int deleteAny(final Class cls, final Long[] id) throws PersistenceException {
+    public int deleteAny(final Class cls, final Long[] id)
+	    throws PersistenceException {
 	try {
 	    final StringBuilder sb = new StringBuilder("delete from ").append(
 		    cls.getName()).append(" as obj Where obj.id IN (:ids) ");
@@ -183,11 +197,12 @@ public class BaseDAO extends HibernateDaoSupport implements IBaseDAO {
     }
 
     @Override
-    public int deleteAny(final Class cls, final Long id) throws PersistenceException {
+    public int deleteAny(final Long id, final Class cla)
+	    throws PersistenceException {
 	try {
 
 	    final StringBuilder sb = new StringBuilder("delete from ").append(
-		    cls.getName()).append(" as obj Where obj.id = (:id) ");
+		    cla.getName()).append(" as obj Where obj.id = (:id) ");
 	    final Session session = getHibernateTemplate().getSessionFactory()
 		    .getCurrentSession();
 	    final Query query = session.createQuery(sb.toString());

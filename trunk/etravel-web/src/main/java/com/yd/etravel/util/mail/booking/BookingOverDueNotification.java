@@ -5,11 +5,11 @@ package com.yd.etravel.util.mail.booking;
 
 import javax.mail.MessagingException;
 
+import org.springframework.stereotype.Component;
+
 import com.yd.etravel.util.mail.MailMessage;
 
-/**
- * @author yora com.yd.etravel.util.mail.booking.BookingOverDueNotification
- */
+@Component
 public class BookingOverDueNotification extends MailMessage {
 
     /**

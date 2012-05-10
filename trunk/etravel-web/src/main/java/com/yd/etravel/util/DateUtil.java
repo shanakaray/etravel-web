@@ -74,12 +74,11 @@ public class DateUtil {
 	final DateHolder dh1 = new DateHolder(d1);
 	final DateHolder dh2 = new DateHolder(d2);
 
-	return dh1.getYear() < dh2.getYear()
-		|| dh1.getYear() == dh2.getYear() && dh1.getMonth() < dh2
-			.getMonth()
+	return dh1.getYear() < dh2.getYear() || dh1.getYear() == dh2.getYear()
+		&& dh1.getMonth() < dh2.getMonth()
 		|| dh1.getYear() == dh2.getYear()
-			&& dh1.getMonth() == dh2.getMonth() && dh1.getDay() < dh2
-			.getDay();
+		&& dh1.getMonth() == dh2.getMonth()
+		&& dh1.getDay() < dh2.getDay();
     }
 
     public static boolean equals(final Date d1, final Date d2) {
@@ -100,17 +99,15 @@ public class DateUtil {
 	final DateHolder dh2 = new DateHolder(d2);
 
 	return dh1.getYear() == dh2.getYear()
-		&& dh1.getMonth() == dh2.getMonth() && dh1.getDay() == dh2
-		.getDay() - 1
+		&& dh1.getMonth() == dh2.getMonth()
+		&& dh1.getDay() == dh2.getDay() - 1
 		|| dh1.getYear() == dh2.getYear()
-			&& dh1.getMonth() == dh2.getMonth() - 1
-			&& dh1.getDay() == daysOfMonth(dh1.getYear(),
-				dh1.getMonth()) && dh2.getDay() == 1
-		|| dh1.getYear() == dh2.getYear() - 1
-			&& dh1.getMonth() == 11
-			&& dh2.getMonth() == 0
-			&& dh1.getDay() == daysOfMonth(dh1.getYear(),
-				dh1.getMonth()) && dh2.getDay() == 1;
+		&& dh1.getMonth() == dh2.getMonth() - 1
+		&& dh1.getDay() == daysOfMonth(dh1.getYear(), dh1.getMonth())
+		&& dh2.getDay() == 1 || dh1.getYear() == dh2.getYear() - 1
+		&& dh1.getMonth() == 11 && dh2.getMonth() == 0
+		&& dh1.getDay() == daysOfMonth(dh1.getYear(), dh1.getMonth())
+		&& dh2.getDay() == 1;
 
     }
 
@@ -179,8 +176,8 @@ public class DateUtil {
 	    // that accepts e.g. 2002-01-32 as 2002-02-01 etc
 	    final Date d = DateFormat.getDateInstance(DateFormat.SHORT, locale)
 		    .parse(s);
-	    final String sd = DateFormat.getDateInstance(DateFormat.SHORT, locale)
-		    .format(d);
+	    final String sd = DateFormat.getDateInstance(DateFormat.SHORT,
+		    locale).format(d);
 
 	    if (s.equals(sd)) {
 		return d;
@@ -321,8 +318,8 @@ public class DateUtil {
 	    // that accepts e.g. 2002-01-32 as 2002-02-01 etc
 	    final Date d = DateFormat.getTimeInstance(DateFormat.SHORT, locale)
 		    .parse(s);
-	    final String sd = DateFormat.getTimeInstance(DateFormat.SHORT, locale)
-		    .format(d);
+	    final String sd = DateFormat.getTimeInstance(DateFormat.SHORT,
+		    locale).format(d);
 
 	    if (s.equals(sd)) {
 		return d;
@@ -499,7 +496,8 @@ public class DateUtil {
 	return new SimpleDateFormat(format).format(date);
     }
 
-    public static String convert(final String date, final String fromFormat, final String toFormat) {
+    public static String convert(final String date, final String fromFormat,
+	    final String toFormat) {
 	final Date tmp = parse(date, fromFormat);
 	if (tmp == null) {
 	    return "";
@@ -525,7 +523,8 @@ public class DateUtil {
      * @param date2
      * @return true if date1 is equal to or greater than date2
      */
-    public static boolean dateAfterOrEqualMinute(final Date date1, final Date date2) {
+    public static boolean dateAfterOrEqualMinute(final Date date1,
+	    final Date date2) {
 	return dateLessOrEqualMinuteInternal(date2, date1, false);
     }
 
@@ -537,8 +536,8 @@ public class DateUtil {
      * @return true if date1 is equal to date2
      */
     public static boolean dateEqual(final Date date1, final Date date2) {
-	return dateAfterOrEqual(date1, date2) && dateBeforeOrEqual(date1,
-		date2);
+	return dateAfterOrEqual(date1, date2)
+		&& dateBeforeOrEqual(date1, date2);
     }
 
     /**
@@ -574,8 +573,7 @@ public class DateUtil {
 	final int second2 = cal2.get(Calendar.SECOND);
 
 	return year1 == year2 && month1 == month2 && day1 == day2
-		&& hour1 == hour2 && minute1 == minute2
-		&& second1 == second2;
+		&& hour1 == hour2 && minute1 == minute2 && second1 == second2;
 
     }
 
@@ -760,11 +758,11 @@ public class DateUtil {
 	final int date2Month = cal2.get(Calendar.MONTH);
 	final int date2Day = cal2.get(Calendar.DATE);
 
-	return date1Year < date2Year
-		|| date1Year == date2Year && date1Month < date2Month
-		|| date1Year == date2Year && date1Month == date2Month && date1Day < date2Day
-		|| !strict && date1Year == date2Year
-			&& date1Month == date2Month && date1Day == date2Day;
+	return date1Year < date2Year || date1Year == date2Year
+		&& date1Month < date2Month || date1Year == date2Year
+		&& date1Month == date2Month && date1Day < date2Day || !strict
+		&& date1Year == date2Year && date1Month == date2Month
+		&& date1Day == date2Day;
 
     }
 
@@ -791,16 +789,17 @@ public class DateUtil {
 	final int date2Hour = cal2.get(Calendar.HOUR_OF_DAY);
 	final int date2Minute = cal2.get(Calendar.MINUTE);
 
-	return date1Year < date2Year
-		|| date1Year == date2Year && date1Month < date2Month
-		|| date1Year == date2Year && date1Month == date2Month && date1Day < date2Day
+	return date1Year < date2Year || date1Year == date2Year
+		&& date1Month < date2Month || date1Year == date2Year
+		&& date1Month == date2Month && date1Day < date2Day
 		|| date1Year == date2Year && date1Month == date2Month
-			&& date1Day == date2Day && date1Hour < date2Hour
+		&& date1Day == date2Day && date1Hour < date2Hour
 		|| date1Year == date2Year && date1Month == date2Month
-			&& date1Day == date2Day && date1Hour == date2Hour && date1Minute < date2Minute
-		|| !strict && date1Year == date2Year
-			&& date1Month == date2Month && date1Day == date2Day
-			&& date1Hour == date2Hour && date1Minute == date2Minute;
+		&& date1Day == date2Day && date1Hour == date2Hour
+		&& date1Minute < date2Minute || !strict
+		&& date1Year == date2Year && date1Month == date2Month
+		&& date1Day == date2Day && date1Hour == date2Hour
+		&& date1Minute == date2Minute;
 
     }
 
@@ -825,8 +824,9 @@ public class DateUtil {
 	return "";
     }
 
-    public static Date substract(final Date date, final int years, final int months, final int days,
-	    final int hours, final int minutes, final int seconds) {
+    public static Date substract(final Date date, final int years,
+	    final int months, final int days, final int hours,
+	    final int minutes, final int seconds) {
 	final Calendar cal = new GregorianCalendar();
 	cal.setTime(date);
 	cal.add(Calendar.YEAR, -years);
@@ -839,8 +839,9 @@ public class DateUtil {
 	return cal.getTime();
     }
 
-    public static Date add(final Date date, final int years, final int months, final int days,
-	    final int hours, final int minutes, final int seconds) {
+    public static Date add(final Date date, final int years, final int months,
+	    final int days, final int hours, final int minutes,
+	    final int seconds) {
 	final Calendar cal = new GregorianCalendar();
 	cal.setTime(date);
 	cal.add(Calendar.YEAR, years);
@@ -853,7 +854,8 @@ public class DateUtil {
 	return cal.getTime();
     }
 
-    public static int getDays(final GregorianCalendar g1, final GregorianCalendar g2) {
+    public static int getDays(final GregorianCalendar g1,
+	    final GregorianCalendar g2) {
 	int elapsed = 0;
 	GregorianCalendar gc1, gc2;
 
@@ -1090,8 +1092,8 @@ public class DateUtil {
      * @param lastDate
      * @return
      */
-    public static boolean isInsideInterval(final Date aDate, final Date firstDate,
-	    final Date lastDate) {
+    public static boolean isInsideInterval(final Date aDate,
+	    final Date firstDate, final Date lastDate) {
 	if (aDate != null) {
 	    if (lastDate == null && firstDate == null) {
 		// Interval: ------

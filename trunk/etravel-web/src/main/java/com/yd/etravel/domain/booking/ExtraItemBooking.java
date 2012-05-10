@@ -18,7 +18,7 @@ import com.yd.etravel.domain.extraitem.ExtraItem;
 @Entity
 @Table(name = "T_EXTRA_ITEM_BOOKING")
 public class ExtraItemBooking extends BaseObject {
-   
+
     @ManyToOne
     @ForeignKey(name = "FK_BOOKING")
     private Booking booking;
@@ -40,7 +40,6 @@ public class ExtraItemBooking extends BaseObject {
     public void setExtraItem(final ExtraItem extraItem) {
 	this.extraItem = extraItem;
     }
-
 
     public Booking getBooking() {
 	return this.booking;

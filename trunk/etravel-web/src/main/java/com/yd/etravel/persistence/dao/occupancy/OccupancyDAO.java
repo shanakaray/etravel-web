@@ -8,13 +8,14 @@ import java.util.List;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
-import org.hibernate.Session;
+import org.springframework.stereotype.Repository;
 
 import com.yd.etravel.domain.occupancy.Occupancy;
 import com.yd.etravel.persistence.dao.common.BaseDAO;
 import com.yd.etravel.persistence.exception.PersistenceException;
 import com.yd.etravel.util.IConstants.IOccupancy;
 
+@Repository
 public class OccupancyDAO extends BaseDAO implements IOccupancyDAO {
 
     final static StringBuilder IS_OCCUPANCY_NAME_EXIST = new StringBuilder(
@@ -36,15 +37,12 @@ public class OccupancyDAO extends BaseDAO implements IOccupancyDAO {
 	    "SELECT occupancy FROM com.yd.etravel.domain.occupancy.Occupancy as occupancy "
 		    + "where occupancy.name=? ");
 
-    /**
-	 * 
-	 */
     public OccupancyDAO() {
     }
 
     @Override
-    public boolean isOccupancyNameExist(final String occupancyName, final Long id)
-	    throws PersistenceException {
+    public boolean isOccupancyNameExist(final String occupancyName,
+	    final Long id) throws PersistenceException {
 	try {
 
 	    final StringBuilder IS_OCCUPANCY_NAME_EXIST = new StringBuilder(
@@ -55,10 +53,8 @@ public class OccupancyDAO extends BaseDAO implements IOccupancyDAO {
 		IS_OCCUPANCY_NAME_EXIST.append(" AND occupancy.id != :id");
 	    }
 
-	    final Session session = getHibernateTemplate().getSessionFactory()
-		    .getCurrentSession();
-	    final Query query = session.createQuery(IS_OCCUPANCY_NAME_EXIST
-		    .toString());
+	    final Query query = getCurrentSession().createQuery(
+		    IS_OCCUPANCY_NAME_EXIST.toString());
 	    query.setParameter("name", occupancyName);
 	    if (id != null) {
 		query.setParameter("id", id);
@@ -88,10 +84,8 @@ public class OccupancyDAO extends BaseDAO implements IOccupancyDAO {
 	    throws PersistenceException {
 
 	try {
-	    final Session session = getHibernateTemplate().getSessionFactory()
-		    .getCurrentSession();
-	    final Query query = session.createQuery(FIND_ALL_OCCUPANCY_BY_PAX_INFO
-		    .toString());
+	    final Query query = getCurrentSession().createQuery(
+		    FIND_ALL_OCCUPANCY_BY_PAX_INFO.toString());
 	    query.setParameter(0, occupancy.getAdult());
 	    query.setParameter(1, occupancy.getChild());
 	    query.setParameter(2, occupancy.getInfant());
@@ -107,18 +101,17 @@ public class OccupancyDAO extends BaseDAO implements IOccupancyDAO {
 	    throws PersistenceException {
 	try {
 	    final List<Occupancy> results = new ArrayList<Occupancy>();
-	    final Session session = getHibernateTemplate().getSessionFactory()
-		    .getCurrentSession();
-	    final Query query1 = session.createQuery(FIND_ALL_OCCUPANCY_BY_OCC_NAME
-		    .toString());
-	    query1.setParameter(0, IOccupancy.COMMON_OCCUPANCY_NAME);
-	    results.addAll(query1.list());
+	    final Query queryOccupancyByName = getCurrentSession().createQuery(
+		    FIND_ALL_OCCUPANCY_BY_OCC_NAME.toString());
+	    queryOccupancyByName.setParameter(0,
+		    IOccupancy.COMMON_OCCUPANCY_NAME);
+	    results.addAll(queryOccupancyByName.list());
 
-	    final Query query = session.createQuery(FIND_ALL_OCCUPANCY_BY_ROOM_TYPE
-		    .toString());
-	    query.setParameter(0, roomTypeId);
+	    final Query queryOccupancyByType = getCurrentSession().createQuery(
+		    FIND_ALL_OCCUPANCY_BY_ROOM_TYPE.toString());
+	    queryOccupancyByType.setParameter(0, roomTypeId);
 
-	    results.addAll(query.list());
+	    results.addAll(queryOccupancyByType.list());
 
 	    return results;
 	} catch (final HibernateException e) {

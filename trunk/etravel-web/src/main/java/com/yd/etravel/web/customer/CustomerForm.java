@@ -122,7 +122,8 @@ public class CustomerForm extends BaseForm {
      * .ActionMapping, javax.servlet.http.HttpServletRequest)
      */
     @Override
-    public void resetBean(final ActionMapping mapping, final HttpServletRequest request) {
+    public void resetBean(final ActionMapping mapping,
+	    final HttpServletRequest request) {
 	this.address = EMPTY_STRING;
 	this.contact = EMPTY_STRING;
 	this.email = EMPTY_STRING;

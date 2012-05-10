@@ -6,6 +6,11 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.yd.etravel.domain.custom.search.RoomDTO;
 import com.yd.etravel.domain.custom.search.SearchRequestDTO;
 import com.yd.etravel.domain.custom.search.SearchResultsDTO;
@@ -20,15 +25,14 @@ import com.yd.etravel.persistence.exception.PersistenceException;
 import com.yd.etravel.service.exception.ServiceException;
 import com.yd.etravel.util.SortedCollection;
 
-/**
- * 
- * @author Dharsahana
- * 
- */
+@Service(value = "searchService")
+@Transactional(propagation = Propagation.SUPPORTS)
 public class SearchManagerImpl implements ISearchManager {
-
+    @Autowired(required = true)
     private ISearchDAO searchDAO;
+    @Autowired(required = true)
     private ISeasonDAO seasonDAO;
+    @Autowired(required = true)
     private IRoomAvailabilityDAO roomAvailabilityDAO;
 
     public void setSearchDAO(final ISearchDAO searchDAO) {
@@ -39,7 +43,8 @@ public class SearchManagerImpl implements ISearchManager {
 	this.seasonDAO = seasonDAO;
     }
 
-    public void setRoomAvailabilityDAO(final IRoomAvailabilityDAO roomAvailabilityDAO) {
+    public void setRoomAvailabilityDAO(
+	    final IRoomAvailabilityDAO roomAvailabilityDAO) {
 	this.roomAvailabilityDAO = roomAvailabilityDAO;
     }
 
@@ -48,7 +53,8 @@ public class SearchManagerImpl implements ISearchManager {
 	    throws ServiceException {
 	final SearchResultsDTO searchResultsDTO = new SearchResultsDTO();
 	try {
-	    final List<RoomAvailability> list = this.searchDAO.findRooms(searchRequestDTO);
+	    final List<RoomAvailability> list = this.searchDAO
+		    .findRooms(searchRequestDTO);
 	    List<RoomDTO> roomDTOList = new ArrayList<RoomDTO>();
 
 	    if (list == null || list.isEmpty()) {
@@ -61,8 +67,7 @@ public class SearchManagerImpl implements ISearchManager {
 
 		    final RoomAvailability maxType =
 
-		    findRoomAvailability(type,
-			    searchRequestDTO.getCheckIn(),
+		    findRoomAvailability(type, searchRequestDTO.getCheckIn(),
 			    searchRequestDTO.getCheckOut());
 		    if (maxType.getAvailableUnit() <= 0) {
 			continue;
@@ -77,7 +82,8 @@ public class SearchManagerImpl implements ISearchManager {
 		    List<RoomSeasonalRate> rsrList = new ArrayList<RoomSeasonalRate>();
 		    rsrList = this.seasonDAO.findRoomSeasonalRateByRoomId(type
 			    .getRoom().getId());
-		    final RoomSeasonalRate roomSeasonalRate = findRoomSeasonalRate(searchRequestDTO, rsrList);
+		    final RoomSeasonalRate roomSeasonalRate = findRoomSeasonalRate(
+			    searchRequestDTO, rsrList);
 
 		    if (roomSeasonalRate.getSeason() == null) {
 			roomSeasonalRate.setSeason(new Season());
@@ -96,7 +102,8 @@ public class SearchManagerImpl implements ISearchManager {
     }
 
     private RoomSeasonalRate findRoomSeasonalRate(
-	    final SearchRequestDTO searchRequestDTO, final List<RoomSeasonalRate> rsrList) {
+	    final SearchRequestDTO searchRequestDTO,
+	    final List<RoomSeasonalRate> rsrList) {
 
 	RoomSeasonalRate rsr = new RoomSeasonalRate();
 
@@ -133,8 +140,8 @@ public class SearchManagerImpl implements ISearchManager {
     }
 
     private RoomAvailability findRoomAvailability(
-	    final RoomAvailability roomAvailability, final Date checkIn, final Date checkOut)
-	    throws ServiceException {
+	    final RoomAvailability roomAvailability, final Date checkIn,
+	    final Date checkOut) throws ServiceException {
 
 	try {
 	    ArrayList<RoomDailyAvailability> roomDailyAvList = (ArrayList<RoomDailyAvailability>) this.roomAvailabilityDAO
@@ -146,17 +153,13 @@ public class SearchManagerImpl implements ISearchManager {
 
 	    if (!roomDailyAvList.isEmpty()) {
 
-		roomAvailability
-			.setAvailableUnit((roomDailyAvList
-				.get(0)).getAvailabalUnit());
+		roomAvailability.setAvailableUnit(roomDailyAvList.get(0)
+			.getAvailabalUnit());
 	    }
 
-	    // should return here minimum available room
 	} catch (final PersistenceException e) {
-	    // TODO Auto-generated catch block
 	    throw new ServiceException(null, e);
 	} catch (final Exception e) {
-	    // TODO Auto-generated catch block
 	    throw new ServiceException(null, e);
 	}
 
@@ -165,8 +168,8 @@ public class SearchManagerImpl implements ISearchManager {
     }
 
     private List<RoomDTO> findRoomDateCrossAllocation(
-	    final SearchRequestDTO searchRequestDTO) throws PersistenceException,
-	    ServiceException {
+	    final SearchRequestDTO searchRequestDTO)
+	    throws PersistenceException, ServiceException {
 
 	new ArrayList();
 	final List<RoomAvailability> checkInList = this.searchDAO
@@ -177,10 +180,10 @@ public class SearchManagerImpl implements ISearchManager {
 
 	final Iterator<RoomAvailability> iterCheckIn = checkInList.iterator();
 	while (iterCheckIn.hasNext()) {
-	    final RoomAvailability roomAvailabilityCheckIn = iterCheckIn
-		    .next();
+	    final RoomAvailability roomAvailabilityCheckIn = iterCheckIn.next();
 
-	    final Iterator<RoomAvailability> iterCheckOut = checkOutList.iterator();
+	    final Iterator<RoomAvailability> iterCheckOut = checkOutList
+		    .iterator();
 	    while (iterCheckOut.hasNext()) {
 		final RoomAvailability roomAvailabilityCheckOut = iterCheckOut
 			.next();
@@ -201,11 +204,9 @@ public class SearchManagerImpl implements ISearchManager {
 			    .getFromDate().getTime()) {
 
 			RoomDTO roomDTO = new RoomDTO();
-
 			roomDTO.setRoomAvailabilityCheckIn(roomAvailabilityCheckIn);
 			roomDTO.setRoomAvailabilityCheckOut(roomAvailabilityCheckOut);
 			roomDTO.setCombineAvailability(true);
-
 			final RoomAvailability type = roomAvailabilityCheckIn;
 			roomDTO.setRoomAvailability(new RoomAvailability());
 			roomDTO.getRoomAvailability().setFromDate(
@@ -216,26 +217,23 @@ public class SearchManagerImpl implements ISearchManager {
 			roomDTO.setRoom(type.getRoom());
 			roomDTO.setRoomType(type.getRoom().getRoomType());
 			roomDTO.setHotel(type.getRoom().getHotel());
-
 			roomDTO.setId(type.getId());
-			// roomDTO.setOccupancy(type.getOccupancy());
 
 			List<RoomSeasonalRate> rsrList = new ArrayList<RoomSeasonalRate>();
-			rsrList = this.seasonDAO.findRoomSeasonalRateByRoomId(type
-				.getRoom().getId());
-			final RoomSeasonalRate roomSeasonalRate = findRoomSeasonalRate(searchRequestDTO, rsrList);
+			rsrList = this.seasonDAO
+				.findRoomSeasonalRateByRoomId(type.getRoom()
+					.getId());
+			final RoomSeasonalRate roomSeasonalRate = findRoomSeasonalRate(
+				searchRequestDTO, rsrList);
 
 			if (roomSeasonalRate.getSeason() == null) {
 			    roomSeasonalRate.setSeason(new Season());
 			    continue;
 			}
-
 			roomDTO.setRoomSeasonalRate(roomSeasonalRate);
 			roomDTOList.add(roomDTO);
-
 		    }
 		}
-
 	    }
 
 	}
@@ -248,7 +246,6 @@ public class SearchManagerImpl implements ISearchManager {
 	    throws ServiceException {
 
 	try {
-
 	    final RoomAvailability roomAvailabilityCheckIn = roomDTO
 		    .getRoomAvailabilityCheckIn();
 	    final RoomAvailability roomAvailabilityCheckOut = roomDTO
@@ -278,13 +275,13 @@ public class SearchManagerImpl implements ISearchManager {
 
 	    if (!roomDailyAvListCheckIn.isEmpty()) {
 
-		avalUnitCheckIn = (roomDailyAvListCheckIn
-			.get(0)).getAvailabalUnit();
+		avalUnitCheckIn = roomDailyAvListCheckIn.get(0)
+			.getAvailabalUnit();
 	    }
 	    if (!roomDailyAvListCheckOut.isEmpty()) {
 
-		avalUnitCheckOut = (roomDailyAvListCheckOut
-			.get(0)).getAvailabalUnit();
+		avalUnitCheckOut = roomDailyAvListCheckOut.get(0)
+			.getAvailabalUnit();
 	    }
 	    if (avalUnitCheckIn > avalUnitCheckOut) {
 		roomDTO.getRoomAvailability()
@@ -297,11 +294,9 @@ public class SearchManagerImpl implements ISearchManager {
 	    int allocatedUnitCheckOut = 0;
 
 	    if (!roomDailyAvListCheckIn.isEmpty()) {
-
 		allocatedUnitCheckIn = roomAvailabilityCheckIn.getUnit();
 	    }
 	    if (!roomDailyAvListCheckOut.isEmpty()) {
-
 		allocatedUnitCheckOut = roomAvailabilityCheckOut.getUnit();
 	    }
 	    if (allocatedUnitCheckIn > allocatedUnitCheckOut) {
@@ -309,12 +304,9 @@ public class SearchManagerImpl implements ISearchManager {
 	    } else {
 		roomDTO.getRoomAvailability().setUnit(allocatedUnitCheckIn);
 	    }
-	    // should return here minimum avalable room
 	} catch (final PersistenceException e) {
-	    // TODO Auto-generated catch block
 	    throw new ServiceException(null, e);
 	} catch (final Exception e) {
-	    // TODO Auto-generated catch block
 	    throw new ServiceException(null, e);
 	}
 

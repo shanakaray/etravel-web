@@ -15,15 +15,16 @@ import com.yd.etravel.util.IConstants;
 public class ValidationHelper {
 
     // Utility method without parameter MessageHelper.
-    public static UIMesssage getMessageHolder(final String key, final String bundleName,
-	    final String[] args) {
+    public static UIMesssage getMessageHolder(final String key,
+	    final String bundleName, final String[] args) {
 	final UIMesssage mh = new UIMesssage();
 	mh.addError(key, bundleName, args);
 	return mh;
     }
 
     // Utility method without parameter MessageHelper.
-    public static UIMesssage getMessageHolder(final String key, final String[] args) {
+    public static UIMesssage getMessageHolder(final String key,
+	    final String[] args) {
 	final UIMesssage mh = new UIMesssage();
 	mh.addError(key, IConstants.IBundle.ETRAVEL, args);
 	return mh;

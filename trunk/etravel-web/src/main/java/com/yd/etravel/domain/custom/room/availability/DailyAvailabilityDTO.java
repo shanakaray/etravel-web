@@ -34,10 +34,12 @@ public class DailyAvailabilityDTO {
     public DailyAvailabilityDTO() {
     }
 
-    public DailyAvailabilityDTO(final Long id, final Date date, final Integer allocatedUnit,
-	    final Integer availableUnit, final Long roomId, final Long roomTypeId, final Long hotelId,
-	    final String hotelName, final String roomName, final String roomTypeName,
-	    final Boolean active, final Date createdDate) {
+    public DailyAvailabilityDTO(final Long id, final Date date,
+	    final Integer allocatedUnit, final Integer availableUnit,
+	    final Long roomId, final Long roomTypeId, final Long hotelId,
+	    final String hotelName, final String roomName,
+	    final String roomTypeName, final Boolean active,
+	    final Date createdDate) {
 	super();
 	this.id = id;
 	this.date = date;

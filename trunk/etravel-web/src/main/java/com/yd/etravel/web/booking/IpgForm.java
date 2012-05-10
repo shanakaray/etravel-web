@@ -578,7 +578,8 @@ public class IpgForm extends BaseForm {
      * .ActionMapping, javax.servlet.http.HttpServletRequest)
      */
     @Override
-    public void resetBean(final ActionMapping mapping, final HttpServletRequest request) {
+    public void resetBean(final ActionMapping mapping,
+	    final HttpServletRequest request) {
 	this.AgainLink = EMPTY_STRING;
 	this.vpc_Amount = EMPTY_STRING;
 	this.vpc_Locale = EMPTY_STRING;

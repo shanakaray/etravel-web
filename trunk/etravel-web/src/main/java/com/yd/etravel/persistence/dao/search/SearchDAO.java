@@ -7,53 +7,15 @@ import java.util.List;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
-import org.hibernate.Session;
+import org.springframework.stereotype.Repository;
 
 import com.yd.etravel.domain.custom.search.SearchRequestDTO;
 import com.yd.etravel.domain.room.availability.RoomAvailability;
 import com.yd.etravel.persistence.dao.common.BaseDAO;
 import com.yd.etravel.persistence.exception.PersistenceException;
 
-/**
- * @author Dharsahana
- * 
- */
+@Repository
 public class SearchDAO extends BaseDAO implements ISearchDAO {
-
-    // final static StringBuilder FIND_ROOMS = new StringBuilder(
-    // "SELECT roomAvailability FROM
-    // com.yd.etravel.domain.room.availability.RoomAvailability as
-    // roomAvailability "
-    // + "join fetch roomAvailability.room as room "
-    // + "join fetch room.roomType as roomType "
-    // + "join fetch roomAvailability.occupancy as occupancy "
-    // + "join fetch room.hotel as hotel "
-    // + "where hotel.id= ? And "
-    // + "(roomAvailability.fromDate <= ? And roomAvailability.toDate >= ? ) ");
-    //
-    // final static StringBuilder FIND_ROOMS_BY_CHECK_IN_DATE = new
-    // StringBuilder(
-    // "SELECT roomAvailability FROM
-    // com.yd.etravel.domain.room.availability.RoomAvailability as
-    // roomAvailability "
-    // + "join fetch roomAvailability.room as room "
-    // + "join fetch room.roomType as roomType "
-    // + "join fetch roomAvailability.occupancy as occupancy "
-    // + "join fetch room.hotel as hotel "
-    // + "where hotel.id= ? And "
-    // + "(roomAvailability.fromDate <= ? And roomAvailability.toDate >= ? ) ");
-    //
-    // final static StringBuilder FIND_ROOMS_BY_CHECK_OUT_DATE = new
-    // StringBuilder(
-    // "SELECT roomAvailability FROM
-    // com.yd.etravel.domain.room.availability.RoomAvailability as
-    // roomAvailability "
-    // + "join fetch roomAvailability.room as room "
-    // + "join fetch room.roomType as roomType "
-    // + "join fetch roomAvailability.occupancy as occupancy "
-    // + "join fetch room.hotel as hotel "
-    // + "where hotel.id= ? And "
-    // + "(roomAvailability.fromDate <= ? And roomAvailability.toDate >= ? ) ");
 
     final static StringBuilder FIND_ROOMS_BY_CHECK_IN_DATE = new StringBuilder(
 	    "SELECT roomAvailability FROM com.yd.etravel.domain.room.availability.RoomAvailability as roomAvailability "
@@ -71,11 +33,7 @@ public class SearchDAO extends BaseDAO implements ISearchDAO {
 		    + "where hotel.id= ? And "
 		    + "(roomAvailability.fromDate <= ? And roomAvailability.toDate >= ? ) ");
 
-    /**
-	 * 
-	 */
     public SearchDAO() {
-	// TODO Auto-generated constructor stub
     }
 
     @Override
@@ -95,9 +53,8 @@ public class SearchDAO extends BaseDAO implements ISearchDAO {
 		FIND_ROOMS.append(" AND roomType.id=:rid ");
 	    }
 
-	    final Session session = getHibernateTemplate().getSessionFactory()
-		    .getCurrentSession();
-	    final Query query = session.createQuery(FIND_ROOMS.toString());
+	    final Query query = getCurrentSession().createQuery(
+		    FIND_ROOMS.toString());
 	    query.setParameter(0, searchRequestDTO.getHotelId());
 	    query.setParameter(1, searchRequestDTO.getCheckIn());
 	    query.setParameter(2, searchRequestDTO.getCheckOut());
@@ -115,11 +72,8 @@ public class SearchDAO extends BaseDAO implements ISearchDAO {
 	    final SearchRequestDTO searchRequestDTO)
 	    throws PersistenceException {
 	try {
-
-	    final Session session = getHibernateTemplate().getSessionFactory()
-		    .getCurrentSession();
-	    final Query query = session.createQuery(FIND_ROOMS_BY_CHECK_IN_DATE
-		    .toString());
+	    final Query query = getCurrentSession().createQuery(
+		    FIND_ROOMS_BY_CHECK_IN_DATE.toString());
 	    query.setParameter(0, searchRequestDTO.getHotelId());
 	    query.setParameter(1, searchRequestDTO.getCheckIn());
 	    query.setParameter(2, searchRequestDTO.getCheckIn());
@@ -134,11 +88,8 @@ public class SearchDAO extends BaseDAO implements ISearchDAO {
 	    final SearchRequestDTO searchRequestDTO)
 	    throws PersistenceException {
 	try {
-
-	    final Session session = getHibernateTemplate().getSessionFactory()
-		    .getCurrentSession();
-	    final Query query = session.createQuery(FIND_ROOMS_BY_CHECK_OUT_DATE
-		    .toString());
+	    final Query query = getCurrentSession().createQuery(
+		    FIND_ROOMS_BY_CHECK_OUT_DATE.toString());
 	    query.setParameter(0, searchRequestDTO.getHotelId());
 	    query.setParameter(1, searchRequestDTO.getCheckOut());
 	    query.setParameter(2, searchRequestDTO.getCheckOut());

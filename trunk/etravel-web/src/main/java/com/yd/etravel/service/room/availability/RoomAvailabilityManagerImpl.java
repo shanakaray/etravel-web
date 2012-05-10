@@ -4,6 +4,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.yd.etravel.domain.custom.room.availability.DailyAvailabilityDTO;
 import com.yd.etravel.domain.custom.room.availability.RoomAvailabilityDTO;
 import com.yd.etravel.domain.room.Room;
@@ -16,19 +21,18 @@ import com.yd.etravel.persistence.exception.PersistenceException;
 import com.yd.etravel.service.exception.ServiceException;
 import com.yd.etravel.service.message.ValidationHelper;
 
-/**
- * 
- * 
- * @author Dharsahana
- * 
- */
+@Service(value = "roomAvailabilityService")
+@Transactional(propagation = Propagation.SUPPORTS)
 public class RoomAvailabilityManagerImpl implements IRoomAvailabilityManager {
-
+    @Autowired(required = true)
     private IRoomAvailabilityDAO roomAvailabilityDAO;
+    @Autowired(required = true)
     private IRoomDAO roomDAO;
+    @Autowired(required = true)
     private IOccupancyDAO occupancyDAO;
 
-    public void setRoomAvailabilityDAO(final IRoomAvailabilityDAO roomAvailabilityDAO) {
+    public void setRoomAvailabilityDAO(
+	    final IRoomAvailabilityDAO roomAvailabilityDAO) {
 	this.roomAvailabilityDAO = roomAvailabilityDAO;
     }
 
@@ -40,13 +44,14 @@ public class RoomAvailabilityManagerImpl implements IRoomAvailabilityManager {
 	this.occupancyDAO = occupancyDAO;
     }
 
+    @Transactional
     @Override
     public RoomAvailability save(RoomAvailability roomAvail)
 	    throws ServiceException {
 	try {
 	    if (roomAvail.getId() == null) {
-		if (!this.roomAvailabilityDAO.isDataRangeValid(roomAvail.getRoom()
-			.getId(), roomAvail.getFromDate(), roomAvail
+		if (!this.roomAvailabilityDAO.isDataRangeValid(roomAvail
+			.getRoom().getId(), roomAvail.getFromDate(), roomAvail
 			.getToDate())) {
 
 		    throw new ServiceException(
@@ -55,11 +60,8 @@ public class RoomAvailabilityManagerImpl implements IRoomAvailabilityManager {
 
 		} else {
 
-		    final Room room = (Room) this.roomDAO.findById(Room.class, roomAvail
-			    .getRoom().getId());
-		    // Occupancy occ = (Occupancy) occupancyDAO.findById(
-		    // Occupancy.class, roomAvail.getOccupancy()
-		    // .getId());
+		    final Room room = (Room) this.roomDAO.findById(Room.class,
+			    roomAvail.getRoom().getId());
 		    if (room.getNoOfRoom() < roomAvail.getUnit()) {
 
 			throw new ServiceException(
@@ -69,8 +71,6 @@ public class RoomAvailabilityManagerImpl implements IRoomAvailabilityManager {
 		    }
 
 		    roomAvail.setRoom(room);
-		    // roomAvail.setOccupancy(occ);
-
 		    roomAvail = (RoomAvailability) this.roomAvailabilityDAO
 			    .save(roomAvail);
 
@@ -86,10 +86,8 @@ public class RoomAvailabilityManagerImpl implements IRoomAvailabilityManager {
 			rda.setAllocatedUnit(roomAvail.getUnit());
 			rda.setAvailabalUnit(roomAvail.getUnit());
 			rda.setActive(true);
-
 			rda.setDate(from);
 			this.roomAvailabilityDAO.save(rda);
-
 			final Calendar cal = Calendar.getInstance();
 			cal.setTime(from);
 			cal.add(Calendar.DATE, 1);
@@ -103,21 +101,8 @@ public class RoomAvailabilityManagerImpl implements IRoomAvailabilityManager {
 		}
 
 	    } else {
-		// if (!roomAvailDAO.isDataRangeValid(roomAvail
-		// .getRoom().getId(), roomAvail.getFromDate())) {
-		//
-		// throw new ServiceException(
-		// ValidationHelper
-		// .getMessageHolder("etravel.roomAvailability.dateRange.valid"));
-		//
-		// } else {
-		final Room room = (Room) this.roomDAO.findById(Room.class, roomAvail
-			.getRoom().getId());
-		// Occupancy occ = (Occupancy) occupancyDAO.findById(
-		// Occupancy.class, roomAvailability.getOccupancy()
-		// .getId());
-
-		// roomAvailability.setOccupancy(occ);
+		final Room room = (Room) this.roomDAO.findById(Room.class,
+			roomAvail.getRoom().getId());
 		roomAvail.setRoom(room);
 		this.roomAvailabilityDAO.update(roomAvail);
 
@@ -138,9 +123,6 @@ public class RoomAvailabilityManagerImpl implements IRoomAvailabilityManager {
 		    this.roomAvailabilityDAO.update(dailyRoomAv);
 
 		}
-
-		// }
-
 	    }
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
@@ -153,8 +135,8 @@ public class RoomAvailabilityManagerImpl implements IRoomAvailabilityManager {
 	    throws ServiceException {
 	RoomAvailability roomAvailability = null;
 	try {
-	    roomAvailability = (RoomAvailability) this.roomAvailabilityDAO.findById(
-		    RoomAvailability.class, id);
+	    roomAvailability = (RoomAvailability) this.roomAvailabilityDAO
+		    .findById(RoomAvailability.class, id);
 
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
@@ -162,11 +144,12 @@ public class RoomAvailabilityManagerImpl implements IRoomAvailabilityManager {
 	return roomAvailability;
     }
 
+    @Transactional
     @Override
     public int deleteRoomAvailability(final Long id) throws ServiceException {
 	int flag = 0;
 	try {
-	    flag = this.roomAvailabilityDAO.deleteAny(RoomAvailability.class, id);
+	    flag = this.roomAvailabilityDAO.deleteAny(id, null);
 
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
@@ -202,8 +185,8 @@ public class RoomAvailabilityManagerImpl implements IRoomAvailabilityManager {
     }
 
     @Override
-    public List<RoomDailyAvailability> findAllRoomDailyAvailability(final Long id)
-	    throws ServiceException {
+    public List<RoomDailyAvailability> findAllRoomDailyAvailability(
+	    final Long id) throws ServiceException {
 	try {
 	    return this.roomAvailabilityDAO.findAllRoomDailyAvailability(id);
 

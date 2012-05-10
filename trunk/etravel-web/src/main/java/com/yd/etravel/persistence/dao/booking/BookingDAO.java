@@ -8,7 +8,7 @@ import java.util.List;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
-import org.hibernate.Session;
+import org.springframework.stereotype.Repository;
 
 import com.yd.etravel.domain.booking.RoomBooking;
 import com.yd.etravel.domain.custom.booking.BookingReportDTO;
@@ -17,10 +17,7 @@ import com.yd.etravel.persistence.dao.common.BaseDAO;
 import com.yd.etravel.persistence.exception.PersistenceException;
 import com.yd.etravel.util.StringUtils;
 
-/**
- * @author : Dharshana
- * 
- */
+@Repository
 public class BookingDAO extends BaseDAO implements IBookingDAO {
 
     final static StringBuilder FIND_ALL_BOOKING = new StringBuilder(
@@ -33,16 +30,15 @@ public class BookingDAO extends BaseDAO implements IBookingDAO {
     @Override
     public List<RoomBooking> findAllBooking() throws PersistenceException {
 	try {
-	    return getHibernateTemplate().find(
-		    FIND_ALL_BOOKING.toString());
+	    return getHibernateTemplate().find(FIND_ALL_BOOKING.toString());
 	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 	}
     }
 
     @Override
-    public List<BookingReportDTO> findBookingDetail(final BookingReportSearchDTO dto)
-	    throws PersistenceException {
+    public List<BookingReportDTO> findBookingDetail(
+	    final BookingReportSearchDTO dto) throws PersistenceException {
 	try {
 	    final StringBuilder sb = new StringBuilder();
 	    sb.append(
@@ -106,9 +102,7 @@ public class BookingDAO extends BaseDAO implements IBookingDAO {
 	    }
 
 	    sb.append(" ORDER BY hb.checkInDate ");
-	    final Session session = getHibernateTemplate().getSessionFactory()
-		    .getCurrentSession();
-	    final Query query = session.createQuery(sb.toString());
+	    final Query query = getCurrentSession().createQuery(sb.toString());
 
 	    if (dto.getHotelId() != null && !dto.getHotelId().isEmpty()) {
 		query.setParameterList("hid", dto.getHotelId());
@@ -169,9 +163,7 @@ public class BookingDAO extends BaseDAO implements IBookingDAO {
 	    sb.append("SELECT r ")
 		    .append(" FROM RoomBooking r JOIN fetch r.hotelBooking h JOIN fetch h.booking b ")
 		    .append(" WHERE b.expireDate <= :expdate and  b.status=:status and  b.paymentMethod=:pm ");
-	    final Session session = getHibernateTemplate().getSessionFactory()
-		    .getCurrentSession();
-	    final Query query = session.createQuery(sb.toString());
+	    final Query query = getCurrentSession().createQuery(sb.toString());
 	    query.setParameter("expdate", date);
 	    query.setParameter("status", status);
 	    query.setParameter("pm", paymentMethod);
@@ -190,9 +182,7 @@ public class BookingDAO extends BaseDAO implements IBookingDAO {
 	    sb.append("SELECT r ")
 		    .append(" FROM RoomBooking r JOIN fetch r.room rr JOIN fetch rr.roomType rt JOIN fetch r.hotelBooking h JOIN fetch h.hotel hh JOIN fetch h.booking b ")
 		    .append(" WHERE b.code = :code");
-	    final Session session = getHibernateTemplate().getSessionFactory()
-		    .getCurrentSession();
-	    final Query query = session.createQuery(sb.toString());
+	    final Query query = getCurrentSession().createQuery(sb.toString());
 	    query.setParameter("code", bookingid);
 	    final List<RoomBooking> list = query.list();
 	    return !list.isEmpty() ? list.get(0) : null;

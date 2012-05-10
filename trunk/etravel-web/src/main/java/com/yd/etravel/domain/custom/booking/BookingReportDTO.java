@@ -120,7 +120,8 @@ public class BookingReportDTO {
 
     public String getUserFName() {
 	if (!StringUtils.isEmpty(this.userFName)) {
-	    String str = new String(new char[] { this.userFName.trim().charAt(0) });
+	    String str = new String(new char[] { this.userFName.trim()
+		    .charAt(0) });
 	    str = str.toUpperCase();
 	    return new StringBuilder(this.userFName.trim()).replace(0, 1, str)
 		    .toString();
@@ -135,7 +136,8 @@ public class BookingReportDTO {
 
     public String getUserLName() {
 	if (!StringUtils.isEmpty(this.userLName)) {
-	    String str = new String(new char[] { this.userLName.trim().charAt(0) });
+	    String str = new String(new char[] { this.userLName.trim()
+		    .charAt(0) });
 	    str = str.toUpperCase();
 	    return new StringBuilder(this.userLName.trim()).replace(0, 1, str)
 		    .toString();
@@ -151,7 +153,8 @@ public class BookingReportDTO {
 
     public String getAgentName() {
 	if (!StringUtils.isEmpty(this.agentName)) {
-	    String str = new String(new char[] { this.agentName.trim().charAt(0) });
+	    String str = new String(new char[] { this.agentName.trim()
+		    .charAt(0) });
 	    str = str.toUpperCase();
 	    return new StringBuilder(this.agentName.trim()).replace(0, 1, str)
 		    .toString();
@@ -334,9 +337,11 @@ public class BookingReportDTO {
 	calendar2.setTime(this.checkInDate);
 	calendar2.getTime();
 
-	final long diff = calendar1.getTimeInMillis() - calendar2.getTimeInMillis();
+	final long diff = calendar1.getTimeInMillis()
+		- calendar2.getTimeInMillis();
 
-	final int noOfNights = Long.valueOf(diff / (24 * 60 * 60 * 1000)).intValue();
+	final int noOfNights = Long.valueOf(diff / (24 * 60 * 60 * 1000))
+		.intValue();
 
 	return noOfNights;
     }
@@ -350,21 +355,27 @@ public class BookingReportDTO {
     }
 
     public String getExpireDateString() {
-	return DateUtil.format(this.expireDate, DateUtil.SIMPLE_DATE_TIME_FORMAT);
+	return DateUtil.format(this.expireDate,
+		DateUtil.SIMPLE_DATE_TIME_FORMAT);
     }
 
     public BookingReportDTO() {
     }
 
-    public BookingReportDTO(final Long bookingId, final Long roomId, final Long roomTypeId,
-	    final Long hotelId, final Long userId, final String bookingCode, final String userName,
-	    final String userFName, final String userLName, final String userAdress,
-	    final String userContact, final String userEmail, final String hotelName,
-	    final String roomName, final String roomTypeName, final String status,
-	    final Date depatureDate, final Date bookingDate, final Date cancelDate,
-	    final Date expireDate, final BigDecimal totalPrice, final BigDecimal totalCost,
-	    final String paymentMethod, final BigDecimal paidAmount, final Date checkInDate,
-	    final Date checkOutDate, final Integer noOfRoom, final Long agentId, final String agentName) {
+    public BookingReportDTO(final Long bookingId, final Long roomId,
+	    final Long roomTypeId, final Long hotelId, final Long userId,
+	    final String bookingCode, final String userName,
+	    final String userFName, final String userLName,
+	    final String userAdress, final String userContact,
+	    final String userEmail, final String hotelName,
+	    final String roomName, final String roomTypeName,
+	    final String status, final Date depatureDate,
+	    final Date bookingDate, final Date cancelDate,
+	    final Date expireDate, final BigDecimal totalPrice,
+	    final BigDecimal totalCost, final String paymentMethod,
+	    final BigDecimal paidAmount, final Date checkInDate,
+	    final Date checkOutDate, final Integer noOfRoom,
+	    final Long agentId, final String agentName) {
 	super();
 	this.bookingId = bookingId;
 	this.roomId = roomId;

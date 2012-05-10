@@ -152,7 +152,8 @@ public class PaxFrom extends BaseForm {
      * .ActionMapping, javax.servlet.http.HttpServletRequest)
      */
     @Override
-    public void resetBean(final ActionMapping mapping, final HttpServletRequest request) {
+    public void resetBean(final ActionMapping mapping,
+	    final HttpServletRequest request) {
 	this.childMax = 0;
 	this.childMin = 0;
 
@@ -217,7 +218,8 @@ public class PaxFrom extends BaseForm {
 	}
 
 	if (this.infantMin > this.infantMax || this.infantMax > this.childMin
-		|| this.childMin > this.childMax || this.childMax > this.adultMin
+		|| this.childMin > this.childMax
+		|| this.childMax > this.adultMin
 		|| this.adultMin > this.adultMax) {
 	    addErrors(errors, "etravel.error.pax.invalidage");
 	    this.childMax = 0;
