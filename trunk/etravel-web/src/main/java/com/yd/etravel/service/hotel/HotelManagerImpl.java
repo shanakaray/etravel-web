@@ -54,45 +54,29 @@ public class HotelManagerImpl implements IHotelManager {
 	return val;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.yd.etravel.service.hotel.IHotelManager#findAllActiveHotels()
-     */
     @Override
     public List<Hotel> findAllActiveHotels() throws ServiceException {
 	try {
-	    return this.hotelDAO.findAllActive(Hotel.class);
+	    return this.hotelDAO.findAllActive();
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.yd.etravel.service.hotel.IHotelManager#findAllHotel()
-     */
     @Override
     public List<Hotel> findAllHotel() throws ServiceException {
 	try {
-	    return this.hotelDAO.findAll(Hotel.class);
+	    return this.hotelDAO.findAll();
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * com.yd.etravel.service.hotel.IHotelManager#findRoleById(java.lang.Long)
-     */
     @Override
     public Hotel findHotelById(final Long id) throws ServiceException {
 	Hotel hotel = null;
 	try {
-	    hotel = (Hotel) this.hotelDAO.findById(Hotel.class, id);
+	    hotel = this.hotelDAO.findById(id);
 	    hotel.getUserIds();
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
@@ -103,7 +87,7 @@ public class HotelManagerImpl implements IHotelManager {
     @Override
     public List<Hotel> findHotelsById(final Long id[]) throws ServiceException {
 	try {
-	    return this.hotelDAO.findAll(Hotel.class, id);
+	    return this.hotelDAO.findAll(id);
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
@@ -128,9 +112,9 @@ public class HotelManagerImpl implements IHotelManager {
 	    hotel.setSuperUser(this.userDAO.findUsers(userSearchDTO));
 
 	    if (hotel.getId() == null) {
-		hotel = (Hotel) this.hotelDAO.save(hotel);
+		hotel = this.hotelDAO.save(hotel);
 	    } else {
-		hotel = (Hotel) this.hotelDAO.update(hotel);
+		hotel = this.hotelDAO.update(hotel);
 	    }
 
 	} catch (final PersistenceException e) {

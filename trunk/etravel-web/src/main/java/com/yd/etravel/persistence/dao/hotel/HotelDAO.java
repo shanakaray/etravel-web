@@ -20,7 +20,7 @@ import com.yd.etravel.persistence.exception.PersistenceException;
  * 
  */
 @Repository
-public class HotelDAO extends BaseDAO implements IHotelDAO {
+public class HotelDAO extends BaseDAO<Hotel> implements IHotelDAO {
 
     final static StringBuilder FIND_HOTEL_WITH_USER = new StringBuilder(
 	    "SELECT hot FROM ").append(Hotel.class.getName()).append(
@@ -75,6 +75,11 @@ public class HotelDAO extends BaseDAO implements IHotelDAO {
 	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 	}
+    }
+
+    @Override
+    protected Class getEntityClass() {
+	return Hotel.class;
     }
 
 }

@@ -16,7 +16,7 @@ import com.yd.etravel.persistence.exception.PersistenceException;
  *         com.yd.etravel.persistence.dao.extraitem.IExtraItemDAO
  * 
  */
-public interface IExtraItemDAO extends IBaseDAO {
+public interface IExtraItemDAO extends IBaseDAO<ExtraItem> {
 
     public boolean isExist(String name, String code, Long id)
 	    throws PersistenceException;

@@ -17,7 +17,7 @@ import com.yd.etravel.persistence.exception.PersistenceException;
  * 
  */
 @Repository
-public class PaxDAO extends BaseDAO implements IPaxDAO {
+public class PaxDAO extends BaseDAO<Pax> implements IPaxDAO {
 
     @Override
     public boolean isPaxTypeExist(final Long hotelId, final Long id)
@@ -73,6 +73,11 @@ public class PaxDAO extends BaseDAO implements IPaxDAO {
 	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 	}
+    }
+
+    @Override
+    protected Class getEntityClass() {
+	return Pax.class;
     }
 
 }

@@ -13,7 +13,7 @@ import com.yd.etravel.persistence.exception.PersistenceException;
  *         com.yd.etravel.persistence.dao.hotel.IHotelDAO
  * 
  */
-public interface IHotelDAO extends IBaseDAO {
+public interface IHotelDAO extends IBaseDAO<Hotel> {
 
     public boolean isHotelNameExist(final String name, Long id)
 	    throws PersistenceException;

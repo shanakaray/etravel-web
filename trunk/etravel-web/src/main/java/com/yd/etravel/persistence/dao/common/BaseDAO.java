@@ -3,6 +3,7 @@
  */
 package com.yd.etravel.persistence.dao.common;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -23,19 +24,20 @@ import com.yd.etravel.persistence.exception.PersistenceException;
  *         com.yd.etravel.persistence.dao.common.BaseDAO
  * 
  */
-public class BaseDAO extends HibernateDaoSupport implements IBaseDAO {
+public abstract class BaseDAO<T extends BaseObject> extends HibernateDaoSupport
+	implements IBaseDAO<T> {
 
     @Autowired
     public void init(final SessionFactory sessionFactory) {
 	setSessionFactory(sessionFactory);
     }
 
-    protected org.hibernate.classic.Session getCurrentSession() {
+    protected Session getCurrentSession() {
 	return getHibernateTemplate().getSessionFactory().getCurrentSession();
     }
 
     @Override
-    public void delete(final Object object) throws PersistenceException {
+    public void delete(final T object) throws PersistenceException {
 	try {
 
 	    getCurrentSession().delete(object);
@@ -48,10 +50,22 @@ public class BaseDAO extends HibernateDaoSupport implements IBaseDAO {
     }
 
     @Override
-    public Object findById(final Class cls, final Long id)
-	    throws PersistenceException {
+    public T findById(final Long id) throws PersistenceException {
 	try {
-	    return getCurrentSession().load(cls, id);
+	    return (T) getCurrentSession().load(getEntityClass(), id);
+	} catch (final HibernateException e) {
+	    throw new PersistenceException(e);
+	} catch (final DataAccessException e) {
+	    throw new PersistenceException(e);
+	}
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<T> findBySample(final T object) throws PersistenceException {
+	try {
+	    return new ArrayList<T>(getHibernateTemplate()
+		    .findByExample(object));
 	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 	} catch (final DataAccessException e) {
@@ -60,21 +74,9 @@ public class BaseDAO extends HibernateDaoSupport implements IBaseDAO {
     }
 
     @Override
-    public List findBySample(final Object object) throws PersistenceException {
+    public T save(final T object) throws PersistenceException {
 	try {
-	    final List list = getHibernateTemplate().findByExample(object);
-	    return list;
-	} catch (final HibernateException e) {
-	    throw new PersistenceException(e);
-	} catch (final DataAccessException e) {
-	    throw new PersistenceException(e);
-	}
-    }
-
-    @Override
-    public Object save(final Object object) throws PersistenceException {
-	try {
-	    final BaseObject baseObject = (BaseObject) object;
+	    final BaseObject baseObject = object;
 	    baseObject.setCreatedDate(new Date());
 	    baseObject.setCreatedBy(Thread.currentThread().getName());
 	    getHibernateTemplate().saveOrUpdate(baseObject);
@@ -87,9 +89,9 @@ public class BaseDAO extends HibernateDaoSupport implements IBaseDAO {
     }
 
     @Override
-    public Object update(final Object object) throws PersistenceException {
+    public T update(final T object) throws PersistenceException {
 	try {
-	    final BaseObject baseObject = (BaseObject) object;
+	    final BaseObject baseObject = object;
 	    baseObject.setModifiedDate(new Date());
 	    baseObject.setModifiedBy(Thread.currentThread().getName());
 	    getHibernateTemplate().update(baseObject);
@@ -102,9 +104,9 @@ public class BaseDAO extends HibernateDaoSupport implements IBaseDAO {
     }
 
     @Override
-    public Object merge(final Object object) throws PersistenceException {
+    public T merge(final T object) throws PersistenceException {
 	try {
-	    BaseObject baseObject = (BaseObject) object;
+	    BaseObject baseObject = object;
 	    if (baseObject.getId() == null) {
 		baseObject.setCreatedDate(new Date());
 		baseObject.setCreatedBy(Thread.currentThread().getName());
@@ -124,13 +126,28 @@ public class BaseDAO extends HibernateDaoSupport implements IBaseDAO {
 	}
     }
 
+    @SuppressWarnings("unchecked")
     @Override
-    public List findAll(final Class cls) throws PersistenceException {
+    public List<T> findAll() throws PersistenceException {
 	try {
 	    final StringBuilder sb = new StringBuilder("SELECT obj FROM ")
-		    .append(cls.getName()).append(" as obj");
-	    final List list = getHibernateTemplate().find(sb.toString());
-	    return list;
+		    .append(getEntityClass().getName()).append(" as obj");
+	    return new ArrayList<T>(getHibernateTemplate().find(sb.toString()));
+	} catch (final HibernateException e) {
+	    throw new PersistenceException(e);
+	} catch (final DataAccessException e) {
+	    throw new PersistenceException(e);
+	}
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<T> findAllActive() throws PersistenceException {
+	try {
+	    final StringBuilder sb = new StringBuilder("SELECT obj FROM ")
+		    .append(getEntityClass().getName()).append(
+			    " as obj Where obj.active=1 ");
+	    return new ArrayList<T>(getHibernateTemplate().find(sb.toString()));
 	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 	} catch (final DataAccessException e) {
@@ -139,26 +156,10 @@ public class BaseDAO extends HibernateDaoSupport implements IBaseDAO {
     }
 
     @Override
-    public List findAllActive(final Class cls) throws PersistenceException {
+    public List<T> findAll(final Long[] id) throws PersistenceException {
 	try {
 	    final StringBuilder sb = new StringBuilder("SELECT obj FROM ")
-		    .append(cls.getName())
-		    .append(" as obj Where obj.active=1 ");
-	    final List list = getHibernateTemplate().find(sb.toString());
-	    return list;
-	} catch (final HibernateException e) {
-	    throw new PersistenceException(e);
-	} catch (final DataAccessException e) {
-	    throw new PersistenceException(e);
-	}
-    }
-
-    @Override
-    public List findAll(final Class cls, final Long[] id)
-	    throws PersistenceException {
-	try {
-	    final StringBuilder sb = new StringBuilder("SELECT obj FROM ")
-		    .append(cls.getName()).append(
+		    .append(getEntityClass().getName()).append(
 			    " as obj Where obj.id IN (:ids) AND obj.active=1 ");
 
 	    final Session session = getHibernateTemplate().getSessionFactory()
@@ -177,11 +178,11 @@ public class BaseDAO extends HibernateDaoSupport implements IBaseDAO {
     }
 
     @Override
-    public int deleteAny(final Class cls, final Long[] id)
-	    throws PersistenceException {
+    public int deleteAny(final Long[] id) throws PersistenceException {
 	try {
 	    final StringBuilder sb = new StringBuilder("delete from ").append(
-		    cls.getName()).append(" as obj Where obj.id IN (:ids) ");
+		    getEntityClass().getName()).append(
+		    " as obj Where obj.id IN (:ids) ");
 
 	    final Session session = getHibernateTemplate().getSessionFactory()
 		    .getCurrentSession();
@@ -197,12 +198,12 @@ public class BaseDAO extends HibernateDaoSupport implements IBaseDAO {
     }
 
     @Override
-    public int deleteAny(final Long id, final Class cla)
-	    throws PersistenceException {
+    public int deleteAny(final Long id) throws PersistenceException {
 	try {
 
 	    final StringBuilder sb = new StringBuilder("delete from ").append(
-		    cla.getName()).append(" as obj Where obj.id = (:id) ");
+		    getEntityClass().getName()).append(
+		    " as obj Where obj.id = (:id) ");
 	    final Session session = getHibernateTemplate().getSessionFactory()
 		    .getCurrentSession();
 	    final Query query = session.createQuery(sb.toString());
@@ -216,4 +217,7 @@ public class BaseDAO extends HibernateDaoSupport implements IBaseDAO {
 	    throw new PersistenceException(e);
 	}
     }
+
+    @SuppressWarnings("rawtypes")
+    protected abstract Class getEntityClass();
 }

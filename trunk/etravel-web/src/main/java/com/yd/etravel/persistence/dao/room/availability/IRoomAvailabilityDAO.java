@@ -15,7 +15,7 @@ import com.yd.etravel.service.exception.ServiceException;
  * @author Dharsahana
  * 
  */
-public interface IRoomAvailabilityDAO extends IBaseDAO {
+public interface IRoomAvailabilityDAO extends IBaseDAO<RoomAvailability> {
 
     public boolean isDataRangeValid(final Long hotelId, Date fromDate,
 	    Date toDate) throws PersistenceException;
@@ -47,6 +47,12 @@ public interface IRoomAvailabilityDAO extends IBaseDAO {
 	    Long id, Date checkIn, Date checkOut) throws PersistenceException;
 
     public List<DailyAvailabilityDTO> findDailyAvailability(Long id)
+	    throws PersistenceException;
+
+    public void update(RoomDailyAvailability roomDailyAvailability)
+	    throws PersistenceException;
+
+    public void save(RoomDailyAvailability dailyAvailability)
 	    throws PersistenceException;
 
 }

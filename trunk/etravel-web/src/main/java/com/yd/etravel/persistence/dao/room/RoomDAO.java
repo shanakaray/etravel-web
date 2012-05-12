@@ -20,7 +20,7 @@ import com.yd.etravel.persistence.exception.PersistenceException;
  * 
  */
 @Repository
-public class RoomDAO extends BaseDAO implements IRoomDAO {
+public class RoomDAO extends BaseDAO<Room> implements IRoomDAO {
 
     @Override
     public boolean isExist(final Long hotelId, final Long roomTypeId,
@@ -73,7 +73,6 @@ public class RoomDAO extends BaseDAO implements IRoomDAO {
 	    if (roomSearchDTO.getRoomTypeId() != null) {
 		query.setParameter("tid", roomSearchDTO.getRoomTypeId());
 	    }
-
 	    return query.list();
 
 	} catch (final HibernateException e) {
@@ -87,7 +86,6 @@ public class RoomDAO extends BaseDAO implements IRoomDAO {
 	final StringBuilder sb = new StringBuilder(
 		"SELECT room FROM Room as room join fetch  room.roomType as roomType"
 			+ " JOIN room.hotel as hot where room.active=1");
-
 	try {
 
 	    if (hotelId != null) {
@@ -104,5 +102,10 @@ public class RoomDAO extends BaseDAO implements IRoomDAO {
 	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 	}
+    }
+
+    @Override
+    protected Class getEntityClass() {
+	return Room.class;
     }
 }

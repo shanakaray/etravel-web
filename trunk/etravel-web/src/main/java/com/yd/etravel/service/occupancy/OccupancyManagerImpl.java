@@ -52,9 +52,8 @@ public class OccupancyManagerImpl implements IOccupancyManager {
 
 		} else {
 
-		    final RoomType roomType = (RoomType) this.roomTypeDAO
-			    .findById(RoomType.class, occupancy.getRoomType()
-				    .getId());
+		    final RoomType roomType = this.roomTypeDAO
+			    .findById(occupancy.getRoomType().getId());
 
 		    occupancy.setRoomType(roomType);
 
@@ -63,8 +62,8 @@ public class OccupancyManagerImpl implements IOccupancyManager {
 
 	    } else {
 
-		final RoomType roomType = (RoomType) this.roomTypeDAO.findById(
-			RoomType.class, occupancy.getRoomType().getId());
+		final RoomType roomType = this.roomTypeDAO.findById(occupancy
+			.getRoomType().getId());
 
 		occupancy.setRoomType(roomType);
 		this.occupancyDAO.update(occupancy);
@@ -80,8 +79,7 @@ public class OccupancyManagerImpl implements IOccupancyManager {
     public Occupancy findOccupancyById(final Long id) throws ServiceException {
 	Occupancy occupancy = null;
 	try {
-	    occupancy = (Occupancy) this.occupancyDAO.findById(Occupancy.class,
-		    id);
+	    occupancy = this.occupancyDAO.findById(id);
 
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
@@ -94,7 +92,7 @@ public class OccupancyManagerImpl implements IOccupancyManager {
     public int deleteOccupancy(final Long id) throws ServiceException {
 	int flag = 0;
 	try {
-	    flag = this.occupancyDAO.deleteAny(id, null);
+	    flag = this.occupancyDAO.deleteAny(id);
 
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
@@ -105,7 +103,7 @@ public class OccupancyManagerImpl implements IOccupancyManager {
     @Override
     public List<Occupancy> findAllOccupancy() throws ServiceException {
 	try {
-	    return this.occupancyDAO.findAll(Occupancy.class);
+	    return this.occupancyDAO.findAll();
 
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
@@ -126,7 +124,7 @@ public class OccupancyManagerImpl implements IOccupancyManager {
     @Override
     public List<Occupancy> findAllActiveOccupancy() throws ServiceException {
 	try {
-	    return this.occupancyDAO.findAllActive(Occupancy.class);
+	    return this.occupancyDAO.findAllActive();
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}

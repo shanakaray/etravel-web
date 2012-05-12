@@ -12,7 +12,7 @@ import com.yd.etravel.persistence.exception.PersistenceException;
  * @author Dharsahana
  * 
  */
-public interface ISeasonDAO extends IBaseDAO {
+public interface ISeasonDAO extends IBaseDAO<Season> {
 
     public boolean isSeasonNameExist(final String seasonName)
 	    throws PersistenceException;
@@ -37,5 +37,14 @@ public interface ISeasonDAO extends IBaseDAO {
     public List<Season> findSeasonByHotel(final Long hotelId)
 	    throws PersistenceException;
 
-    public RoomSeasonalRate findById(Long id) throws PersistenceException;
+    public RoomSeasonalRate findSeasonRate(Long id) throws PersistenceException;
+
+    public void save(RoomSeasonalRate roomSeasonalRate)
+	    throws PersistenceException;
+
+    public void update(RoomSeasonalRate roomSeasonalRate)
+	    throws PersistenceException;
+
+    public List<RoomSeasonalRate> findAllRoomSeasonalRateList()
+	    throws PersistenceException;
 }

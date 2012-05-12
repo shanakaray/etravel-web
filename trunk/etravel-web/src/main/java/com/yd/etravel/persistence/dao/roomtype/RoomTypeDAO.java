@@ -7,11 +7,13 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
+import com.yd.etravel.domain.roomtype.RoomType;
 import com.yd.etravel.persistence.dao.common.BaseDAO;
 import com.yd.etravel.persistence.exception.PersistenceException;
 
+@SuppressWarnings("unchecked")
 @Repository
-public class RoomTypeDAO extends BaseDAO implements IRoomTypeDAO {
+public class RoomTypeDAO extends BaseDAO<RoomType> implements IRoomTypeDAO {
 
     final static StringBuilder IS_ROOM_TYPE_EXIST = new StringBuilder(
 	    "SELECT roomType FROM com.yd.etravel.domain.roomtype.RoomType as roomType where ")
@@ -43,6 +45,11 @@ public class RoomTypeDAO extends BaseDAO implements IRoomTypeDAO {
 	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 	}
+    }
+
+    @Override
+    protected Class getEntityClass() {
+	return RoomType.class;
     }
 
 }

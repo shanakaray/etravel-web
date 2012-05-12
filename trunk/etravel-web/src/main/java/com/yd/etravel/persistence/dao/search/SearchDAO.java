@@ -15,7 +15,7 @@ import com.yd.etravel.persistence.dao.common.BaseDAO;
 import com.yd.etravel.persistence.exception.PersistenceException;
 
 @Repository
-public class SearchDAO extends BaseDAO implements ISearchDAO {
+public class SearchDAO extends BaseDAO<RoomAvailability> implements ISearchDAO {
 
     final static StringBuilder FIND_ROOMS_BY_CHECK_IN_DATE = new StringBuilder(
 	    "SELECT roomAvailability FROM com.yd.etravel.domain.room.availability.RoomAvailability as roomAvailability "
@@ -97,5 +97,10 @@ public class SearchDAO extends BaseDAO implements ISearchDAO {
 	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 	}
+    }
+
+    @Override
+    protected Class getEntityClass() {
+	return RoomAvailability.class;
     }
 }

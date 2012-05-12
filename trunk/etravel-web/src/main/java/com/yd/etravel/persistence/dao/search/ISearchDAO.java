@@ -11,7 +11,7 @@ import com.yd.etravel.persistence.exception.PersistenceException;
  * @author Dharsahana
  * 
  */
-public interface ISearchDAO extends IBaseDAO {
+public interface ISearchDAO extends IBaseDAO<RoomAvailability> {
 
     public List<RoomAvailability> findRooms(
 	    final SearchRequestDTO searchRequestDTO)

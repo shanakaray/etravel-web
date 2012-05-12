@@ -15,7 +15,7 @@ import com.yd.etravel.persistence.exception.PersistenceException;
  *         com.yd.etravel.persistence.dao.IPaxDAO
  * 
  */
-public interface IPaxDAO extends IBaseDAO {
+public interface IPaxDAO extends IBaseDAO<Pax> {
 
     public boolean isPaxTypeExist(Long hotelId, Long id)
 	    throws PersistenceException;

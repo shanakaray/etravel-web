@@ -19,7 +19,7 @@ import com.yd.etravel.persistence.exception.PersistenceException;
 import com.yd.etravel.service.exception.ServiceException;
 
 @Repository
-public class RoomAvailabilityDAO extends BaseDAO implements
+public class RoomAvailabilityDAO extends BaseDAO<RoomAvailability> implements
 	IRoomAvailabilityDAO {
 
     final static StringBuilder IS_DATE_RANGE_VALID = new StringBuilder(
@@ -267,5 +267,32 @@ public class RoomAvailabilityDAO extends BaseDAO implements
 	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 	}
+    }
+
+    @Override
+    protected Class getEntityClass() {
+	return RoomAvailability.class;
+    }
+
+    @Override
+    public void update(final RoomDailyAvailability rd)
+	    throws PersistenceException {
+	try {
+	    getCurrentSession().update(rd);
+	} catch (final HibernateException e) {
+	    throw new PersistenceException(e);
+	}
+
+    }
+
+    @Override
+    public void save(final RoomDailyAvailability dailyAvailability)
+	    throws PersistenceException {
+	try {
+	    getCurrentSession().save(dailyAvailability);
+	} catch (final HibernateException e) {
+	    throw new PersistenceException(e);
+	}
+
     }
 }

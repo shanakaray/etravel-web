@@ -10,6 +10,10 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
+import com.yd.etravel.domain.booking.Booking;
+import com.yd.etravel.domain.booking.ExtraItemBooking;
+import com.yd.etravel.domain.booking.HotelBooking;
+import com.yd.etravel.domain.booking.Payment;
 import com.yd.etravel.domain.booking.RoomBooking;
 import com.yd.etravel.domain.custom.booking.BookingReportDTO;
 import com.yd.etravel.domain.custom.booking.BookingReportSearchDTO;
@@ -18,7 +22,7 @@ import com.yd.etravel.persistence.exception.PersistenceException;
 import com.yd.etravel.util.StringUtils;
 
 @Repository
-public class BookingDAO extends BaseDAO implements IBookingDAO {
+public class BookingDAO extends BaseDAO<Booking> implements IBookingDAO {
 
     final static StringBuilder FIND_ALL_BOOKING = new StringBuilder(
 	    "SELECT roomBookong FROM com.yd.etravel.domain.booking.RoomBooking as roomBookong "
@@ -187,6 +191,51 @@ public class BookingDAO extends BaseDAO implements IBookingDAO {
 	    final List<RoomBooking> list = query.list();
 	    return !list.isEmpty() ? list.get(0) : null;
 
+	} catch (final HibernateException e) {
+	    throw new PersistenceException(e);
+	}
+    }
+
+    @Override
+    protected Class getEntityClass() {
+	return RoomBooking.class;
+    }
+
+    @Override
+    public HotelBooking save(final HotelBooking hotelBooking)
+	    throws PersistenceException {
+	try {
+	    return (HotelBooking) getCurrentSession().save(hotelBooking);
+	} catch (final HibernateException e) {
+	    throw new PersistenceException(e);
+	}
+    }
+
+    @Override
+    public RoomBooking save(final RoomBooking roomBooking)
+	    throws PersistenceException {
+	try {
+	    return (RoomBooking) getCurrentSession().save(roomBooking);
+	} catch (final HibernateException e) {
+	    throw new PersistenceException(e);
+	}
+    }
+
+    @Override
+    public Payment save(final Payment payment) throws PersistenceException {
+	try {
+	    return (Payment) getCurrentSession().save(payment);
+	} catch (final HibernateException e) {
+	    throw new PersistenceException(e);
+	}
+    }
+
+    @Override
+    public ExtraItemBooking merge(final ExtraItemBooking extraItemBooking)
+	    throws PersistenceException {
+	try {
+	    return (ExtraItemBooking) getCurrentSession()
+		    .save(extraItemBooking);
 	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 	}
