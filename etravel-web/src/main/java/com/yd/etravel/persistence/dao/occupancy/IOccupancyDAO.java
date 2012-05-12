@@ -6,7 +6,7 @@ import com.yd.etravel.domain.occupancy.Occupancy;
 import com.yd.etravel.persistence.dao.common.IBaseDAO;
 import com.yd.etravel.persistence.exception.PersistenceException;
 
-public interface IOccupancyDAO extends IBaseDAO {
+public interface IOccupancyDAO extends IBaseDAO<Occupancy> {
 
     public boolean isOccupancyNameExist(final String occupancyName, Long id)
 	    throws PersistenceException;

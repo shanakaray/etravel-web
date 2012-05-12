@@ -3,11 +3,13 @@
  */
 package com.yd.etravel.persistence.dao.season;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.yd.etravel.domain.season.RoomSeasonalRate;
@@ -16,7 +18,7 @@ import com.yd.etravel.persistence.dao.common.BaseDAO;
 import com.yd.etravel.persistence.exception.PersistenceException;
 
 @Repository
-public class SeasonDAO extends BaseDAO implements ISeasonDAO {
+public class SeasonDAO extends BaseDAO<Season> implements ISeasonDAO {
 
     final static StringBuilder IS_SEASON_NAME_EXIST = new StringBuilder(
 	    "SELECT season FROM com.yd.etravel.domain.season.Season as season where ")
@@ -184,7 +186,8 @@ public class SeasonDAO extends BaseDAO implements ISeasonDAO {
     }
 
     @Override
-    public RoomSeasonalRate findById(final Long id) throws PersistenceException {
+    public RoomSeasonalRate findSeasonRate(final Long id)
+	    throws PersistenceException {
 	try {
 	    final StringBuilder sb = new StringBuilder(
 		    "SELECT roomSeasonalRate FROM com.yd.etravel.domain.season.RoomSeasonalRate as roomSeasonalRate "
@@ -193,9 +196,54 @@ public class SeasonDAO extends BaseDAO implements ISeasonDAO {
 	    final Query query = getCurrentSession().createQuery(sb.toString());
 	    query.setParameter("id", id);
 	    final List<RoomSeasonalRate> list = query.list();
-	    return list.isEmpty() ? null : (RoomSeasonalRate) list.get(0);
+	    return list.isEmpty() ? null : list.get(0);
 
 	} catch (final HibernateException e) {
+	    throw new PersistenceException(e);
+	}
+    }
+
+    @Override
+    protected Class getEntityClass() {
+	return Season.class;
+    }
+
+    @Override
+    public void save(final RoomSeasonalRate roomSeasonalRate)
+	    throws PersistenceException {
+	try {
+	    getCurrentSession().save(roomSeasonalRate);
+	} catch (final HibernateException e) {
+	    throw new PersistenceException(e);
+	} catch (final DataAccessException e) {
+	    throw new PersistenceException(e);
+	}
+    }
+
+    @Override
+    public void update(final RoomSeasonalRate roomSeasonalRate)
+	    throws PersistenceException {
+	try {
+	    getCurrentSession().update(roomSeasonalRate);
+	} catch (final HibernateException e) {
+	    throw new PersistenceException(e);
+	} catch (final DataAccessException e) {
+	    throw new PersistenceException(e);
+	}
+
+    }
+
+    @Override
+    public List<RoomSeasonalRate> findAllRoomSeasonalRateList()
+	    throws PersistenceException {
+	try {
+	    final StringBuilder sb = new StringBuilder("SELECT obj FROM ")
+		    .append(RoomSeasonalRate.class.getName()).append(" as obj");
+	    return new ArrayList<RoomSeasonalRate>(getHibernateTemplate().find(
+		    sb.toString()));
+	} catch (final HibernateException e) {
+	    throw new PersistenceException(e);
+	} catch (final DataAccessException e) {
 	    throw new PersistenceException(e);
 	}
     }

@@ -18,7 +18,7 @@ import com.yd.etravel.service.booking.IBookingManager;
 public class BookingTask implements ITask {
     @Autowired(required = true)
     private IBookingManager bookingManager;
-    protected static final Log log = LogFactory.getLog(BookingTask.class);
+    protected static final Log LOG = LogFactory.getLog(BookingTask.class);
 
     public IBookingManager getBookingManager() {
 	return this.bookingManager;
@@ -38,7 +38,7 @@ public class BookingTask implements ITask {
 	    getBookingManager().saveFailedOnRequestBookings();
 	    getBookingManager().saveFailedOnlineBookings();
 	} catch (final Exception e) {
-	    log.fatal(e.getMessage(), e);
+	    LOG.fatal(e.getMessage(), e);
 	}
 
     }

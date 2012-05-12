@@ -16,7 +16,7 @@ import com.yd.etravel.persistence.exception.PersistenceException;
 import com.yd.etravel.util.IConstants.IOccupancy;
 
 @Repository
-public class OccupancyDAO extends BaseDAO implements IOccupancyDAO {
+public class OccupancyDAO extends BaseDAO<Occupancy> implements IOccupancyDAO {
 
     final static StringBuilder IS_OCCUPANCY_NAME_EXIST = new StringBuilder(
 	    "SELECT occupancy FROM com.yd.etravel.domain.occupancy.Occupancy as occupancy where ")
@@ -117,5 +117,10 @@ public class OccupancyDAO extends BaseDAO implements IOccupancyDAO {
 	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 	}
+    }
+
+    @Override
+    protected Class getEntityClass() {
+	return Occupancy.class;
     }
 }

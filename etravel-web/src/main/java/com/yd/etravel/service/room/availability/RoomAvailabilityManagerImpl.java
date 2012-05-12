@@ -14,7 +14,6 @@ import com.yd.etravel.domain.custom.room.availability.RoomAvailabilityDTO;
 import com.yd.etravel.domain.room.Room;
 import com.yd.etravel.domain.room.availability.RoomAvailability;
 import com.yd.etravel.domain.room.availability.RoomDailyAvailability;
-import com.yd.etravel.persistence.dao.occupancy.IOccupancyDAO;
 import com.yd.etravel.persistence.dao.room.IRoomDAO;
 import com.yd.etravel.persistence.dao.room.availability.IRoomAvailabilityDAO;
 import com.yd.etravel.persistence.exception.PersistenceException;
@@ -28,8 +27,6 @@ public class RoomAvailabilityManagerImpl implements IRoomAvailabilityManager {
     private IRoomAvailabilityDAO roomAvailabilityDAO;
     @Autowired(required = true)
     private IRoomDAO roomDAO;
-    @Autowired(required = true)
-    private IOccupancyDAO occupancyDAO;
 
     public void setRoomAvailabilityDAO(
 	    final IRoomAvailabilityDAO roomAvailabilityDAO) {
@@ -38,10 +35,6 @@ public class RoomAvailabilityManagerImpl implements IRoomAvailabilityManager {
 
     public void setRoomDAO(final IRoomDAO roomDAO) {
 	this.roomDAO = roomDAO;
-    }
-
-    public void setOccupancyDAO(final IOccupancyDAO occupancyDAO) {
-	this.occupancyDAO = occupancyDAO;
     }
 
     @Transactional
@@ -60,8 +53,8 @@ public class RoomAvailabilityManagerImpl implements IRoomAvailabilityManager {
 
 		} else {
 
-		    final Room room = (Room) this.roomDAO.findById(Room.class,
-			    roomAvail.getRoom().getId());
+		    final Room room = this.roomDAO.findById(roomAvail.getRoom()
+			    .getId());
 		    if (room.getNoOfRoom() < roomAvail.getUnit()) {
 
 			throw new ServiceException(
@@ -71,8 +64,7 @@ public class RoomAvailabilityManagerImpl implements IRoomAvailabilityManager {
 		    }
 
 		    roomAvail.setRoom(room);
-		    roomAvail = (RoomAvailability) this.roomAvailabilityDAO
-			    .save(roomAvail);
+		    roomAvail = this.roomAvailabilityDAO.save(roomAvail);
 
 		    boolean flag = true;
 
@@ -101,8 +93,8 @@ public class RoomAvailabilityManagerImpl implements IRoomAvailabilityManager {
 		}
 
 	    } else {
-		final Room room = (Room) this.roomDAO.findById(Room.class,
-			roomAvail.getRoom().getId());
+		final Room room = this.roomDAO.findById(roomAvail.getRoom()
+			.getId());
 		roomAvail.setRoom(room);
 		this.roomAvailabilityDAO.update(roomAvail);
 
@@ -135,8 +127,7 @@ public class RoomAvailabilityManagerImpl implements IRoomAvailabilityManager {
 	    throws ServiceException {
 	RoomAvailability roomAvailability = null;
 	try {
-	    roomAvailability = (RoomAvailability) this.roomAvailabilityDAO
-		    .findById(RoomAvailability.class, id);
+	    roomAvailability = this.roomAvailabilityDAO.findById(id);
 
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
@@ -149,7 +140,7 @@ public class RoomAvailabilityManagerImpl implements IRoomAvailabilityManager {
     public int deleteRoomAvailability(final Long id) throws ServiceException {
 	int flag = 0;
 	try {
-	    flag = this.roomAvailabilityDAO.deleteAny(id, null);
+	    flag = this.roomAvailabilityDAO.deleteAny(id);
 
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
@@ -161,7 +152,7 @@ public class RoomAvailabilityManagerImpl implements IRoomAvailabilityManager {
     public List<RoomAvailability> findAllRoomAvailability()
 	    throws ServiceException {
 	try {
-	    return this.roomAvailabilityDAO.findAll(RoomAvailability.class);
+	    return this.roomAvailabilityDAO.findAll();
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}

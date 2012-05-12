@@ -15,7 +15,7 @@ import com.yd.etravel.persistence.exception.PersistenceException;
  *         com.yd.etravel.persistence.dao.room.IRoomDAO
  * 
  */
-public interface IRoomDAO extends IBaseDAO {
+public interface IRoomDAO extends IBaseDAO<Room> {
 
     public boolean isExist(Long hotelId, Long roomTypeId, Long id)
 	    throws PersistenceException;

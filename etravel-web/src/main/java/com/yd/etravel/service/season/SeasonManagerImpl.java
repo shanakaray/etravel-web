@@ -12,6 +12,7 @@ import com.yd.etravel.domain.room.Room;
 import com.yd.etravel.domain.season.RoomSeasonalRate;
 import com.yd.etravel.domain.season.Season;
 import com.yd.etravel.persistence.dao.hotel.IHotelDAO;
+import com.yd.etravel.persistence.dao.room.IRoomDAO;
 import com.yd.etravel.persistence.dao.season.ISeasonDAO;
 import com.yd.etravel.persistence.exception.PersistenceException;
 import com.yd.etravel.service.exception.ServiceException;
@@ -24,6 +25,8 @@ public class SeasonManagerImpl implements ISeasonManager {
     private ISeasonDAO seasonDAO;
     @Autowired(required = true)
     private IHotelDAO hotelDAO;
+    @Autowired(required = true)
+    private IRoomDAO roomDAO;
 
     public void setSeasonDAO(final ISeasonDAO seasonDAO) {
 	this.seasonDAO = seasonDAO;
@@ -31,6 +34,14 @@ public class SeasonManagerImpl implements ISeasonManager {
 
     public void setHotelDAO(final IHotelDAO hotelDAO) {
 	this.hotelDAO = hotelDAO;
+    }
+
+    public IRoomDAO getRoomDAO() {
+	return this.roomDAO;
+    }
+
+    public void setRoomDAO(final IRoomDAO roomDAO) {
+	this.roomDAO = roomDAO;
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
@@ -50,15 +61,15 @@ public class SeasonManagerImpl implements ISeasonManager {
 
 		} else {
 
-		    final Hotel hotel = (Hotel) this.hotelDAO.findById(
-			    Hotel.class, season.getHotel().getId());
+		    final Hotel hotel = this.hotelDAO.findById(season
+			    .getHotel().getId());
 		    season.setHotel(hotel);
 		    this.seasonDAO.save(season);
 		}
 
 	    } else {
-		final Hotel hotel = (Hotel) this.hotelDAO.findById(Hotel.class,
-			season.getHotel().getId());
+		final Hotel hotel = this.hotelDAO.findById(season.getHotel()
+			.getId());
 
 		season.setHotel(hotel);
 		this.seasonDAO.update(season);
@@ -73,7 +84,7 @@ public class SeasonManagerImpl implements ISeasonManager {
     public Season findSeasonById(final Long id) throws ServiceException {
 	Season season = null;
 	try {
-	    season = (Season) this.seasonDAO.findById(Season.class, id);
+	    season = this.seasonDAO.findById(id);
 	    season.toString();
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
@@ -86,7 +97,7 @@ public class SeasonManagerImpl implements ISeasonManager {
     public int deleteSeason(final Long id) throws ServiceException {
 	int flag = 0;
 	try {
-	    flag = this.seasonDAO.deleteAny(id, null);
+	    flag = this.seasonDAO.deleteAny(id);
 
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
@@ -97,7 +108,7 @@ public class SeasonManagerImpl implements ISeasonManager {
     @Override
     public List<Season> findAllSeason() throws ServiceException {
 	try {
-	    return this.seasonDAO.findAll(Season.class);
+	    return this.seasonDAO.findAll();
 
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
@@ -116,7 +127,7 @@ public class SeasonManagerImpl implements ISeasonManager {
     @Override
     public List<Season> findAllActiveSeason() throws ServiceException {
 	try {
-	    return this.seasonDAO.findAllActive(Season.class);
+	    return this.seasonDAO.findAllActive();
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
@@ -134,21 +145,21 @@ public class SeasonManagerImpl implements ISeasonManager {
 				    .getMessageHolder("etravel.seasonalRate.exist"));
 		} else {
 
-		    final Season season = (Season) this.seasonDAO.findById(
-			    Season.class, roomSeasonalRate.getSeason().getId());
+		    final Season season = this.seasonDAO
+			    .findById(roomSeasonalRate.getSeason().getId());
 		    roomSeasonalRate.setSeason(season);
-		    final Room room = (Room) this.seasonDAO.findById(
-			    Room.class, roomSeasonalRate.getRoom().getId());
+		    final Room room = this.roomDAO.findById(roomSeasonalRate
+			    .getRoom().getId());
 		    roomSeasonalRate.setRoom(room);
 		    this.seasonDAO.save(roomSeasonalRate);
 		}
 	    } else {
 
-		final Season season = (Season) this.seasonDAO.findById(
-			Season.class, roomSeasonalRate.getSeason().getId());
+		final Season season = this.seasonDAO.findById(roomSeasonalRate
+			.getSeason().getId());
 		roomSeasonalRate.setSeason(season);
-		final Room room = (Room) this.seasonDAO.findById(Room.class,
-			roomSeasonalRate.getRoom().getId());
+		final Room room = this.roomDAO.findById(roomSeasonalRate
+			.getRoom().getId());
 		roomSeasonalRate.setRoom(room);
 		this.seasonDAO.update(roomSeasonalRate);
 
@@ -164,7 +175,7 @@ public class SeasonManagerImpl implements ISeasonManager {
 	    throws ServiceException {
 	RoomSeasonalRate roomSeasonalRate = null;
 	try {
-	    roomSeasonalRate = this.seasonDAO.findById(id);
+	    roomSeasonalRate = this.seasonDAO.findSeasonRate(id);
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
@@ -176,7 +187,7 @@ public class SeasonManagerImpl implements ISeasonManager {
     public int deleteRoomSeasonalRate(final Long id) throws ServiceException {
 	int flag = 0;
 	try {
-	    flag = this.seasonDAO.deleteAny(id, null);
+	    flag = this.seasonDAO.deleteAny(id);
 
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
@@ -188,7 +199,7 @@ public class SeasonManagerImpl implements ISeasonManager {
     public List<RoomSeasonalRate> findAllRoomSeasonalRate()
 	    throws ServiceException {
 	try {
-	    return this.seasonDAO.findAll(RoomSeasonalRate.class);
+	    return this.seasonDAO.findAllRoomSeasonalRateList();
 
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);

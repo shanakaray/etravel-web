@@ -1,9 +1,11 @@
 package com.yd.etravel.persistence.dao.user;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
+import org.hibernate.Session;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
@@ -11,11 +13,12 @@ import com.yd.etravel.domain.custom.user.UserSearchDTO;
 import com.yd.etravel.domain.hotel.Hotel;
 import com.yd.etravel.domain.user.User;
 import com.yd.etravel.domain.user.role.Function;
+import com.yd.etravel.domain.user.role.Role;
 import com.yd.etravel.persistence.dao.common.BaseDAO;
 import com.yd.etravel.persistence.exception.PersistenceException;
 
 @Repository
-public class UserDAO extends BaseDAO implements IUserDAO {
+public class UserDAO extends BaseDAO<User> implements IUserDAO {
 
     final static StringBuilder FIND_USER = new StringBuilder(
 	    "FROM User as usr join fetch usr.roles as rol where usr.active=1 AND")
@@ -262,6 +265,117 @@ public class UserDAO extends BaseDAO implements IUserDAO {
 	    return query.list();
 
 	} catch (final HibernateException e) {
+	    throw new PersistenceException(e);
+	}
+    }
+
+    @Override
+    protected Class getEntityClass() {
+	return User.class;
+    }
+
+    @Override
+    public List<Role> findAllUserRoles(final Long[] ids)
+	    throws PersistenceException {
+	try {
+	    final StringBuilder sb = new StringBuilder("SELECT obj FROM ")
+		    .append(Role.class.getName()).append(
+			    " as obj Where obj.id IN (:ids) AND obj.active=1 ");
+
+	    final Session session = getHibernateTemplate().getSessionFactory()
+		    .getCurrentSession();
+	    final Query query = session.createQuery(sb.toString());
+	    query.setParameterList("ids", ids);
+
+	    return query.list();
+
+	} catch (final HibernateException e) {
+	    throw new PersistenceException(e);
+	} catch (final DataAccessException e) {
+	    throw new PersistenceException(e);
+	}
+    }
+
+    @Override
+    public Role findRoleById(final Long customerRoleId)
+	    throws PersistenceException {
+	try {
+	    return (Role) getCurrentSession().load(Role.class, customerRoleId);
+	} catch (final HibernateException e) {
+	    throw new PersistenceException(e);
+	} catch (final DataAccessException e) {
+	    throw new PersistenceException(e);
+	}
+    }
+
+    @Override
+    public void saveRole(final Role role) throws PersistenceException {
+	try {
+	    getCurrentSession().save(role);
+	} catch (final HibernateException e) {
+	    throw new PersistenceException(e);
+	} catch (final DataAccessException e) {
+	    throw new PersistenceException(e);
+	}
+    }
+
+    @Override
+    public void updateRole(final Role role) throws PersistenceException {
+	try {
+	    getCurrentSession().update(role);
+	} catch (final HibernateException e) {
+	    throw new PersistenceException(e);
+	} catch (final DataAccessException e) {
+	    throw new PersistenceException(e);
+	}
+
+    }
+
+    @Override
+    public List<Role> findAllActiveRoles() throws PersistenceException {
+	try {
+	    final StringBuilder sb = new StringBuilder("SELECT obj FROM ")
+		    .append(Role.class.getName()).append(
+			    " as obj Where obj.active=1 ");
+	    return new ArrayList<Role>(getHibernateTemplate().find(
+		    sb.toString()));
+	} catch (final HibernateException e) {
+	    throw new PersistenceException(e);
+	} catch (final DataAccessException e) {
+	    throw new PersistenceException(e);
+	}
+    }
+
+    @Override
+    public List<Role> findAllRoles() throws PersistenceException {
+	try {
+	    final StringBuilder sb = new StringBuilder("SELECT obj FROM ")
+		    .append(Role.class.getName()).append(" as obj");
+	    return new ArrayList<Role>(getHibernateTemplate().find(
+		    sb.toString()));
+	} catch (final HibernateException e) {
+	    throw new PersistenceException(e);
+	} catch (final DataAccessException e) {
+	    throw new PersistenceException(e);
+	}
+    }
+
+    @Override
+    public int deleteRole(final Long id) throws PersistenceException {
+	final Role role = findRoleById(id);
+	role.getFunction().clear();
+	getCurrentSession().delete(role);
+	return 1;
+    }
+
+    @Override
+    public Function findFunctionById(final Long fid)
+	    throws PersistenceException {
+	try {
+	    return (Function) getCurrentSession().load(Function.class, fid);
+	} catch (final HibernateException e) {
+	    throw new PersistenceException(e);
+	} catch (final DataAccessException e) {
 	    throw new PersistenceException(e);
 	}
     }

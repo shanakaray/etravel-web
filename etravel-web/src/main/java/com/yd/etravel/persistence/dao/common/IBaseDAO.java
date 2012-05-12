@@ -5,6 +5,7 @@ package com.yd.etravel.persistence.dao.common;
 
 import java.util.List;
 
+import com.yd.etravel.domain.common.BaseObject;
 import com.yd.etravel.persistence.exception.PersistenceException;
 
 /**
@@ -13,28 +14,28 @@ import com.yd.etravel.persistence.exception.PersistenceException;
  *         com.yd.etravel.persistence.dao.common.IBaseDAO
  * 
  */
-public interface IBaseDAO {
+public interface IBaseDAO<T extends BaseObject> {
 
-    public Object findById(Class cls, final Long id)
-	    throws PersistenceException;
+    public T findById(final Long id) throws PersistenceException;
 
-    public List findBySample(final Object object) throws PersistenceException;
+    public List<T> findBySample(final T object) throws PersistenceException;
 
-    public List findAll(Class cls) throws PersistenceException;
+    public List<T> findAll() throws PersistenceException;
 
-    public Object save(final Object object) throws PersistenceException;
+    public T save(final T object) throws PersistenceException;
 
-    public Object update(final Object object) throws PersistenceException;
+    public T update(final T object) throws PersistenceException;
 
-    public Object merge(final Object object) throws PersistenceException;
+    public T merge(final T object) throws PersistenceException;
 
-    public void delete(final Object object) throws PersistenceException;
+    public void delete(final T object) throws PersistenceException;
 
-    public List findAllActive(Class cls) throws PersistenceException;
+    public List<T> findAllActive() throws PersistenceException;
 
-    public List findAll(Class cls, Long[] id) throws PersistenceException;
+    public List<T> findAll(Long[] id) throws PersistenceException;
 
-    public int deleteAny(Long id, Class cla) throws PersistenceException;
+    public int deleteAny(Long id) throws PersistenceException;
 
-    public int deleteAny(Class cls, Long[] id) throws PersistenceException;
+    public int deleteAny(Long[] id) throws PersistenceException;
+
 }

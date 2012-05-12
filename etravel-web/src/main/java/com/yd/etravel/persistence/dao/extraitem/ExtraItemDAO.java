@@ -3,6 +3,7 @@
  */
 package com.yd.etravel.persistence.dao.extraitem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -22,7 +23,7 @@ import com.yd.etravel.persistence.exception.PersistenceException;
  * 
  */
 @Repository
-public class ExtraItemDAO extends BaseDAO implements IExtraItemDAO {
+public class ExtraItemDAO extends BaseDAO<ExtraItem> implements IExtraItemDAO {
 
     @Override
     public List<ExtraItemBooking> findByBookingId(final Long bookingId)
@@ -78,16 +79,15 @@ public class ExtraItemDAO extends BaseDAO implements IExtraItemDAO {
     }
 
     @Override
-    public Object findById(final Class cls, final Long id)
-	    throws PersistenceException {
+    public ExtraItem findById(final Long id) throws PersistenceException {
 	try {
 	    final StringBuilder sb = new StringBuilder("SELECT obj FROM ")
-		    .append(cls.getName())
+		    .append(getEntityClass().getName())
 		    .append(" as obj left join fetch obj.hotel WHERE obj.id = :id ");
 
 	    final Query query = getCurrentSession().createQuery(sb.toString());
 	    query.setParameter("id", id);
-	    final List results = query.list();
+	    final List<ExtraItem> results = query.list();
 	    return results.isEmpty() ? null : results.get(0);
 
 	} catch (final HibernateException e) {
@@ -107,13 +107,18 @@ public class ExtraItemDAO extends BaseDAO implements IExtraItemDAO {
 
 	    final Query query = getCurrentSession().createQuery(sb.toString());
 	    query.setParameter("id", id);
-	    return query.list();
+	    return new ArrayList<ExtraItem>(query.list());
 
 	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 	} catch (final DataAccessException e) {
 	    throw new PersistenceException(e);
 	}
+    }
+
+    @Override
+    protected Class getEntityClass() {
+	return ExtraItem.class;
     }
 
 }

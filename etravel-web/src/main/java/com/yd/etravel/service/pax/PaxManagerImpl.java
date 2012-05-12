@@ -35,7 +35,7 @@ public class PaxManagerImpl implements IPaxManager {
     public int deletePax(final Long id) throws ServiceException {
 	int count = 0;
 	try {
-	    count = this.paxDAO.deleteAny(id, null);
+	    count = this.paxDAO.deleteAny(id);
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
@@ -45,7 +45,7 @@ public class PaxManagerImpl implements IPaxManager {
     @Override
     public List<Pax> findAllActivePax() throws ServiceException {
 	try {
-	    return this.paxDAO.findAllActive(Pax.class);
+	    return this.paxDAO.findAllActive();
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
@@ -54,7 +54,7 @@ public class PaxManagerImpl implements IPaxManager {
     @Override
     public List<Pax> findAllPax() throws ServiceException {
 	try {
-	    return this.paxDAO.findAll(Pax.class);
+	    return this.paxDAO.findAll();
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
@@ -76,7 +76,7 @@ public class PaxManagerImpl implements IPaxManager {
 	Pax pax = null;
 	try {
 
-	    pax = (Pax) this.paxDAO.findById(Pax.class, id);
+	    pax = this.paxDAO.findById(id);
 
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
@@ -97,9 +97,9 @@ public class PaxManagerImpl implements IPaxManager {
 	    }
 
 	    if (pax.getId() == null) {
-		pax = (Pax) this.paxDAO.save(pax);
+		pax = this.paxDAO.save(pax);
 	    } else {
-		pax = (Pax) this.paxDAO.update(pax);
+		pax = this.paxDAO.update(pax);
 	    }
 
 	} catch (final PersistenceException e) {

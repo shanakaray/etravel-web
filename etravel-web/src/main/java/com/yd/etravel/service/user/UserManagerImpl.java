@@ -143,7 +143,7 @@ public class UserManagerImpl implements IUserManager {
 	    }
 
 	    if (ids != null && ids.length > 0) {
-		final List<Role> roles = this.userDAO.findAll(Role.class, ids);
+		final List<Role> roles = this.userDAO.findAllUserRoles(ids);
 		user.setRoles(roles);
 
 	    }
@@ -198,8 +198,8 @@ public class UserManagerImpl implements IUserManager {
 	    }
 
 	    final List<Role> roles = new ArrayList<Role>();
-	    final Role role = (Role) this.userDAO.findById(Role.class,
-		    IUserRoles.CUSTOMER_ROLE_ID);
+	    final Role role = this.userDAO.findAllUserRoles(
+		    new Long[] { IUserRoles.CUSTOMER_ROLE_ID }).get(0);
 	    roles.add(role);
 	    user.setRoles(roles);
 
@@ -207,11 +207,11 @@ public class UserManagerImpl implements IUserManager {
 
 	    user.encriptPW();
 	    if (user.getId() == null) {
-		user = (User) this.userDAO.save(user);
+		user = this.userDAO.save(user);
 		this.userNotificationMail.setParam(userProfile.getParams());
 		this.userNotificationMail.sendMail();
 	    } else {
-		user = (User) this.userDAO.update(user);
+		user = this.userDAO.update(user);
 	    }
 	    userProfile.setFunctionKeySet(user.getFunctionSet());
 	    userProfile.setId(user.getId());
@@ -232,9 +232,9 @@ public class UserManagerImpl implements IUserManager {
 			    ValidationHelper
 				    .getMessageHolder("etravel.userrole.exist"));
 		}
-		this.userDAO.save(role);
+		this.userDAO.saveRole(role);
 	    } else {
-		this.userDAO.update(role);
+		this.userDAO.updateRole(role);
 	    }
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
@@ -245,7 +245,7 @@ public class UserManagerImpl implements IUserManager {
     @Override
     public List<Role> findAllActiveRoles() throws ServiceException {
 	try {
-	    return this.userDAO.findAllActive(Role.class);
+	    return this.userDAO.findAllActiveRoles();
 
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
@@ -256,7 +256,7 @@ public class UserManagerImpl implements IUserManager {
     public Role findRoleById(final Long id) throws ServiceException {
 	Role role = null;
 	try {
-	    role = (Role) this.userDAO.findById(Role.class, id);
+	    role = this.userDAO.findAllUserRoles(new Long[] { id }).get(0);
 	    role.toString();
 
 	} catch (final PersistenceException e) {
@@ -268,7 +268,7 @@ public class UserManagerImpl implements IUserManager {
     @Override
     public List<Role> findAllRoles() throws ServiceException {
 	try {
-	    return this.userDAO.findAll(Role.class);
+	    return this.userDAO.findAllRoles();
 
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
@@ -280,7 +280,7 @@ public class UserManagerImpl implements IUserManager {
     public int deleteRole(final Long id) throws ServiceException {
 	int flag = 0;
 	try {
-	    flag = this.userDAO.deleteAny(id, null);
+	    flag = this.userDAO.deleteRole(id);
 
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
@@ -313,7 +313,7 @@ public class UserManagerImpl implements IUserManager {
     @Override
     public List<Role> findRolesById(final Long[] id) throws ServiceException {
 	try {
-	    final List<Role> list = this.userDAO.findAll(Role.class, id);
+	    final List<Role> list = this.userDAO.findAllUserRoles(id);
 	    return list;
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
@@ -361,7 +361,7 @@ public class UserManagerImpl implements IUserManager {
 	    final List<Long> functionIds) throws ServiceException {
 	try {
 
-	    final Role role = (Role) this.userDAO.findById(Role.class, roleId);
+	    final Role role = this.userDAO.findRoleById(roleId);
 	    role.getFunction().size();
 	    for (final Iterator<Function> funcIt = role.getFunction()
 		    .iterator(); funcIt.hasNext();) {
@@ -372,13 +372,11 @@ public class UserManagerImpl implements IUserManager {
 
 	    for (final Long fid : functionIds) {
 		if (!role.hasFunctionId(fid)) {
-		    role.getFunction().add(
-			    (Function) this.userDAO.findById(Function.class,
-				    fid));
+		    role.getFunction().add(this.userDAO.findFunctionById(fid));
 		}
 	    }
 
-	    this.userDAO.save(role);
+	    this.userDAO.saveRole(role);
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}

@@ -52,7 +52,7 @@ public class RoomTypeManagerImpl implements IRoomTypeManager {
     public RoomType findRoomTypeById(final Long id) throws ServiceException {
 	RoomType roomType = null;
 	try {
-	    roomType = (RoomType) this.roomTypeDAO.findById(RoomType.class, id);
+	    roomType = this.roomTypeDAO.findById(id);
 	    roomType.toString();
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
@@ -65,7 +65,7 @@ public class RoomTypeManagerImpl implements IRoomTypeManager {
     public int deleteRoomType(final Long id) throws ServiceException {
 	int flag = 0;
 	try {
-	    flag = this.roomTypeDAO.deleteAny(id, null);
+	    flag = this.roomTypeDAO.deleteAny(id);
 
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
@@ -76,7 +76,7 @@ public class RoomTypeManagerImpl implements IRoomTypeManager {
     @Override
     public List<RoomType> findAllRoomType() throws ServiceException {
 	try {
-	    return this.roomTypeDAO.findAll(RoomType.class);
+	    return this.roomTypeDAO.findAll();
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
@@ -85,7 +85,7 @@ public class RoomTypeManagerImpl implements IRoomTypeManager {
     @Override
     public List<RoomType> findAllActiveRoomType() throws ServiceException {
 	try {
-	    return this.roomTypeDAO.findAllActive(RoomType.class);
+	    return this.roomTypeDAO.findAllActive();
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}

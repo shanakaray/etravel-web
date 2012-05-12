@@ -38,8 +38,7 @@ public class ExtraItemManagerImpl implements IExtraItemManager {
     public int deleteExtraItem(final Long id) throws ServiceException {
 	final int val = 0;
 	try {
-	    final ExtraItem extraItem = (ExtraItem) this.itemDAO.findById(
-		    ExtraItem.class, id);
+	    final ExtraItem extraItem = (ExtraItem) this.itemDAO.findById(id);
 	    extraItem.getHotel().clear();
 	    this.itemDAO.delete(extraItem);
 	} catch (final PersistenceException e) {
@@ -51,7 +50,7 @@ public class ExtraItemManagerImpl implements IExtraItemManager {
     @Override
     public List<ExtraItem> findAllActiveExtraItems() throws ServiceException {
 	try {
-	    return this.itemDAO.findAllActive(ExtraItem.class);
+	    return this.itemDAO.findAllActive();
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
@@ -60,7 +59,7 @@ public class ExtraItemManagerImpl implements IExtraItemManager {
     @Override
     public List<ExtraItem> findAllExtraItem() throws ServiceException {
 	try {
-	    return this.itemDAO.findAll(ExtraItem.class);
+	    return this.itemDAO.findAll();
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
@@ -71,7 +70,7 @@ public class ExtraItemManagerImpl implements IExtraItemManager {
 	ExtraItem extraItem = null;
 	try {
 
-	    extraItem = (ExtraItem) this.itemDAO.findById(ExtraItem.class, id);
+	    extraItem = (ExtraItem) this.itemDAO.findById(id);
 
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
@@ -90,9 +89,9 @@ public class ExtraItemManagerImpl implements IExtraItemManager {
 				.getMessageHolder("etravel.hotel.extraitem.exist"));
 	    }
 	    if (item.getId() == null) {
-		item = (ExtraItem) this.itemDAO.save(item);
+		item = this.itemDAO.save(item);
 	    } else {
-		item = (ExtraItem) this.itemDAO.update(item);
+		item = this.itemDAO.update(item);
 	    }
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
