@@ -205,7 +205,8 @@ public class BookingDAO extends BaseDAO<Booking> implements IBookingDAO {
     public HotelBooking save(final HotelBooking hotelBooking)
 	    throws PersistenceException {
 	try {
-	    return (HotelBooking) getCurrentSession().save(hotelBooking);
+	    getCurrentSession().save(hotelBooking);
+	    return hotelBooking;
 	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 	}
@@ -215,7 +216,8 @@ public class BookingDAO extends BaseDAO<Booking> implements IBookingDAO {
     public RoomBooking save(final RoomBooking roomBooking)
 	    throws PersistenceException {
 	try {
-	    return (RoomBooking) getCurrentSession().save(roomBooking);
+	    getCurrentSession().save(roomBooking);
+	    return roomBooking;
 	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 	}
@@ -224,7 +226,8 @@ public class BookingDAO extends BaseDAO<Booking> implements IBookingDAO {
     @Override
     public Payment save(final Payment payment) throws PersistenceException {
 	try {
-	    return (Payment) getCurrentSession().save(payment);
+	    getCurrentSession().save(payment);
+	    return payment;
 	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 	}
@@ -234,8 +237,8 @@ public class BookingDAO extends BaseDAO<Booking> implements IBookingDAO {
     public ExtraItemBooking merge(final ExtraItemBooking extraItemBooking)
 	    throws PersistenceException {
 	try {
-	    return (ExtraItemBooking) getCurrentSession()
-		    .save(extraItemBooking);
+	    getCurrentSession().save(extraItemBooking);
+	    return extraItemBooking;
 	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 	}
