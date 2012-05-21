@@ -16,9 +16,9 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 import org.apache.struts.util.MessageResources;
-import org.apache.struts.util.PropertyMessageResources;
 
 import com.yd.etravel.service.booking.IBookingManager;
+import com.yd.etravel.service.cmt.content.IContentManager;
 import com.yd.etravel.service.exception.ServiceException;
 import com.yd.etravel.service.exception.ValidationException;
 import com.yd.etravel.service.extraitem.IExtraItemManager;
@@ -55,6 +55,7 @@ public abstract class BaseAction extends Action implements
     private IExtraItemManager itemManager;
     private ISearchManager searchManager;
     private IBookingManager bookingManager;
+    private IContentManager contentManager;
 
     // Spring Managers End
 
@@ -432,6 +433,14 @@ public abstract class BaseAction extends Action implements
      */
     public void setBookingManager(final IBookingManager bookingManager) {
 	this.bookingManager = bookingManager;
+    }
+
+    public IContentManager getContentManager() {
+	return this.contentManager;
+    }
+
+    public void setContentManager(final IContentManager contentManager) {
+	this.contentManager = contentManager;
     }
 
     protected IUserProfile getUserProfile(final HttpServletRequest request) {

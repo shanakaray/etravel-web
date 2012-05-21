@@ -33,7 +33,6 @@ public class Content extends BaseObject {
      */
     public Content(final Long id, final String name, final String code) {
 	super(id, name, code);
-	// TODO Auto-generated constructor stub
     }
 
     /**
