@@ -691,4 +691,16 @@
 			<ref bean="bookingService" />
 		</property>
 	</bean>
+	
+	<bean name="/admin/initupload" class="com.yd.etravel.web.content.ImageAction">
+	<property name="contentManager">
+			<ref bean="contentService" />
+		</property>
+	</bean>
+	
+	<bean name="/admin/upload" class="com.yd.etravel.web.content.ImageAction">
+	<property name="contentManager">
+			<ref bean="contentService" />
+		</property>
+	</bean>
 </beans>

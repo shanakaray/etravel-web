@@ -156,4 +156,9 @@
       <put name="body" value="/admin/user/reset_pw.jsp" />
     </definition> 
     
+      <definition name="content.image" extends="home.admin" > 
+      <put name="title" type="string" value="Upload Content" />
+      <put name="body" value="/admin/content/upload.jsp" />
+    </definition> 
+    
 </tiles-definitions>

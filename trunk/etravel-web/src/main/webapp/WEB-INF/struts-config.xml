@@ -29,6 +29,7 @@
 		<form-bean name="functionForm" type="com.yd.etravel.web.user.FunctionForm" />
 		<form-bean name="resetPwForm" type="com.yd.etravel.web.user.ChangePasswordForm" />
 		<form-bean name="ipgForm" type="com.yd.etravel.web.booking.IpgForm" />
+		<form-bean name="imageForm" type="com.yd.etravel.web.content.ImageForm" />
 	</form-beans>
 	<global-exceptions />
 	<global-forwards>
@@ -506,6 +507,18 @@
 			<forward name="ipg" path="/admin/booking/vpc_request.jsp"
 				redirect="false" />
 		</action>
+		<!-- Image -->
+		<action input="/admin/initupload.do"  name="imageForm" parameter="process" path="/admin/upload"
+			scope="request" validate="false"
+			type="org.springframework.web.struts.DelegatingActionProxy">
+			<forward name="success" path="content.image" redirect="false" />
+		</action>
+		<action name="imageForm" parameter="init" path="/admin/initupload"
+			scope="request" validate="false"
+			type="org.springframework.web.struts.DelegatingActionProxy">
+			<forward name="success" path="content.image" redirect="false" />
+		</action>
+	
 	</action-mappings>
 	<message-resources parameter="MessageResources" />
 	<plug-in className="org.springframework.web.struts.ContextLoaderPlugIn">

@@ -282,6 +282,9 @@
 							<a href='../admin/initFunction.do'>Assign Role Functions</a>
 						</li>
 						</user:access>
+						<li>
+							<a href='../admin/initupload.do'>upload</a>
+						</li>
 					</ul>
 				</li>
 				</user:access>
