@@ -6,6 +6,7 @@ package com.yd.etravel.util;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.yd.etravel.service.booking.IBookingManager;
+import com.yd.etravel.service.cmt.content.IContentManager;
 import com.yd.etravel.service.hotel.IHotelManager;
 import com.yd.etravel.service.room.IRoomManager;
 import com.yd.etravel.service.user.IUserManager;
@@ -56,6 +57,10 @@ public final class ServiceHelper implements IServiceNames {
 
     public IpgUtil getIpgUtil() {
 	return (IpgUtil) this.applicationContext.getBean(IPG);
+    }
+
+    public IContentManager getContentService() {
+	return (IContentManager) this.applicationContext.getBean(CONTENT);
     }
 
 }

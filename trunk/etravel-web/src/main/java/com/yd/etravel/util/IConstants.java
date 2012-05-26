@@ -104,6 +104,7 @@ public interface IConstants {
 	public static final String HOTEL = "hotelService";
 	public static final String ROOM = "roomService";
 	public static final String IPG = "ipgService";
+	public static final String CONTENT = "contentService";
     }
 
 }
