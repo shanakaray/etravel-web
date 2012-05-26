@@ -703,4 +703,8 @@
 			<ref bean="contentService" />
 		</property>
 	</bean>
+	
+	
+	
+	
 </beans>

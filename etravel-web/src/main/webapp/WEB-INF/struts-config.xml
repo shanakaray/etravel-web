@@ -518,6 +518,12 @@
 			type="org.springframework.web.struts.DelegatingActionProxy">
 			<forward name="success" path="content.image" redirect="false" />
 		</action>
+		
+		<action name="imageForm" parameter="init" path="/admin/initupload"
+			scope="request" validate="false"
+			type="org.springframework.web.struts.DelegatingActionProxy">
+			<forward name="success" path="content.image" redirect="false" />
+		</action>
 	
 	</action-mappings>
 	<message-resources parameter="MessageResources" />
