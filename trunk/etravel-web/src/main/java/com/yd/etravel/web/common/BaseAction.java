@@ -56,7 +56,6 @@ public abstract class BaseAction extends Action implements
     private ISearchManager searchManager;
     private IBookingManager bookingManager;
     private IContentManager contentManager;
-
     // Spring Managers End
 
     protected volatile ActionMessages actionMessages; // NOPMD by yohan on

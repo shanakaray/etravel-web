@@ -32,6 +32,7 @@ public class HotelAction extends BaseAction {
 	 * 
 	 */
     public HotelAction() {
+
 	ADMIN_ROLES.add(IUserRoles.HOTEL_ADMIN_ROLE_ID);
     }
 
