@@ -137,6 +137,10 @@
 						href="../admin/deleteHotel.do?id=<bean:write name='i' property='id'/>"><img
 							src="../images/deleteico.gif" />
 					</a>
+					<a
+						href="../admin/initupload.do?pk=<bean:write name='i' property='id'/>&object=HOTEL"><img
+							src="../images/editico.gif" />
+					</a>
 				</display:column>
 			</display:table>
 		</td>
