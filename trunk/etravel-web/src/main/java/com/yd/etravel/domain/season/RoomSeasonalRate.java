@@ -13,6 +13,7 @@ import com.yd.etravel.domain.room.Room;
 @Entity
 @Table(name = "T_ROOM_SEASONAL_RATE")
 public class RoomSeasonalRate extends BaseObject {
+
     @ManyToOne
     private Season season;
 

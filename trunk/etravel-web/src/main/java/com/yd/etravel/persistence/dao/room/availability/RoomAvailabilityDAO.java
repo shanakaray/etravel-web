@@ -242,7 +242,7 @@ public class RoomAvailabilityDAO extends BaseDAO<RoomAvailability> implements
 	    throws PersistenceException {
 	final StringBuilder sb = new StringBuilder(
 		"SELECT new com.yd.etravel.domain.custom.room.availability.DailyAvailabilityDTO( "
-			+ "rda.id,rda.date,rda.allocatedUnit,rda.availabalUnit,"
+			+ "rda.id,rda.date,rda.allocatedUnit,rda.availableUnit,"
 			+ "r.id,t.id,h.id,"
 			+ "h.name,r.name,t.name,rda.active,ra.createdDate"
 			+ ")"

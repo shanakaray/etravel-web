@@ -32,10 +32,8 @@
 				<value>com.yd.etravel.domain.season.RoomSeasonalRate</value>
 				<value>com.yd.etravel.domain.room.Room</value>
 				<value>com.yd.etravel.domain.hotel.Pax</value>
-				<value>com.yd.etravel.domain.room.availability.RoomAvailability
-				</value>
-				<value>com.yd.etravel.domain.room.availability.RoomDailyAvailability
-				</value>
+				<value>com.yd.etravel.domain.room.availability.RoomAvailability</value>
+				<value>com.yd.etravel.domain.room.availability.RoomDailyAvailability</value>
 				<value>com.yd.etravel.domain.extraitem.ExtraItem</value>
 				<value>com.yd.etravel.domain.booking.Booking</value>
 				<value>com.yd.etravel.domain.booking.HotelBooking</value>
@@ -114,8 +112,8 @@
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="smtp.gmail.com" />
 		<property name="port" value="587" />
-		<property name="username" value="anilanaresorts@gmail.com" />
-		<property name="password" value="anilana69" />
+		<property name="username" value="shanakaray@gmail.com" />
+		<property name="password" value="dieselpower123" />
 		<property name="javaMailProperties">
 			<props>
 				<prop key="mail.smtp.starttls.enable">true</prop>
@@ -125,20 +123,20 @@
 	<bean id="userMailTarget" class="com.yd.etravel.util.mail.user.UserNotificationMail">
 		<property name="mailSender" ref="mailSender" />
 		<property name="subject" value="Successful User Registration" />
-		<property name="from" value="anilanaresorts@gmail.com" />
+		<property name="from" value="shanakaray@gmail.com" />
 	</bean>
 	<bean id="bookingMailTarget"
 		class="com.yd.etravel.util.mail.booking.BookingOverDueNotification">
 		<property name="mailSender" ref="mailSender" />
 		<property name="subject" value="Booking Overdue" />
-		<property name="from" value="anilanaresorts@gmail.com" />
-		<property name="cc" value="sales@anilana.com" />
+		<property name="from" value="shanakaray@gmail.com" />
+		<property name="cc" value="shanakaray@gmail.com" />
 	</bean>
 	<bean id="bookingConfirmMailTarget" class="com.yd.etravel.util.mail.booking.BookingConfirmation">
 		<property name="mailSender" ref="mailSender" />
 		<property name="subject" value="Booking Confirmation" />
-		<property name="from" value="anilanaresorts@gmail.com" />
-		<property name="cc" value="sales@anilana.com" />
+		<property name="from" value="shanakaray@gmail.com" />
+		<property name="cc" value="shanakaray@gmail.com" />
 	</bean>
 	<!--User Profile implementations -->
 	<bean id="userProfileTarget" class="com.yd.etravel.service.util.UserProfile" />

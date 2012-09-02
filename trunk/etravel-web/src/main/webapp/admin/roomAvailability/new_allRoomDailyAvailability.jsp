@@ -12,6 +12,6 @@
 <display:column title="Room Type" style="width:10%" sortable="true" property="roomTypeName" class="sortable" />
 <display:column title="Date" style="width:10%" sortable="true" property="dateString" class="sortable" sortProperty="date" />
 <display:column title="Allocated Room" style="width:15%" sortable="true" property="allocatedUnit" class="sortable" />
-<display:column title="Availabal Room" style="width:15%" sortable="true" property="availableUnit" class="sortable" />
+<display:column title="Available Room" style="width:15%" sortable="true" property="availableUnit" class="sortable" />
 <display:column title="Active" style="width:10%" sortable="true" property="active" class="sortable" ><br></display:column>
 </display:table>

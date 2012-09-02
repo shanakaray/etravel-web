@@ -149,12 +149,12 @@ public class SearchManagerImpl implements ISearchManager {
 			    roomAvailability.getId(), checkIn, checkOut);
 
 	    roomDailyAvList = (ArrayList<RoomDailyAvailability>) SortedCollection
-		    .orderByField(roomDailyAvList, "availabalUnit", true);
+		    .orderByField(roomDailyAvList, "availableUnit", true);
 
 	    if (!roomDailyAvList.isEmpty()) {
 
 		roomAvailability.setAvailableUnit(roomDailyAvList.get(0)
-			.getAvailabalUnit());
+			.getAvailableUnit());
 	    }
 
 	} catch (final PersistenceException e) {
@@ -171,7 +171,6 @@ public class SearchManagerImpl implements ISearchManager {
 	    final SearchRequestDTO searchRequestDTO)
 	    throws PersistenceException, ServiceException {
 
-	new ArrayList();
 	final List<RoomAvailability> checkInList = this.searchDAO
 		.findRoomsByCheckInDate(searchRequestDTO);
 	final List<RoomAvailability> checkOutList = this.searchDAO
@@ -188,8 +187,7 @@ public class SearchManagerImpl implements ISearchManager {
 		final RoomAvailability roomAvailabilityCheckOut = iterCheckOut
 			.next();
 
-		Calendar cal;
-		cal = Calendar.getInstance();
+		final Calendar cal = Calendar.getInstance();
 		cal.setTime(roomAvailabilityCheckIn.getToDate());
 		cal.add(Calendar.DATE, 1);
 
@@ -258,7 +256,7 @@ public class SearchManagerImpl implements ISearchManager {
 			    roomDTO.getRoomAvailability().getToDate());
 
 	    roomDailyAvListCheckIn = (ArrayList<RoomDailyAvailability>) SortedCollection
-		    .orderByField(roomDailyAvListCheckIn, "availabalUnit", true);
+		    .orderByField(roomDailyAvListCheckIn, "availableUnit", true);
 
 	    ArrayList<RoomDailyAvailability> roomDailyAvListCheckOut = (ArrayList<RoomDailyAvailability>) this.roomAvailabilityDAO
 		    .findAllRoomDailyAvailabilityByRoomAvailabilityIdAndDateRange(
@@ -267,7 +265,7 @@ public class SearchManagerImpl implements ISearchManager {
 			    roomDTO.getRoomAvailability().getToDate());
 
 	    roomDailyAvListCheckOut = (ArrayList<RoomDailyAvailability>) SortedCollection
-		    .orderByField(roomDailyAvListCheckOut, "availabalUnit",
+		    .orderByField(roomDailyAvListCheckOut, "availableUnit",
 			    true);
 
 	    int avalUnitCheckIn = 0;
@@ -276,12 +274,12 @@ public class SearchManagerImpl implements ISearchManager {
 	    if (!roomDailyAvListCheckIn.isEmpty()) {
 
 		avalUnitCheckIn = roomDailyAvListCheckIn.get(0)
-			.getAvailabalUnit();
+			.getAvailableUnit();
 	    }
 	    if (!roomDailyAvListCheckOut.isEmpty()) {
 
 		avalUnitCheckOut = roomDailyAvListCheckOut.get(0)
-			.getAvailabalUnit();
+			.getAvailableUnit();
 	    }
 	    if (avalUnitCheckIn > avalUnitCheckOut) {
 		roomDTO.getRoomAvailability()

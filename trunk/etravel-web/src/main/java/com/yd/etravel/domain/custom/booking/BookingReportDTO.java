@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.yd.etravel.domain.custom.booking;
 
 import java.math.BigDecimal;
@@ -10,13 +7,6 @@ import java.util.Date;
 import com.yd.etravel.util.DateUtil;
 import com.yd.etravel.util.IConstants;
 import com.yd.etravel.util.StringUtils;
-
-/**
- * 
- * @author : Yohan Ranasinghe. Created Date : Mar 1, 2009 : 4:17:22 PM Type :
- *         com.yd.etravel.domain.custom.booking.BookingReportDTO
- * 
- */
 
 public class BookingReportDTO {
     private Long bookingId;
