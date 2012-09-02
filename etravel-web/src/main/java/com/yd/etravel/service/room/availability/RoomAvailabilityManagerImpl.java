@@ -76,7 +76,7 @@ public class RoomAvailabilityManagerImpl implements IRoomAvailabilityManager {
 			final RoomDailyAvailability rda = new RoomDailyAvailability();
 			rda.setRoomAvailability(roomAvail);
 			rda.setAllocatedUnit(roomAvail.getUnit());
-			rda.setAvailabalUnit(roomAvail.getUnit());
+			rda.setAvailableUnit(roomAvail.getUnit());
 			rda.setActive(true);
 			rda.setDate(from);
 			this.roomAvailabilityDAO.save(rda);
@@ -107,9 +107,9 @@ public class RoomAvailabilityManagerImpl implements IRoomAvailabilityManager {
 		    dailyRoomAv.setAllocatedUnit(roomAvail.getUnit());
 
 		    int avaunit = 0;
-		    if (roomAvail.getUnit() < dailyRoomAv.getAvailabalUnit()) {
+		    if (roomAvail.getUnit() < dailyRoomAv.getAvailableUnit()) {
 			avaunit = roomAvail.getUnit();
-			dailyRoomAv.setAvailabalUnit(avaunit);
+			dailyRoomAv.setAvailableUnit(avaunit);
 		    }
 
 		    this.roomAvailabilityDAO.update(dailyRoomAv);

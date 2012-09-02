@@ -137,7 +137,7 @@
 								%>
 
 
-								<tr height="25px">
+								<tr height="25px" >
 									<td><strong><%=dto.getRoomTypeName().equals(tmp)?"":dto.getRoomTypeName()%></strong></td>
 									<%  tmp=dto.getRoomTypeName();
 										if (thisbean.getStartDateToDate() != null) {
@@ -217,7 +217,7 @@
 																if (!found) {
 									%>
 
-									<td bgcolor="gray">
+									<td bgcolor="<%=dto.getRoomTypeName().equals(tmp)?"#C0C0C0":"#808080"%>">
 										&nbsp;
 									</td>
 									<%

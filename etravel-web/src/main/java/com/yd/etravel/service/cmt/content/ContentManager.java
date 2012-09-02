@@ -46,7 +46,6 @@ public class ContentManager implements IContentManager {
 		fos = new FileOutputStream(System.getProperty("java.io.tmpdir")
 			+ image.getId() + image.getCode());
 		fos.write(bytes);
-		// /
 	    }
 	    image.setFile(img);
 	} catch (final Exception exception) {

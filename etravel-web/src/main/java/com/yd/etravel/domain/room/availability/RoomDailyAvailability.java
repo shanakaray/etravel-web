@@ -14,8 +14,11 @@ import com.yd.etravel.domain.common.BaseObject;
 import com.yd.etravel.util.DateUtil;
 
 @Entity
-@Table(name = "T_ROOM_DAILY_AVAILABILITY")
+@Table(name = "T_ROOM_AVAILABILITY")
 public class RoomDailyAvailability extends BaseObject {
+
+    private static final long serialVersionUID = -6352662473914965372L;
+
     @Column
     private Date date;
 
@@ -23,7 +26,7 @@ public class RoomDailyAvailability extends BaseObject {
     private Integer allocatedUnit;
 
     @Column
-    private Integer availabalUnit;
+    private Integer availableUnit;
 
     @ManyToOne
     private RoomAvailability roomAvailability;
@@ -48,20 +51,20 @@ public class RoomDailyAvailability extends BaseObject {
 	this.allocatedUnit = allocatedUnit;
     }
 
-    public Integer getAvailabalUnit() {
-	return this.availabalUnit;
+    public Integer getAvailableUnit() {
+	return this.availableUnit;
     }
 
-    public void addAvailabalUnit(final int val) {
-	this.availabalUnit += val;
+    public void addAvailableUnit(final int val) {
+	this.availableUnit += val;
     }
 
-    public void subAvailabalUnit(final int val) {
-	this.availabalUnit -= val;
+    public void subAvailableUnit(final int val) {
+	this.availableUnit -= val;
     }
 
-    public void setAvailabalUnit(final Integer availabalUnit) {
-	this.availabalUnit = availabalUnit;
+    public void setAvailableUnit(final Integer availabalUnit) {
+	this.availableUnit = availabalUnit;
     }
 
     public RoomAvailability getRoomAvailability() {

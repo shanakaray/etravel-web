@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,16 +44,24 @@ public class BookingManagerImpl implements IBookingManager {
     @Autowired(required = true)
     private IBookingDAO bookingDAO;
     @Autowired(required = true)
-    private IExtraItemDAO extraItemDAO;
-    @Autowired(required = true)
     private IRoomAvailabilityDAO roomAvailabilityDAO;
     @Autowired(required = true)
     private IUserDAO userDAO;
     private MailMessage bookingOverDueNotification;
     @Autowired(required = true)
     private MailMessage bookingConfirmation;
+    @Autowired
+    private JavaMailSenderImpl mailSender;
     private int onlineExpire;
     private int onrequestExpire;
+
+    public JavaMailSenderImpl getMailSender() {
+	return this.mailSender;
+    }
+
+    public void setMailSender(final JavaMailSenderImpl mailSender) {
+	this.mailSender = mailSender;
+    }
 
     public int getOnlineExpire() {
 	return this.onlineExpire;
@@ -71,6 +80,7 @@ public class BookingManagerImpl implements IBookingManager {
     }
 
     public MailMessage getBookingConfirmation() {
+	this.bookingConfirmation.setMailSender(this.mailSender);
 	return this.bookingConfirmation;
     }
 
@@ -83,7 +93,6 @@ public class BookingManagerImpl implements IBookingManager {
     }
 
     public void setExtraItemDAO(final IExtraItemDAO extraItemDAO) {
-	this.extraItemDAO = extraItemDAO;
     }
 
     public void setRoomAvailabilityDAO(
@@ -117,8 +126,7 @@ public class BookingManagerImpl implements IBookingManager {
 
 	    // Save booking
 
-	    Booking booking = (Booking) this.bookingDAO.save(bookingDTO
-		    .getBooking());
+	    Booking booking = this.bookingDAO.save(bookingDTO.getBooking());
 
 	    if (StringUtils.isEmpty(booking.getCode())) {
 		final StringBuilder sb = new StringBuilder().append('B');
@@ -128,7 +136,7 @@ public class BookingManagerImpl implements IBookingManager {
 		}
 		sb.append(booking.getId().toString());
 		booking.setCode(sb.toString());
-		booking = (Booking) this.bookingDAO.save(booking);
+		booking = this.bookingDAO.save(booking);
 	    }
 
 	    bookingDTO.setBooking(booking);
@@ -138,13 +146,13 @@ public class BookingManagerImpl implements IBookingManager {
 	    bookingDTO.getHotelBooking().setBooking(booking);
 	    HotelBooking hotelBooking = bookingDTO.getHotelBooking();
 	    hotelBooking.setRoomAvalabiltyId(bookingDTO.getRoomAvalabiltyId());
-	    hotelBooking = (HotelBooking) this.bookingDAO.save(hotelBooking);
+	    hotelBooking = this.bookingDAO.save(hotelBooking);
 	    bookingDTO.setHotelBooking(hotelBooking);
 
 	    // Save Room booking
 	    bookingDTO.getRoomBooking().setHotelBooking(hotelBooking);
 	    RoomBooking roomBooking = bookingDTO.getRoomBooking();
-	    roomBooking = (RoomBooking) this.bookingDAO.save(roomBooking);
+	    roomBooking = this.bookingDAO.save(roomBooking);
 	    bookingDTO.setRoomBooking(roomBooking);
 
 	    // Save Extra Item
@@ -157,8 +165,8 @@ public class BookingManagerImpl implements IBookingManager {
 		    IBooking.BOOKING_PAYMENT_METHOD_CASH_DES)) {
 		bookingDTO.getPayment().setBooking(booking);
 
-		final Payment payment = (Payment) this.bookingDAO
-			.save(bookingDTO.getPayment());
+		final Payment payment = this.bookingDAO.save(bookingDTO
+			.getPayment());
 		bookingDTO.setPayment(payment);
 
 	    }
@@ -185,7 +193,7 @@ public class BookingManagerImpl implements IBookingManager {
 
 	    if (booking.getPaymentMethod().equals(
 		    IBooking.BOOKING_PAYMENT_METHOD_CASH_DES)) {
-		final User bookingUser = (User) this.userDAO.findBySample(
+		final User bookingUser = this.userDAO.findBySample(
 			booking.getBookingUser()).get(0);
 		bookingUser.getFunctionSet();
 		sendConfirmation(
@@ -201,10 +209,10 @@ public class BookingManagerImpl implements IBookingManager {
 
     private void sendConfirmation(final IUserProfile profile,
 	    final RoomBooking booking) {
-
-	this.bookingConfirmation.setParam(booking.getParams());
-	this.bookingConfirmation.addParam(profile.getParams());
-	this.bookingConfirmation.sendMail();
+	final MailMessage message = getBookingConfirmation();
+	message.setParam(booking.getParams());
+	message.addParam(profile.getParams());
+	message.sendMail();
 
     }
 
@@ -214,7 +222,7 @@ public class BookingManagerImpl implements IBookingManager {
 	boolean flag = true;
 
 	for (final RoomDailyAvailability roomDailyAva : roomDailyAvList) {
-	    if (room > roomDailyAva.getAvailabalUnit()) {
+	    if (room > roomDailyAva.getAvailableUnit()) {
 		flag = false;
 		break;
 	    }
@@ -227,13 +235,13 @@ public class BookingManagerImpl implements IBookingManager {
 	    throws PersistenceException {
 	boolean flag = true;
 	for (final RoomDailyAvailability rd : availList) {
-	    final int updatedUnit = rd.getAvailabalUnit().intValue()
+	    final int updatedUnit = rd.getAvailableUnit().intValue()
 		    - room.intValue();
 	    if (updatedUnit < 0) {
 		flag = false;
 		break;
 	    }
-	    rd.setAvailabalUnit(updatedUnit);
+	    rd.setAvailableUnit(updatedUnit);
 	    this.roomAvailabilityDAO.update(rd);
 	}
 	return flag;
@@ -265,8 +273,7 @@ public class BookingManagerImpl implements IBookingManager {
 	for (ExtraItemBooking extraItemBooking : arraListList) {
 	    extraItemBooking.setBooking(booking);
 	    try {
-		extraItemBooking = (ExtraItemBooking) this.bookingDAO
-			.merge(extraItemBooking);
+		extraItemBooking = this.bookingDAO.merge(extraItemBooking);
 	    } catch (final PersistenceException e) {
 		throw e;
 	    }
@@ -433,7 +440,7 @@ public class BookingManagerImpl implements IBookingManager {
 	    throws PersistenceException {
 	final boolean flag = true;
 	for (final RoomDailyAvailability roomDailyAvil : availList) {
-	    roomDailyAvil.addAvailabalUnit(room);
+	    roomDailyAvil.addAvailableUnit(room);
 	    this.roomAvailabilityDAO.update(roomDailyAvil);
 	}
 	return flag;

@@ -17,6 +17,9 @@ import com.yd.etravel.util.DateUtil;
 @Entity
 @Table(name = "T_ROOM_AVAILABILITY")
 public class RoomAvailability extends BaseObject {
+
+    private static final long serialVersionUID = -4703243526080212840L;
+
     @Column
     private Date fromDate;
 
