@@ -138,7 +138,7 @@
 
 
 								<tr height="25px" >
-									<td><strong><%=dto.getRoomTypeName().equals(tmp)?"":dto.getRoomTypeName()%></strong></td>
+									<td style="background-color:<%=y%2==1?"#F4EDFA":"#A7A0AD"%>;"><strong><%=dto.getRoomTypeName().equals(tmp)?"":dto.getRoomTypeName()%></strong></td>
 									<%  tmp=dto.getRoomTypeName();
 										if (thisbean.getStartDateToDate() != null) {
 														Calendar c = Calendar.getInstance();
@@ -217,7 +217,7 @@
 																if (!found) {
 									%>
 
-									<td bgcolor="<%=dto.getRoomTypeName().equals(tmp)?"#C0C0C0":"#808080"%>">
+									<td style="background-color:<%=y%2==1?"#F4EDFA":"#A7A0AD"%>;">
 										&nbsp;
 									</td>
 									<%
