@@ -27,21 +27,13 @@ public class RoomTypeManagerImpl implements IRoomTypeManager {
     @Override
     public RoomType save(final RoomType roomType) throws ServiceException {
 	try {
-
 	    if (this.roomTypeDAO.isRoomTypeNameExist(roomType.getName(),
 		    roomType.getId())) {
 		throw new ServiceException(
 			ValidationHelper
 				.getMessageHolder("etravel.roomTypeName.exist"));
 	    }
-
-	    if (roomType.getId() == null) {
-		this.roomTypeDAO.save(roomType);
-
-	    } else {
-		this.roomTypeDAO.update(roomType);
-	    }
-
+	    this.roomTypeDAO.saveOrUpdate(roomType);
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}

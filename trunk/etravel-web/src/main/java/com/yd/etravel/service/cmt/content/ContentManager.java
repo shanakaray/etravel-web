@@ -19,13 +19,13 @@ import com.yd.etravel.service.exception.ServiceException;
 @Transactional(propagation = Propagation.SUPPORTS)
 public class ContentManager implements IContentManager {
     @Autowired(required = true)
-    private IImageDAO iImageDAO;
+    private IImageDAO imageDao;
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
     public Image saveImage(final Image image) throws ServiceException {
 	try {
-	    this.iImageDAO.save(image);
+	    this.imageDao.saveOrUpdate(image);
 	} catch (final PersistenceException exception) {
 	    throw new ServiceException(null, exception);
 	}
@@ -38,7 +38,7 @@ public class ContentManager implements IContentManager {
 	Image image = null;
 	FileOutputStream fos = null;
 	try {
-	    image = this.iImageDAO.findById(id);
+	    image = this.imageDao.findById(id);
 	    final File img = new File(System.getProperty("java.io.tmpdir")
 		    + image.getId() + image.getCode());
 	    if (!img.exists()) {
@@ -66,7 +66,7 @@ public class ContentManager implements IContentManager {
     @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public List<Long> getImageList(final Image image) throws ServiceException {
 	try {
-	    return this.iImageDAO.getIds(image);
+	    return this.imageDao.getIds(image);
 	} catch (final PersistenceException exception) {
 	    throw new ServiceException(null, exception);
 	}

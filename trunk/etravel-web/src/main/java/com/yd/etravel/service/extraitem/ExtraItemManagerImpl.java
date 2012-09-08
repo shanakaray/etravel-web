@@ -14,14 +14,10 @@ import com.yd.etravel.persistence.exception.PersistenceException;
 import com.yd.etravel.service.exception.ServiceException;
 import com.yd.etravel.service.message.ValidationHelper;
 
-/**
- * 
- * @author : Yohan Ranasinghe. Created Date : Feb 14, 2009 : 4:43:03 PM Type :
- *         com.yd.etravel.service.extraitem.ExtraItemManagerImpl
- */
 @Service(value = "itemService")
 @Transactional(propagation = Propagation.SUPPORTS)
 public class ExtraItemManagerImpl implements IExtraItemManager {
+
     @Autowired(required = true)
     private IExtraItemDAO itemDAO;
 
@@ -38,7 +34,7 @@ public class ExtraItemManagerImpl implements IExtraItemManager {
     public int deleteExtraItem(final Long id) throws ServiceException {
 	final int val = 0;
 	try {
-	    final ExtraItem extraItem = (ExtraItem) this.itemDAO.findById(id);
+	    final ExtraItem extraItem = this.itemDAO.findById(id);
 	    extraItem.getHotel().clear();
 	    this.itemDAO.delete(extraItem);
 	} catch (final PersistenceException e) {
@@ -70,7 +66,7 @@ public class ExtraItemManagerImpl implements IExtraItemManager {
 	ExtraItem extraItem = null;
 	try {
 
-	    extraItem = (ExtraItem) this.itemDAO.findById(id);
+	    extraItem = this.itemDAO.findById(id);
 
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
@@ -88,11 +84,9 @@ public class ExtraItemManagerImpl implements IExtraItemManager {
 			ValidationHelper
 				.getMessageHolder("etravel.hotel.extraitem.exist"));
 	    }
-	    if (item.getId() == null) {
-		item = this.itemDAO.save(item);
-	    } else {
-		item = this.itemDAO.update(item);
-	    }
+
+	    item = this.itemDAO.saveOrUpdate(item);
+
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}

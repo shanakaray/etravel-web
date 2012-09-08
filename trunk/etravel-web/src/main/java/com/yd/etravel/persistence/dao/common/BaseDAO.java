@@ -18,12 +18,6 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import com.yd.etravel.domain.common.BaseObject;
 import com.yd.etravel.persistence.exception.PersistenceException;
 
-/**
- * 
- * @author : Yohan Ranasinghe. Created Date : Jan 26, 2009 : 9:47:43 PM Type :
- *         com.yd.etravel.persistence.dao.common.BaseDAO
- * 
- */
 public abstract class BaseDAO<T extends BaseObject> extends HibernateDaoSupport
 	implements IBaseDAO<T> {
 
@@ -39,9 +33,7 @@ public abstract class BaseDAO<T extends BaseObject> extends HibernateDaoSupport
     @Override
     public void delete(final T object) throws PersistenceException {
 	try {
-
 	    getCurrentSession().delete(object);
-
 	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 	} catch (final DataAccessException e) {
@@ -74,28 +66,18 @@ public abstract class BaseDAO<T extends BaseObject> extends HibernateDaoSupport
     }
 
     @Override
-    public T save(final T object) throws PersistenceException {
+    public T saveOrUpdate(final T obj) throws PersistenceException {
 	try {
-	    final BaseObject baseObject = object;
-	    baseObject.setCreatedDate(new Date());
-	    baseObject.setCreatedBy(Thread.currentThread().getName());
-	    getHibernateTemplate().saveOrUpdate(baseObject);
-	    return object;
-	} catch (final HibernateException e) {
-	    throw new PersistenceException(e);
-	} catch (final DataAccessException e) {
-	    throw new PersistenceException(e);
-	}
-    }
-
-    @Override
-    public T update(final T object) throws PersistenceException {
-	try {
-	    final BaseObject baseObject = object;
-	    baseObject.setModifiedDate(new Date());
-	    baseObject.setModifiedBy(Thread.currentThread().getName());
-	    getHibernateTemplate().update(baseObject);
-	    return object;
+	    final BaseObject object = obj;
+	    if (object.getId() == null) {
+		object.setCreatedDate(new Date());
+		object.setCreatedBy(Thread.currentThread().getName());
+	    } else {
+		object.setModifiedDate(new Date());
+		object.setModifiedBy(Thread.currentThread().getName());
+	    }
+	    getHibernateTemplate().saveOrUpdate(object);
+	    return obj;
 	} catch (final HibernateException e) {
 	    throw new PersistenceException(e);
 	} catch (final DataAccessException e) {

@@ -95,12 +95,7 @@ public class PaxManagerImpl implements IPaxManager {
 			ValidationHelper
 				.getMessageHolder("etravel.pax.type.exist"));
 	    }
-
-	    if (pax.getId() == null) {
-		pax = this.paxDAO.save(pax);
-	    } else {
-		pax = this.paxDAO.update(pax);
-	    }
+	    pax = this.paxDAO.saveOrUpdate(pax);
 
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);

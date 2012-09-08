@@ -2,6 +2,8 @@ package com.yd.etravel.service.search;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -23,7 +25,6 @@ import com.yd.etravel.persistence.dao.search.ISearchDAO;
 import com.yd.etravel.persistence.dao.season.ISeasonDAO;
 import com.yd.etravel.persistence.exception.PersistenceException;
 import com.yd.etravel.service.exception.ServiceException;
-import com.yd.etravel.util.SortedCollection;
 
 @Service(value = "searchService")
 @Transactional(propagation = Propagation.SUPPORTS)
@@ -53,17 +54,17 @@ public class SearchManagerImpl implements ISearchManager {
 	    throws ServiceException {
 	final SearchResultsDTO searchResultsDTO = new SearchResultsDTO();
 	try {
-	    final List<RoomAvailability> list = this.searchDAO
+	    final List<RoomAvailability> roomList = this.searchDAO
 		    .findRooms(searchRequestDTO);
 	    List<RoomDTO> roomDTOList = new ArrayList<RoomDTO>();
 
-	    if (list == null || list.isEmpty()) {
+	    if (roomList == null || roomList.isEmpty()) {
 
 		roomDTOList = findRoomDateCrossAllocation(searchRequestDTO);
 	    } else {
 
-		for (final RoomAvailability type : list) {
-		    final RoomDTO roomDTO = new RoomDTO();
+		for (final RoomAvailability type : roomList) {
+		    final RoomDTO room = new RoomDTO();
 
 		    final RoomAvailability maxType =
 
@@ -73,11 +74,11 @@ public class SearchManagerImpl implements ISearchManager {
 			continue;
 
 		    }
-		    roomDTO.setRoomAvailability(maxType);
-		    roomDTO.setRoom(type.getRoom());
-		    roomDTO.setRoomType(type.getRoom().getRoomType());
-		    roomDTO.setHotel(type.getRoom().getHotel());
-		    roomDTO.setId(type.getId());
+		    room.setRoomAvailability(maxType);
+		    room.setRoom(type.getRoom());
+		    room.setRoomType(type.getRoom().getRoomType());
+		    room.setHotel(type.getRoom().getHotel());
+		    room.setId(type.getId());
 
 		    List<RoomSeasonalRate> rsrList = new ArrayList<RoomSeasonalRate>();
 		    rsrList = this.seasonDAO.findRoomSeasonalRateByRoomId(type
@@ -89,8 +90,8 @@ public class SearchManagerImpl implements ISearchManager {
 			roomSeasonalRate.setSeason(new Season());
 			continue;
 		    }
-		    roomDTO.setRoomSeasonalRate(roomSeasonalRate);
-		    roomDTOList.add(roomDTO);
+		    room.setRoomSeasonalRate(roomSeasonalRate);
+		    roomDTOList.add(room);
 		}
 	    }
 	    searchResultsDTO.setRoomDTO(roomDTOList);
@@ -105,7 +106,7 @@ public class SearchManagerImpl implements ISearchManager {
 	    final SearchRequestDTO searchRequestDTO,
 	    final List<RoomSeasonalRate> rsrList) {
 
-	RoomSeasonalRate rsr = new RoomSeasonalRate();
+	RoomSeasonalRate seasonrate = new RoomSeasonalRate();
 
 	boolean flag = false;
 
@@ -117,7 +118,7 @@ public class SearchManagerImpl implements ISearchManager {
 		    .getCheckIn().getTime()
 		    && searchRequestDTO.getCheckOut().getTime() <= type
 			    .getSeason().getToDate().getTime()) {
-		rsr = type;
+		seasonrate = type;
 		flag = true;
 		break;
 	    }
@@ -129,13 +130,13 @@ public class SearchManagerImpl implements ISearchManager {
 			.getCheckIn().getTime()
 			&& searchRequestDTO.getCheckIn().getTime() <= type
 				.getSeason().getToDate().getTime()) {
-		    rsr = type;
+		    seasonrate = type;
 		    flag = true;
 		    break;
 		}
 	    }
 	}
-	return rsr;
+	return seasonrate;
 
     }
 
@@ -144,12 +145,12 @@ public class SearchManagerImpl implements ISearchManager {
 	    final Date checkOut) throws ServiceException {
 
 	try {
-	    ArrayList<RoomDailyAvailability> roomDailyAvList = (ArrayList<RoomDailyAvailability>) this.roomAvailabilityDAO
+	    final ArrayList<RoomDailyAvailability> roomDailyAvList = (ArrayList<RoomDailyAvailability>) this.roomAvailabilityDAO
 		    .findAllRoomDailyAvailabilityByRoomAvailabilityIdAndDateRange(
 			    roomAvailability.getId(), checkIn, checkOut);
 
-	    roomDailyAvList = (ArrayList<RoomDailyAvailability>) SortedCollection
-		    .orderByField(roomDailyAvList, "availableUnit", true);
+	    Collections.sort(roomDailyAvList,
+		    new RoomDailyAvailabilityComparatorAsc());
 
 	    if (!roomDailyAvList.isEmpty()) {
 
@@ -249,24 +250,23 @@ public class SearchManagerImpl implements ISearchManager {
 	    final RoomAvailability roomAvailabilityCheckOut = roomDTO
 		    .getRoomAvailabilityCheckOut();
 
-	    ArrayList<RoomDailyAvailability> roomDailyAvListCheckIn = (ArrayList<RoomDailyAvailability>) this.roomAvailabilityDAO
+	    final ArrayList<RoomDailyAvailability> roomDailyAvListCheckIn = (ArrayList<RoomDailyAvailability>) this.roomAvailabilityDAO
 		    .findAllRoomDailyAvailabilityByRoomAvailabilityIdAndDateRange(
 			    roomAvailabilityCheckIn.getId(), roomDTO
 				    .getRoomAvailability().getFromDate(),
 			    roomDTO.getRoomAvailability().getToDate());
 
-	    roomDailyAvListCheckIn = (ArrayList<RoomDailyAvailability>) SortedCollection
-		    .orderByField(roomDailyAvListCheckIn, "availableUnit", true);
+	    Collections.sort(roomDailyAvListCheckIn,
+		    new RoomDailyAvailabilityComparatorAsc());
 
-	    ArrayList<RoomDailyAvailability> roomDailyAvListCheckOut = (ArrayList<RoomDailyAvailability>) this.roomAvailabilityDAO
+	    final ArrayList<RoomDailyAvailability> roomDailyAvListCheckOut = (ArrayList<RoomDailyAvailability>) this.roomAvailabilityDAO
 		    .findAllRoomDailyAvailabilityByRoomAvailabilityIdAndDateRange(
 			    roomAvailabilityCheckOut.getId(), roomDTO
 				    .getRoomAvailability().getFromDate(),
 			    roomDTO.getRoomAvailability().getToDate());
 
-	    roomDailyAvListCheckOut = (ArrayList<RoomDailyAvailability>) SortedCollection
-		    .orderByField(roomDailyAvListCheckOut, "availableUnit",
-			    true);
+	    Collections.sort(roomDailyAvListCheckOut,
+		    new RoomDailyAvailabilityComparatorAsc());
 
 	    int avalUnitCheckIn = 0;
 	    int avalUnitCheckOut = 0;
@@ -310,6 +310,24 @@ public class SearchManagerImpl implements ISearchManager {
 
 	return roomDTO;
 
+    }
+
+    class RoomDailyAvailabilityComparatorAsc implements
+	    Comparator<RoomDailyAvailability> {
+	@Override
+	public int compare(final RoomDailyAvailability o1,
+		final RoomDailyAvailability o2) {
+	    return o1.getAvailableUnit().compareTo(o2.getAvailableUnit());
+	}
+    }
+
+    class RoomDailyAvailabilityComparatorDscs implements
+	    Comparator<RoomDailyAvailability> {
+	@Override
+	public int compare(final RoomDailyAvailability o1,
+		final RoomDailyAvailability o2) {
+	    return o2.getAvailableUnit().compareTo(o1.getAvailableUnit());
+	}
     }
 
 }

@@ -43,31 +43,19 @@ public class OccupancyManagerImpl implements IOccupancyManager {
 				.getMessageHolder("etravel.occupancyName.exist"));
 	    }
 
-	    if (occupancy.getId() == null) {
-		if (!this.occupancyDAO.findAllOccupancyByPaxInfo(occupancy)) {
+	    if (occupancy.getId() == null
+		    && !this.occupancyDAO.findAllOccupancyByPaxInfo(occupancy)) {
 
-		    throw new ServiceException(
-			    ValidationHelper
-				    .getMessageHolder("etravel.occupancy.paxCombination.exist"));
+		throw new ServiceException(
+			ValidationHelper
+				.getMessageHolder("etravel.occupancy.paxCombination.exist"));
 
-		} else {
-
-		    final RoomType roomType = this.roomTypeDAO
-			    .findById(occupancy.getRoomType().getId());
-
-		    occupancy.setRoomType(roomType);
-
-		    this.occupancyDAO.save(occupancy);
-		}
-
-	    } else {
-
-		final RoomType roomType = this.roomTypeDAO.findById(occupancy
-			.getRoomType().getId());
-
-		occupancy.setRoomType(roomType);
-		this.occupancyDAO.update(occupancy);
 	    }
+	    final RoomType roomType = this.roomTypeDAO.findById(occupancy
+		    .getRoomType().getId());
+
+	    occupancy.setRoomType(roomType);
+	    this.occupancyDAO.saveOrUpdate(occupancy);
 
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);

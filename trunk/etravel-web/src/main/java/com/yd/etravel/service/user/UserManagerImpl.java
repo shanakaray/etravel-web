@@ -150,10 +150,8 @@ public class UserManagerImpl implements IUserManager {
 
 	    if (user.getId() == null) {
 		user.encriptPW();
-		this.userDAO.save(user);
-	    } else {
-		this.userDAO.update(user);
 	    }
+	    this.userDAO.saveOrUpdate(user);
 
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
@@ -173,11 +171,10 @@ public class UserManagerImpl implements IUserManager {
 	    }
 
 	    if (user.getId() == null) {
-		this.userDAO.save(user);
 		user.encriptPW();
-	    } else {
-		this.userDAO.update(user);
 	    }
+	    this.userDAO.saveOrUpdate(user);
+
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
@@ -207,12 +204,11 @@ public class UserManagerImpl implements IUserManager {
 
 	    user.encriptPW();
 	    if (user.getId() == null) {
-		user = this.userDAO.save(user);
 		this.userNotificationMail.setParam(userProfile.getParams());
 		this.userNotificationMail.sendMail();
-	    } else {
-		user = this.userDAO.update(user);
 	    }
+	    user = this.userDAO.saveOrUpdate(user);
+
 	    userProfile.setFunctionKeySet(user.getFunctionSet());
 	    userProfile.setId(user.getId());
 
@@ -407,18 +403,18 @@ public class UserManagerImpl implements IUserManager {
     public void saveUserPassWord(final Long userId, final String oldPw,
 	    final String newPw) throws ServiceException {
 	try {
-	    final User usr = this.userDAO.findById(userId);
+	    final User user = this.userDAO.findById(userId);
 
-	    if (usr == null
-		    || !usr.getPassword().equals(
+	    if (user == null
+		    || !user.getPassword().equals(
 			    PasswordEncrypt.encrypt(oldPw.trim()))) {
 		throw new ServiceException(
 			ValidationHelper
 				.getMessageHolder("etravel.error.old.pw.invalid"));
 	    }
 
-	    usr.setPassword(PasswordEncrypt.encrypt(newPw.trim()));
-	    this.userDAO.update(usr);
+	    user.setPassword(PasswordEncrypt.encrypt(newPw.trim()));
+	    this.userDAO.saveOrUpdate(user);
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}
