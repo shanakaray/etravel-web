@@ -126,7 +126,8 @@ public class BookingManagerImpl implements IBookingManager {
 
 	    // Save booking
 
-	    Booking booking = this.bookingDAO.save(bookingDTO.getBooking());
+	    Booking booking = this.bookingDAO.saveOrUpdate(bookingDTO
+		    .getBooking());
 
 	    if (StringUtils.isEmpty(booking.getCode())) {
 		final StringBuilder sb = new StringBuilder().append('B');
@@ -136,7 +137,7 @@ public class BookingManagerImpl implements IBookingManager {
 		}
 		sb.append(booking.getId().toString());
 		booking.setCode(sb.toString());
-		booking = this.bookingDAO.save(booking);
+		booking = this.bookingDAO.saveOrUpdate(booking);
 	    }
 
 	    bookingDTO.setBooking(booking);
@@ -305,7 +306,7 @@ public class BookingManagerImpl implements IBookingManager {
 		payment.setTotalPrice(ammount);
 		this.bookingDAO.save(payment);
 	    }
-	    this.bookingDAO.save(booking);
+	    this.bookingDAO.saveOrUpdate(booking);
 
 	    sendConfirmation(
 		    new UserHelper().getUserProfile(null,
@@ -428,7 +429,7 @@ public class BookingManagerImpl implements IBookingManager {
 			IBooking.BOOKING_SATATUS_CANCELED);
 		booking.getBooking().setStatusDes(
 			IBooking.BOOKING_SATATUS_CANCELED_DES);
-		this.bookingDAO.update(booking.getBooking());
+		this.bookingDAO.saveOrUpdate(booking.getBooking());
 	    }
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);

@@ -59,21 +59,15 @@ public class SeasonManagerImpl implements ISeasonManager {
 			    ValidationHelper
 				    .getMessageHolder("etravel.season.dateRange.valid"));
 
-		} else {
-
-		    final Hotel hotel = this.hotelDAO.findById(season
-			    .getHotel().getId());
-		    season.setHotel(hotel);
-		    this.seasonDAO.save(season);
 		}
-
-	    } else {
-		final Hotel hotel = this.hotelDAO.findById(season.getHotel()
-			.getId());
-
-		season.setHotel(hotel);
-		this.seasonDAO.update(season);
 	    }
+
+	    final Hotel hotel = this.hotelDAO.findById(season.getHotel()
+		    .getId());
+
+	    season.setHotel(hotel);
+	    this.seasonDAO.saveOrUpdate(season);
+
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);
 	}

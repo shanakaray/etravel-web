@@ -92,11 +92,7 @@ public class RoomManagerImpl implements IRoomManager {
 				.getMessageHolder("etravel.hotel.room.exist"));
 	    }
 
-	    if (room.getId() == null) {
-		room = this.roomDAO.save(room);
-	    } else {
-		room = this.roomDAO.update(room);
-	    }
+	    room = this.roomDAO.saveOrUpdate(room);
 
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);

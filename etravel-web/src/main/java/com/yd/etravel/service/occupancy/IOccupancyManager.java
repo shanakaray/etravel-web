@@ -8,10 +8,6 @@ import java.util.List;
 import com.yd.etravel.domain.occupancy.Occupancy;
 import com.yd.etravel.service.exception.ServiceException;
 
-/**
- * @author XPPRESP3
- * 
- */
 public interface IOccupancyManager {
 
     public Occupancy save(final Occupancy occupancy) throws ServiceException;

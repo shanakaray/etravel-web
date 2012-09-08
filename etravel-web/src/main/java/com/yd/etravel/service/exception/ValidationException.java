@@ -12,6 +12,11 @@ import com.yd.etravel.service.message.UIMesssage;
 public class ValidationException extends ServiceException {
 
     /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+
+    /**
 	 * 
 	 */
     public ValidationException() {

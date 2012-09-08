@@ -110,12 +110,7 @@ public class HotelManagerImpl implements IHotelManager {
 		hotel.getSuperUser().clear();
 	    }
 	    hotel.setSuperUser(this.userDAO.findUsers(userSearchDTO));
-
-	    if (hotel.getId() == null) {
-		hotel = this.hotelDAO.save(hotel);
-	    } else {
-		hotel = this.hotelDAO.update(hotel);
-	    }
+	    hotel = this.hotelDAO.saveOrUpdate(hotel);
 
 	} catch (final PersistenceException e) {
 	    throw new ServiceException(null, e);

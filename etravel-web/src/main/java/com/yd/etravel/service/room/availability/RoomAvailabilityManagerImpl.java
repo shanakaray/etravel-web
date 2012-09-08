@@ -64,7 +64,8 @@ public class RoomAvailabilityManagerImpl implements IRoomAvailabilityManager {
 		    }
 
 		    roomAvail.setRoom(room);
-		    roomAvail = this.roomAvailabilityDAO.save(roomAvail);
+		    roomAvail = this.roomAvailabilityDAO
+			    .saveOrUpdate(roomAvail);
 
 		    boolean flag = true;
 
@@ -96,7 +97,7 @@ public class RoomAvailabilityManagerImpl implements IRoomAvailabilityManager {
 		final Room room = this.roomDAO.findById(roomAvail.getRoom()
 			.getId());
 		roomAvail.setRoom(room);
-		this.roomAvailabilityDAO.update(roomAvail);
+		this.roomAvailabilityDAO.saveOrUpdate(roomAvail);
 
 		final List<RoomDailyAvailability> availabilityList = this.roomAvailabilityDAO
 			.findAllRoomDailyAvailabilityByRoomAvailabilityId(roomAvail
