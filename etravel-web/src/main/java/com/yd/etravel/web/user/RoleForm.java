@@ -24,7 +24,7 @@ public class RoleForm extends BaseForm {
     private Long id;
     private String name;
     private String discription;
-    private List<Role> allRoles = Collections.EMPTY_LIST;
+    private List<Role> allRoles = Collections.emptyList();
     private boolean active;
 
     /**
@@ -87,7 +87,7 @@ public class RoleForm extends BaseForm {
 	this.name = ICommon.EMPTY_STRING;
 	this.discription = ICommon.EMPTY_STRING;
 	this.active = false;
-	this.allRoles = Collections.EMPTY_LIST;
+	this.allRoles = Collections.emptyList();
 	this.id = null;
     }
 

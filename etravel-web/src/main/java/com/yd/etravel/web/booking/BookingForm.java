@@ -226,7 +226,7 @@ public class BookingForm extends BaseForm {
 	this.uid = 0L;
 	this.guest = false;
 	this.newCustomer = false;
-	this.allCustomers = Collections.EMPTY_LIST;
+	this.allCustomers = Collections.emptyList();
     }
 
     public List<User> getAllCustomers() {

@@ -145,15 +145,15 @@ public class RoomForm extends BaseForm {
     @Override
     public void resetBean(final ActionMapping mapping,
 	    final HttpServletRequest request) {
-	this.hotelList = Collections.EMPTY_LIST;
-	this.roomTypeList = Collections.EMPTY_LIST;
-	this.roomList = Collections.EMPTY_LIST;
+	this.hotelList = Collections.emptyList();
+	this.roomTypeList = Collections.emptyList();
+	this.roomList = Collections.emptyList();
 	this.roomTypeId = 0L;
 	this.hotelId = 0L;
 	this.noOfRooms = 0;
 	this.id = 0L;
-	this.hotelMap = Collections.EMPTY_MAP;
-	this.roomTypeMap = Collections.EMPTY_MAP;
+	this.hotelMap = Collections.emptyMap();
+	this.roomTypeMap = Collections.emptyMap();
 	// this.name=EMPTY_STRING;
 
     }

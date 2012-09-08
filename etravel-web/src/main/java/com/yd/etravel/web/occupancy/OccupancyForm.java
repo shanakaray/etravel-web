@@ -30,8 +30,8 @@ public class OccupancyForm extends BaseForm {
     private int infant;
     private int totalPax;
     private boolean active;
-    private List<Occupancy> allOccupancy = Collections.EMPTY_LIST;
-    private List<RoomType> allRoomType = Collections.EMPTY_LIST;
+    private List<Occupancy> allOccupancy = Collections.emptyList();
+    private List<RoomType> allRoomType = Collections.emptyList();
     private Long[] roomTypeids;
 
     /**
@@ -219,8 +219,8 @@ public class OccupancyForm extends BaseForm {
 	this.totalPax = 0;
 	this.active = true;
 	this.id = null;
-	this.allOccupancy = Collections.EMPTY_LIST;
-	this.allRoomType = Collections.EMPTY_LIST;
+	this.allOccupancy = Collections.emptyList();
+	this.allRoomType = Collections.emptyList();
 
     }
 

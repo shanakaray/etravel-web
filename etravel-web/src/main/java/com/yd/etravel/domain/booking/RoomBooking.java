@@ -16,6 +16,8 @@ import com.yd.etravel.util.DateUtil;
 @Entity
 @Table(name = "T_ROOM_BOOKING")
 public class RoomBooking extends BaseObject {
+    private static final long serialVersionUID = -4428559965266056423L;
+
     @ManyToOne
     private HotelBooking hotelBooking;
 

@@ -35,7 +35,7 @@ public class SearchForm extends BaseForm {
 
     private SearchResultsDTO searchResultsDTO = new SearchResultsDTO();
 
-    private List<Hotel> allHotel = Collections.EMPTY_LIST;
+    private List<Hotel> allHotel = Collections.emptyList();
     // private Long[] hotelIds;
     private String[] commets;
     private Long[] extraItemId;
@@ -150,7 +150,7 @@ public class SearchForm extends BaseForm {
     @Override
     public void resetBean(final ActionMapping mapping,
 	    final HttpServletRequest request) {
-	this.allRoom = Collections.EMPTY_LIST;
+	this.allRoom = Collections.emptyList();
 	this.roomId = -1l;
 	this.hotelId = -1l;
     }

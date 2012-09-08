@@ -26,9 +26,8 @@ public class UserProfile implements IUserProfile {
     private String password;
 
     private Long id;
-
-    private Set<String> roles = Collections.EMPTY_SET;
-    private Set<String> functionKeySet = Collections.EMPTY_SET;
+    private Set<String> roles = Collections.emptySet();
+    private Set<String> functionKeySet = Collections.emptySet();
     private Map<Long, String> assignedHotels;
 
     public UserProfile() {

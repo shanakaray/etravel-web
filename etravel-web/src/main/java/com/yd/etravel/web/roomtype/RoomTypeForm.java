@@ -25,7 +25,7 @@ public class RoomTypeForm extends BaseForm {
     private String name;
     private String comments;
     private boolean active;
-    private List<RoomType> allRoomType = Collections.EMPTY_LIST;
+    private List<RoomType> allRoomType = Collections.emptyList();
     private int maxPassengers;
 
     /**
@@ -141,7 +141,7 @@ public class RoomTypeForm extends BaseForm {
 	this.comments = EMPTY_STRING;
 	this.active = true;
 	this.id = 0L;
-	this.allRoomType = Collections.EMPTY_LIST;
+	this.allRoomType = Collections.emptyList();
 	this.maxPassengers = 0;
     }
 

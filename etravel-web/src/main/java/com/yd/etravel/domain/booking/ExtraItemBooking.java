@@ -19,6 +19,8 @@ import com.yd.etravel.domain.extraitem.ExtraItem;
 @Table(name = "T_EXTRA_ITEM_BOOKING")
 public class ExtraItemBooking extends BaseObject {
 
+    private static final long serialVersionUID = 3158821878330977859L;
+
     @ManyToOne
     @ForeignKey(name = "FK_BOOKING")
     private Booking booking;

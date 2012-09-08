@@ -26,7 +26,7 @@ public class ImageForm extends BaseForm {
     @Override
     public void resetBean(final ActionMapping mapping,
 	    final HttpServletRequest request) {
-	this.images = Collections.EMPTY_LIST;
+	this.images = Collections.emptyList();
 	this.formFile = null;
 	this.pk = null;
 	this.object = StringUtils.EMPTY_STRING;
