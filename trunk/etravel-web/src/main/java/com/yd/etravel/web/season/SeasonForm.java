@@ -28,8 +28,8 @@ public class SeasonForm extends BaseForm {
     private String name;
     private String comments;
     private boolean active;
-    private List<Season> allSeason = Collections.EMPTY_LIST;
-    private List<Hotel> allHotel = Collections.EMPTY_LIST;
+    private List<Season> allSeason = Collections.emptyList();
+    private List<Hotel> allHotel = Collections.emptyList();
     private Long[] hotelIds;
 
     /**
@@ -131,8 +131,8 @@ public class SeasonForm extends BaseForm {
 	    final HttpServletRequest request) {
 	// TODO Auto-generated method stub
 
-	this.allSeason = Collections.EMPTY_LIST;
-	this.allHotel = Collections.EMPTY_LIST;
+	this.allSeason = Collections.emptyList();
+	this.allHotel = Collections.emptyList();
 	this.fromDate = EMPTY_STRING;
 	this.toDate = EMPTY_STRING;
 	this.comments = EMPTY_STRING;

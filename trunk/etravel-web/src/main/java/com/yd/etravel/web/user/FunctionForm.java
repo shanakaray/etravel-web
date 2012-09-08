@@ -18,19 +18,13 @@ import com.yd.etravel.domain.user.role.Function;
 import com.yd.etravel.domain.user.role.Role;
 import com.yd.etravel.web.common.BaseForm;
 
-/**
- * 
- * @author : Yohan Ranasinghe. Created Date : Oct 20, 2009 : 6:51:58 AM Type :
- *         com.yd.etravel.web.user.FunctionForm
- * 
- */
-
 public class FunctionForm extends BaseForm {
 
-    private List<Function> fuctionList = Collections.EMPTY_LIST;
+    private static final long serialVersionUID = 218962256958181018L;
+    private List<Function> fuctionList = Collections.emptyList();
     private Long roleId;
     private Long[] functionIds;
-    private List<Role> allRoles = Collections.EMPTY_LIST;
+    private List<Role> allRoles = Collections.emptyList();
     private Long[] allFunctionIds;
 
     /**
@@ -48,10 +42,10 @@ public class FunctionForm extends BaseForm {
     public Set<Function> getSelectedFuctionList() {
 	final Set<Function> sfunc = new HashSet<Function>();
 	if (getFunctionIds() != null) {
-	    for (final Long s : getFunctionIds()) {
-		for (final Function f : this.fuctionList) {
-		    if (f.getId().equals(s)) {
-			sfunc.add(f);
+	    for (final Long id : getFunctionIds()) {
+		for (final Function function : this.fuctionList) {
+		    if (function.getId().equals(id)) {
+			sfunc.add(function);
 			break;
 		    }
 		}
@@ -61,23 +55,23 @@ public class FunctionForm extends BaseForm {
     }
 
     public List<Function> getRemainFuctionList() {
-	final List<Function> sfunc = new ArrayList<Function>();
-	final Long stmp[] = getFunctionIds();
-	for (final Function f : this.fuctionList) {
+	final List<Function> returnList = new ArrayList<Function>();
+	final Long functionIds[] = getFunctionIds();
+	for (final Function function : this.fuctionList) {
 	    boolean flag = false;
-	    if (stmp != null) {
-		for (final Long s : stmp) {
-		    if (f.getId().equals(s)) {
+	    if (functionIds != null) {
+		for (final Long id : functionIds) {
+		    if (function.getId().equals(id)) {
 			flag = true;
 			break;
 		    }
 		}
 	    }
 	    if (!flag) {
-		sfunc.add(f);
+		returnList.add(function);
 	    }
 	}
-	return sfunc;
+	return returnList;
     }
 
     public void setFuctionList(final List<Function> fuctionList) {
@@ -131,21 +125,14 @@ public class FunctionForm extends BaseForm {
     @Override
     public void resetBean(final ActionMapping mapping,
 	    final HttpServletRequest request) {
-	this.fuctionList = Collections.EMPTY_LIST;
+	this.fuctionList = Collections.emptyList();
 	this.roleId = -1l;
 	this.functionIds = new Long[0];
 	this.allFunctionIds = new Long[0];
-	this.allRoles = Collections.EMPTY_LIST;
+	this.allRoles = Collections.emptyList();
 
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * com.yd.etravel.web.common.BaseForm#validateBean(org.apache.struts.action
-     * .ActionMapping, javax.servlet.http.HttpServletRequest)
-     */
     @Override
     public ActionErrors validateBean(final ActionMapping mapping,
 	    final HttpServletRequest request) {

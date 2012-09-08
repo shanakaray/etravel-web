@@ -19,6 +19,7 @@ import com.yd.etravel.domain.common.BaseObject;
  */
 public class BookingDTO extends BaseObject {
 
+    private static final long serialVersionUID = 773272035813874261L;
     private String bookingNumber;
     private BigDecimal totalPrice;
     private Long roomAvalabiltyId;

@@ -14,6 +14,7 @@ import com.yd.etravel.domain.common.BaseObject;
  */
 public class Content extends BaseObject {
 
+    private static final long serialVersionUID = 4577466925804323125L;
     private String text;
     private String url;
     private Category category;

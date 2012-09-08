@@ -169,8 +169,8 @@ public class UserForm extends BaseForm {
 	this.user = new User();
 	this.repassword = IConstants.ICommon.EMPTY_STRING;
 	this.roleIds = null;
-	this.allRoles = Collections.EMPTY_LIST;
-	this.allUsers = Collections.EMPTY_LIST;
+	this.allRoles = Collections.emptyList();
+	this.allUsers = Collections.emptyList();
 	this.passwordReset = false;
     }
 

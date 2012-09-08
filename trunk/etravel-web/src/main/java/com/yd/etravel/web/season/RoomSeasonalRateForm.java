@@ -218,9 +218,9 @@ public class RoomSeasonalRateForm extends BaseForm {
 	    final HttpServletRequest request) {
 	// TODO Auto-generated method stub
 
-	this.allSeason = Collections.EMPTY_LIST;
-	this.allRoom = Collections.EMPTY_LIST;
-	this.allRoomSeasonalRate = Collections.EMPTY_LIST;
+	this.allSeason = Collections.emptyList();
+	this.allRoom = Collections.emptyList();
+	this.allRoomSeasonalRate = Collections.emptyList();
 	this.comments = EMPTY_STRING;
 	this.adultCost = new BigDecimal(0.0);
 	this.childCost = new BigDecimal(0.0);
@@ -229,7 +229,7 @@ public class RoomSeasonalRateForm extends BaseForm {
 	this.hotelId = 0L;
 	this.active = true;
 	this.id = null;
-	this.hotelList = Collections.EMPTY_LIST;
+	this.hotelList = Collections.emptyList();
 	this.roomId = 0L;
 	this.seasonId = 0L;
 

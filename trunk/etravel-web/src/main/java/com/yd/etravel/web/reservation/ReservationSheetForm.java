@@ -125,9 +125,9 @@ public class ReservationSheetForm extends BaseForm {
     @Override
     public void resetBean(final ActionMapping mapping,
 	    final HttpServletRequest request) {
-	this.hotelList = Collections.EMPTY_LIST;
-	this.roomAvailabilitySet = Collections.EMPTY_SET;
-	this.bookingList = Collections.EMPTY_LIST;
+	this.hotelList = Collections.emptyList();
+	this.roomAvailabilitySet = Collections.emptySet();
+	this.bookingList = Collections.emptyList();
 	this.hotelId = 1L;
 	this.startDate = EMPTY_STRING;
 	this.endDate = EMPTY_STRING;

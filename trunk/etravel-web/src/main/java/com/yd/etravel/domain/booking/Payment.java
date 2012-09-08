@@ -15,6 +15,9 @@ import com.yd.etravel.domain.common.BaseObject;
 @Entity
 @Table(name = "T_PAYMENT")
 public class Payment extends BaseObject {
+
+    private static final long serialVersionUID = -2912368260338991279L;
+
     @ManyToOne
     private Booking booking;
 

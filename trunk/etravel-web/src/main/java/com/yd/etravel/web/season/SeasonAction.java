@@ -232,7 +232,7 @@ public class SeasonAction extends BaseAction {
 	final SeasonForm seasonForm = (SeasonForm) form;
 
 	seasonForm.setAllSeason(getSeasonManager().findAllSeasonWithHotel());
-	List<Hotel> allHotel = new ArrayList();
+	List<Hotel> allHotel = new ArrayList<Hotel>();
 	allHotel = getHotelManager().findAllActiveHotels();
 	seasonForm.setAllHotel(allHotel);
 	request.getSession().setAttribute("hotelId", "");

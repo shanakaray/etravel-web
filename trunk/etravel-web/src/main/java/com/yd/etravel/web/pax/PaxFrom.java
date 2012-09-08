@@ -164,10 +164,10 @@ public class PaxFrom extends BaseForm {
 	this.adultMin = 0;
 
 	this.hotelId = 0L;
-	this.hotelList = Collections.EMPTY_LIST;
+	this.hotelList = Collections.emptyList();
 
-	this.paxList = Collections.EMPTY_LIST;
-	this.hotelNameMap = Collections.EMPTY_MAP;
+	this.paxList = Collections.emptyList();
+	this.hotelNameMap = Collections.emptyMap();
 	this.id = 0L;
     }
 

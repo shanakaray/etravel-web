@@ -148,8 +148,8 @@ public class HotelForm extends BaseForm {
     @Override
     public void resetBean(final ActionMapping mapping,
 	    final HttpServletRequest request) {
-	this.adminList = Collections.EMPTY_LIST;
-	this.hotelList = Collections.EMPTY_LIST;
+	this.adminList = Collections.emptyList();
+	this.hotelList = Collections.emptyList();
 	this.address = EMPTY_STRING;
 	this.city = EMPTY_STRING;
 	this.contact = EMPTY_STRING;
