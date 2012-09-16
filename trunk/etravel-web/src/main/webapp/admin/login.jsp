@@ -95,7 +95,7 @@ body,td,th {
                               <tr>
                                 <td>&nbsp;</td>
                                 <td align="left"><%--<img src="../images/btnSubmit.jpg" border="0">--%>
-                                  <html:submit></html:submit></td>
+                                  <html:submit styleId="button"></html:submit></td>
                                 <td></td>
                               </tr>
                             </table></td>
