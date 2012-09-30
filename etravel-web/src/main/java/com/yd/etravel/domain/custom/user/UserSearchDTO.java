@@ -3,11 +3,13 @@
  */
 package com.yd.etravel.domain.custom.user;
 
+import java.io.Serializable;
+
 /**
  * @author yora
  * 
  */
-public class UserSearchDTO {
+public class UserSearchDTO implements Serializable {
 
     private java.util.Set<Long> roleIds;
     private java.util.Set<String> userNameSet;

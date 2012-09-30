@@ -3,6 +3,8 @@
  */
 package com.yd.etravel.domain.custom.search;
 
+import java.io.Serializable;
+
 import com.yd.etravel.domain.hotel.Hotel;
 import com.yd.etravel.domain.room.Room;
 import com.yd.etravel.domain.room.availability.RoomAvailability;
@@ -14,7 +16,7 @@ import com.yd.etravel.domain.season.RoomSeasonalRate;
  * 
  *         com.yd.etravel.domain.custom.search.RoomDTO
  */
-public class RoomDTO {
+public class RoomDTO implements Serializable {
     private Long id; // This is equal to roomAvailability id
     private Room room;
     private RoomType roomType;

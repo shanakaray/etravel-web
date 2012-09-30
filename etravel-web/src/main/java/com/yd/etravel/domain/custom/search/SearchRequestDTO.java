@@ -1,5 +1,6 @@
 package com.yd.etravel.domain.custom.search;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -8,7 +9,7 @@ import com.yd.etravel.util.DateUtil;
 /**
  * @author Dharshana com.yd.etravel.domain.custom.search.SearchRequestDTO
  */
-public class SearchRequestDTO {
+public class SearchRequestDTO implements Serializable {
 
     private Long hotelId;
     private String hotelName;

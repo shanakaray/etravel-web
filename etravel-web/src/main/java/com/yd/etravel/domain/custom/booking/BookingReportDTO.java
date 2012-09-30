@@ -1,5 +1,6 @@
 package com.yd.etravel.domain.custom.booking;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
@@ -8,7 +9,7 @@ import com.yd.etravel.util.DateUtil;
 import com.yd.etravel.util.IConstants;
 import com.yd.etravel.util.StringUtils;
 
-public class BookingReportDTO {
+public class BookingReportDTO implements Serializable {
     private Long bookingId;
     private Long roomId;
     private Long roomTypeId;

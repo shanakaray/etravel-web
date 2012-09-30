@@ -3,6 +3,7 @@
  */
 package com.yd.etravel.domain.custom.booking;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.List;
  * 
  */
 
-public class BookingReportSearchDTO {
+public class BookingReportSearchDTO implements Serializable {
 
     private Long roomId;
     private Long roomTypeId;

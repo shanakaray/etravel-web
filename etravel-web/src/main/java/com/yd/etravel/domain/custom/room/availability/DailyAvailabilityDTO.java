@@ -3,6 +3,7 @@
  */
 package com.yd.etravel.domain.custom.room.availability;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import com.yd.etravel.util.DateUtil;
@@ -14,7 +15,7 @@ import com.yd.etravel.util.DateUtil;
  * 
  */
 
-public class DailyAvailabilityDTO {
+public class DailyAvailabilityDTO implements Serializable {
     private Long id;
     private Date date;
     private Date createdDate;

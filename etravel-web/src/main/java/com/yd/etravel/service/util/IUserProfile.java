@@ -1,9 +1,10 @@
 package com.yd.etravel.service.util;
 
+import java.io.Serializable;
 import java.util.Map;
 import java.util.Set;
 
-public interface IUserProfile {
+public interface IUserProfile extends Serializable {
     public String getPassword();
 
     public void setPassword(String username);

@@ -3,12 +3,14 @@
  */
 package com.yd.etravel.domain.custom.room;
 
+import java.io.Serializable;
+
 /**
  * @author : Yohan Ranasinghe. Created Date : Feb 1, 2009 : 11:45:40 AM Type :
  *         com.yd.etravel.domain.custom.room.RoomSearchDTO
  * 
  */
-public class RoomSearchDTO {
+public class RoomSearchDTO implements Serializable {
 
     private Integer noOfRoom;
     private Long roomTypeId;
