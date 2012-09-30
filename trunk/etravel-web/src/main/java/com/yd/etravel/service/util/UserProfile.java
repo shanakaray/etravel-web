@@ -3,6 +3,7 @@
  */
 package com.yd.etravel.service.util;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,7 +15,7 @@ import com.yd.etravel.util.StringUtils;
  * @author yora
  * 
  */
-public class UserProfile implements IUserProfile {
+public class UserProfile implements IUserProfile, Serializable {
 
     private String username;
     private String firstname;

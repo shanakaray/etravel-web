@@ -3,6 +3,7 @@
  */
 package com.yd.etravel.domain.custom.search;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
  * @author Dharshana
  * 
  */
-public class SearchResultsDTO {
+public class SearchResultsDTO implements Serializable {
 
     private List<RoomDTO> roomDTO = new ArrayList<RoomDTO>();
     private List<ExtraItemDTO> extraItemDTO = new ArrayList<ExtraItemDTO>();
