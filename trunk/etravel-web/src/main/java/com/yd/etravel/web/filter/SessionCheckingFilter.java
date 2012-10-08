@@ -52,6 +52,8 @@ public class SessionCheckingFilter implements Filter {
 	String uriend = "";
 	if (valStrings != null) {
 	    uriend = valStrings[valStrings.length - 1];
+	} else {
+	    uriend = URI;
 	}
 
 	if (urls.contains(uriend)) {
