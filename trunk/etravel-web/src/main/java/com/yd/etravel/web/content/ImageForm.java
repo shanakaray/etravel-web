@@ -90,8 +90,7 @@ public class ImageForm extends BaseForm {
 
 	if (this.formFile == null || this.formFile.getFileSize() < 1) {
 	    addErrors(errors, "etravel.error.image.required");
-	}
-	if (this.formFile != null
+	} else if (this.formFile != null
 		&& !this.formFile.getContentType().startsWith("image")) {
 	    addErrors(errors, "etravel.error.image.invalid.contenttype");
 	}

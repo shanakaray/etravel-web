@@ -509,7 +509,7 @@
 		</action>
 		<!-- Image -->
 		<action input="/admin/initupload.do"  name="imageForm" parameter="process" path="/admin/upload"
-			scope="request" validate="false"
+			scope="request" validate="true"
 			type="org.springframework.web.struts.DelegatingActionProxy">
 			<forward name="success" path="content.image" redirect="false" />
 		</action>
