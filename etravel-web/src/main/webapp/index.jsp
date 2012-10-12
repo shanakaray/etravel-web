@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>~ Tharu Villas ~</title>
+<title></title>
 <link href="./css/tv.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -46,16 +46,14 @@
                   <td colspan="2" class="imgFlash"></td>
                 </tr>
                 <tr>
-                  <td colspan="2" style="padding:10px;"><span class="txtGreen">Tharu villas, sri lanka</span> - small botique luxury and style in sri lanka hotels -  a beach resort , a river side villa, a city hotel and a heritage house. <br />
-                    featured in the <span class="txtGreen">conde nast traveler, hip hotels </span> and <span class="txtGreen">the hip hotels atlas,</span> herbert ypma's  series of fun, stylish, independent botique hotels.</td>
-                </tr>
+                  <td colspan="2" style="padding:10px;"></tr>
                 <tr>
                   <td colspan="2" style="height:100%;"></td>
                 </tr>
               </table>
             </div>
             <div style=" width:64px; float:left;  height:20px; background-image:url(./images/imgSound.jpg)"></div>
-            <div style="position:relative; direction:rtl; width:500px;  float:right; height:20px; padding-top:2px;" align="right" >Copyright @ tharu 2009. All Rights Reserved | Designed & Developed by EFutures (pvt) ltd</div></td>
+            <div style="position:relative; direction:rtl; width:500px;  float:right; height:20px; padding-top:2px;" align="right" ></div></td>
         </tr>
       </table></td>
     <td>&nbsp;</td>

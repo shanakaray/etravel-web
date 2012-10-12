@@ -31,6 +31,17 @@ public class Image extends BaseObject {
     @Column
     private String type;
 
+    @Column
+    private int sequence;
+
+    public int getSequence() {
+	return this.sequence;
+    }
+
+    public void setSequence(final int sequence) {
+	this.sequence = sequence;
+    }
+
     public byte[] getSource() {
 	return this.source;
     }

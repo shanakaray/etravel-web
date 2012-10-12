@@ -45,41 +45,58 @@ public class SessionCheckingFilter implements Filter {
     public void doFilter(final ServletRequest request,
 	    final ServletResponse response, final FilterChain filterChain)
 	    throws IOException, ServletException {
-	final String URI = ((HttpServletRequest) request).getRequestURI();
+	final String url = ((HttpServletRequest) request).getRequestURI();
 	final HttpSession session = ((HttpServletRequest) request)
 		.getSession(false);
-	final String[] valStrings = URI.split(APP_NAME);
-	String uriend = "";
-	if (valStrings != null) {
-	    uriend = valStrings[valStrings.length - 1];
+	final String[] valStrings = url.split(APP_NAME);
+	String urlEnd = "";
+	boolean hasAppname = true;
+	if (valStrings != null && valStrings.length > 1) {
+	    urlEnd = valStrings[valStrings.length - 1];
 	} else {
-	    uriend = URI;
+	    urlEnd = url;
+	    hasAppname = false;
 	}
 
-	if (urls.contains(uriend)) {
+	if (urls.contains(urlEnd)) {
 	    filterChain.doFilter(request, response);
 	    return;
 
-	} else if (URI.startsWith(APP_NAME + "/admin/")) {
-	    if (session == null
-		    || session.getAttribute(IConstants.IUser.USER_PROFILE) == null) {
-		((HttpServletResponse) response).sendRedirect(APP_NAME
-			+ "/admin/login.jsp");
-		return;
-	    }
-	} else if (URI.startsWith(APP_NAME + "/customer/")) {
-	    if (session == null
-		    || session.getAttribute(IConstants.IUser.USER_PROFILE) == null) {
-		((HttpServletResponse) response).sendRedirect(APP_NAME
-			+ "/customer/initCustomerCreate.do");
-		return;
-	    } else {
-		filterChain.doFilter(request, response);
-		return;
+	} else {
+	    final HttpServletResponse httpServletResponse = (HttpServletResponse) response;
+	    if (url.contains("/admin/")) {
+		if (isSessionNull(session)) {
+		    redirect("/admin/login.jsp", hasAppname,
+			    httpServletResponse);
+		    return;
+		}
+	    } else if (url.contains("/customer/")) {
+		if (isSessionNull(session)) {
+		    redirect("/customer/initCustomerCreate.do", hasAppname,
+			    httpServletResponse);
+		    return;
+		} else {
+		    filterChain.doFilter(request, response);
+		    return;
+		}
 	    }
 	}
 	filterChain.doFilter(request, response);
 	return;
+    }
+
+    protected void redirect(final String url, final boolean hasAppname,
+	    final HttpServletResponse response) throws IOException {
+	response.sendRedirect(getUrl(url, hasAppname));
+    }
+
+    protected boolean isSessionNull(final HttpSession session) {
+	return session == null
+		|| session.getAttribute(IConstants.IUser.USER_PROFILE) == null;
+    }
+
+    private String getUrl(final String uri, final boolean hasAppname) {
+	return hasAppname ? APP_NAME + uri : uri;
     }
 
     @Override
