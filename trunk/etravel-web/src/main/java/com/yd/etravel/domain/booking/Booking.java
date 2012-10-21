@@ -213,10 +213,6 @@ public class Booking extends BaseObject {
 		this.statusDes = statusDes;
 	}
 
-	/**
-	 * @param totalCost
-	 *            the totalCost to set
-	 */
 	public void setTotalCost(final BigDecimal totalCost) {
 		this.totalCost = totalCost;
 	}
