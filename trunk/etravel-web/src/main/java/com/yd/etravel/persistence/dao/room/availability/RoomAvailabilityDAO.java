@@ -56,54 +56,6 @@ public class RoomAvailabilityDAO extends BaseDAO<RoomAvailability> implements
 	public RoomAvailabilityDAO() {
 	}
 
-	@Override
-	public boolean isDataRangeValid(final Long roomId, final Date fromDate,
-			final Date toDate) throws PersistenceException {
-		try {
-
-			final Query query = getCurrentSession().createQuery(
-					IS_DATE_RANGE_VALID.toString());
-			query.setParameter(0, fromDate);
-			query.setParameter(1, fromDate);
-			query.setParameter(2, toDate);
-			query.setParameter(3, toDate);
-			query.setParameter(4, roomId);
-
-			return query.list().isEmpty();
-		} catch (final HibernateException e) {
-			throw new PersistenceException(e);
-		}
-	}
-
-	@Override
-	@Deprecated
-	/**
-	 * use List<RoomAvailabilityDTO> findAllRoomAvailabilityDTO(Long hotelId)
-	 * instead
-	 */
-	public List<RoomAvailability> findAllRoomAvailabilityWithRoomAndOccu(
-			final Long hotelId) throws PersistenceException {
-		try {
-			final StringBuilder sb = new StringBuilder(
-
-			"SELECT roomAvailability FROM RoomAvailability as roomAvailability ")
-					.append("join fetch  roomAvailability.room as room join fetch room.roomType as roomType ")
-					.append("join fetch room.hotel as hot WHERE 1=1 ");
-
-			if (hotelId != null) {
-				sb.append(" AND hot.id=:hid ");
-			}
-			final Query query = getCurrentSession().createQuery(sb.toString());
-			if (hotelId != null) {
-				query.setParameter("hid", hotelId);
-			}
-
-			return query.list();
-		} catch (final HibernateException e) {
-			throw new PersistenceException(e);
-		}
-	}
-
 	/**
 	 * 
 	 * 
@@ -150,6 +102,49 @@ public class RoomAvailabilityDAO extends BaseDAO<RoomAvailability> implements
 		}
 	}
 
+	@Override
+	@Deprecated
+	/**
+	 * use List<RoomAvailabilityDTO> findAllRoomAvailabilityDTO(Long hotelId)
+	 * instead
+	 */
+	public List<RoomAvailability> findAllRoomAvailabilityWithRoomAndOccu(
+			final Long hotelId) throws PersistenceException {
+		try {
+			final StringBuilder sb = new StringBuilder(
+
+			"SELECT roomAvailability FROM RoomAvailability as roomAvailability ")
+					.append("join fetch  roomAvailability.room as room join fetch room.roomType as roomType ")
+					.append("join fetch room.hotel as hot WHERE 1=1 ");
+
+			if (hotelId != null) {
+				sb.append(" AND hot.id=:hid ");
+			}
+			final Query query = getCurrentSession().createQuery(sb.toString());
+			if (hotelId != null) {
+				query.setParameter("hid", hotelId);
+			}
+
+			return query.list();
+		} catch (final HibernateException e) {
+			throw new PersistenceException(e);
+		}
+	}
+
+	@Override
+	public List<RoomDailyAvailability> findAllRoomDailyAvailability()
+			throws PersistenceException {
+		try {
+			final Query query = getCurrentSession().createQuery(
+					FIND_ALL_DAILY_ROOM_AVAILABILITY.toString());
+
+			return query.list();
+
+		} catch (final HibernateException e) {
+			throw new PersistenceException(e);
+		}
+	}
+
 	// Daily Availabilty
 
 	@Override
@@ -170,20 +165,6 @@ public class RoomAvailabilityDAO extends BaseDAO<RoomAvailability> implements
 	}
 
 	@Override
-	public List<RoomDailyAvailability> findAllRoomDailyAvailability()
-			throws PersistenceException {
-		try {
-			final Query query = getCurrentSession().createQuery(
-					FIND_ALL_DAILY_ROOM_AVAILABILITY.toString());
-
-			return query.list();
-
-		} catch (final HibernateException e) {
-			throw new PersistenceException(e);
-		}
-	}
-
-	@Override
 	public List<RoomDailyAvailability> findAllRoomDailyAvailabilityByRoomAvailabilityId(
 			final Long id) throws PersistenceException {
 		try {
@@ -196,25 +177,6 @@ public class RoomAvailabilityDAO extends BaseDAO<RoomAvailability> implements
 
 		} catch (final HibernateException e) {
 			throw new PersistenceException(e);
-		}
-	}
-
-	@Override
-	public RoomAvailability findRoomAvailabilityById(final Long id)
-			throws ServiceException, PersistenceException {
-		try {
-			final Query query = getCurrentSession().createQuery(
-					FIND_ALL_ROOM_AVAILABILITY_WITH_ROOM_AND_ROOM_TYPE_BY_ID
-							.toString());
-			query.setParameter(0, id);
-
-			final List<RoomAvailability> list = query.list();
-			return !list.isEmpty() ? (RoomAvailability) list.get(0)
-					: new RoomAvailability();
-
-		} catch (final HibernateException e) {
-			throw new PersistenceException(e);
-
 		}
 	}
 
@@ -270,19 +232,46 @@ public class RoomAvailabilityDAO extends BaseDAO<RoomAvailability> implements
 	}
 
 	@Override
+	public RoomAvailability findRoomAvailabilityById(final Long id)
+			throws ServiceException, PersistenceException {
+		try {
+			final Query query = getCurrentSession().createQuery(
+					FIND_ALL_ROOM_AVAILABILITY_WITH_ROOM_AND_ROOM_TYPE_BY_ID
+							.toString());
+			query.setParameter(0, id);
+
+			final List<RoomAvailability> list = query.list();
+			return !list.isEmpty() ? (RoomAvailability) list.get(0)
+					: new RoomAvailability();
+
+		} catch (final HibernateException e) {
+			throw new PersistenceException(e);
+
+		}
+	}
+
+	@Override
 	protected Class getEntityClass() {
 		return RoomAvailability.class;
 	}
 
 	@Override
-	public void update(final RoomDailyAvailability rd)
-			throws PersistenceException {
+	public boolean isDataRangeValid(final Long roomId, final Date fromDate,
+			final Date toDate) throws PersistenceException {
 		try {
-			getCurrentSession().update(rd);
+
+			final Query query = getCurrentSession().createQuery(
+					IS_DATE_RANGE_VALID.toString());
+			query.setParameter(0, fromDate);
+			query.setParameter(1, fromDate);
+			query.setParameter(2, toDate);
+			query.setParameter(3, toDate);
+			query.setParameter(4, roomId);
+
+			return query.list().isEmpty();
 		} catch (final HibernateException e) {
 			throw new PersistenceException(e);
 		}
-
 	}
 
 	@Override
@@ -290,6 +279,17 @@ public class RoomAvailabilityDAO extends BaseDAO<RoomAvailability> implements
 			throws PersistenceException {
 		try {
 			getCurrentSession().save(dailyAvailability);
+		} catch (final HibernateException e) {
+			throw new PersistenceException(e);
+		}
+
+	}
+
+	@Override
+	public void update(final RoomDailyAvailability rd)
+			throws PersistenceException {
+		try {
+			getCurrentSession().update(rd);
 		} catch (final HibernateException e) {
 			throw new PersistenceException(e);
 		}

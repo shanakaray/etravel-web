@@ -133,8 +133,9 @@ public class ReservationSheetAction extends BaseAction {
 		} else {
 			resForm.setHotelList(getHotelManager().findAllActiveHotels());
 		}
-		if (resForm.getHotelId() != null && resForm.getEndDateToDate() != null
-				&& resForm.getStartDateToDate() != null) {
+		if ((resForm.getHotelId() != null)
+				&& (resForm.getEndDateToDate() != null)
+				&& (resForm.getStartDateToDate() != null)) {
 			final RoomAvailabilityDTO dto = new RoomAvailabilityDTO();
 			dto.setHotelId(resForm.getHotelId());
 			dto.setFromDate(resForm.getStartDateToDate());
@@ -230,6 +231,14 @@ public class ReservationSheetAction extends BaseAction {
 		return mapping.findForward(SUCCESS);
 	}
 
+	@Override
+	public ActionForward search(final ActionMapping mapping,
+			final ActionForm form, final HttpServletRequest request,
+			final HttpServletResponse response) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -258,14 +267,6 @@ public class ReservationSheetAction extends BaseAction {
 			final ActionForm form, final HttpServletRequest request,
 			final HttpServletResponse response) throws Exception {
 		return mapping.findForward(SUCCESS);
-	}
-
-	@Override
-	public ActionForward search(final ActionMapping mapping,
-			final ActionForm form, final HttpServletRequest request,
-			final HttpServletResponse response) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

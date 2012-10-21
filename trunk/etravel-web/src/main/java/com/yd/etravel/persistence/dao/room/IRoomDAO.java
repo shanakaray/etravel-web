@@ -17,13 +17,13 @@ import com.yd.etravel.persistence.exception.PersistenceException;
  */
 public interface IRoomDAO extends IBaseDAO<Room> {
 
-	public boolean isExist(Long hotelId, Long roomTypeId, Long id)
+	public List<Room> findAllRoomWithRoomType(Long hotelId)
 			throws PersistenceException;
 
 	public List<Room> findRooms(RoomSearchDTO roomSearchDTO)
 			throws PersistenceException;
 
-	public List<Room> findAllRoomWithRoomType(Long hotelId)
+	public boolean isExist(Long hotelId, Long roomTypeId, Long id)
 			throws PersistenceException;
 
 }

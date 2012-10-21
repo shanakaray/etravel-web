@@ -23,6 +23,11 @@ import com.yd.etravel.util.PasswordEncrypt;
 @Table(name = "T_USER")
 public class User extends BaseObject {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9107128069100674032L;
+
 	@ManyToMany(cascade = { javax.persistence.CascadeType.ALL })
 	@JoinTable(joinColumns = @JoinColumn(name = "USER_ID", nullable = false), inverseJoinColumns = @JoinColumn(name = "ROLE_ID", nullable = false), uniqueConstraints = @UniqueConstraint(columnNames = {
 			"USER_ID", "ROLE_ID" }))
@@ -46,69 +51,40 @@ public class User extends BaseObject {
 	@Column
 	private String lastName;
 
-	public String getPassword() {
-		return this.password;
-	}
-
-	public void setPassword(final String password) {
-		this.password = password;
+	public void encriptPW() {
+		this.password = PasswordEncrypt.encrypt(this.password);
 	}
 
 	public String getAddress() {
 		return this.address;
 	}
 
-	public void setAddress(final String address) {
-		this.address = address;
-	}
-
 	public String getContact() {
 		return this.contact;
-	}
-
-	public void setContact(final String contact) {
-		this.contact = contact;
 	}
 
 	public String getEmail() {
 		return this.email;
 	}
 
-	public void setEmail(final String email) {
-		this.email = email;
-	}
-
 	public String getFirstName() {
 		return this.firstName;
 	}
 
-	public void setFirstName(final String firstName) {
-		this.firstName = firstName;
+	public Set<String> getFunctionSet() {
+		final Set<String> key = new HashSet<String>();
+		for (final Role role : getRoles()) {
+			key.addAll(role.getFunctionNames());
+		}
+		return key;
 	}
 
 	public String getLastName() {
 		return this.lastName;
 	}
 
-	public void setLastName(final String lastName) {
-		this.lastName = lastName;
-	}
-
-	public List<Role> getRoles() {
-		return this.roles;
-	}
-
-	public void setRoles(final List<Role> roles) {
-		this.roles = roles;
-	}
-
-	public Set<String> getRoleNames() {
-		final Set<String> set = new HashSet<String>();
-		final List<Role> roleList = getRoles();
-		for (final Role role : roleList) {
-			set.add(role.getName());
-		}
-		return set;
+	public String getPassword() {
+		return this.password;
 	}
 
 	public Set<Long> getRoleIds() {
@@ -120,6 +96,19 @@ public class User extends BaseObject {
 		return set;
 	}
 
+	public Set<String> getRoleNames() {
+		final Set<String> set = new HashSet<String>();
+		final List<Role> roleList = getRoles();
+		for (final Role role : roleList) {
+			set.add(role.getName());
+		}
+		return set;
+	}
+
+	public List<Role> getRoles() {
+		return this.roles;
+	}
+
 	public boolean hasFunction(final String key) {
 		for (final Role role : getRoles()) {
 			if (role.hasFunction(key)) {
@@ -129,16 +118,32 @@ public class User extends BaseObject {
 		return false;
 	}
 
-	public Set<String> getFunctionSet() {
-		final Set<String> key = new HashSet<String>();
-		for (final Role role : getRoles()) {
-			key.addAll(role.getFunctionNames());
-		}
-		return key;
+	public void setAddress(final String address) {
+		this.address = address;
 	}
 
-	public void encriptPW() {
-		this.password = PasswordEncrypt.encrypt(this.password);
+	public void setContact(final String contact) {
+		this.contact = contact;
+	}
+
+	public void setEmail(final String email) {
+		this.email = email;
+	}
+
+	public void setFirstName(final String firstName) {
+		this.firstName = firstName;
+	}
+
+	public void setLastName(final String lastName) {
+		this.lastName = lastName;
+	}
+
+	public void setPassword(final String password) {
+		this.password = password;
+	}
+
+	public void setRoles(final List<Role> roles) {
+		this.roles = roles;
 	}
 
 }

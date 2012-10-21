@@ -198,6 +198,14 @@ public class RoomDailyAvailabilityAction extends BaseAction {
 		return null;
 	}
 
+	@Override
+	public ActionForward search(final ActionMapping mapping,
+			final ActionForm form, final HttpServletRequest request,
+			final HttpServletResponse response) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -224,14 +232,6 @@ public class RoomDailyAvailabilityAction extends BaseAction {
 	 */
 	@Override
 	protected ActionForward sort(final ActionMapping mapping,
-			final ActionForm form, final HttpServletRequest request,
-			final HttpServletResponse response) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ActionForward search(final ActionMapping mapping,
 			final ActionForm form, final HttpServletRequest request,
 			final HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub

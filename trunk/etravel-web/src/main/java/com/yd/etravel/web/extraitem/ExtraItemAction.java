@@ -89,8 +89,8 @@ public class ExtraItemAction extends BaseAction {
 		item.setCost(extraItemForm.getCost());
 		item.setCurrency(extraItemForm.getCurrency());
 		item.setActive(true);
-		if (extraItemForm.getHotelId() != null
-				&& extraItemForm.getHotelId().length > 0) {
+		if ((extraItemForm.getHotelId() != null)
+				&& (extraItemForm.getHotelId().length > 0)) {
 			item.setHotel(getHotelManager().findHotelsById(
 					extraItemForm.getHotelId()));
 		}
@@ -236,6 +236,14 @@ public class ExtraItemAction extends BaseAction {
 		return null;
 	}
 
+	@Override
+	public ActionForward search(final ActionMapping mapping,
+			final ActionForm form, final HttpServletRequest request,
+			final HttpServletResponse response) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -262,14 +270,6 @@ public class ExtraItemAction extends BaseAction {
 	 */
 	@Override
 	protected ActionForward sort(final ActionMapping mapping,
-			final ActionForm form, final HttpServletRequest request,
-			final HttpServletResponse response) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ActionForward search(final ActionMapping mapping,
 			final ActionForm form, final HttpServletRequest request,
 			final HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub

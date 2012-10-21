@@ -22,6 +22,10 @@ import com.yd.etravel.web.common.BaseForm;
  */
 public class HotelForm extends BaseForm {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5184424878374872721L;
 	private String name;
 	private String address;
 	private String city;
@@ -42,100 +46,52 @@ public class HotelForm extends BaseForm {
 		// TODO Auto-generated constructor stub
 	}
 
-	public String getName() {
-		return this.name;
-	}
-
-	public void setName(final String name) {
-		this.name = name;
-	}
-
 	public String getAddress() {
 		return this.address;
-	}
-
-	public void setAddress(final String address) {
-		this.address = address;
-	}
-
-	public String getCity() {
-		return this.city;
-	}
-
-	public void setCity(final String city) {
-		this.city = city;
-	}
-
-	public String getContact() {
-		return this.contact;
-	}
-
-	public void setContact(final String contact) {
-		this.contact = contact;
-	}
-
-	public String getEmail() {
-		return this.email;
-	}
-
-	public void setEmail(final String email) {
-		this.email = email;
-	}
-
-	public int getRating() {
-		return this.rating;
-	}
-
-	public void setRating(final int rating) {
-		this.rating = rating;
-	}
-
-	public Long[] getSuperUserId() {
-		return this.superUserId;
-	}
-
-	public void setSuperUserId(final Long[] superUserId) {
-		this.superUserId = superUserId;
 	}
 
 	public List<User> getAdminList() {
 		return this.adminList;
 	}
 
-	public void setAdminList(final List<User> adminList) {
-		this.adminList = adminList;
+	public String getCity() {
+		return this.city;
+	}
+
+	public String getContact() {
+		return this.contact;
 	}
 
 	public String getCountry() {
 		return this.country;
 	}
 
-	public void setCountry(final String country) {
-		this.country = country;
+	public String getEmail() {
+		return this.email;
 	}
 
 	public List<Hotel> getHotelList() {
 		return this.hotelList;
 	}
 
-	public void setHotelList(final List<Hotel> hotelList) {
-		this.hotelList = hotelList;
-	}
-
-	public boolean isActive() {
-		return this.active;
-	}
-
-	public void setActive(final boolean active) {
-		this.active = active;
-	}
-
 	public Long getId() {
 		return this.id;
 	}
 
-	public void setId(final Long id) {
-		this.id = id;
+	public String getName() {
+		return this.name;
+	}
+
+	public int getRating() {
+		return this.rating;
+	}
+
+	public Long[] getSuperUserId() {
+		return this.superUserId;
+	}
+
+	public boolean isActive() {
+		return this.active;
 	}
 
 	/*
@@ -160,6 +116,54 @@ public class HotelForm extends BaseForm {
 		this.superUserId = null;
 		this.active = true;
 		this.id = null;
+	}
+
+	public void setActive(final boolean active) {
+		this.active = active;
+	}
+
+	public void setAddress(final String address) {
+		this.address = address;
+	}
+
+	public void setAdminList(final List<User> adminList) {
+		this.adminList = adminList;
+	}
+
+	public void setCity(final String city) {
+		this.city = city;
+	}
+
+	public void setContact(final String contact) {
+		this.contact = contact;
+	}
+
+	public void setCountry(final String country) {
+		this.country = country;
+	}
+
+	public void setEmail(final String email) {
+		this.email = email;
+	}
+
+	public void setHotelList(final List<Hotel> hotelList) {
+		this.hotelList = hotelList;
+	}
+
+	public void setId(final Long id) {
+		this.id = id;
+	}
+
+	public void setName(final String name) {
+		this.name = name;
+	}
+
+	public void setRating(final int rating) {
+		this.rating = rating;
+	}
+
+	public void setSuperUserId(final Long[] superUserId) {
+		this.superUserId = superUserId;
 	}
 
 	/*

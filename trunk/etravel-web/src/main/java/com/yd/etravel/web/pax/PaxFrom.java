@@ -26,6 +26,11 @@ import com.yd.etravel.web.common.BaseForm;
  */
 public class PaxFrom extends BaseForm {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5269439491988484181L;
+
 	private Long id;
 
 	private int childMax;
@@ -42,16 +47,20 @@ public class PaxFrom extends BaseForm {
 	private List<Pax> paxList;
 	private Map<Long, String> hotelNameMap;
 
-	public Long getHotelId() {
-		return this.hotelId;
+	public int getAdultMax() {
+		return this.adultMax;
 	}
 
-	public void setHotelId(final Long hotelId) {
-		this.hotelId = hotelId;
+	public int getAdultMin() {
+		return this.adultMin;
 	}
 
-	public List<Hotel> getHotelList() {
-		return this.hotelList;
+	public int getChildMax() {
+		return this.childMax;
+	}
+
+	public int getChildMin() {
+		return this.childMin;
 	}
 
 	public Hotel getHotel(final Long id) {
@@ -65,16 +74,16 @@ public class PaxFrom extends BaseForm {
 		return hotel;
 	}
 
-	public void setHotelList(final List<Hotel> hotelList) {
-		this.hotelList = hotelList;
-		this.hotelNameMap = new HashMap<Long, String>();
-		for (final Hotel hotel : hotelList) {
-			this.hotelNameMap.put(hotel.getId(), hotel.getName());
-		}
+	public Long getHotelId() {
+		return this.hotelId;
+	}
+
+	public List<Hotel> getHotelList() {
+		return this.hotelList;
 	}
 
 	public String getHotelName(final Long id) {
-		if (this.hotelNameMap != null && this.hotelNameMap.containsKey(id)) {
+		if ((this.hotelNameMap != null) && this.hotelNameMap.containsKey(id)) {
 			return this.hotelNameMap.get(id).toString();
 		}
 		return EMPTY_STRING;
@@ -84,64 +93,16 @@ public class PaxFrom extends BaseForm {
 		return this.id;
 	}
 
-	public void setId(final Long id) {
-		this.id = id;
-	}
-
-	public List<Pax> getPaxList() {
-		return this.paxList;
-	}
-
-	public void setPaxList(final List<Pax> paxList) {
-		this.paxList = paxList;
-	}
-
-	public int getChildMax() {
-		return this.childMax;
-	}
-
-	public void setChildMax(final int childMax) {
-		this.childMax = childMax;
-	}
-
-	public int getChildMin() {
-		return this.childMin;
-	}
-
-	public void setChildMin(final int childMin) {
-		this.childMin = childMin;
-	}
-
 	public int getInfantMax() {
 		return this.infantMax;
-	}
-
-	public void setInfantMax(final int infantMax) {
-		this.infantMax = infantMax;
 	}
 
 	public int getInfantMin() {
 		return this.infantMin;
 	}
 
-	public void setInfantMin(final int infantMin) {
-		this.infantMin = infantMin;
-	}
-
-	public int getAdultMax() {
-		return this.adultMax;
-	}
-
-	public void setAdultMax(final int adultMax) {
-		this.adultMax = adultMax;
-	}
-
-	public int getAdultMin() {
-		return this.adultMin;
-	}
-
-	public void setAdultMin(final int adultMin) {
-		this.adultMin = adultMin;
+	public List<Pax> getPaxList() {
+		return this.paxList;
 	}
 
 	/*
@@ -171,6 +132,50 @@ public class PaxFrom extends BaseForm {
 		this.id = 0L;
 	}
 
+	public void setAdultMax(final int adultMax) {
+		this.adultMax = adultMax;
+	}
+
+	public void setAdultMin(final int adultMin) {
+		this.adultMin = adultMin;
+	}
+
+	public void setChildMax(final int childMax) {
+		this.childMax = childMax;
+	}
+
+	public void setChildMin(final int childMin) {
+		this.childMin = childMin;
+	}
+
+	public void setHotelId(final Long hotelId) {
+		this.hotelId = hotelId;
+	}
+
+	public void setHotelList(final List<Hotel> hotelList) {
+		this.hotelList = hotelList;
+		this.hotelNameMap = new HashMap<Long, String>();
+		for (final Hotel hotel : hotelList) {
+			this.hotelNameMap.put(hotel.getId(), hotel.getName());
+		}
+	}
+
+	public void setId(final Long id) {
+		this.id = id;
+	}
+
+	public void setInfantMax(final int infantMax) {
+		this.infantMax = infantMax;
+	}
+
+	public void setInfantMin(final int infantMin) {
+		this.infantMin = infantMin;
+	}
+
+	public void setPaxList(final List<Pax> paxList) {
+		this.paxList = paxList;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -187,40 +192,41 @@ public class PaxFrom extends BaseForm {
 			addErrors(errors, "etravel.error.pax.hotelid.required");
 		}
 
-		if (this.infantMin < 0 || this.infantMin > 150) {
+		if ((this.infantMin < 0) || (this.infantMin > 150)) {
 			addErrors(errors, "etravel.error.pax.infant.minage");
 			this.infantMin = 0;
 		}
 
-		if (this.infantMax < 0 || this.infantMax > 150) {
+		if ((this.infantMax < 0) || (this.infantMax > 150)) {
 			addErrors(errors, "etravel.error.pax.infant.maxage");
 			this.infantMax = 0;
 		}
 
-		if (this.childMin < 0 || this.childMin > 150) {
+		if ((this.childMin < 0) || (this.childMin > 150)) {
 			addErrors(errors, "etravel.error.pax.child.minage");
 			this.childMin = 0;
 		}
 
-		if (this.childMax < 0 || this.childMax > 150) {
+		if ((this.childMax < 0) || (this.childMax > 150)) {
 			addErrors(errors, "etravel.error.pax.child.maxage");
 			this.childMax = 0;
 		}
 
-		if (this.adultMin < 0 || this.adultMin > 150) {
+		if ((this.adultMin < 0) || (this.adultMin > 150)) {
 			addErrors(errors, "etravel.error.pax.adult.minage");
 			this.adultMin = 0;
 		}
 
-		if (this.adultMax < 0 || this.adultMax > 150) {
+		if ((this.adultMax < 0) || (this.adultMax > 150)) {
 			addErrors(errors, "etravel.error.pax.adult.maxage");
 			this.adultMax = 0;
 		}
 
-		if (this.infantMin > this.infantMax || this.infantMax > this.childMin
-				|| this.childMin > this.childMax
-				|| this.childMax > this.adultMin
-				|| this.adultMin > this.adultMax) {
+		if ((this.infantMin > this.infantMax)
+				|| (this.infantMax > this.childMin)
+				|| (this.childMin > this.childMax)
+				|| (this.childMax > this.adultMin)
+				|| (this.adultMin > this.adultMax)) {
 			addErrors(errors, "etravel.error.pax.invalidage");
 			this.childMax = 0;
 			this.childMin = 0;

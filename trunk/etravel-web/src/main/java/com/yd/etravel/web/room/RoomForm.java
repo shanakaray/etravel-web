@@ -25,6 +25,10 @@ import com.yd.etravel.web.common.BaseForm;
  */
 public class RoomForm extends BaseForm {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8267573289442318573L;
 	private int noOfRooms;
 	// private String name;
 	private Long roomTypeId;
@@ -43,91 +47,54 @@ public class RoomForm extends BaseForm {
 		// TODO Auto-generated constructor stub
 	}
 
-	public int getNoOfRooms() {
-		return this.noOfRooms;
-	}
-
-	public void setNoOfRooms(final int noOfRooms) {
-		this.noOfRooms = noOfRooms;
-	}
-
-	public Long getRoomTypeId() {
-		return this.roomTypeId;
-	}
-
-	public void setRoomTypeId(final Long roomTypeId) {
-		this.roomTypeId = roomTypeId;
+	public Hotel getHotel(final Long id) {
+		return this.hotelMap.get(id);
 	}
 
 	public Long getHotelId() {
 		return this.hotelId;
 	}
 
-	public void setHotelId(final Long hotelId) {
-		this.hotelId = hotelId;
-	}
-
 	public List<Hotel> getHotelList() {
 		return this.hotelList;
 	}
 
-	public void setHotelList(final List<Hotel> hotelList) {
-		this.hotelList = hotelList;
-		this.hotelMap = new HashMap<Long, Hotel>();
-		for (final Hotel hotel : hotelList) {
-			this.hotelMap.put(hotel.getId(), hotel);
-		}
-	}
-
 	public String getHotelName(final Long id) {
-		if (this.hotelMap != null && this.hotelMap.containsKey(id)) {
+		if ((this.hotelMap != null) && this.hotelMap.containsKey(id)) {
 			return this.hotelMap.get(id).getName();
 		}
 		return EMPTY_STRING;
-	}
-
-	public String getTypeName(final Long id) {
-		if (this.roomTypeMap != null && this.roomTypeMap.containsKey(id)) {
-			return this.roomTypeMap.get(id).getName();
-		}
-		return EMPTY_STRING;
-	}
-
-	public List<RoomType> getRoomTypeList() {
-		return this.roomTypeList;
-	}
-
-	public void setRoomTypeList(final List<RoomType> roomTypeList) {
-		this.roomTypeList = roomTypeList;
-		this.roomTypeMap = new HashMap<Long, RoomType>();
-		for (final RoomType roomType : roomTypeList) {
-			this.roomTypeMap.put(roomType.getId(), roomType);
-		}
-
-	}
-
-	public RoomType getRoomType(final Long id) {
-		return this.roomTypeMap.get(id);
-	}
-
-	public Hotel getHotel(final Long id) {
-		return this.hotelMap.get(id);
-	}
-
-	public List<Room> getRoomList() {
-		return this.roomList;
-	}
-
-	public void setRoomList(final List<Room> roomList) {
-		this.roomList = roomList;
 	}
 
 	public Long getId() {
 		return this.id;
 	}
 
-	public void setId(final Long id) {
-		this.id = id;
+	public int getNoOfRooms() {
+		return this.noOfRooms;
+	}
+
+	public List<Room> getRoomList() {
+		return this.roomList;
+	}
+
+	public RoomType getRoomType(final Long id) {
+		return this.roomTypeMap.get(id);
+	}
+
+	public Long getRoomTypeId() {
+		return this.roomTypeId;
+	}
+
+	public List<RoomType> getRoomTypeList() {
+		return this.roomTypeList;
+	}
+
+	public String getTypeName(final Long id) {
+		if ((this.roomTypeMap != null) && this.roomTypeMap.containsKey(id)) {
+			return this.roomTypeMap.get(id).getName();
+		}
+		return EMPTY_STRING;
 	}
 
 	/*
@@ -155,6 +122,43 @@ public class RoomForm extends BaseForm {
 		this.hotelMap = Collections.emptyMap();
 		this.roomTypeMap = Collections.emptyMap();
 		// this.name=EMPTY_STRING;
+
+	}
+
+	public void setHotelId(final Long hotelId) {
+		this.hotelId = hotelId;
+	}
+
+	public void setHotelList(final List<Hotel> hotelList) {
+		this.hotelList = hotelList;
+		this.hotelMap = new HashMap<Long, Hotel>();
+		for (final Hotel hotel : hotelList) {
+			this.hotelMap.put(hotel.getId(), hotel);
+		}
+	}
+
+	public void setId(final Long id) {
+		this.id = id;
+	}
+
+	public void setNoOfRooms(final int noOfRooms) {
+		this.noOfRooms = noOfRooms;
+	}
+
+	public void setRoomList(final List<Room> roomList) {
+		this.roomList = roomList;
+	}
+
+	public void setRoomTypeId(final Long roomTypeId) {
+		this.roomTypeId = roomTypeId;
+	}
+
+	public void setRoomTypeList(final List<RoomType> roomTypeList) {
+		this.roomTypeList = roomTypeList;
+		this.roomTypeMap = new HashMap<Long, RoomType>();
+		for (final RoomType roomType : roomTypeList) {
+			this.roomTypeMap.put(roomType.getId(), roomType);
+		}
 
 	}
 

@@ -26,14 +26,6 @@ public class RoomManagerImpl implements IRoomManager {
 	@Autowired(required = true)
 	private IRoomDAO roomDAO;
 
-	public IRoomDAO getRoomDAO() {
-		return this.roomDAO;
-	}
-
-	public void setRoomDAO(final IRoomDAO roomDAO) {
-		this.roomDAO = roomDAO;
-	}
-
 	@Transactional
 	@Override
 	public int deleteRoom(final Long id) throws ServiceException {
@@ -47,9 +39,30 @@ public class RoomManagerImpl implements IRoomManager {
 	}
 
 	@Override
+	public List<Room> findAllActiveRoom() throws ServiceException {
+		try {
+			return this.roomDAO.findAllActive();
+		} catch (final PersistenceException e) {
+			throw new ServiceException(null, e);
+		}
+	}
+
+	@Override
 	public List<Room> findAllRooms() throws ServiceException {
 		try {
 			return this.roomDAO.findAll();
+		} catch (final PersistenceException e) {
+			throw new ServiceException(null, e);
+		}
+
+	}
+
+	@Override
+	public List<Room> findAllRoomWithRoomType(final Long hotelid)
+			throws ServiceException {
+		try {
+			return this.roomDAO.findAllRoomWithRoomType(hotelid);
+
 		} catch (final PersistenceException e) {
 			throw new ServiceException(null, e);
 		}
@@ -80,6 +93,10 @@ public class RoomManagerImpl implements IRoomManager {
 
 	}
 
+	public IRoomDAO getRoomDAO() {
+		return this.roomDAO;
+	}
+
 	@Transactional
 	@Override
 	public Room saveRoom(Room room) throws ServiceException {
@@ -101,25 +118,8 @@ public class RoomManagerImpl implements IRoomManager {
 		return room;
 	}
 
-	@Override
-	public List<Room> findAllActiveRoom() throws ServiceException {
-		try {
-			return this.roomDAO.findAllActive();
-		} catch (final PersistenceException e) {
-			throw new ServiceException(null, e);
-		}
-	}
-
-	@Override
-	public List<Room> findAllRoomWithRoomType(final Long hotelid)
-			throws ServiceException {
-		try {
-			return this.roomDAO.findAllRoomWithRoomType(hotelid);
-
-		} catch (final PersistenceException e) {
-			throw new ServiceException(null, e);
-		}
-
+	public void setRoomDAO(final IRoomDAO roomDAO) {
+		this.roomDAO = roomDAO;
 	}
 
 }

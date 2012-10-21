@@ -43,30 +43,11 @@ public class Content extends BaseObject {
 		return this.category;
 	}
 
-	public void setCategory(final Category category) {
-		this.category = category;
-	}
-
-	/**
-	 * @hibernate.property length="1000"
-	 */
-	public String getText() {
-		return this.text;
-	}
-
-	public void setText(final String text) {
-		this.text = text;
-	}
-
 	/**
 	 * @hibernate.property
 	 */
-	public String getUrl() {
-		return this.url;
-	}
-
-	public void setUrl(final String url) {
-		this.url = url;
+	public String getObject() {
+		return this.object;
 	}
 
 	/**
@@ -76,19 +57,38 @@ public class Content extends BaseObject {
 		return this.pk;
 	}
 
-	public void setPk(final Long pk) {
-		this.pk = pk;
+	/**
+	 * @hibernate.property length="1000"
+	 */
+	public String getText() {
+		return this.text;
 	}
 
 	/**
 	 * @hibernate.property
 	 */
-	public String getObject() {
-		return this.object;
+	public String getUrl() {
+		return this.url;
+	}
+
+	public void setCategory(final Category category) {
+		this.category = category;
 	}
 
 	public void setObject(final String object) {
 		this.object = object;
+	}
+
+	public void setPk(final Long pk) {
+		this.pk = pk;
+	}
+
+	public void setText(final String text) {
+		this.text = text;
+	}
+
+	public void setUrl(final String url) {
+		this.url = url;
 	}
 
 }

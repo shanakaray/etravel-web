@@ -20,31 +20,6 @@ import com.yd.etravel.persistence.exception.PersistenceException;
 public class PaxDAO extends BaseDAO<Pax> implements IPaxDAO {
 
 	@Override
-	public boolean isPaxTypeExist(final Long hotelId, final Long id)
-			throws PersistenceException {
-		try {
-			final StringBuilder IS_PAX_TYPE_EXIST = new StringBuilder(
-					"SELECT pax FROM Pax as pax where ")
-					.append("pax.hotel.id=:hid");
-
-			if (id != null) {
-				IS_PAX_TYPE_EXIST.append(" AND pax.id != :id");
-			}
-
-			final Query query = getCurrentSession().createQuery(
-					IS_PAX_TYPE_EXIST.toString());
-			query.setParameter("hid", hotelId);
-
-			if (id != null) {
-				query.setParameter("id", id);
-			}
-			return !query.list().isEmpty();
-		} catch (final HibernateException e) {
-			throw new PersistenceException(e);
-		}
-	}
-
-	@Override
 	public List<Pax> findPax(final PaxSearchDTO paxSearchDTO)
 			throws PersistenceException {
 		try {
@@ -78,6 +53,31 @@ public class PaxDAO extends BaseDAO<Pax> implements IPaxDAO {
 	@Override
 	protected Class getEntityClass() {
 		return Pax.class;
+	}
+
+	@Override
+	public boolean isPaxTypeExist(final Long hotelId, final Long id)
+			throws PersistenceException {
+		try {
+			final StringBuilder IS_PAX_TYPE_EXIST = new StringBuilder(
+					"SELECT pax FROM Pax as pax where ")
+					.append("pax.hotel.id=:hid");
+
+			if (id != null) {
+				IS_PAX_TYPE_EXIST.append(" AND pax.id != :id");
+			}
+
+			final Query query = getCurrentSession().createQuery(
+					IS_PAX_TYPE_EXIST.toString());
+			query.setParameter("hid", hotelId);
+
+			if (id != null) {
+				query.setParameter("id", id);
+			}
+			return !query.list().isEmpty();
+		} catch (final HibernateException e) {
+			throw new PersistenceException(e);
+		}
 	}
 
 }

@@ -26,6 +26,25 @@ import com.yd.etravel.persistence.exception.PersistenceException;
 public class ExtraItemDAO extends BaseDAO<ExtraItem> implements IExtraItemDAO {
 
 	@Override
+	public List<ExtraItem> findAllByHotelId(final Long id)
+			throws PersistenceException {
+		try {
+			final StringBuilder sb = new StringBuilder("SELECT obj FROM ")
+					.append(ExtraItem.class.getName()).append(
+							" as obj join fetch obj.hotel h WHERE h.id = :id ");
+
+			final Query query = getCurrentSession().createQuery(sb.toString());
+			query.setParameter("id", id);
+			return new ArrayList<ExtraItem>(query.list());
+
+		} catch (final HibernateException e) {
+			throw new PersistenceException(e);
+		} catch (final DataAccessException e) {
+			throw new PersistenceException(e);
+		}
+	}
+
+	@Override
 	public List<ExtraItemBooking> findByBookingId(final Long bookingId)
 			throws PersistenceException {
 		try {
@@ -39,41 +58,6 @@ public class ExtraItemDAO extends BaseDAO<ExtraItem> implements IExtraItemDAO {
 		} catch (final HibernateException e) {
 			throw new PersistenceException(e);
 		} catch (final DataAccessException e) {
-			throw new PersistenceException(e);
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.yd.etravel.persistence.dao.extraitem.IExtraItemDAO#isExtraItemExist
-	 * (java.lang.String, java.lang.Long)
-	 */
-	@Override
-	public boolean isExist(String name, final String code, final Long id)
-			throws PersistenceException {
-		try {
-			final StringBuilder sb = new StringBuilder(
-					"SELECT item FROM ExtraItem as item where ");
-
-			if (id != null) {
-				sb.append(" item.id != :id ");
-				sb.append(" AND (item.name= :name " + "OR item.code = :code)");
-			} else {
-				sb.append(" UPPER(item.name)= UPPER(:name) "
-						+ "OR UPPER(item.code)= UPPER(:code)");
-			}
-
-			final Query query = getCurrentSession().createQuery(sb.toString());
-			query.setParameter("name", name);
-			query.setParameter("code", code);
-			if (id != null) {
-				query.setParameter("id", id);
-			}
-
-			return !query.list().isEmpty();
-		} catch (final HibernateException e) {
 			throw new PersistenceException(e);
 		}
 	}
@@ -98,27 +82,43 @@ public class ExtraItemDAO extends BaseDAO<ExtraItem> implements IExtraItemDAO {
 	}
 
 	@Override
-	public List<ExtraItem> findAllByHotelId(final Long id)
-			throws PersistenceException {
-		try {
-			final StringBuilder sb = new StringBuilder("SELECT obj FROM ")
-					.append(ExtraItem.class.getName()).append(
-							" as obj join fetch obj.hotel h WHERE h.id = :id ");
-
-			final Query query = getCurrentSession().createQuery(sb.toString());
-			query.setParameter("id", id);
-			return new ArrayList<ExtraItem>(query.list());
-
-		} catch (final HibernateException e) {
-			throw new PersistenceException(e);
-		} catch (final DataAccessException e) {
-			throw new PersistenceException(e);
-		}
-	}
-
-	@Override
 	protected Class getEntityClass() {
 		return ExtraItem.class;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.yd.etravel.persistence.dao.extraitem.IExtraItemDAO#isExtraItemExist
+	 * (java.lang.String, java.lang.Long)
+	 */
+	@Override
+	public boolean isExist(final String name, final String code, final Long id)
+			throws PersistenceException {
+		try {
+			final StringBuilder sb = new StringBuilder(
+					"SELECT item FROM ExtraItem as item where ");
+
+			if (id != null) {
+				sb.append(" item.id != :id ");
+				sb.append(" AND (item.name= :name " + "OR item.code = :code)");
+			} else {
+				sb.append(" UPPER(item.name)= UPPER(:name) "
+						+ "OR UPPER(item.code)= UPPER(:code)");
+			}
+
+			final Query query = getCurrentSession().createQuery(sb.toString());
+			query.setParameter("name", name);
+			query.setParameter("code", code);
+			if (id != null) {
+				query.setParameter("id", id);
+			}
+
+			return !query.list().isEmpty();
+		} catch (final HibernateException e) {
+			throw new PersistenceException(e);
+		}
 	}
 
 }

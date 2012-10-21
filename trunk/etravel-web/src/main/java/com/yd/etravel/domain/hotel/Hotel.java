@@ -26,6 +26,11 @@ import com.yd.etravel.domain.user.User;
 @Entity
 @Table(name = "T_HOTEL")
 public class Hotel extends BaseObject {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5486731096002281449L;
+
 	@Column
 	private String address;
 
@@ -55,25 +60,11 @@ public class Hotel extends BaseObject {
 		super(id, name, code);
 	}
 
-	@Override
-	public String getName() {
-		return super.getName();
-	}
-
-	@Override
-	public void setName(final String name) {
-		super.setName(name);
-	}
-
 	/**
 	 * @hibernate.property
 	 */
 	public String getAddress() {
 		return this.address;
-	}
-
-	public void setAddress(final String address) {
-		this.address = address;
 	}
 
 	/**
@@ -83,49 +74,11 @@ public class Hotel extends BaseObject {
 		return this.city;
 	}
 
-	public void setCity(final String city) {
-		this.city = city;
-	}
-
 	/**
 	 * @hibernate.property
 	 */
 	public String getContact() {
 		return this.contact;
-	}
-
-	public void setContact(final String contact) {
-		this.contact = contact;
-	}
-
-	/**
-	 * @hibernate.property
-	 */
-	public String getEmail() {
-		return this.email;
-	}
-
-	public void setEmail(final String email) {
-		this.email = email;
-	}
-
-	/**
-	 * @hibernate.property
-	 */
-	public int getRating() {
-		return this.rating;
-	}
-
-	public void setRating(final int rating) {
-		this.rating = rating;
-	}
-
-	public List<User> getSuperUser() {
-		return this.superUser;
-	}
-
-	public void setSuperUser(final List<User> superUser) {
-		this.superUser = superUser;
 	}
 
 	/**
@@ -135,8 +88,27 @@ public class Hotel extends BaseObject {
 		return this.country;
 	}
 
-	public void setCountry(final String country) {
-		this.country = country;
+	/**
+	 * @hibernate.property
+	 */
+	public String getEmail() {
+		return this.email;
+	}
+
+	@Override
+	public String getName() {
+		return super.getName();
+	}
+
+	/**
+	 * @hibernate.property
+	 */
+	public int getRating() {
+		return this.rating;
+	}
+
+	public List<User> getSuperUser() {
+		return this.superUser;
 	}
 
 	public Long[] getUserIds() {
@@ -146,6 +118,39 @@ public class Hotel extends BaseObject {
 		}
 
 		return userIds.toArray(new Long[0]);
+	}
+
+	public void setAddress(final String address) {
+		this.address = address;
+	}
+
+	public void setCity(final String city) {
+		this.city = city;
+	}
+
+	public void setContact(final String contact) {
+		this.contact = contact;
+	}
+
+	public void setCountry(final String country) {
+		this.country = country;
+	}
+
+	public void setEmail(final String email) {
+		this.email = email;
+	}
+
+	@Override
+	public void setName(final String name) {
+		super.setName(name);
+	}
+
+	public void setRating(final int rating) {
+		this.rating = rating;
+	}
+
+	public void setSuperUser(final List<User> superUser) {
+		this.superUser = superUser;
 	}
 
 }

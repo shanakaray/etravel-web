@@ -26,6 +26,10 @@ import com.yd.etravel.web.common.BaseForm;
  */
 public class ExtraItemForm extends BaseForm {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3058925732332335646L;
 	private List<Hotel> hotelList;
 	private List<ExtraItem> extraItemList;
 	private List<String> currencyList;
@@ -45,84 +49,44 @@ public class ExtraItemForm extends BaseForm {
 		// TODO Auto-generated constructor stub
 	}
 
-	public List<Hotel> getHotelList() {
-		return this.hotelList;
-	}
-
-	public void setHotelList(final List<Hotel> hotelList) {
-		this.hotelList = hotelList;
-	}
-
-	public List<ExtraItem> getExtraItemList() {
-		return this.extraItemList;
-	}
-
-	public void setExtraItemList(final List<ExtraItem> extraItemList) {
-		this.extraItemList = extraItemList;
-	}
-
-	public BigDecimal getCost() {
-		return this.cost;
-	}
-
-	public void setCost(final BigDecimal cost) {
-		this.cost = cost;
+	public String getCode() {
+		return this.code;
 	}
 
 	public String getComments() {
 		return this.comments;
 	}
 
-	public void setComments(final String comments) {
-		this.comments = comments;
+	public BigDecimal getCost() {
+		return this.cost;
 	}
 
 	public String getCurrency() {
 		return this.currency;
 	}
 
-	public void setCurrency(final String currency) {
-		this.currency = currency;
-	}
-
-	public String getCode() {
-		return this.code;
-	}
-
-	public void setCode(final String code) {
-		this.code = code;
-	}
-
 	public List<String> getCurrencyList() {
 		return this.currencyList;
 	}
 
-	public void setCurrencyList(final List<String> currencyList) {
-		this.currencyList = currencyList;
-	}
-
-	public String getName() {
-		return this.name;
-	}
-
-	public void setName(final String name) {
-		this.name = name;
+	public List<ExtraItem> getExtraItemList() {
+		return this.extraItemList;
 	}
 
 	public Long[] getHotelId() {
 		return this.hotelId;
 	}
 
-	public void setHotelId(final Long[] hotelId) {
-		this.hotelId = hotelId;
+	public List<Hotel> getHotelList() {
+		return this.hotelList;
 	}
 
 	public Long getId() {
 		return this.id;
 	}
 
-	public void setId(final Long id) {
-		this.id = id;
+	public String getName() {
+		return this.name;
 	}
 
 	@Override
@@ -137,6 +101,46 @@ public class ExtraItemForm extends BaseForm {
 		this.currency = ICurrency.USD;
 		this.name = EMPTY_STRING;
 		this.id = 0L;
+	}
+
+	public void setCode(final String code) {
+		this.code = code;
+	}
+
+	public void setComments(final String comments) {
+		this.comments = comments;
+	}
+
+	public void setCost(final BigDecimal cost) {
+		this.cost = cost;
+	}
+
+	public void setCurrency(final String currency) {
+		this.currency = currency;
+	}
+
+	public void setCurrencyList(final List<String> currencyList) {
+		this.currencyList = currencyList;
+	}
+
+	public void setExtraItemList(final List<ExtraItem> extraItemList) {
+		this.extraItemList = extraItemList;
+	}
+
+	public void setHotelId(final Long[] hotelId) {
+		this.hotelId = hotelId;
+	}
+
+	public void setHotelList(final List<Hotel> hotelList) {
+		this.hotelList = hotelList;
+	}
+
+	public void setId(final Long id) {
+		this.id = id;
+	}
+
+	public void setName(final String name) {
+		this.name = name;
 	}
 
 	/*

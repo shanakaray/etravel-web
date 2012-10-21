@@ -25,6 +25,10 @@ import com.yd.etravel.web.common.BaseForm;
  */
 public class SearchForm extends BaseForm {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4203859044449133475L;
 	private Long id;
 	private Long roomId;
 	private Long hotelId;
@@ -42,33 +46,14 @@ public class SearchForm extends BaseForm {
 	private List<Room> allRoom;
 
 	/**
-	 * @return the hotelId
+	 * @return the allHotel
 	 */
-	public Long getHotelId() {
-		return this.hotelId;
+	public List<Hotel> getAllHotel() {
+		return this.allHotel;
 	}
 
-	/**
-	 * @param hotelId
-	 *            the hotelId to set
-	 */
-	public void setHotelId(final Long hotelId) {
-		this.hotelId = hotelId;
-	}
-
-	/**
-	 * @return the hotelName
-	 */
-	public String getHotelName() {
-		return this.hotelName;
-	}
-
-	/**
-	 * @param hotelName
-	 *            the hotelName to set
-	 */
-	public void setHotelName(final String hotelName) {
-		this.hotelName = hotelName;
+	public List<Room> getAllRoom() {
+		return this.allRoom;
 	}
 
 	/**
@@ -79,26 +64,43 @@ public class SearchForm extends BaseForm {
 	}
 
 	/**
-	 * @param checkIn
-	 *            the checkIn to set
-	 */
-	public void setCheckIn(final String checkIn) {
-		this.checkIn = checkIn;
-	}
-
-	/**
 	 * @return the checkOut
 	 */
 	public String getCheckOut() {
 		return this.checkOut;
 	}
 
+	public String[] getCommets() {
+		return this.commets;
+	}
+
+	public Long[] getExtraItemId() {
+		return this.extraItemId;
+	}
+
 	/**
-	 * @param checkOut
-	 *            the checkOut to set
+	 * @return the hotelId
 	 */
-	public void setCheckOut(final String checkOut) {
-		this.checkOut = checkOut;
+	public Long getHotelId() {
+		return this.hotelId;
+	}
+
+	/**
+	 * @return the hotelName
+	 */
+	public String getHotelName() {
+		return this.hotelName;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public Long getId() {
+		return this.id;
+	}
+
+	public Long getRoomId() {
+		return this.roomId;
 	}
 
 	/**
@@ -106,29 +108,6 @@ public class SearchForm extends BaseForm {
 	 */
 	public SearchResultsDTO getSearchResultsDTO() {
 		return this.searchResultsDTO;
-	}
-
-	/**
-	 * @param searchResultsDTO
-	 *            the searchResultsDTO to set
-	 */
-	public void setSearchResultsDTO(final SearchResultsDTO searchResultsDTO) {
-		this.searchResultsDTO = searchResultsDTO;
-	}
-
-	/**
-	 * @return the allHotel
-	 */
-	public List<Hotel> getAllHotel() {
-		return this.allHotel;
-	}
-
-	/**
-	 * @param allHotel
-	 *            the allHotel to set
-	 */
-	public void setAllHotel(final List<Hotel> allHotel) {
-		this.allHotel = allHotel;
 	}
 
 	/**
@@ -155,20 +134,76 @@ public class SearchForm extends BaseForm {
 		this.hotelId = -1l;
 	}
 
-	public Long getRoomId() {
-		return this.roomId;
+	/**
+	 * @param allHotel
+	 *            the allHotel to set
+	 */
+	public void setAllHotel(final List<Hotel> allHotel) {
+		this.allHotel = allHotel;
+	}
+
+	public void setAllRoom(final List<Room> allRoom) {
+		this.allRoom = allRoom;
+	}
+
+	/**
+	 * @param checkIn
+	 *            the checkIn to set
+	 */
+	public void setCheckIn(final String checkIn) {
+		this.checkIn = checkIn;
+	}
+
+	/**
+	 * @param checkOut
+	 *            the checkOut to set
+	 */
+	public void setCheckOut(final String checkOut) {
+		this.checkOut = checkOut;
+	}
+
+	public void setCommets(final String[] commets) {
+		this.commets = commets;
+	}
+
+	public void setExtraItemId(final Long[] extraItemId) {
+		this.extraItemId = extraItemId;
+	}
+
+	/**
+	 * @param hotelId
+	 *            the hotelId to set
+	 */
+	public void setHotelId(final Long hotelId) {
+		this.hotelId = hotelId;
+	}
+
+	/**
+	 * @param hotelName
+	 *            the hotelName to set
+	 */
+	public void setHotelName(final String hotelName) {
+		this.hotelName = hotelName;
+	}
+
+	/**
+	 * @param id
+	 *            the id to set
+	 */
+	public void setId(final Long id) {
+		this.id = id;
 	}
 
 	public void setRoomId(final Long roomId) {
 		this.roomId = roomId;
 	}
 
-	public List<Room> getAllRoom() {
-		return this.allRoom;
-	}
-
-	public void setAllRoom(final List<Room> allRoom) {
-		this.allRoom = allRoom;
+	/**
+	 * @param searchResultsDTO
+	 *            the searchResultsDTO to set
+	 */
+	public void setSearchResultsDTO(final SearchResultsDTO searchResultsDTO) {
+		this.searchResultsDTO = searchResultsDTO;
 	}
 
 	/*
@@ -196,37 +231,6 @@ public class SearchForm extends BaseForm {
 		}
 
 		return errors;
-	}
-
-	/**
-	 * @return the id
-	 */
-	public Long getId() {
-		return this.id;
-	}
-
-	/**
-	 * @param id
-	 *            the id to set
-	 */
-	public void setId(final Long id) {
-		this.id = id;
-	}
-
-	public String[] getCommets() {
-		return this.commets;
-	}
-
-	public void setCommets(final String[] commets) {
-		this.commets = commets;
-	}
-
-	public Long[] getExtraItemId() {
-		return this.extraItemId;
-	}
-
-	public void setExtraItemId(final Long[] extraItemId) {
-		this.extraItemId = extraItemId;
 	}
 
 }

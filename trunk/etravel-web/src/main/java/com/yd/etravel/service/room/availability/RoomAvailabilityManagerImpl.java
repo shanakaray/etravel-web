@@ -28,13 +28,113 @@ public class RoomAvailabilityManagerImpl implements IRoomAvailabilityManager {
 	@Autowired(required = true)
 	private IRoomDAO roomDAO;
 
-	public void setRoomAvailabilityDAO(
-			final IRoomAvailabilityDAO roomAvailabilityDAO) {
-		this.roomAvailabilityDAO = roomAvailabilityDAO;
+	@Transactional
+	@Override
+	public int deleteRoomAvailability(final Long id) throws ServiceException {
+		int flag = 0;
+		try {
+			flag = this.roomAvailabilityDAO.deleteAny(id);
+
+		} catch (final PersistenceException e) {
+			throw new ServiceException(null, e);
+		}
+		return flag;
 	}
 
-	public void setRoomDAO(final IRoomDAO roomDAO) {
-		this.roomDAO = roomDAO;
+	@Override
+	public List<RoomAvailability> findAllRoomAvailability()
+			throws ServiceException {
+		try {
+			return this.roomAvailabilityDAO.findAll();
+		} catch (final PersistenceException e) {
+			throw new ServiceException(null, e);
+		}
+	}
+
+	@Override
+	public List<RoomAvailabilityDTO> findAllRoomAvailabilityDTO(
+			final RoomAvailabilityDTO dto) throws ServiceException {
+		try {
+			return this.roomAvailabilityDAO.findAllRoomAvailabilityDTO(dto);
+
+		} catch (final PersistenceException e) {
+			throw new ServiceException(null, e);
+		}
+	}
+
+	@Override
+	@Deprecated
+	/**
+	 * @see List<RoomAvailabilityDTO> findAllRoomAvailabilityDTO(Long hotelId)
+	 *      instead
+	 */
+	public List<RoomAvailability> findAllRoomAvailabilityWithRoomAndOccu(
+			final Long hotelId) throws ServiceException {
+		try {
+			return this.roomAvailabilityDAO
+					.findAllRoomAvailabilityWithRoomAndOccu(hotelId);
+
+		} catch (final PersistenceException e) {
+			throw new ServiceException(null, e);
+		}
+	}
+
+	@Override
+	public List<RoomDailyAvailability> findAllRoomDailyAvailability()
+			throws ServiceException {
+		try {
+			return this.roomAvailabilityDAO.findAllRoomDailyAvailability();
+
+		} catch (final PersistenceException e) {
+			throw new ServiceException(null, e);
+		}
+	}
+
+	@Override
+	public List<RoomDailyAvailability> findAllRoomDailyAvailability(
+			final Long id) throws ServiceException {
+		try {
+			return this.roomAvailabilityDAO.findAllRoomDailyAvailability(id);
+
+		} catch (final PersistenceException e) {
+			throw new ServiceException(null, e);
+		}
+	}
+
+	@Override
+	public List<DailyAvailabilityDTO> findDailyAvailability(final Long id)
+			throws ServiceException {
+		try {
+			return this.roomAvailabilityDAO.findDailyAvailability(id);
+
+		} catch (final PersistenceException e) {
+			throw new ServiceException(null, e);
+		}
+	}
+
+	@Override
+	public RoomAvailability findRoomAvailabilityById(final Long id)
+			throws ServiceException {
+		RoomAvailability roomAvailability = null;
+		try {
+			roomAvailability = this.roomAvailabilityDAO.findById(id);
+
+		} catch (final PersistenceException e) {
+			throw new ServiceException(null, e);
+		}
+		return roomAvailability;
+	}
+
+	@Override
+	public RoomAvailability findRoomAvailabilityWithRoomInfoById(final Long id)
+			throws ServiceException {
+		try {
+			return this.roomAvailabilityDAO.findRoomAvailabilityById(id);
+
+		} catch (final PersistenceException e) {
+			throw new ServiceException(null, e);
+		}
+
 	}
 
 	@Transactional
@@ -123,113 +223,13 @@ public class RoomAvailabilityManagerImpl implements IRoomAvailabilityManager {
 		return roomAvail;
 	}
 
-	@Override
-	public RoomAvailability findRoomAvailabilityById(final Long id)
-			throws ServiceException {
-		RoomAvailability roomAvailability = null;
-		try {
-			roomAvailability = this.roomAvailabilityDAO.findById(id);
-
-		} catch (final PersistenceException e) {
-			throw new ServiceException(null, e);
-		}
-		return roomAvailability;
+	public void setRoomAvailabilityDAO(
+			final IRoomAvailabilityDAO roomAvailabilityDAO) {
+		this.roomAvailabilityDAO = roomAvailabilityDAO;
 	}
 
-	@Transactional
-	@Override
-	public int deleteRoomAvailability(final Long id) throws ServiceException {
-		int flag = 0;
-		try {
-			flag = this.roomAvailabilityDAO.deleteAny(id);
-
-		} catch (final PersistenceException e) {
-			throw new ServiceException(null, e);
-		}
-		return flag;
-	}
-
-	@Override
-	public List<RoomAvailability> findAllRoomAvailability()
-			throws ServiceException {
-		try {
-			return this.roomAvailabilityDAO.findAll();
-		} catch (final PersistenceException e) {
-			throw new ServiceException(null, e);
-		}
-	}
-
-	@Override
-	@Deprecated
-	/**
-	 * @see List<RoomAvailabilityDTO> findAllRoomAvailabilityDTO(Long hotelId)
-	 *      instead
-	 */
-	public List<RoomAvailability> findAllRoomAvailabilityWithRoomAndOccu(
-			final Long hotelId) throws ServiceException {
-		try {
-			return this.roomAvailabilityDAO
-					.findAllRoomAvailabilityWithRoomAndOccu(hotelId);
-
-		} catch (final PersistenceException e) {
-			throw new ServiceException(null, e);
-		}
-	}
-
-	@Override
-	public List<RoomDailyAvailability> findAllRoomDailyAvailability(
-			final Long id) throws ServiceException {
-		try {
-			return this.roomAvailabilityDAO.findAllRoomDailyAvailability(id);
-
-		} catch (final PersistenceException e) {
-			throw new ServiceException(null, e);
-		}
-	}
-
-	@Override
-	public List<RoomDailyAvailability> findAllRoomDailyAvailability()
-			throws ServiceException {
-		try {
-			return this.roomAvailabilityDAO.findAllRoomDailyAvailability();
-
-		} catch (final PersistenceException e) {
-			throw new ServiceException(null, e);
-		}
-	}
-
-	@Override
-	public RoomAvailability findRoomAvailabilityWithRoomInfoById(final Long id)
-			throws ServiceException {
-		try {
-			return this.roomAvailabilityDAO.findRoomAvailabilityById(id);
-
-		} catch (final PersistenceException e) {
-			throw new ServiceException(null, e);
-		}
-
-	}
-
-	@Override
-	public List<RoomAvailabilityDTO> findAllRoomAvailabilityDTO(
-			final RoomAvailabilityDTO dto) throws ServiceException {
-		try {
-			return this.roomAvailabilityDAO.findAllRoomAvailabilityDTO(dto);
-
-		} catch (final PersistenceException e) {
-			throw new ServiceException(null, e);
-		}
-	}
-
-	@Override
-	public List<DailyAvailabilityDTO> findDailyAvailability(final Long id)
-			throws ServiceException {
-		try {
-			return this.roomAvailabilityDAO.findDailyAvailability(id);
-
-		} catch (final PersistenceException e) {
-			throw new ServiceException(null, e);
-		}
+	public void setRoomDAO(final IRoomDAO roomDAO) {
+		this.roomDAO = roomDAO;
 	}
 
 }

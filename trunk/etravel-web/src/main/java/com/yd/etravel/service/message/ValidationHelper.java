@@ -14,6 +14,12 @@ import com.yd.etravel.util.IConstants;
  */
 public class ValidationHelper {
 
+	public static UIMesssage getMessageHolder(final String key) {
+		final UIMesssage mh = new UIMesssage();
+		mh.addError(key, IConstants.IBundle.ETRAVEL, null);
+		return mh;
+	}
+
 	// Utility method without parameter MessageHelper.
 	public static UIMesssage getMessageHolder(final String key,
 			final String bundleName, final String[] args) {
@@ -27,12 +33,6 @@ public class ValidationHelper {
 			final String[] args) {
 		final UIMesssage mh = new UIMesssage();
 		mh.addError(key, IConstants.IBundle.ETRAVEL, args);
-		return mh;
-	}
-
-	public static UIMesssage getMessageHolder(final String key) {
-		final UIMesssage mh = new UIMesssage();
-		mh.addError(key, IConstants.IBundle.ETRAVEL, null);
 		return mh;
 	}
 

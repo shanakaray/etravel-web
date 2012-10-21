@@ -19,8 +19,47 @@ public class RoomTypeManagerImpl implements IRoomTypeManager {
 	@Autowired(required = true)
 	private IRoomTypeDAO roomTypeDAO;
 
-	public void setRoomTypeDAO(final IRoomTypeDAO roomTypeDAO) {
-		this.roomTypeDAO = roomTypeDAO;
+	@Transactional
+	@Override
+	public int deleteRoomType(final Long id) throws ServiceException {
+		int flag = 0;
+		try {
+			flag = this.roomTypeDAO.deleteAny(id);
+
+		} catch (final PersistenceException e) {
+			throw new ServiceException(null, e);
+		}
+		return flag;
+	}
+
+	@Override
+	public List<RoomType> findAllActiveRoomType() throws ServiceException {
+		try {
+			return this.roomTypeDAO.findAllActive();
+		} catch (final PersistenceException e) {
+			throw new ServiceException(null, e);
+		}
+	}
+
+	@Override
+	public List<RoomType> findAllRoomType() throws ServiceException {
+		try {
+			return this.roomTypeDAO.findAll();
+		} catch (final PersistenceException e) {
+			throw new ServiceException(null, e);
+		}
+	}
+
+	@Override
+	public RoomType findRoomTypeById(final Long id) throws ServiceException {
+		RoomType roomType = null;
+		try {
+			roomType = this.roomTypeDAO.findById(id);
+			roomType.toString();
+		} catch (final PersistenceException e) {
+			throw new ServiceException(null, e);
+		}
+		return roomType;
 	}
 
 	@Transactional
@@ -40,46 +79,7 @@ public class RoomTypeManagerImpl implements IRoomTypeManager {
 		return roomType;
 	}
 
-	@Override
-	public RoomType findRoomTypeById(final Long id) throws ServiceException {
-		RoomType roomType = null;
-		try {
-			roomType = this.roomTypeDAO.findById(id);
-			roomType.toString();
-		} catch (final PersistenceException e) {
-			throw new ServiceException(null, e);
-		}
-		return roomType;
-	}
-
-	@Transactional
-	@Override
-	public int deleteRoomType(final Long id) throws ServiceException {
-		int flag = 0;
-		try {
-			flag = this.roomTypeDAO.deleteAny(id);
-
-		} catch (final PersistenceException e) {
-			throw new ServiceException(null, e);
-		}
-		return flag;
-	}
-
-	@Override
-	public List<RoomType> findAllRoomType() throws ServiceException {
-		try {
-			return this.roomTypeDAO.findAll();
-		} catch (final PersistenceException e) {
-			throw new ServiceException(null, e);
-		}
-	}
-
-	@Override
-	public List<RoomType> findAllActiveRoomType() throws ServiceException {
-		try {
-			return this.roomTypeDAO.findAllActive();
-		} catch (final PersistenceException e) {
-			throw new ServiceException(null, e);
-		}
+	public void setRoomTypeDAO(final IRoomTypeDAO roomTypeDAO) {
+		this.roomTypeDAO = roomTypeDAO;
 	}
 }

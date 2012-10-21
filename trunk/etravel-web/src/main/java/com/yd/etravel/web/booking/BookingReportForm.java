@@ -28,6 +28,10 @@ import com.yd.etravel.web.common.BaseForm;
  */
 
 public class BookingReportForm extends BaseForm {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6153737269499189809L;
 	private List<Hotel> hotelList;
 	private List<BookingReportDTO> bookingList;
 	private List<Room> allRoom;
@@ -47,62 +51,6 @@ public class BookingReportForm extends BaseForm {
 		// TODO Auto-generated constructor stub
 	}
 
-	public List<BookingReportDTO> getBookingList() {
-		return this.bookingList;
-	}
-
-	public void setBookingList(final List<BookingReportDTO> bookingList) {
-		this.bookingList = bookingList;
-	}
-
-	public Long getRoomTypeId() {
-		return this.roomTypeId;
-	}
-
-	public void setRoomTypeId(final Long roomTypeId) {
-		this.roomTypeId = roomTypeId;
-	}
-
-	public Long getHotelId() {
-		return this.hotelId;
-	}
-
-	public void setHotelId(final Long hotelId) {
-		this.hotelId = hotelId;
-	}
-
-	public Set<Long> getHotelSet() {
-		final Set<Long> set = new HashSet<Long>();
-		if (this.hotelId != null && this.hotelId.longValue() > 0) {
-			set.add(this.hotelId);
-		}
-		return set;
-	}
-
-	public String getUserName() {
-		return this.userName;
-	}
-
-	public void setUserName(final String userName) {
-		this.userName = userName;
-	}
-
-	public String getUserCode() {
-		return this.userCode;
-	}
-
-	public void setUserCode(final String userCode) {
-		this.userCode = userCode;
-	}
-
-	public List<Hotel> getHotelList() {
-		return this.hotelList;
-	}
-
-	public void setHotelList(final List<Hotel> hotelList) {
-		this.hotelList = hotelList;
-	}
-
 	public void addHotelMap(final Map<Long, String> hotelMap) {
 		this.hotelList = new ArrayList<Hotel>();
 		for (final Map.Entry<Long, String> e : hotelMap.entrySet()) {
@@ -116,40 +64,52 @@ public class BookingReportForm extends BaseForm {
 		return this.allRoom;
 	}
 
-	public void setAllRoom(final List<Room> allRoom) {
-		this.allRoom = allRoom;
-	}
-
-	public Long getRoomId() {
-		return this.roomId;
-	}
-
-	public void setRoomId(final Long roomId) {
-		this.roomId = roomId;
-	}
-
-	public String getBookingId() {
-		return this.bookingId;
-	}
-
-	public void setBookingId(final String bookingId) {
-		this.bookingId = bookingId;
-	}
-
 	public String getBookedFromString() {
 		return this.bookedFromString;
-	}
-
-	public void setBookedFromString(final String bookedFromString) {
-		this.bookedFromString = bookedFromString;
 	}
 
 	public String getBookedToString() {
 		return this.bookedToString;
 	}
 
-	public void setBookedToString(final String bookedToString) {
-		this.bookedToString = bookedToString;
+	public String getBookingId() {
+		return this.bookingId;
+	}
+
+	public List<BookingReportDTO> getBookingList() {
+		return this.bookingList;
+	}
+
+	public Long getHotelId() {
+		return this.hotelId;
+	}
+
+	public List<Hotel> getHotelList() {
+		return this.hotelList;
+	}
+
+	public Set<Long> getHotelSet() {
+		final Set<Long> set = new HashSet<Long>();
+		if ((this.hotelId != null) && (this.hotelId.longValue() > 0)) {
+			set.add(this.hotelId);
+		}
+		return set;
+	}
+
+	public Long getRoomId() {
+		return this.roomId;
+	}
+
+	public Long getRoomTypeId() {
+		return this.roomTypeId;
+	}
+
+	public String getUserCode() {
+		return this.userCode;
+	}
+
+	public String getUserName() {
+		return this.userName;
 	}
 
 	@Override
@@ -166,6 +126,50 @@ public class BookingReportForm extends BaseForm {
 		this.roomTypeId = -1L;
 		this.hotelId = -1L;
 		this.roomId = -1L;
+	}
+
+	public void setAllRoom(final List<Room> allRoom) {
+		this.allRoom = allRoom;
+	}
+
+	public void setBookedFromString(final String bookedFromString) {
+		this.bookedFromString = bookedFromString;
+	}
+
+	public void setBookedToString(final String bookedToString) {
+		this.bookedToString = bookedToString;
+	}
+
+	public void setBookingId(final String bookingId) {
+		this.bookingId = bookingId;
+	}
+
+	public void setBookingList(final List<BookingReportDTO> bookingList) {
+		this.bookingList = bookingList;
+	}
+
+	public void setHotelId(final Long hotelId) {
+		this.hotelId = hotelId;
+	}
+
+	public void setHotelList(final List<Hotel> hotelList) {
+		this.hotelList = hotelList;
+	}
+
+	public void setRoomId(final Long roomId) {
+		this.roomId = roomId;
+	}
+
+	public void setRoomTypeId(final Long roomTypeId) {
+		this.roomTypeId = roomTypeId;
+	}
+
+	public void setUserCode(final String userCode) {
+		this.userCode = userCode;
+	}
+
+	public void setUserName(final String userName) {
+		this.userName = userName;
 	}
 
 	/*

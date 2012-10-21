@@ -18,11 +18,6 @@ import com.yd.etravel.persistence.exception.PersistenceException;
 public class ImageDAO extends BaseDAO<Image> implements IImageDAO {
 
 	@Override
-	public void saveContent(final Image image) throws PersistenceException {
-		getCurrentSession().save(image);
-	}
-
-	@Override
 	public void deleteContent(final Image image) throws PersistenceException {
 		getCurrentSession().delete(image);
 	}
@@ -39,5 +34,10 @@ public class ImageDAO extends BaseDAO<Image> implements IImageDAO {
 				.createQuery("select i.id from Image i where i.object='"
 						+ image.getObject() + "' and i.pk=" + image.getPk());
 		return query.list();
+	}
+
+	@Override
+	public void saveContent(final Image image) throws PersistenceException {
+		getCurrentSession().save(image);
 	}
 }

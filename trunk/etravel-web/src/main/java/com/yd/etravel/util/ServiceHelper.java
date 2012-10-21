@@ -18,10 +18,6 @@ import com.yd.etravel.util.IConstants.IServiceNames;
  */
 public final class ServiceHelper implements IServiceNames {
 	private static ServiceHelper instance = null;
-	private WebApplicationContext applicationContext;
-
-	private ServiceHelper() {
-	}
 
 	public static ServiceHelper getInstance() {
 		if (instance == null) {
@@ -30,25 +26,21 @@ public final class ServiceHelper implements IServiceNames {
 		return instance;
 	}
 
-	public WebApplicationContext getApplicationContext() {
-		return this.applicationContext;
+	private WebApplicationContext applicationContext;
+
+	private ServiceHelper() {
 	}
 
-	public void setApplicationContext(
-			final WebApplicationContext applicationContext) {
-		this.applicationContext = applicationContext;
+	public WebApplicationContext getApplicationContext() {
+		return this.applicationContext;
 	}
 
 	public IBookingManager getBookingManager() {
 		return (IBookingManager) this.applicationContext.getBean(BOOKING);
 	}
 
-	public IUserManager getUserManager() {
-		return (IUserManager) this.applicationContext.getBean(USER);
-	}
-
-	public IRoomManager getRoomManager() {
-		return (IRoomManager) this.applicationContext.getBean(ROOM);
+	public IContentManager getContentService() {
+		return (IContentManager) this.applicationContext.getBean(CONTENT);
 	}
 
 	public IHotelManager getHotelManager() {
@@ -59,8 +51,17 @@ public final class ServiceHelper implements IServiceNames {
 		return (IpgUtil) this.applicationContext.getBean(IPG);
 	}
 
-	public IContentManager getContentService() {
-		return (IContentManager) this.applicationContext.getBean(CONTENT);
+	public IRoomManager getRoomManager() {
+		return (IRoomManager) this.applicationContext.getBean(ROOM);
+	}
+
+	public IUserManager getUserManager() {
+		return (IUserManager) this.applicationContext.getBean(USER);
+	}
+
+	public void setApplicationContext(
+			final WebApplicationContext applicationContext) {
+		this.applicationContext = applicationContext;
 	}
 
 }

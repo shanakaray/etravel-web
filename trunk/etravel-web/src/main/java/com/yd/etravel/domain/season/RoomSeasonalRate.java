@@ -14,6 +14,11 @@ import com.yd.etravel.domain.room.Room;
 @Table(name = "T_ROOM_SEASONAL_RATE")
 public class RoomSeasonalRate extends BaseObject {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8816174091724964282L;
+
 	@ManyToOne
 	private Season season;
 
@@ -23,24 +28,24 @@ public class RoomSeasonalRate extends BaseObject {
 	@Column
 	private BigDecimal totalCost;
 
+	public Room getRoom() {
+		return this.room;
+	}
+
 	public Season getSeason() {
 		return this.season;
 	}
 
-	public void setSeason(final Season season) {
-		this.season = season;
-	}
-
-	public Room getRoom() {
-		return this.room;
+	public BigDecimal getTotalCost() {
+		return this.totalCost;
 	}
 
 	public void setRoom(final Room room) {
 		this.room = room;
 	}
 
-	public BigDecimal getTotalCost() {
-		return this.totalCost;
+	public void setSeason(final Season season) {
+		this.season = season;
 	}
 
 	public void setTotalCost(final BigDecimal totalCost) {

@@ -26,10 +26,6 @@ public class PaxManagerImpl implements IPaxManager {
 	@Autowired(required = true)
 	private IPaxDAO paxDAO;
 
-	public void setPaxDAO(final IPaxDAO paxDAO) {
-		this.paxDAO = paxDAO;
-	}
-
 	@Transactional
 	@Override
 	public int deletePax(final Long id) throws ServiceException {
@@ -55,6 +51,16 @@ public class PaxManagerImpl implements IPaxManager {
 	public List<Pax> findAllPax() throws ServiceException {
 		try {
 			return this.paxDAO.findAll();
+		} catch (final PersistenceException e) {
+			throw new ServiceException(null, e);
+		}
+	}
+
+	@Override
+	public List<Pax> findPax(final PaxSearchDTO paxSearchDTO)
+			throws ServiceException {
+		try {
+			return this.paxDAO.findPax(paxSearchDTO);
 		} catch (final PersistenceException e) {
 			throw new ServiceException(null, e);
 		}
@@ -103,14 +109,8 @@ public class PaxManagerImpl implements IPaxManager {
 		return pax;
 	}
 
-	@Override
-	public List<Pax> findPax(final PaxSearchDTO paxSearchDTO)
-			throws ServiceException {
-		try {
-			return this.paxDAO.findPax(paxSearchDTO);
-		} catch (final PersistenceException e) {
-			throw new ServiceException(null, e);
-		}
+	public void setPaxDAO(final IPaxDAO paxDAO) {
+		this.paxDAO = paxDAO;
 	}
 
 }

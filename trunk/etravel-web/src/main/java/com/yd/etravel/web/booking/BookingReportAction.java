@@ -120,6 +120,23 @@ public class BookingReportAction extends BaseAction {
 		return null;
 	}
 
+	public void filUpSelects(final BookingReportForm reportForm,
+			final IUserProfile profile) throws ServiceException {
+
+		if (profile.hasFunction(IUserFunctions.BOOKINGREPORT_ASSIGNHOTELS_ONLY)) {
+			reportForm.addHotelMap(profile.getAssignedHotels());
+		} else {
+			reportForm.setHotelList(getHotelManager().findAllActiveHotels());
+		}
+
+		if ((reportForm.getHotelId() != null)
+				&& (reportForm.getHotelId().longValue() > 0)) {
+			final List<Room> roomList = getRoomManager()
+					.findAllRoomWithRoomType(reportForm.getHotelId());
+			reportForm.setAllRoom(roomList);
+		}
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -166,8 +183,8 @@ public class BookingReportAction extends BaseAction {
 					bookingDto));
 		}
 
-		if (reportForm.getHotelId() != null
-				&& reportForm.getHotelId().longValue() > 0) {
+		if ((reportForm.getHotelId() != null)
+				&& (reportForm.getHotelId().longValue() > 0)) {
 			final List<Room> rooms = getRoomManager().findAllRoomWithRoomType(
 					reportForm.getHotelId());
 			reportForm.setAllRoom(rooms);
@@ -210,7 +227,7 @@ public class BookingReportAction extends BaseAction {
 
 		filUpSelects(reportForm, profile);
 
-		if (reportForm.getBookingList() == null
+		if ((reportForm.getBookingList() == null)
 				|| reportForm.getBookingList().isEmpty()) {
 			final BookingReportSearchDTO bookinDto = new BookingReportSearchDTO();
 
@@ -232,23 +249,6 @@ public class BookingReportAction extends BaseAction {
 		}
 
 		return mapping.findForward(SUCCESS);
-	}
-
-	public void filUpSelects(final BookingReportForm reportForm,
-			final IUserProfile profile) throws ServiceException {
-
-		if (profile.hasFunction(IUserFunctions.BOOKINGREPORT_ASSIGNHOTELS_ONLY)) {
-			reportForm.addHotelMap(profile.getAssignedHotels());
-		} else {
-			reportForm.setHotelList(getHotelManager().findAllActiveHotels());
-		}
-
-		if (reportForm.getHotelId() != null
-				&& reportForm.getHotelId().longValue() > 0) {
-			final List<Room> roomList = getRoomManager()
-					.findAllRoomWithRoomType(reportForm.getHotelId());
-			reportForm.setAllRoom(roomList);
-		}
 	}
 
 	/*
@@ -284,6 +284,14 @@ public class BookingReportAction extends BaseAction {
 		return null;
 	}
 
+	@Override
+	public ActionForward search(final ActionMapping mapping,
+			final ActionForm form, final HttpServletRequest request,
+			final HttpServletResponse response) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -311,14 +319,6 @@ public class BookingReportAction extends BaseAction {
 	protected ActionForward sort(final ActionMapping mapping,
 			final ActionForm form, final HttpServletRequest request,
 			final HttpServletResponse response) throws Exception {
-		return null;
-	}
-
-	@Override
-	public ActionForward search(final ActionMapping mapping,
-			final ActionForm form, final HttpServletRequest request,
-			final HttpServletResponse response) throws Exception {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

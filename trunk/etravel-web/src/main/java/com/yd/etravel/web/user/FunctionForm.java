@@ -34,24 +34,21 @@ public class FunctionForm extends BaseForm {
 		this.functionIds = new Long[0];
 	}
 
+	public Long[] getAllFunctionIds() {
+		return this.allFunctionIds;
+	}
+
+	public List<Role> getAllRoles() {
+		return this.allRoles;
+	}
+
 	public List<Function> getFuctionList() {
 
 		return this.fuctionList;
 	}
 
-	public Set<Function> getSelectedFuctionList() {
-		final Set<Function> sfunc = new HashSet<Function>();
-		if (getFunctionIds() != null) {
-			for (final Long id : getFunctionIds()) {
-				for (final Function function : this.fuctionList) {
-					if (function.getId().equals(id)) {
-						sfunc.add(function);
-						break;
-					}
-				}
-			}
-		}
-		return sfunc;
+	public Long[] getFunctionIds() {
+		return this.functionIds;
 	}
 
 	public List<Function> getRemainFuctionList() {
@@ -74,24 +71,46 @@ public class FunctionForm extends BaseForm {
 		return returnList;
 	}
 
-	public void setFuctionList(final List<Function> fuctionList) {
-		this.fuctionList = fuctionList;
-	}
-
 	public Long getRoleId() {
 		return this.roleId;
 	}
 
-	public void setRoleId(final Long roleId) {
-		this.roleId = roleId;
+	public Set<Function> getSelectedFuctionList() {
+		final Set<Function> sfunc = new HashSet<Function>();
+		if (getFunctionIds() != null) {
+			for (final Long id : getFunctionIds()) {
+				for (final Function function : this.fuctionList) {
+					if (function.getId().equals(id)) {
+						sfunc.add(function);
+						break;
+					}
+				}
+			}
+		}
+		return sfunc;
 	}
 
-	public Long[] getFunctionIds() {
-		return this.functionIds;
+	@Override
+	public void resetBean(final ActionMapping mapping,
+			final HttpServletRequest request) {
+		this.fuctionList = Collections.emptyList();
+		this.roleId = -1l;
+		this.functionIds = new Long[0];
+		this.allFunctionIds = new Long[0];
+		this.allRoles = Collections.emptyList();
+
 	}
 
-	public void setFunctionIds(final Long[] functionIds) {
-		this.functionIds = functionIds;
+	public void setAllFunctionIds(final Long[] allFunctionIds) {
+		this.allFunctionIds = allFunctionIds;
+	}
+
+	public void setAllRoles(final List<Role> allRoles) {
+		this.allRoles = allRoles;
+	}
+
+	public void setFuctionList(final List<Function> fuctionList) {
+		this.fuctionList = fuctionList;
 	}
 
 	public void setFunctionIds(final List<Function> functionIds) {
@@ -106,31 +125,12 @@ public class FunctionForm extends BaseForm {
 		}
 	}
 
-	public List<Role> getAllRoles() {
-		return this.allRoles;
+	public void setFunctionIds(final Long[] functionIds) {
+		this.functionIds = functionIds;
 	}
 
-	public void setAllRoles(final List<Role> allRoles) {
-		this.allRoles = allRoles;
-	}
-
-	public Long[] getAllFunctionIds() {
-		return this.allFunctionIds;
-	}
-
-	public void setAllFunctionIds(final Long[] allFunctionIds) {
-		this.allFunctionIds = allFunctionIds;
-	}
-
-	@Override
-	public void resetBean(final ActionMapping mapping,
-			final HttpServletRequest request) {
-		this.fuctionList = Collections.emptyList();
-		this.roleId = -1l;
-		this.functionIds = new Long[0];
-		this.allFunctionIds = new Long[0];
-		this.allRoles = Collections.emptyList();
-
+	public void setRoleId(final Long roleId) {
+		this.roleId = roleId;
 	}
 
 	@Override

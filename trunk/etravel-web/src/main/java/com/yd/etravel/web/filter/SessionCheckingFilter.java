@@ -51,7 +51,7 @@ public class SessionCheckingFilter implements Filter {
 		final String[] valStrings = url.split(APP_NAME);
 		String urlEnd = "";
 		boolean hasAppname = true;
-		if (valStrings != null && valStrings.length > 1) {
+		if ((valStrings != null) && (valStrings.length > 1)) {
 			urlEnd = valStrings[valStrings.length - 1];
 		} else {
 			urlEnd = url;
@@ -85,16 +85,6 @@ public class SessionCheckingFilter implements Filter {
 		return;
 	}
 
-	protected void redirect(final String url, final boolean hasAppname,
-			final HttpServletResponse response) throws IOException {
-		response.sendRedirect(getUrl(url, hasAppname));
-	}
-
-	protected boolean isSessionNull(final HttpSession session) {
-		return session == null
-				|| session.getAttribute(IConstants.IUser.USER_PROFILE) == null;
-	}
-
 	private String getUrl(final String uri, final boolean hasAppname) {
 		return hasAppname ? APP_NAME + uri : uri;
 	}
@@ -102,6 +92,16 @@ public class SessionCheckingFilter implements Filter {
 	@Override
 	public void init(final FilterConfig config) throws ServletException {
 		this.config = config;
+	}
+
+	protected boolean isSessionNull(final HttpSession session) {
+		return (session == null)
+				|| (session.getAttribute(IConstants.IUser.USER_PROFILE) == null);
+	}
+
+	protected void redirect(final String url, final boolean hasAppname,
+			final HttpServletResponse response) throws IOException {
+		response.sendRedirect(getUrl(url, hasAppname));
 	}
 
 }

@@ -10,23 +10,19 @@ import com.yd.etravel.web.common.BaseForm;
 
 public class AuthanticationForm extends BaseForm {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4010044878943623934L;
 	private String username;
 	private String password;
-
-	public String getUsername() {
-		return this.username;
-	}
-
-	public void setUsername(final String username) {
-		this.username = username;
-	}
 
 	public String getPassword() {
 		return this.password;
 	}
 
-	public void setPassword(final String password) {
-		this.password = password;
+	public String getUsername() {
+		return this.username;
 	}
 
 	@Override
@@ -34,6 +30,14 @@ public class AuthanticationForm extends BaseForm {
 			final HttpServletRequest request) {
 		this.username = EMPTY_STRING;
 		this.password = EMPTY_STRING;
+	}
+
+	public void setPassword(final String password) {
+		this.password = password;
+	}
+
+	public void setUsername(final String username) {
+		this.username = username;
 	}
 
 	@Override

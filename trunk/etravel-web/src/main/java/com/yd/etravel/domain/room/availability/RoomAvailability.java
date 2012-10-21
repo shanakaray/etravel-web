@@ -35,6 +35,10 @@ public class RoomAvailability extends BaseObject {
 	@ManyToOne
 	private Room room;
 
+	public int getAvailableUnit() {
+		return this.availableUnit;
+	}
+
 	public Date getFromDate() {
 		return this.fromDate;
 	}
@@ -43,8 +47,8 @@ public class RoomAvailability extends BaseObject {
 		return DateUtil.format(this.fromDate);
 	}
 
-	public void setFromDate(final Date fromDate) {
-		this.fromDate = fromDate;
+	public Room getRoom() {
+		return this.room;
 	}
 
 	public Date getToDate() {
@@ -55,32 +59,28 @@ public class RoomAvailability extends BaseObject {
 		return DateUtil.format(this.toDate);
 	}
 
-	public void setToDate(final Date toDate) {
-		this.toDate = toDate;
-	}
-
 	public int getUnit() {
 		return this.unit;
 	}
 
-	public void setUnit(final int unit) {
-		this.unit = unit;
+	public void setAvailableUnit(final int availableUnit) {
+		this.availableUnit = availableUnit;
 	}
 
-	public Room getRoom() {
-		return this.room;
+	public void setFromDate(final Date fromDate) {
+		this.fromDate = fromDate;
 	}
 
 	public void setRoom(final Room room) {
 		this.room = room;
 	}
 
-	public int getAvailableUnit() {
-		return this.availableUnit;
+	public void setToDate(final Date toDate) {
+		this.toDate = toDate;
 	}
 
-	public void setAvailableUnit(final int availableUnit) {
-		this.availableUnit = availableUnit;
+	public void setUnit(final int unit) {
+		this.unit = unit;
 	}
 
 }

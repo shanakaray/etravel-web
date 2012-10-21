@@ -23,27 +23,24 @@ import com.yd.etravel.persistence.exception.PersistenceException;
 public class RoomDAO extends BaseDAO<Room> implements IRoomDAO {
 
 	@Override
-	public boolean isExist(final Long hotelId, final Long roomTypeId,
-			final Long id) throws PersistenceException {
+	public List<Room> findAllRoomWithRoomType(final Long hotelId)
+			throws PersistenceException {
+		final StringBuilder sb = new StringBuilder(
+				"SELECT room FROM Room as room join fetch  room.roomType as roomType"
+						+ " JOIN room.hotel as hot where room.active=1");
 		try {
-			final StringBuilder IS_ROOM_EXIST = new StringBuilder(
-					"SELECT room FROM Room as room where ")
-					.append("room.hotel.id=:hid AND room.roomType.id=:typeid ");
 
-			if (id != null) {
-				IS_ROOM_EXIST.append(" AND room.id != :id");
+			if (hotelId != null) {
+				sb.append(" AND hot.id=:hid ");
 			}
 
-			final Query query = getCurrentSession().createQuery(
-					IS_ROOM_EXIST.toString());
-			query.setParameter("hid", hotelId);
-			query.setParameter("typeid", roomTypeId);
+			final Query query = getCurrentSession().createQuery(sb.toString());
 
-			if (id != null) {
-				query.setParameter("id", id);
+			if (hotelId != null) {
+				query.setParameter("hid", hotelId);
 			}
 
-			return !query.list().isEmpty();
+			return query.list();
 		} catch (final HibernateException e) {
 			throw new PersistenceException(e);
 		}
@@ -81,31 +78,34 @@ public class RoomDAO extends BaseDAO<Room> implements IRoomDAO {
 	}
 
 	@Override
-	public List<Room> findAllRoomWithRoomType(final Long hotelId)
-			throws PersistenceException {
-		final StringBuilder sb = new StringBuilder(
-				"SELECT room FROM Room as room join fetch  room.roomType as roomType"
-						+ " JOIN room.hotel as hot where room.active=1");
-		try {
-
-			if (hotelId != null) {
-				sb.append(" AND hot.id=:hid ");
-			}
-
-			final Query query = getCurrentSession().createQuery(sb.toString());
-
-			if (hotelId != null) {
-				query.setParameter("hid", hotelId);
-			}
-
-			return query.list();
-		} catch (final HibernateException e) {
-			throw new PersistenceException(e);
-		}
+	protected Class getEntityClass() {
+		return Room.class;
 	}
 
 	@Override
-	protected Class getEntityClass() {
-		return Room.class;
+	public boolean isExist(final Long hotelId, final Long roomTypeId,
+			final Long id) throws PersistenceException {
+		try {
+			final StringBuilder IS_ROOM_EXIST = new StringBuilder(
+					"SELECT room FROM Room as room where ")
+					.append("room.hotel.id=:hid AND room.roomType.id=:typeid ");
+
+			if (id != null) {
+				IS_ROOM_EXIST.append(" AND room.id != :id");
+			}
+
+			final Query query = getCurrentSession().createQuery(
+					IS_ROOM_EXIST.toString());
+			query.setParameter("hid", hotelId);
+			query.setParameter("typeid", roomTypeId);
+
+			if (id != null) {
+				query.setParameter("id", id);
+			}
+
+			return !query.list().isEmpty();
+		} catch (final HibernateException e) {
+			throw new PersistenceException(e);
+		}
 	}
 }

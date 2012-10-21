@@ -17,6 +17,11 @@ import com.yd.etravel.util.DateUtil;
 @Entity
 @Table(name = "T_SEASON")
 public class Season extends BaseObject {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5948772438828750808L;
+
 	@Column
 	private Date fromDate;
 
@@ -29,6 +34,14 @@ public class Season extends BaseObject {
 	@ManyToOne
 	private Hotel hotel;
 
+	/**
+	 * @hibernate.property
+	 * @return the status
+	 */
+	public String getComments() {
+		return this.comments;
+	}
+
 	public Date getFromDate() {
 		return this.fromDate;
 	}
@@ -38,11 +51,11 @@ public class Season extends BaseObject {
 	}
 
 	/**
-	 * @param fromDate
-	 *            the fromDate to set
+	 * @hibernate.many-to-one cascade="save-update"
+	 * @return the season
 	 */
-	public void setFromDate(final Date fromDate) {
-		this.fromDate = fromDate;
+	public Hotel getHotel() {
+		return this.hotel;
 	}
 
 	/**
@@ -57,20 +70,16 @@ public class Season extends BaseObject {
 		return DateUtil.format(this.toDate);
 	}
 
-	/**
-	 * @param toDate
-	 *            the toDate to set
-	 */
-	public void setToDate(final Date toDate) {
-		this.toDate = toDate;
+	public void setComments(final String comments) {
+		this.comments = comments;
 	}
 
 	/**
-	 * @hibernate.many-to-one cascade="save-update"
-	 * @return the season
+	 * @param fromDate
+	 *            the fromDate to set
 	 */
-	public Hotel getHotel() {
-		return this.hotel;
+	public void setFromDate(final Date fromDate) {
+		this.fromDate = fromDate;
 	}
 
 	public void setHotel(final Hotel hotel) {
@@ -78,15 +87,11 @@ public class Season extends BaseObject {
 	}
 
 	/**
-	 * @hibernate.property
-	 * @return the status
+	 * @param toDate
+	 *            the toDate to set
 	 */
-	public String getComments() {
-		return this.comments;
-	}
-
-	public void setComments(final String comments) {
-		this.comments = comments;
+	public void setToDate(final Date toDate) {
+		this.toDate = toDate;
 	}
 
 }

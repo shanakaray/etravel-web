@@ -13,6 +13,10 @@ import com.yd.etravel.domain.extraitem.ExtraItem;
  */
 public class ExtraItemDTO implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2714566480162127288L;
 	private ExtraItem extraItem;
 
 	/**

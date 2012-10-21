@@ -90,13 +90,13 @@ public class OccupancyAction extends BaseAction {
 		occupancy.setTotalPax(occupancyForm.getAdult()
 				+ occupancyForm.getAdult() + occupancyForm.getAdult());
 
-		if (occupancyForm.getId() != null && occupancyForm.getId() > 0) {
+		if ((occupancyForm.getId() != null) && (occupancyForm.getId() > 0)) {
 			occupancy.setId(occupancyForm.getId());
 			isnew = false;
 		}
 
-		if (occupancyForm.getRoomTypeids() != null
-				&& occupancyForm.getRoomTypeids().length > 0) {
+		if ((occupancyForm.getRoomTypeids() != null)
+				&& (occupancyForm.getRoomTypeids().length > 0)) {
 			final RoomType roomType = new RoomType();
 			for (int i = 0; i < occupancyForm.getRoomTypeids().length; i++) {
 
@@ -273,6 +273,14 @@ public class OccupancyAction extends BaseAction {
 		return null;
 	}
 
+	@Override
+	public ActionForward search(final ActionMapping mapping,
+			final ActionForm form, final HttpServletRequest request,
+			final HttpServletResponse response) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -299,14 +307,6 @@ public class OccupancyAction extends BaseAction {
 	 */
 	@Override
 	protected ActionForward sort(final ActionMapping mapping,
-			final ActionForm form, final HttpServletRequest request,
-			final HttpServletResponse response) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ActionForward search(final ActionMapping mapping,
 			final ActionForm form, final HttpServletRequest request,
 			final HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub

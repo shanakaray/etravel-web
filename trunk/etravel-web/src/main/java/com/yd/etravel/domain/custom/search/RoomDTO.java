@@ -17,6 +17,10 @@ import com.yd.etravel.domain.season.RoomSeasonalRate;
  *         com.yd.etravel.domain.custom.search.RoomDTO
  */
 public class RoomDTO implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1859777270142908528L;
 	private Long id; // This is equal to roomAvailability id
 	private Room room;
 	private RoomType roomType;
@@ -29,48 +33,24 @@ public class RoomDTO implements Serializable {
 	private RoomAvailability roomAvailabilityCheckOut;
 
 	/**
+	 * @return the hotel
+	 */
+	public Hotel getHotel() {
+		return this.hotel;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public Long getId() {
+		return this.id;
+	}
+
+	/**
 	 * @return the room
 	 */
 	public Room getRoom() {
 		return this.room;
-	}
-
-	/**
-	 * @param room
-	 *            the room to set
-	 */
-	public void setRoom(final Room room) {
-		this.room = room;
-	}
-
-	/**
-	 * @return the roomType
-	 */
-	public RoomType getRoomType() {
-		return this.roomType;
-	}
-
-	/**
-	 * @param roomType
-	 *            the roomType to set
-	 */
-	public void setRoomType(final RoomType roomType) {
-		this.roomType = roomType;
-	}
-
-	/**
-	 * @return the roomSeasonalRate
-	 */
-	public RoomSeasonalRate getRoomSeasonalRate() {
-		return this.roomSeasonalRate;
-	}
-
-	/**
-	 * @param roomSeasonalRate
-	 *            the roomSeasonalRate to set
-	 */
-	public void setRoomSeasonalRate(final RoomSeasonalRate roomSeasonalRate) {
-		this.roomSeasonalRate = roomSeasonalRate;
 	}
 
 	// /**
@@ -93,41 +73,31 @@ public class RoomDTO implements Serializable {
 	}
 
 	/**
-	 * @param roomAvailability
-	 *            the roomAvailability to set
+	 * @return the roomAvailabilityCheckIn
 	 */
-	public void setRoomAvailability(final RoomAvailability roomAvailability) {
-		this.roomAvailability = roomAvailability;
+	public RoomAvailability getRoomAvailabilityCheckIn() {
+		return this.roomAvailabilityCheckIn;
 	}
 
 	/**
-	 * @return the hotel
+	 * @return the roomAvailabilityCheckOut
 	 */
-	public Hotel getHotel() {
-		return this.hotel;
+	public RoomAvailability getRoomAvailabilityCheckOut() {
+		return this.roomAvailabilityCheckOut;
 	}
 
 	/**
-	 * @param hotel
-	 *            the hotel to set
+	 * @return the roomSeasonalRate
 	 */
-	public void setHotel(final Hotel hotel) {
-		this.hotel = hotel;
+	public RoomSeasonalRate getRoomSeasonalRate() {
+		return this.roomSeasonalRate;
 	}
 
 	/**
-	 * @return the id
+	 * @return the roomType
 	 */
-	public Long getId() {
-		return this.id;
-	}
-
-	/**
-	 * @param id
-	 *            the id to set
-	 */
-	public void setId(final Long id) {
-		this.id = id;
+	public RoomType getRoomType() {
+		return this.roomType;
 	}
 
 	/**
@@ -146,10 +116,35 @@ public class RoomDTO implements Serializable {
 	}
 
 	/**
-	 * @return the roomAvailabilityCheckIn
+	 * @param hotel
+	 *            the hotel to set
 	 */
-	public RoomAvailability getRoomAvailabilityCheckIn() {
-		return this.roomAvailabilityCheckIn;
+	public void setHotel(final Hotel hotel) {
+		this.hotel = hotel;
+	}
+
+	/**
+	 * @param id
+	 *            the id to set
+	 */
+	public void setId(final Long id) {
+		this.id = id;
+	}
+
+	/**
+	 * @param room
+	 *            the room to set
+	 */
+	public void setRoom(final Room room) {
+		this.room = room;
+	}
+
+	/**
+	 * @param roomAvailability
+	 *            the roomAvailability to set
+	 */
+	public void setRoomAvailability(final RoomAvailability roomAvailability) {
+		this.roomAvailability = roomAvailability;
 	}
 
 	/**
@@ -162,19 +157,28 @@ public class RoomDTO implements Serializable {
 	}
 
 	/**
-	 * @return the roomAvailabilityCheckOut
-	 */
-	public RoomAvailability getRoomAvailabilityCheckOut() {
-		return this.roomAvailabilityCheckOut;
-	}
-
-	/**
 	 * @param roomAvailabilityCheckOut
 	 *            the roomAvailabilityCheckOut to set
 	 */
 	public void setRoomAvailabilityCheckOut(
 			final RoomAvailability roomAvailabilityCheckOut) {
 		this.roomAvailabilityCheckOut = roomAvailabilityCheckOut;
+	}
+
+	/**
+	 * @param roomSeasonalRate
+	 *            the roomSeasonalRate to set
+	 */
+	public void setRoomSeasonalRate(final RoomSeasonalRate roomSeasonalRate) {
+		this.roomSeasonalRate = roomSeasonalRate;
+	}
+
+	/**
+	 * @param roomType
+	 *            the roomType to set
+	 */
+	public void setRoomType(final RoomType roomType) {
+		this.roomType = roomType;
 	}
 
 }

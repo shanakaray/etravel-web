@@ -11,6 +11,10 @@ import com.yd.etravel.util.DateUtil;
  */
 public class SearchRequestDTO implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8337895053648763479L;
 	private Long hotelId;
 	private String hotelName;
 	private Long roomTypeId;
@@ -27,63 +31,10 @@ public class SearchRequestDTO implements Serializable {
 	private Integer infantAge; // Month
 
 	/**
-	 * @return the hotelId
+	 * @return the adult
 	 */
-	public Long getHotelId() {
-		return this.hotelId;
-	}
-
-	/**
-	 * @param hotelId
-	 *            the hotelId to set
-	 */
-	public void setHotelId(final Long hotelId) {
-		this.hotelId = hotelId;
-	}
-
-	/**
-	 * @return the hotelName
-	 */
-	public String getHotelName() {
-		return this.hotelName;
-	}
-
-	/**
-	 * @param hotelName
-	 *            the hotelName to set
-	 */
-	public void setHotelName(final String hotelName) {
-		this.hotelName = hotelName;
-	}
-
-	/**
-	 * @return the roomTypeId
-	 */
-	public Long getRoomTypeId() {
-		return this.roomTypeId;
-	}
-
-	/**
-	 * @param roomTypeId
-	 *            the roomTypeId to set
-	 */
-	public void setRoomTypeId(final Long Long) {
-		this.roomTypeId = this.roomTypeId;
-	}
-
-	/**
-	 * @return the roomTypeName
-	 */
-	public String getRoomTypeName() {
-		return this.roomTypeName;
-	}
-
-	/**
-	 * @param roomTypeName
-	 *            the roomTypeName to set
-	 */
-	public void setRoomTypeName(final String roomTypeName) {
-		this.roomTypeName = roomTypeName;
+	public Integer getAdult() {
+		return this.adult;
 	}
 
 	/**
@@ -98,14 +49,6 @@ public class SearchRequestDTO implements Serializable {
 	}
 
 	/**
-	 * @param checkIn
-	 *            the checkIn to set
-	 */
-	public void setCheckIn(final Date checkIn) {
-		this.checkIn = checkIn;
-	}
-
-	/**
 	 * @return the checkOut
 	 */
 	public Date getCheckOut() {
@@ -114,6 +57,48 @@ public class SearchRequestDTO implements Serializable {
 
 	public String getCheckOutString() {
 		return DateUtil.format(this.checkOut);
+	}
+
+	/**
+	 * @return the child
+	 */
+	public Integer getChild() {
+		return this.child;
+	}
+
+	/**
+	 * @return the childAge
+	 */
+	public Integer getChildAge() {
+		return this.childAge;
+	}
+
+	/**
+	 * @return the hotelId
+	 */
+	public Long getHotelId() {
+		return this.hotelId;
+	}
+
+	/**
+	 * @return the hotelName
+	 */
+	public String getHotelName() {
+		return this.hotelName;
+	}
+
+	/**
+	 * @return the infant
+	 */
+	public Integer getInfant() {
+		return this.infant;
+	}
+
+	/**
+	 * @return the infantAge
+	 */
+	public Integer getInfantAge() {
+		return this.infantAge;
 	}
 
 	public int getNoOfNights() {
@@ -133,18 +118,17 @@ public class SearchRequestDTO implements Serializable {
 	}
 
 	/**
-	 * @param checkOut
-	 *            the checkOut to set
+	 * @return the roomTypeId
 	 */
-	public void setCheckOut(final Date checkOut) {
-		this.checkOut = checkOut;
+	public Long getRoomTypeId() {
+		return this.roomTypeId;
 	}
 
 	/**
-	 * @return the adult
+	 * @return the roomTypeName
 	 */
-	public Integer getAdult() {
-		return this.adult;
+	public String getRoomTypeName() {
+		return this.roomTypeName;
 	}
 
 	/**
@@ -156,10 +140,19 @@ public class SearchRequestDTO implements Serializable {
 	}
 
 	/**
-	 * @return the child
+	 * @param checkIn
+	 *            the checkIn to set
 	 */
-	public Integer getChild() {
-		return this.child;
+	public void setCheckIn(final Date checkIn) {
+		this.checkIn = checkIn;
+	}
+
+	/**
+	 * @param checkOut
+	 *            the checkOut to set
+	 */
+	public void setCheckOut(final Date checkOut) {
+		this.checkOut = checkOut;
 	}
 
 	/**
@@ -171,10 +164,27 @@ public class SearchRequestDTO implements Serializable {
 	}
 
 	/**
-	 * @return the infant
+	 * @param childAge
+	 *            the childAge to set
 	 */
-	public Integer getInfant() {
-		return this.infant;
+	public void setChildAge(final Integer childAge) {
+		this.childAge = childAge;
+	}
+
+	/**
+	 * @param hotelId
+	 *            the hotelId to set
+	 */
+	public void setHotelId(final Long hotelId) {
+		this.hotelId = hotelId;
+	}
+
+	/**
+	 * @param hotelName
+	 *            the hotelName to set
+	 */
+	public void setHotelName(final String hotelName) {
+		this.hotelName = hotelName;
 	}
 
 	/**
@@ -186,33 +196,27 @@ public class SearchRequestDTO implements Serializable {
 	}
 
 	/**
-	 * @return the childAge
-	 */
-	public Integer getChildAge() {
-		return this.childAge;
-	}
-
-	/**
-	 * @param childAge
-	 *            the childAge to set
-	 */
-	public void setChildAge(final Integer childAge) {
-		this.childAge = childAge;
-	}
-
-	/**
-	 * @return the infantAge
-	 */
-	public Integer getInfantAge() {
-		return this.infantAge;
-	}
-
-	/**
 	 * @param infantAge
 	 *            the infantAge to set
 	 */
 	public void setInfantAge(final Integer infantAge) {
 		this.infantAge = infantAge;
+	}
+
+	/**
+	 * @param roomTypeId
+	 *            the roomTypeId to set
+	 */
+	public void setRoomTypeId(final Long Long) {
+		this.roomTypeId = this.roomTypeId;
+	}
+
+	/**
+	 * @param roomTypeName
+	 *            the roomTypeName to set
+	 */
+	public void setRoomTypeName(final String roomTypeName) {
+		this.roomTypeName = roomTypeName;
 	}
 
 }

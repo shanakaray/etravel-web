@@ -24,6 +24,10 @@ import com.yd.etravel.web.common.BaseForm;
  */
 public class RoomAvailabilityForm extends BaseForm {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4768392798260825668L;
 	private String fromDate;
 	private String toDate;
 	private String roomType;
@@ -43,94 +47,10 @@ public class RoomAvailabilityForm extends BaseForm {
 	private Long occupancyId;
 
 	/**
-	 * @return the id
-	 */
-	public Long getId() {
-		return this.id;
-	}
-
-	/**
-	 * @param id
-	 *            the id to set
-	 */
-	public void setId(final Long id) {
-		this.id = id;
-	}
-
-	/**
-	 * @return the fromDate
-	 */
-	public String getFromDate() {
-		return this.fromDate;
-	}
-
-	/**
-	 * @param fromDate
-	 *            the fromDate to set
-	 */
-	public void setFromDate(final String fromDate) {
-		this.fromDate = fromDate;
-	}
-
-	/**
-	 * @return the toDate
-	 */
-	public String getToDate() {
-		return this.toDate;
-	}
-
-	/**
-	 * @param toDate
-	 *            the toDate to set
-	 */
-	public void setToDate(final String toDate) {
-		this.toDate = toDate;
-	}
-
-	/**
 	 * @return the active
 	 */
 	public boolean getActive() {
 		return this.active;
-	}
-
-	/**
-	 * @param active
-	 *            the active to set
-	 */
-	public void setActive(final boolean active) {
-		this.active = active;
-	}
-
-	/**
-	 * @return the unit
-	 */
-	public int getUnit() {
-		return this.unit;
-	}
-
-	/**
-	 * @param unit
-	 *            the unit to set
-	 */
-	public void setUnit(final int unit) {
-		this.unit = unit;
-	}
-
-	/**
-	 * @return the allRoomAvailability
-	 */
-	public List<RoomAvailabilityDTO> getAllRoomAvailability() {
-		return this.allRoomAvailability;
-	}
-
-	/**
-	 * @param allRoomAvailability
-	 *            the allRoomAvailability to set
-	 */
-	public void setAllRoomAvailability(
-			final List<RoomAvailabilityDTO> allRoomAvailability) {
-		this.allRoomAvailability = allRoomAvailability;
 	}
 
 	/**
@@ -141,11 +61,72 @@ public class RoomAvailabilityForm extends BaseForm {
 	}
 
 	/**
-	 * @param allRoom
-	 *            the allRoom to set
+	 * @return the allRoomAvailability
 	 */
-	public void setAllRoom(final List<Room> allRoom) {
-		this.allRoom = allRoom;
+	public List<RoomAvailabilityDTO> getAllRoomAvailability() {
+		return this.allRoomAvailability;
+	}
+
+	/**
+	 * @return the allRoomDailyAvailability
+	 */
+	public List<RoomDailyAvailability> getAllRoomDailyAvailability() {
+		return this.allRoomDailyAvailability;
+	}
+
+	/**
+	 * @return the fromDate
+	 */
+	public String getFromDate() {
+		return this.fromDate;
+	}
+
+	public Long getHotelId() {
+		return this.hotelId;
+	}
+
+	public List<Hotel> getHotelList() {
+		return this.hotelList;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public Long getId() {
+		return this.id;
+	}
+
+	public Long getOccupancyId() {
+		return this.occupancyId;
+	}
+
+	public Long getRoomId() {
+		return this.roomId;
+	}
+
+	/**
+	 * @return the roomType
+	 */
+	public String getRoomType() {
+		return this.roomType;
+	}
+
+	public Long getRoomTypeId() {
+		return this.roomTypeId;
+	}
+
+	/**
+	 * @return the toDate
+	 */
+	public String getToDate() {
+		return this.toDate;
+	}
+
+	/**
+	 * @return the unit
+	 */
+	public int getUnit() {
+		return this.unit;
 	}
 
 	// /**
@@ -163,83 +144,8 @@ public class RoomAvailabilityForm extends BaseForm {
 	// this.allOccupancy = allOccupancy;
 	// }
 
-	/**
-	 * @return the allRoomDailyAvailability
-	 */
-	public List<RoomDailyAvailability> getAllRoomDailyAvailability() {
-		return this.allRoomDailyAvailability;
-	}
-
-	/**
-	 * @param allRoomDailyAvailability
-	 *            the allRoomDailyAvailability to set
-	 */
-	public void setAllRoomDailyAvailability(
-			final List<RoomDailyAvailability> allRoomDailyAvailability) {
-		this.allRoomDailyAvailability = allRoomDailyAvailability;
-	}
-
-	/**
-	 * @return the roomType
-	 */
-	public String getRoomType() {
-		return this.roomType;
-	}
-
-	/**
-	 * @param roomType
-	 *            the roomType to set
-	 */
-	public void setRoomType(final String roomType) {
-		this.roomType = roomType;
-	}
-
-	public Long getHotelId() {
-		return this.hotelId;
-	}
-
-	public void setHotelId(final Long hotelId) {
-		this.hotelId = hotelId;
-	}
-
-	public List<Hotel> getHotelList() {
-		return this.hotelList;
-	}
-
-	public void setHotelList(final List<Hotel> hotelList) {
-		this.hotelList = hotelList;
-	}
-
-	public Long getOccupancyId() {
-		return this.occupancyId;
-	}
-
-	public void setOccupancyId(final Long occupancyId) {
-		this.occupancyId = occupancyId;
-	}
-
-	public Long getRoomId() {
-		return this.roomId;
-	}
-
-	public void setRoomId(final Long roomId) {
-		this.roomId = roomId;
-	}
-
-	public Long getRoomTypeId() {
-		return this.roomTypeId;
-	}
-
-	public void setRoomTypeId(final Long roomTypeId) {
-		this.roomTypeId = roomTypeId;
-	}
-
 	public boolean isEdit() {
 		return this.edit;
-	}
-
-	public void setEdit(final boolean edit) {
-		this.edit = edit;
 	}
 
 	@Override
@@ -258,6 +164,104 @@ public class RoomAvailabilityForm extends BaseForm {
 		this.roomTypeId = -1l;
 		this.unit = 0;
 		this.edit = false;
+	}
+
+	/**
+	 * @param active
+	 *            the active to set
+	 */
+	public void setActive(final boolean active) {
+		this.active = active;
+	}
+
+	/**
+	 * @param allRoom
+	 *            the allRoom to set
+	 */
+	public void setAllRoom(final List<Room> allRoom) {
+		this.allRoom = allRoom;
+	}
+
+	/**
+	 * @param allRoomAvailability
+	 *            the allRoomAvailability to set
+	 */
+	public void setAllRoomAvailability(
+			final List<RoomAvailabilityDTO> allRoomAvailability) {
+		this.allRoomAvailability = allRoomAvailability;
+	}
+
+	/**
+	 * @param allRoomDailyAvailability
+	 *            the allRoomDailyAvailability to set
+	 */
+	public void setAllRoomDailyAvailability(
+			final List<RoomDailyAvailability> allRoomDailyAvailability) {
+		this.allRoomDailyAvailability = allRoomDailyAvailability;
+	}
+
+	public void setEdit(final boolean edit) {
+		this.edit = edit;
+	}
+
+	/**
+	 * @param fromDate
+	 *            the fromDate to set
+	 */
+	public void setFromDate(final String fromDate) {
+		this.fromDate = fromDate;
+	}
+
+	public void setHotelId(final Long hotelId) {
+		this.hotelId = hotelId;
+	}
+
+	public void setHotelList(final List<Hotel> hotelList) {
+		this.hotelList = hotelList;
+	}
+
+	/**
+	 * @param id
+	 *            the id to set
+	 */
+	public void setId(final Long id) {
+		this.id = id;
+	}
+
+	public void setOccupancyId(final Long occupancyId) {
+		this.occupancyId = occupancyId;
+	}
+
+	public void setRoomId(final Long roomId) {
+		this.roomId = roomId;
+	}
+
+	/**
+	 * @param roomType
+	 *            the roomType to set
+	 */
+	public void setRoomType(final String roomType) {
+		this.roomType = roomType;
+	}
+
+	public void setRoomTypeId(final Long roomTypeId) {
+		this.roomTypeId = roomTypeId;
+	}
+
+	/**
+	 * @param toDate
+	 *            the toDate to set
+	 */
+	public void setToDate(final String toDate) {
+		this.toDate = toDate;
+	}
+
+	/**
+	 * @param unit
+	 *            the unit to set
+	 */
+	public void setUnit(final int unit) {
+		this.unit = unit;
 	}
 
 	@Override

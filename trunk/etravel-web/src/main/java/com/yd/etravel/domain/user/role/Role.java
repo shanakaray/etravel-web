@@ -20,36 +20,39 @@ import com.yd.etravel.domain.common.BaseObject;
 @Table(name = "T_ROLE")
 public class Role extends BaseObject {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5974443502845361933L;
 	@ManyToMany(cascade = { ALL })
 	@JoinTable(name = "T_ROLE_T_FUNC", joinColumns = @JoinColumn(name = "T_ROLE_ID", nullable = false), inverseJoinColumns = @JoinColumn(name = "FUNCTION_ID", nullable = false), uniqueConstraints = @UniqueConstraint(columnNames = {
 			"T_ROLE_ID", "FUNCTION_ID" }))
 	private List<Function> function;
 
-	public Role(final String name) {
-		super(name);
-	}
-
 	public Role() {
 		super();
 	}
 
-	@Override
-	@Column(unique = true, nullable = true)
-	public String getName() {
-		return super.getName();
-	}
-
-	@Override
-	public void setName(final String name) {
-		super.setName(name);
+	public Role(final String name) {
+		super(name);
 	}
 
 	public List<Function> getFunction() {
 		return this.function;
 	}
 
-	public void setFunction(final List<Function> function) {
-		this.function = function;
+	public Set<String> getFunctionNames() {
+		final Set<String> set = new HashSet<String>();
+		for (final Function function : getFunction()) {
+			set.add(function.getKey());
+		}
+		return set;
+	}
+
+	@Override
+	@Column(unique = true, nullable = true)
+	public String getName() {
+		return super.getName();
 	}
 
 	public boolean hasFunction(final String key) {
@@ -65,12 +68,13 @@ public class Role extends BaseObject {
 		return false;
 	}
 
-	public Set<String> getFunctionNames() {
-		final Set<String> set = new HashSet<String>();
-		for (final Function function : getFunction()) {
-			set.add(function.getKey());
-		}
-		return set;
+	public void setFunction(final List<Function> function) {
+		this.function = function;
+	}
+
+	@Override
+	public void setName(final String name) {
+		super.setName(name);
 	}
 
 }

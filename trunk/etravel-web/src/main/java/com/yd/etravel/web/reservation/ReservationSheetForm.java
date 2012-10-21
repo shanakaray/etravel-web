@@ -31,6 +31,10 @@ import com.yd.etravel.web.common.BaseForm;
  */
 
 public class ReservationSheetForm extends BaseForm {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4301208483391889574L;
 	private static Map<Integer, String> colurCodes = new HashMap<Integer, String>();
 
 	static {
@@ -53,32 +57,23 @@ public class ReservationSheetForm extends BaseForm {
 	private Set<RoomAvailabilityDTO> roomAvailabilitySet;
 	private List<BookingReportDTO> bookingList;
 
-	public List<Hotel> getHotelList() {
-		return this.hotelList;
+	public void addHotelMap(final Map<Long, String> hotelMap) {
+		this.hotelList = new ArrayList<Hotel>();
+		for (final Map.Entry<Long, String> e : hotelMap.entrySet()) {
+			final Hotel hotel = new Hotel(e.getKey(), e.getValue(), "");
+			this.hotelList.add(hotel);
+		}
+
 	}
 
-	public void setHotelList(final List<Hotel> hotelList) {
-		this.hotelList = hotelList;
+	public List<BookingReportDTO> getBookingList() {
+		return this.bookingList;
 	}
 
-	public Long getHotelId() {
-		return this.hotelId;
-	}
-
-	public void setHotelId(final Long hotelId) {
-		this.hotelId = hotelId;
-	}
-
-	public String getStartDate() {
-		return this.startDate;
-	}
-
-	public Date getStartDateToDate() {
-		return DateUtil.parse(this.startDate);
-	}
-
-	public void setStartDate(final String startDate) {
-		this.startDate = startDate;
+	public String getColur(final String bno) {
+		final Integer intg = Integer.valueOf(String.valueOf(bno.charAt(bno
+				.length() - 1)));
+		return colurCodes.get(intg);
 	}
 
 	public String getEndDate() {
@@ -89,37 +84,29 @@ public class ReservationSheetForm extends BaseForm {
 		return DateUtil.parse(this.endDate);
 	}
 
-	public void setEndDate(final String endDate) {
-		this.endDate = endDate;
+	public Long getHotelId() {
+		return this.hotelId;
+	}
+
+	public Set<Long> getHotelIdSet() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public List<Hotel> getHotelList() {
+		return this.hotelList;
 	}
 
 	public Set<RoomAvailabilityDTO> getRoomAvailabilitySet() {
 		return this.roomAvailabilitySet;
 	}
 
-	public void setRoomAvailabilitySet(
-			final Set<RoomAvailabilityDTO> roomAvailabilitySet) {
-		this.roomAvailabilitySet = roomAvailabilitySet;
+	public String getStartDate() {
+		return this.startDate;
 	}
 
-	public void setRoomAvailabilityList(
-			final List<RoomAvailabilityDTO> roomAvailabilityList) {
-		this.roomAvailabilitySet = new HashSet<RoomAvailabilityDTO>();
-		this.roomAvailabilitySet.addAll(roomAvailabilityList);
-	}
-
-	public String getColur(final String bno) {
-		final Integer intg = Integer.valueOf(String.valueOf(bno.charAt(bno
-				.length() - 1)));
-		return colurCodes.get(intg);
-	}
-
-	public List<BookingReportDTO> getBookingList() {
-		return this.bookingList;
-	}
-
-	public void setBookingList(final List<BookingReportDTO> bookingList) {
-		this.bookingList = bookingList;
+	public Date getStartDateToDate() {
+		return DateUtil.parse(this.startDate);
 	}
 
 	@Override
@@ -133,23 +120,40 @@ public class ReservationSheetForm extends BaseForm {
 		this.endDate = EMPTY_STRING;
 	}
 
+	public void setBookingList(final List<BookingReportDTO> bookingList) {
+		this.bookingList = bookingList;
+	}
+
+	public void setEndDate(final String endDate) {
+		this.endDate = endDate;
+	}
+
+	public void setHotelId(final Long hotelId) {
+		this.hotelId = hotelId;
+	}
+
+	public void setHotelList(final List<Hotel> hotelList) {
+		this.hotelList = hotelList;
+	}
+
+	public void setRoomAvailabilityList(
+			final List<RoomAvailabilityDTO> roomAvailabilityList) {
+		this.roomAvailabilitySet = new HashSet<RoomAvailabilityDTO>();
+		this.roomAvailabilitySet.addAll(roomAvailabilityList);
+	}
+
+	public void setRoomAvailabilitySet(
+			final Set<RoomAvailabilityDTO> roomAvailabilitySet) {
+		this.roomAvailabilitySet = roomAvailabilitySet;
+	}
+
+	public void setStartDate(final String startDate) {
+		this.startDate = startDate;
+	}
+
 	@Override
 	public ActionErrors validateBean(final ActionMapping mapping,
 			final HttpServletRequest request) {
 		return null;
-	}
-
-	public Set<Long> getHotelIdSet() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public void addHotelMap(final Map<Long, String> hotelMap) {
-		this.hotelList = new ArrayList<Hotel>();
-		for (final Map.Entry<Long, String> e : hotelMap.entrySet()) {
-			final Hotel hotel = new Hotel(e.getKey(), e.getValue(), "");
-			this.hotelList.add(hotel);
-		}
-
 	}
 }

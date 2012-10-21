@@ -19,6 +19,11 @@ public class LogoutForm extends BaseForm {
 	/**
 	 * 
 	 */
+	private static final long serialVersionUID = 4680740134638596650L;
+
+	/**
+	 * 
+	 */
 	public LogoutForm() {
 		// TODO Auto-generated constructor stub
 	}

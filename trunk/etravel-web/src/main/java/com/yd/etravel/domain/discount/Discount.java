@@ -14,6 +14,11 @@ import com.yd.etravel.domain.common.BaseObject;
 @Entity
 @Table(name = "T_DISCOUNT")
 public class Discount extends BaseObject {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6936247290080880488L;
+
 	@Column
 	private String disName;
 
@@ -40,50 +45,10 @@ public class Discount extends BaseObject {
 
 	/**
 	 * @hibernate.property
-	 * @return the disName
-	 */
-	public String getDisName() {
-		return this.disName;
-	}
-
-	/**
-	 * @param disName
-	 *            the disName to set
-	 */
-	public void setDisName(final String disName) {
-		this.disName = disName;
-	}
-
-	/**
-	 * @hibernate.property
-	 * @return the disType
-	 */
-	public String getDisType() {
-		return this.disType;
-	}
-
-	/**
-	 * @param disType
-	 *            the disType to set
-	 */
-	public void setDisType(final String disType) {
-		this.disType = disType;
-	}
-
-	/**
-	 * @hibernate.property
 	 * @return the adultDis
 	 */
 	public BigDecimal getAdultDis() {
 		return this.adultDis;
-	}
-
-	/**
-	 * @param adultDis
-	 *            the adultDis to set
-	 */
-	public void setAdultDis(final BigDecimal adultDis) {
-		this.adultDis = adultDis;
 	}
 
 	/**
@@ -95,43 +60,11 @@ public class Discount extends BaseObject {
 	}
 
 	/**
-	 * @param childDis
-	 *            the childDis to set
-	 */
-	public void setChildDis(final BigDecimal childDis) {
-		this.childDis = childDis;
-	}
-
-	/**
 	 * @hibernate.property
-	 * @return the infantDis
+	 * @return the disName
 	 */
-	public BigDecimal getInfantDis() {
-		return this.infantDis;
-	}
-
-	/**
-	 * @param infantDis
-	 *            the infantDis to set
-	 */
-	public void setInfantDis(final BigDecimal infantDis) {
-		this.infantDis = infantDis;
-	}
-
-	/**
-	 * @hibernate.property
-	 * @return the disValue
-	 */
-	public BigDecimal getDisValue() {
-		return this.disValue;
-	}
-
-	/**
-	 * @param disValue
-	 *            the disValue to set
-	 */
-	public void setDisValue(final BigDecimal disValue) {
-		this.disValue = disValue;
+	public String getDisName() {
+		return this.disName;
 	}
 
 	/**
@@ -143,11 +76,27 @@ public class Discount extends BaseObject {
 	}
 
 	/**
-	 * @param disPercentage
-	 *            the disPercentage to set
+	 * @hibernate.property
+	 * @return the disType
 	 */
-	public void setDisPercentage(final BigDecimal disPercentage) {
-		this.disPercentage = disPercentage;
+	public String getDisType() {
+		return this.disType;
+	}
+
+	/**
+	 * @hibernate.property
+	 * @return the disValue
+	 */
+	public BigDecimal getDisValue() {
+		return this.disValue;
+	}
+
+	/**
+	 * @hibernate.property
+	 * @return the infantDis
+	 */
+	public BigDecimal getInfantDis() {
+		return this.infantDis;
 	}
 
 	/**
@@ -157,6 +106,62 @@ public class Discount extends BaseObject {
 	@Override
 	public String getStatus() {
 		return this.status;
+	}
+
+	/**
+	 * @param adultDis
+	 *            the adultDis to set
+	 */
+	public void setAdultDis(final BigDecimal adultDis) {
+		this.adultDis = adultDis;
+	}
+
+	/**
+	 * @param childDis
+	 *            the childDis to set
+	 */
+	public void setChildDis(final BigDecimal childDis) {
+		this.childDis = childDis;
+	}
+
+	/**
+	 * @param disName
+	 *            the disName to set
+	 */
+	public void setDisName(final String disName) {
+		this.disName = disName;
+	}
+
+	/**
+	 * @param disPercentage
+	 *            the disPercentage to set
+	 */
+	public void setDisPercentage(final BigDecimal disPercentage) {
+		this.disPercentage = disPercentage;
+	}
+
+	/**
+	 * @param disType
+	 *            the disType to set
+	 */
+	public void setDisType(final String disType) {
+		this.disType = disType;
+	}
+
+	/**
+	 * @param disValue
+	 *            the disValue to set
+	 */
+	public void setDisValue(final BigDecimal disValue) {
+		this.disValue = disValue;
+	}
+
+	/**
+	 * @param infantDis
+	 *            the infantDis to set
+	 */
+	public void setInfantDis(final BigDecimal infantDis) {
+		this.infantDis = infantDis;
 	}
 
 	/**

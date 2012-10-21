@@ -20,15 +20,11 @@ public class BookingTask implements ITask {
 	private IBookingManager bookingManager;
 	protected static final Log LOG = LogFactory.getLog(BookingTask.class);
 
+	public BookingTask() {
+	}
+
 	public IBookingManager getBookingManager() {
 		return this.bookingManager;
-	}
-
-	public void setBookingManager(final IBookingManager bookingManager) {
-		this.bookingManager = bookingManager;
-	}
-
-	public BookingTask() {
 	}
 
 	@Override
@@ -41,6 +37,10 @@ public class BookingTask implements ITask {
 			LOG.fatal(e.getMessage(), e);
 		}
 
+	}
+
+	public void setBookingManager(final IBookingManager bookingManager) {
+		this.bookingManager = bookingManager;
 	}
 
 }

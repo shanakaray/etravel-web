@@ -74,7 +74,7 @@ public class RoleAction extends BaseAction {
 		boolean isnew = true;
 		final RoleForm roleForm = (RoleForm) form;
 		final Role role = new Role(roleForm.getName());
-		if (roleForm.getId() != null && roleForm.getId() > 0) {
+		if ((roleForm.getId() != null) && (roleForm.getId() > 0)) {
 			role.setId(roleForm.getId());
 			isnew = false;
 		}
@@ -217,6 +217,14 @@ public class RoleAction extends BaseAction {
 		return null;
 	}
 
+	@Override
+	public ActionForward search(final ActionMapping mapping,
+			final ActionForm form, final HttpServletRequest request,
+			final HttpServletResponse response) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -243,14 +251,6 @@ public class RoleAction extends BaseAction {
 	 */
 	@Override
 	protected ActionForward sort(final ActionMapping mapping,
-			final ActionForm form, final HttpServletRequest request,
-			final HttpServletResponse response) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ActionForward search(final ActionMapping mapping,
 			final ActionForm form, final HttpServletRequest request,
 			final HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub

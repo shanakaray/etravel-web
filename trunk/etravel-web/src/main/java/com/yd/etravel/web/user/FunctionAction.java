@@ -162,7 +162,7 @@ public class FunctionAction extends BaseAction {
 		final FunctionForm functionForm = (FunctionForm) form;
 		functionForm.setAllRoles(getUserManager().findAllActiveRoles());
 		functionForm.setFuctionList(getUserManager().findAllFunctions());
-		if (functionForm.getRoleId() < 0
+		if ((functionForm.getRoleId() < 0)
 				&& !functionForm.getAllRoles().isEmpty()) {
 			functionForm.setRoleId(functionForm.getAllRoles().get(0).getId());
 		}
@@ -218,6 +218,14 @@ public class FunctionAction extends BaseAction {
 
 	}
 
+	@Override
+	public ActionForward search(final ActionMapping mapping,
+			final ActionForm form, final HttpServletRequest request,
+			final HttpServletResponse response) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -244,14 +252,6 @@ public class FunctionAction extends BaseAction {
 	 */
 	@Override
 	protected ActionForward sort(final ActionMapping mapping,
-			final ActionForm form, final HttpServletRequest request,
-			final HttpServletResponse response) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ActionForward search(final ActionMapping mapping,
 			final ActionForm form, final HttpServletRequest request,
 			final HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub

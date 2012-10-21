@@ -29,17 +29,6 @@ public class PasswordEncrypt {
 		}
 	}
 
-	public static String encrypt(final String plaintext) {
-		try {
-			md.update(plaintext.getBytes("UTF-8"));
-		} catch (final UnsupportedEncodingException e) {
-			LOG.fatal(e.getMessage(), e);
-		}
-		final byte raw[] = md.digest();
-		final String hash = new BASE64Encoder().encode(raw);
-		return hash;
-	}
-
 	public static String decrypt(final String plaintext) {
 		try {
 			md.update(plaintext.getBytes());
@@ -54,6 +43,17 @@ public class PasswordEncrypt {
 			LOG.fatal(e.getMessage(), e);
 		}
 		return "";
+	}
+
+	public static String encrypt(final String plaintext) {
+		try {
+			md.update(plaintext.getBytes("UTF-8"));
+		} catch (final UnsupportedEncodingException e) {
+			LOG.fatal(e.getMessage(), e);
+		}
+		final byte raw[] = md.digest();
+		final String hash = new BASE64Encoder().encode(raw);
+		return hash;
 	}
 
 	public static void main(final String[] args) {

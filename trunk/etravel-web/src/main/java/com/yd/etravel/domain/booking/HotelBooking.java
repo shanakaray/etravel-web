@@ -38,12 +38,8 @@ public class HotelBooking extends BaseObject {
 	@Column
 	private Long roomAvalabiltyId;
 
-	public Hotel getHotel() {
-		return this.hotel;
-	}
-
-	public void setHotel(final Hotel hotel) {
-		this.hotel = hotel;
+	public Booking getBooking() {
+		return this.booking;
 	}
 
 	public Date getCheckInDate() {
@@ -54,10 +50,6 @@ public class HotelBooking extends BaseObject {
 		return DateUtil.format(this.checkInDate);
 	}
 
-	public void setCheckInDate(final Date checkInDate) {
-		this.checkInDate = checkInDate;
-	}
-
 	public Date getCheckOutDate() {
 		return this.checkOutDate;
 	}
@@ -66,32 +58,8 @@ public class HotelBooking extends BaseObject {
 		return DateUtil.format(this.checkOutDate);
 	}
 
-	public void setCheckOutDate(final Date checkOutDate) {
-		this.checkOutDate = checkOutDate;
-	}
-
-	public Integer getNoOfRoom() {
-		return this.noOfRoom;
-	}
-
-	public void setNoOfRoom(final Integer noOfRoom) {
-		this.noOfRoom = noOfRoom;
-	}
-
-	public Booking getBooking() {
-		return this.booking;
-	}
-
-	public void setBooking(final Booking booking) {
-		this.booking = booking;
-	}
-
-	public Long getRoomAvalabiltyId() {
-		return this.roomAvalabiltyId;
-	}
-
-	public void setRoomAvalabiltyId(final Long roomAvalabiltyId) {
-		this.roomAvalabiltyId = roomAvalabiltyId;
+	public Hotel getHotel() {
+		return this.hotel;
 	}
 
 	public int getNoOfNights() {
@@ -112,6 +80,10 @@ public class HotelBooking extends BaseObject {
 		return noOfNights;
 	}
 
+	public Integer getNoOfRoom() {
+		return this.noOfRoom;
+	}
+
 	public Map<String, String> getParams() {
 		final Map<String, String> map = new HashMap<String, String>();
 		map.put("hotel.name", getHotel().getName());
@@ -124,5 +96,33 @@ public class HotelBooking extends BaseObject {
 		map.put("room.name", "xx");
 		map.put("room.count", "xx");
 		return map;
+	}
+
+	public Long getRoomAvalabiltyId() {
+		return this.roomAvalabiltyId;
+	}
+
+	public void setBooking(final Booking booking) {
+		this.booking = booking;
+	}
+
+	public void setCheckInDate(final Date checkInDate) {
+		this.checkInDate = checkInDate;
+	}
+
+	public void setCheckOutDate(final Date checkOutDate) {
+		this.checkOutDate = checkOutDate;
+	}
+
+	public void setHotel(final Hotel hotel) {
+		this.hotel = hotel;
+	}
+
+	public void setNoOfRoom(final Integer noOfRoom) {
+		this.noOfRoom = noOfRoom;
+	}
+
+	public void setRoomAvalabiltyId(final Long roomAvalabiltyId) {
+		this.roomAvalabiltyId = roomAvalabiltyId;
 	}
 }

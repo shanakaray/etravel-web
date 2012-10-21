@@ -21,14 +21,6 @@ public class ExtraItemManagerImpl implements IExtraItemManager {
 	@Autowired(required = true)
 	private IExtraItemDAO itemDAO;
 
-	public IExtraItemDAO getItemDAO() {
-		return this.itemDAO;
-	}
-
-	public void setItemDAO(final IExtraItemDAO itemDAO) {
-		this.itemDAO = itemDAO;
-	}
-
 	@Transactional
 	@Override
 	public int deleteExtraItem(final Long id) throws ServiceException {
@@ -62,6 +54,16 @@ public class ExtraItemManagerImpl implements IExtraItemManager {
 	}
 
 	@Override
+	public List<ExtraItemBooking> findByBookingId(final Long bookingId)
+			throws ServiceException {
+		try {
+			return this.itemDAO.findByBookingId(bookingId);
+		} catch (final PersistenceException e) {
+			throw new ServiceException(null, e);
+		}
+	}
+
+	@Override
 	public ExtraItem findExtraItemById(final Long id) throws ServiceException {
 		ExtraItem extraItem = null;
 		try {
@@ -72,6 +74,20 @@ public class ExtraItemManagerImpl implements IExtraItemManager {
 			throw new ServiceException(null, e);
 		}
 		return extraItem;
+	}
+
+	@Override
+	public List<ExtraItem> findExtraItemsByHotel(final Long hotelId)
+			throws ServiceException {
+		try {
+			return this.itemDAO.findAllByHotelId(hotelId);
+		} catch (final PersistenceException e) {
+			throw new ServiceException(null, e);
+		}
+	}
+
+	public IExtraItemDAO getItemDAO() {
+		return this.itemDAO;
 	}
 
 	@Transactional
@@ -93,24 +109,8 @@ public class ExtraItemManagerImpl implements IExtraItemManager {
 		return item;
 	}
 
-	@Override
-	public List<ExtraItemBooking> findByBookingId(final Long bookingId)
-			throws ServiceException {
-		try {
-			return this.itemDAO.findByBookingId(bookingId);
-		} catch (final PersistenceException e) {
-			throw new ServiceException(null, e);
-		}
-	}
-
-	@Override
-	public List<ExtraItem> findExtraItemsByHotel(final Long hotelId)
-			throws ServiceException {
-		try {
-			return this.itemDAO.findAllByHotelId(hotelId);
-		} catch (final PersistenceException e) {
-			throw new ServiceException(null, e);
-		}
+	public void setItemDAO(final IExtraItemDAO itemDAO) {
+		this.itemDAO = itemDAO;
 	}
 
 }

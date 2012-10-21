@@ -24,6 +24,10 @@ import com.yd.etravel.web.common.BaseForm;
  */
 public class IpgForm extends BaseForm {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8901449604861662336L;
 	static final char[] HEX_TABLE = new char[] { '0', '1', '2', '3', '4', '5',
 			'6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
 	static final String SECURE_SECRET = ServiceHelper.getInstance()
@@ -42,7 +46,7 @@ public class IpgForm extends BaseForm {
 		// retrieve the byte array data, convert it to hex
 		// and add it to the StringBuffer
 		for (final byte element : input) {
-			sb.append(HEX_TABLE[element >> 4 & 0xf]);
+			sb.append(HEX_TABLE[(element >> 4) & 0xf]);
 			sb.append(HEX_TABLE[element & 0xf]);
 		}
 		return sb.toString();
@@ -57,7 +61,7 @@ public class IpgForm extends BaseForm {
 	 * output String
 	 */
 	private static String null2unknown(final String in) {
-		if (in == null || in.length() == 0) {
+		if ((in == null) || (in.length() == 0)) {
 			return "No Value Returned";
 		} else {
 			return in;
@@ -97,7 +101,7 @@ public class IpgForm extends BaseForm {
 	private String displayAVSResponse(final String vAVSResultCode) {
 
 		String result = "";
-		if (vAVSResultCode != null || vAVSResultCode.length() == 0) {
+		if ((vAVSResultCode != null) || (vAVSResultCode.length() == 0)) {
 
 			if (vAVSResultCode.equalsIgnoreCase("Unsupported")
 					|| vAVSResultCode.equalsIgnoreCase("No Value Returned")) {
@@ -166,7 +170,7 @@ public class IpgForm extends BaseForm {
 	private String displayCSCResponse(final String vCSCResultCode) {
 
 		String result = "";
-		if (vCSCResultCode != null || vCSCResultCode.length() == 0) {
+		if ((vCSCResultCode != null) || (vCSCResultCode.length() == 0)) {
 
 			if (vCSCResultCode.equalsIgnoreCase("Unsupported")
 					|| vCSCResultCode.equalsIgnoreCase("No Value Returned")) {
@@ -207,6 +211,10 @@ public class IpgForm extends BaseForm {
 	}
 
 	// ----------------------------------------------------------------------------
+
+	public String getResponseDesc() {
+		return getResponseDescription(this.vpc_TxnResponseCode);
+	}
 
 	/*
 	 * This function uses the returned status code retrieved from the Digital
@@ -308,19 +316,6 @@ public class IpgForm extends BaseForm {
 		}
 	} //
 
-	public String getResponseDesc() {
-		return getResponseDescription(this.vpc_TxnResponseCode);
-	}
-
-	public String getTxStatus() {
-		return StringUtils.isNotEmpty(this.vpc_TxnResponseCode)
-				&& ServiceHelper.getInstance().getIpgUtil().getSuccessCode()
-						.equals(this.vpc_TxnResponseCode.trim()) ? "Successful"
-				: "Failed";
-	}
-
-	// ----------------------------------------------------------------------------
-
 	/**
 	 * This method uses the 3DS verStatus retrieved from the Response and
 	 * returns an appropriate description for this code.
@@ -332,7 +327,7 @@ public class IpgForm extends BaseForm {
 	private String getStatusDescription(final String vStatus) {
 
 		String result = "";
-		if (vStatus != null && !vStatus.equals("")) {
+		if ((vStatus != null) && !vStatus.equals("")) {
 
 			if (vStatus.equalsIgnoreCase("Unsupported")
 					|| vStatus.equals("No Value Returned")) {
@@ -386,6 +381,15 @@ public class IpgForm extends BaseForm {
 			result = "null response";
 		}
 		return result;
+	}
+
+	// ----------------------------------------------------------------------------
+
+	public String getTxStatus() {
+		return StringUtils.isNotEmpty(this.vpc_TxnResponseCode)
+				&& ServiceHelper.getInstance().getIpgUtil().getSuccessCode()
+						.equals(this.vpc_TxnResponseCode.trim()) ? "Successful"
+				: "Failed";
 	}
 
 	// ----------------------------------------------------------------------------
@@ -551,7 +555,7 @@ public class IpgForm extends BaseForm {
 		while (itr.hasNext()) {
 			final String fieldName = (String) itr.next();
 			final String fieldValue = (String) fields.get(fieldName);
-			if (fieldValue != null && fieldValue.length() > 0) {
+			if ((fieldValue != null) && (fieldValue.length() > 0)) {
 				buf.append(fieldValue);
 			}
 		}

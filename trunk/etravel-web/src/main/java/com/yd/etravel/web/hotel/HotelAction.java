@@ -36,14 +36,6 @@ public class HotelAction extends BaseAction {
 		ADMIN_ROLES.add(IUserRoles.HOTEL_ADMIN_ROLE_ID);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.yd.etravel.web.common.BaseAction#add(org.apache.struts.action.
-	 * ActionMapping, org.apache.struts.action.ActionForm,
-	 * javax.servlet.http.HttpServletRequest,
-	 * javax.servlet.http.HttpServletResponse)
-	 */
 	@Override
 	protected ActionForward add(final ActionMapping mapping,
 			final ActionForm form, final HttpServletRequest request,
@@ -85,7 +77,7 @@ public class HotelAction extends BaseAction {
 		boolean isnew = false;
 		final Hotel hotel = new Hotel();
 
-		if (hotelForm.getId() != null && hotelForm.getId().longValue() > 0) {
+		if ((hotelForm.getId() != null) && (hotelForm.getId().longValue() > 0)) {
 			hotel.setId(hotelForm.getId());
 		} else {
 			hotel.setId(null);
@@ -247,6 +239,14 @@ public class HotelAction extends BaseAction {
 		return null;
 	}
 
+	@Override
+	public ActionForward search(final ActionMapping mapping,
+			final ActionForm form, final HttpServletRequest request,
+			final HttpServletResponse response) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -273,14 +273,6 @@ public class HotelAction extends BaseAction {
 	 */
 	@Override
 	protected ActionForward sort(final ActionMapping mapping,
-			final ActionForm form, final HttpServletRequest request,
-			final HttpServletResponse response) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ActionForward search(final ActionMapping mapping,
 			final ActionForm form, final HttpServletRequest request,
 			final HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub

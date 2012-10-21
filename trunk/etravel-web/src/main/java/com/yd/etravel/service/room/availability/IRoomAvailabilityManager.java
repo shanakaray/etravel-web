@@ -17,16 +17,13 @@ import com.yd.etravel.service.exception.ServiceException;
  */
 public interface IRoomAvailabilityManager {
 
-	public RoomAvailability save(final RoomAvailability roomAvailability)
-			throws ServiceException;
-
-	public RoomAvailability findRoomAvailabilityById(Long id)
-			throws ServiceException;
-
 	public int deleteRoomAvailability(Long id) throws ServiceException;
 
 	public List<RoomAvailability> findAllRoomAvailability()
 			throws ServiceException;
+
+	public List<RoomAvailabilityDTO> findAllRoomAvailabilityDTO(
+			RoomAvailabilityDTO dto) throws ServiceException;
 
 	@Deprecated
 	/**
@@ -36,18 +33,21 @@ public interface IRoomAvailabilityManager {
 	public List<RoomAvailability> findAllRoomAvailabilityWithRoomAndOccu(
 			Long hotelid) throws ServiceException;
 
+	public List<RoomDailyAvailability> findAllRoomDailyAvailability()
+			throws ServiceException;
+
 	public List<RoomDailyAvailability> findAllRoomDailyAvailability(Long id)
 			throws ServiceException;
 
-	public List<RoomDailyAvailability> findAllRoomDailyAvailability()
+	public List<DailyAvailabilityDTO> findDailyAvailability(Long id)
+			throws ServiceException;
+
+	public RoomAvailability findRoomAvailabilityById(Long id)
 			throws ServiceException;
 
 	public RoomAvailability findRoomAvailabilityWithRoomInfoById(Long id)
 			throws ServiceException;
 
-	public List<RoomAvailabilityDTO> findAllRoomAvailabilityDTO(
-			RoomAvailabilityDTO dto) throws ServiceException;
-
-	public List<DailyAvailabilityDTO> findDailyAvailability(Long id)
+	public RoomAvailability save(final RoomAvailability roomAvailability)
 			throws ServiceException;
 }
