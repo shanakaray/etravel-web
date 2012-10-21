@@ -1,8 +1,8 @@
 package com.yd.etravel.web.filter;
 
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -15,24 +15,18 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.yd.etravel.util.IConstants;
+import com.yd.etravel.util.StringUtils;
 
 public class SessionCheckingFilter implements Filter {
 
 	private static final String APP_NAME = "/etravel-web";
-	private static Set<String> urls = new HashSet<String>();
-	static {
-		urls.add("/customer/initCustomerCreate.do");
-		urls.add("/customer/customer_reg.jsp");
-		urls.add("/customer/forwardCustomer.do");
-		urls.add("/customer/createCustomer.do");
-		urls.add("/admin/login.jsp");
-		urls.add("/admin/authanticate.do");
-		urls.add("/admin/findSearch.do");
-		urls.add("/admin/processSearch.do");
-		urls.add("/admin/initBookingCreate.do");
-		urls.add("/admin/initSearch.do");
-		urls.add("/admin/createBooking.do");
-	}
+	private static final List<String> urls = Arrays.asList(
+			"/customer/initCustomerCreate.do", "/customer/customer_reg.jsp",
+			"/customer/forwardCustomer.do", "/customer/createCustomer.do",
+			"/admin/login.jsp", "/admin/authanticate.do",
+			"/admin/findSearch.do", "/admin/processSearch.do",
+			"/admin/initBookingCreate.do", "/admin/initSearch.do",
+			"/admin/createBooking.do");
 
 	private FilterConfig config = null;
 
@@ -51,7 +45,7 @@ public class SessionCheckingFilter implements Filter {
 		final String[] valStrings = url.split(APP_NAME);
 		String urlEnd = "";
 		boolean hasAppname = true;
-		if ((valStrings != null) && (valStrings.length > 1)) {
+		if (StringUtils.isEmpty(valStrings)) {
 			urlEnd = valStrings[valStrings.length - 1];
 		} else {
 			urlEnd = url;
