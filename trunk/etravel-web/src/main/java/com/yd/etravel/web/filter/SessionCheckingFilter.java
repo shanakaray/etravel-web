@@ -20,7 +20,7 @@ import com.yd.etravel.util.StringUtils;
 public class SessionCheckingFilter implements Filter {
 
 	private static final String APP_NAME = "/etravel-web";
-	private static final List<String> urls = Arrays.asList(
+	private static final List<String> URL_LIST = Arrays.asList(
 			"/customer/initCustomerCreate.do", "/customer/customer_reg.jsp",
 			"/customer/forwardCustomer.do", "/customer/createCustomer.do",
 			"/admin/login.jsp", "/admin/authanticate.do",
@@ -52,22 +52,22 @@ public class SessionCheckingFilter implements Filter {
 			hasAppname = false;
 		}
 
-		if (urls.contains(urlEnd)) {
+		if (URL_LIST.contains(urlEnd)) {
 			filterChain.doFilter(request, response);
 			return;
 
 		} else {
-			final HttpServletResponse httpServletResponse = (HttpServletResponse) response;
+			final HttpServletResponse httpResponse = (HttpServletResponse) response;
 			if (url.contains("/admin/")) {
 				if (isSessionNull(session)) {
 					redirect("/admin/login.jsp", hasAppname,
-							httpServletResponse);
+							httpResponse);
 					return;
 				}
 			} else if (url.contains("/customer/")) {
 				if (isSessionNull(session)) {
 					redirect("/customer/initCustomerCreate.do", hasAppname,
-							httpServletResponse);
+							httpResponse);
 					return;
 				} else {
 					filterChain.doFilter(request, response);
