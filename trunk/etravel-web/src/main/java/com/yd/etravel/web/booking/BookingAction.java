@@ -166,8 +166,7 @@ public class BookingAction extends BaseAction {
 		}
 
 		if (request.getSession().getAttribute("extraItem") != null) {
-			extraItemList = (ArrayList<ExtraItem>) request.getSession()
-					.getAttribute("extraItem");
+			extraItemList = getExtraitemList(request);
 		}
 
 		if (roomDTO.getRoomType().getMaxPassengers() < (bookingForm
@@ -293,6 +292,13 @@ public class BookingAction extends BaseAction {
 		} else {
 			return mapping.findForward(SUCCESS);
 		}
+	}
+
+	@SuppressWarnings("unchecked")
+	private ArrayList<ExtraItem> getExtraitemList(
+			final HttpServletRequest request) {
+		return ((ArrayList<ExtraItem>) request.getSession().getAttribute(
+				"extraItem"));
 	}
 
 	/*
