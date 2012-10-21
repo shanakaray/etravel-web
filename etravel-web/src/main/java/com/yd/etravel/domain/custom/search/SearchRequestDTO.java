@@ -11,9 +11,6 @@ import com.yd.etravel.util.DateUtil;
  */
 public class SearchRequestDTO implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -8337895053648763479L;
 	private Long hotelId;
 	private String hotelName;
@@ -102,19 +99,17 @@ public class SearchRequestDTO implements Serializable {
 	}
 
 	public int getNoOfNights() {
-		final Calendar calendar1 = Calendar.getInstance();
-		calendar1.setTime(getCheckOut());
-		calendar1.getTime();
+		final Calendar startDate = Calendar.getInstance();
+		startDate.setTime(getCheckOut());
+		startDate.getTime();
 
-		final Calendar calendar2 = Calendar.getInstance();
-		calendar2.setTime(getCheckIn());
-		calendar2.getTime();
+		final Calendar endDate = Calendar.getInstance();
+		endDate.setTime(getCheckIn());
+		endDate.getTime();
 
-		final long diff = calendar1.getTimeInMillis()
-				- calendar2.getTimeInMillis();
-		final int noOfNights = new Long(diff / (24 * 60 * 60 * 1000))
-				.intValue();
-		return noOfNights;
+		final long diff = startDate.getTimeInMillis()
+				- endDate.getTimeInMillis();
+		return Long.valueOf(diff / (24 * 60 * 60 * 1000)).intValue(); // NOPMD by yohan on 10/22/12 12:03 AM
 	}
 
 	/**
@@ -207,8 +202,8 @@ public class SearchRequestDTO implements Serializable {
 	 * @param roomTypeId
 	 *            the roomTypeId to set
 	 */
-	public void setRoomTypeId(final Long Long) {
-		this.roomTypeId = this.roomTypeId;
+	public void setRoomTypeId(final Long roomTypeId) {
+		this.roomTypeId = roomTypeId;
 	}
 
 	/**
