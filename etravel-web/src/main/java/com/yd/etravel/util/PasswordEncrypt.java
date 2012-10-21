@@ -56,8 +56,4 @@ public class PasswordEncrypt {
 		return hash;
 	}
 
-	public static void main(final String[] args) {
-		System.out.println(decrypt("wLE3/i15JFnyb/djzORFdKW1qwM="));
-	}
-
 }
