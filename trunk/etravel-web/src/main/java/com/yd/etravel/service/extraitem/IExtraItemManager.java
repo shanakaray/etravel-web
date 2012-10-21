@@ -16,21 +16,21 @@ import com.yd.etravel.service.exception.ServiceException;
  */
 public interface IExtraItemManager {
 
-    public List<ExtraItem> findAllActiveExtraItems() throws ServiceException;
+	public List<ExtraItem> findAllActiveExtraItems() throws ServiceException;
 
-    public List<ExtraItem> findExtraItemsByHotel(Long hotelId)
-	    throws ServiceException;
+	public List<ExtraItem> findExtraItemsByHotel(Long hotelId)
+			throws ServiceException;
 
-    public ExtraItem saveExtraItem(final ExtraItem item)
-	    throws ServiceException;
+	public ExtraItem saveExtraItem(final ExtraItem item)
+			throws ServiceException;
 
-    public List<ExtraItem> findAllExtraItem() throws ServiceException;
+	public List<ExtraItem> findAllExtraItem() throws ServiceException;
 
-    public ExtraItem findExtraItemById(Long id) throws ServiceException;
+	public ExtraItem findExtraItemById(Long id) throws ServiceException;
 
-    public int deleteExtraItem(Long id) throws ServiceException;
+	public int deleteExtraItem(Long id) throws ServiceException;
 
-    public List<ExtraItemBooking> findByBookingId(Long bookingId)
-	    throws ServiceException;
+	public List<ExtraItemBooking> findByBookingId(Long bookingId)
+			throws ServiceException;
 
 }

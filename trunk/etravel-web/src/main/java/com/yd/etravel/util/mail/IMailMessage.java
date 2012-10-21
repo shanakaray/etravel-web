@@ -7,8 +7,8 @@ package com.yd.etravel.util.mail;
  */
 public interface IMailMessage {
 
-    public void prepareBody();
+	public void prepareBody();
 
-    public void sendMail();
+	public void sendMail();
 
 }

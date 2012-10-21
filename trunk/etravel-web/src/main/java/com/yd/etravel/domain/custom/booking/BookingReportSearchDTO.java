@@ -17,125 +17,125 @@ import java.util.List;
 
 public class BookingReportSearchDTO implements Serializable {
 
-    private Long roomId;
-    private Long roomTypeId;
-    private Collection<Long> hotelId;
-    private Long id;
+	private Long roomId;
+	private Long roomTypeId;
+	private Collection<Long> hotelId;
+	private Long id;
 
-    private String userName;
-    private String userCode;
-    private String bookingId;
-    private Long bookedBy;
+	private String userName;
+	private String userCode;
+	private String bookingId;
+	private Long bookedBy;
 
-    private Date bookedFrom;
-    private Date bookedTo;
-    private Date checkInFrom;
-    private Date checkInTo;
+	private Date bookedFrom;
+	private Date bookedTo;
+	private Date checkInFrom;
+	private Date checkInTo;
 
-    private List<String> statusList;
+	private List<String> statusList;
 
-    public Long getRoomId() {
-	return this.roomId;
-    }
+	public Long getRoomId() {
+		return this.roomId;
+	}
 
-    public void setRoomId(final Long roomId) {
-	this.roomId = roomId;
-    }
+	public void setRoomId(final Long roomId) {
+		this.roomId = roomId;
+	}
 
-    public Long getRoomTypeId() {
-	return this.roomTypeId;
-    }
+	public Long getRoomTypeId() {
+		return this.roomTypeId;
+	}
 
-    public void setRoomTypeId(final Long roomTypeId) {
-	this.roomTypeId = roomTypeId;
-    }
+	public void setRoomTypeId(final Long roomTypeId) {
+		this.roomTypeId = roomTypeId;
+	}
 
-    public Collection<Long> getHotelId() {
-	return this.hotelId;
-    }
+	public Collection<Long> getHotelId() {
+		return this.hotelId;
+	}
 
-    public void setHotelId(final Collection<Long> hotelId) {
-	this.hotelId = hotelId;
-    }
+	public void setHotelId(final Collection<Long> hotelId) {
+		this.hotelId = hotelId;
+	}
 
-    public String getUserName() {
-	return this.userName;
-    }
+	public String getUserName() {
+		return this.userName;
+	}
 
-    public void setUserName(final String userName) {
-	this.userName = userName;
-    }
+	public void setUserName(final String userName) {
+		this.userName = userName;
+	}
 
-    public String getUserCode() {
-	return this.userCode;
-    }
+	public String getUserCode() {
+		return this.userCode;
+	}
 
-    public void setUserCode(final String userCode) {
-	this.userCode = userCode;
-    }
+	public void setUserCode(final String userCode) {
+		this.userCode = userCode;
+	}
 
-    public String getBookingId() {
-	return this.bookingId;
-    }
+	public String getBookingId() {
+		return this.bookingId;
+	}
 
-    public void setBookingId(final String bookingId) {
-	this.bookingId = bookingId;
-    }
+	public void setBookingId(final String bookingId) {
+		this.bookingId = bookingId;
+	}
 
-    public Date getBookedFrom() {
-	return this.bookedFrom;
-    }
+	public Date getBookedFrom() {
+		return this.bookedFrom;
+	}
 
-    public void setBookedFrom(final Date bookedFrom) {
-	this.bookedFrom = bookedFrom;
-    }
+	public void setBookedFrom(final Date bookedFrom) {
+		this.bookedFrom = bookedFrom;
+	}
 
-    public Date getBookedTo() {
-	return this.bookedTo;
-    }
+	public Date getBookedTo() {
+		return this.bookedTo;
+	}
 
-    public void setBookedTo(final Date bookedTo) {
-	this.bookedTo = bookedTo;
-    }
+	public void setBookedTo(final Date bookedTo) {
+		this.bookedTo = bookedTo;
+	}
 
-    public Date getCheckInFrom() {
-	return this.checkInFrom;
-    }
+	public Date getCheckInFrom() {
+		return this.checkInFrom;
+	}
 
-    public void setCheckInFrom(final Date checkInFrom) {
-	this.checkInFrom = checkInFrom;
-    }
+	public void setCheckInFrom(final Date checkInFrom) {
+		this.checkInFrom = checkInFrom;
+	}
 
-    public Date getCheckInTo() {
-	return this.checkInTo;
-    }
+	public Date getCheckInTo() {
+		return this.checkInTo;
+	}
 
-    public void setCheckInTo(final Date checkInTo) {
-	this.checkInTo = checkInTo;
-    }
+	public void setCheckInTo(final Date checkInTo) {
+		this.checkInTo = checkInTo;
+	}
 
-    public Long getId() {
-	return this.id;
-    }
+	public Long getId() {
+		return this.id;
+	}
 
-    public void setId(final Long id) {
-	this.id = id;
-    }
+	public void setId(final Long id) {
+		this.id = id;
+	}
 
-    public List<String> getStatusList() {
-	return this.statusList;
-    }
+	public List<String> getStatusList() {
+		return this.statusList;
+	}
 
-    public void setStatusList(final List<String> statusList) {
-	this.statusList = statusList;
-    }
+	public void setStatusList(final List<String> statusList) {
+		this.statusList = statusList;
+	}
 
-    public Long getBookedBy() {
-	return this.bookedBy;
-    }
+	public Long getBookedBy() {
+		return this.bookedBy;
+	}
 
-    public void setBookedBy(final Long bookedBy) {
-	this.bookedBy = bookedBy;
-    }
+	public void setBookedBy(final Long bookedBy) {
+		this.bookedBy = bookedBy;
+	}
 
 }

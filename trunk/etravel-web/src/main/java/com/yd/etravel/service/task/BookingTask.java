@@ -16,31 +16,31 @@ import com.yd.etravel.service.booking.IBookingManager;
  * 
  */
 public class BookingTask implements ITask {
-    @Autowired(required = true)
-    private IBookingManager bookingManager;
-    protected static final Log LOG = LogFactory.getLog(BookingTask.class);
+	@Autowired(required = true)
+	private IBookingManager bookingManager;
+	protected static final Log LOG = LogFactory.getLog(BookingTask.class);
 
-    public IBookingManager getBookingManager() {
-	return this.bookingManager;
-    }
-
-    public void setBookingManager(final IBookingManager bookingManager) {
-	this.bookingManager = bookingManager;
-    }
-
-    public BookingTask() {
-    }
-
-    @Override
-    public void runTask() {
-	try {
-	    Thread.currentThread().setName(THREADNAME);
-	    getBookingManager().saveFailedOnRequestBookings();
-	    getBookingManager().saveFailedOnlineBookings();
-	} catch (final Exception e) {
-	    LOG.fatal(e.getMessage(), e);
+	public IBookingManager getBookingManager() {
+		return this.bookingManager;
 	}
 
-    }
+	public void setBookingManager(final IBookingManager bookingManager) {
+		this.bookingManager = bookingManager;
+	}
+
+	public BookingTask() {
+	}
+
+	@Override
+	public void runTask() {
+		try {
+			Thread.currentThread().setName(THREADNAME);
+			getBookingManager().saveFailedOnRequestBookings();
+			getBookingManager().saveFailedOnlineBookings();
+		} catch (final Exception e) {
+			LOG.fatal(e.getMessage(), e);
+		}
+
+	}
 
 }

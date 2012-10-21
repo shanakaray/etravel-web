@@ -25,100 +25,100 @@ import com.yd.etravel.persistence.exception.PersistenceException;
 @Repository
 public class ExtraItemDAO extends BaseDAO<ExtraItem> implements IExtraItemDAO {
 
-    @Override
-    public List<ExtraItemBooking> findByBookingId(final Long bookingId)
-	    throws PersistenceException {
-	try {
-	    final StringBuilder sb = new StringBuilder("SELECT obj FROM ")
-		    .append(" ExtraItemBooking as obj join fetch obj.extraItem join obj.booking bkg WHERE bkg.id = :id ");
+	@Override
+	public List<ExtraItemBooking> findByBookingId(final Long bookingId)
+			throws PersistenceException {
+		try {
+			final StringBuilder sb = new StringBuilder("SELECT obj FROM ")
+					.append(" ExtraItemBooking as obj join fetch obj.extraItem join obj.booking bkg WHERE bkg.id = :id ");
 
-	    final Query query = getCurrentSession().createQuery(sb.toString());
-	    query.setParameter("id", bookingId);
-	    return query.list();
+			final Query query = getCurrentSession().createQuery(sb.toString());
+			query.setParameter("id", bookingId);
+			return query.list();
 
-	} catch (final HibernateException e) {
-	    throw new PersistenceException(e);
-	} catch (final DataAccessException e) {
-	    throw new PersistenceException(e);
+		} catch (final HibernateException e) {
+			throw new PersistenceException(e);
+		} catch (final DataAccessException e) {
+			throw new PersistenceException(e);
+		}
 	}
-    }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * com.yd.etravel.persistence.dao.extraitem.IExtraItemDAO#isExtraItemExist
-     * (java.lang.String, java.lang.Long)
-     */
-    @Override
-    public boolean isExist(final String name, final String code, final Long id)
-	    throws PersistenceException {
-	try {
-	    final StringBuilder sb = new StringBuilder(
-		    "SELECT item FROM ExtraItem as item where ");
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.yd.etravel.persistence.dao.extraitem.IExtraItemDAO#isExtraItemExist
+	 * (java.lang.String, java.lang.Long)
+	 */
+	@Override
+	public boolean isExist(String name, final String code, final Long id)
+			throws PersistenceException {
+		try {
+			final StringBuilder sb = new StringBuilder(
+					"SELECT item FROM ExtraItem as item where ");
 
-	    if (id != null) {
-		sb.append(" item.id != :id ");
-		sb.append(" AND (item.name= :name " + "OR item.code = :code)");
-	    } else {
-		sb.append(" UPPER(item.name)= UPPER(:name) "
-			+ "OR UPPER(item.code)= UPPER(:code)");
-	    }
+			if (id != null) {
+				sb.append(" item.id != :id ");
+				sb.append(" AND (item.name= :name " + "OR item.code = :code)");
+			} else {
+				sb.append(" UPPER(item.name)= UPPER(:name) "
+						+ "OR UPPER(item.code)= UPPER(:code)");
+			}
 
-	    final Query query = getCurrentSession().createQuery(sb.toString());
-	    query.setParameter("name", name);
-	    query.setParameter("code", code);
-	    if (id != null) {
-		query.setParameter("id", id);
-	    }
+			final Query query = getCurrentSession().createQuery(sb.toString());
+			query.setParameter("name", name);
+			query.setParameter("code", code);
+			if (id != null) {
+				query.setParameter("id", id);
+			}
 
-	    return !query.list().isEmpty();
-	} catch (final HibernateException e) {
-	    throw new PersistenceException(e);
+			return !query.list().isEmpty();
+		} catch (final HibernateException e) {
+			throw new PersistenceException(e);
+		}
 	}
-    }
 
-    @Override
-    public ExtraItem findById(final Long id) throws PersistenceException {
-	try {
-	    final StringBuilder sb = new StringBuilder("SELECT obj FROM ")
-		    .append(getEntityClass().getName())
-		    .append(" as obj left join fetch obj.hotel WHERE obj.id = :id ");
+	@Override
+	public ExtraItem findById(final Long id) throws PersistenceException {
+		try {
+			final StringBuilder sb = new StringBuilder("SELECT obj FROM ")
+					.append(getEntityClass().getName())
+					.append(" as obj left join fetch obj.hotel WHERE obj.id = :id ");
 
-	    final Query query = getCurrentSession().createQuery(sb.toString());
-	    query.setParameter("id", id);
-	    final List<ExtraItem> results = query.list();
-	    return results.isEmpty() ? null : results.get(0);
+			final Query query = getCurrentSession().createQuery(sb.toString());
+			query.setParameter("id", id);
+			final List<ExtraItem> results = query.list();
+			return results.isEmpty() ? null : results.get(0);
 
-	} catch (final HibernateException e) {
-	    throw new PersistenceException(e);
-	} catch (final DataAccessException e) {
-	    throw new PersistenceException(e);
+		} catch (final HibernateException e) {
+			throw new PersistenceException(e);
+		} catch (final DataAccessException e) {
+			throw new PersistenceException(e);
+		}
 	}
-    }
 
-    @Override
-    public List<ExtraItem> findAllByHotelId(final Long id)
-	    throws PersistenceException {
-	try {
-	    final StringBuilder sb = new StringBuilder("SELECT obj FROM ")
-		    .append(ExtraItem.class.getName()).append(
-			    " as obj join fetch obj.hotel h WHERE h.id = :id ");
+	@Override
+	public List<ExtraItem> findAllByHotelId(final Long id)
+			throws PersistenceException {
+		try {
+			final StringBuilder sb = new StringBuilder("SELECT obj FROM ")
+					.append(ExtraItem.class.getName()).append(
+							" as obj join fetch obj.hotel h WHERE h.id = :id ");
 
-	    final Query query = getCurrentSession().createQuery(sb.toString());
-	    query.setParameter("id", id);
-	    return new ArrayList<ExtraItem>(query.list());
+			final Query query = getCurrentSession().createQuery(sb.toString());
+			query.setParameter("id", id);
+			return new ArrayList<ExtraItem>(query.list());
 
-	} catch (final HibernateException e) {
-	    throw new PersistenceException(e);
-	} catch (final DataAccessException e) {
-	    throw new PersistenceException(e);
+		} catch (final HibernateException e) {
+			throw new PersistenceException(e);
+		} catch (final DataAccessException e) {
+			throw new PersistenceException(e);
+		}
 	}
-    }
 
-    @Override
-    protected Class getEntityClass() {
-	return ExtraItem.class;
-    }
+	@Override
+	protected Class getEntityClass() {
+		return ExtraItem.class;
+	}
 
 }

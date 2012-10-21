@@ -12,7 +12,7 @@ import com.yd.etravel.service.exception.ServiceException;
  */
 public interface ISearchManager {
 
-    public com.yd.etravel.domain.custom.search.SearchResultsDTO searchRoom(
-	    SearchRequestDTO searchRequestDTO) throws ServiceException;
+	public com.yd.etravel.domain.custom.search.SearchResultsDTO searchRoom(
+			SearchRequestDTO searchRequestDTO) throws ServiceException;
 
 }

@@ -13,26 +13,26 @@ import com.yd.etravel.domain.markup.Markup;
 @Entity
 @Table(name = "T_ROOM_MARKUP")
 public class RoomMarkup extends BaseObject {
-    @ManyToOne
-    private Room room;
+	@ManyToOne
+	private Room room;
 
-    @ManyToOne
-    private Markup markup;
+	@ManyToOne
+	private Markup markup;
 
-    public Room getRoom() {
-	return this.room;
-    }
+	public Room getRoom() {
+		return this.room;
+	}
 
-    public void setRoom(final Room room) {
-	this.room = room;
-    }
+	public void setRoom(final Room room) {
+		this.room = room;
+	}
 
-    public Markup getMarkup() {
-	return this.markup;
-    }
+	public Markup getMarkup() {
+		return this.markup;
+	}
 
-    public void setMarkup(final Markup markup) {
-	this.markup = markup;
-    }
+	public void setMarkup(final Markup markup) {
+		this.markup = markup;
+	}
 
 }

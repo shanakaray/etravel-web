@@ -22,64 +22,64 @@ import com.yd.etravel.persistence.exception.PersistenceException;
 @Repository
 public class HotelDAO extends BaseDAO<Hotel> implements IHotelDAO {
 
-    final static StringBuilder FIND_HOTEL_WITH_USER = new StringBuilder(
-	    "SELECT hot FROM ").append(Hotel.class.getName()).append(
-	    " as hot inner join fetch hot.superUser WHERE hot.id=:pk");
+	final static StringBuilder FIND_HOTEL_WITH_USER = new StringBuilder(
+			"SELECT hot FROM ").append(Hotel.class.getName()).append(
+			" as hot inner join fetch hot.superUser WHERE hot.id=:pk");
 
-    @Override
-    public boolean isHotelNameExist(final String name, final Long id)
-	    throws PersistenceException {
-	try {
-	    final StringBuilder IS_HOTEL_NAME_EXIST = new StringBuilder(
-		    "SELECT hotel FROM Hotel as hotel where ")
-		    .append(" UPPER(hotel.name)= UPPER(:name)");
+	@Override
+	public boolean isHotelNameExist(final String name, final Long id)
+			throws PersistenceException {
+		try {
+			final StringBuilder IS_HOTEL_NAME_EXIST = new StringBuilder(
+					"SELECT hotel FROM Hotel as hotel where ")
+					.append(" UPPER(hotel.name)= UPPER(:name)");
 
-	    if (id != null) {
-		IS_HOTEL_NAME_EXIST.append(" AND hotel.id != :id ");
-	    }
+			if (id != null) {
+				IS_HOTEL_NAME_EXIST.append(" AND hotel.id != :id ");
+			}
 
-	    final Query query = getCurrentSession().createQuery(
-		    IS_HOTEL_NAME_EXIST.toString());
-	    query.setParameter("name", name);
-	    if (id != null) {
-		query.setParameter("id", id);
-	    }
+			final Query query = getCurrentSession().createQuery(
+					IS_HOTEL_NAME_EXIST.toString());
+			query.setParameter("name", name);
+			if (id != null) {
+				query.setParameter("id", id);
+			}
 
-	    return !query.list().isEmpty();
-	} catch (final HibernateException e) {
-	    throw new PersistenceException(e);
+			return !query.list().isEmpty();
+		} catch (final HibernateException e) {
+			throw new PersistenceException(e);
+		}
 	}
-    }
 
-    @Override
-    public Hotel findHotelWithUser(final Long id) throws PersistenceException {
-	try {
-	    final Query query = getCurrentSession().createQuery(
-		    FIND_HOTEL_WITH_USER.toString());
-	    query.setParameter("pk", id);
-	    final List<Hotel> list = query.list();
-	    return list.isEmpty() ? null : list.get(0);
-	} catch (final HibernateException e) {
-	    throw new PersistenceException(e);
+	@Override
+	public Hotel findHotelWithUser(final Long id) throws PersistenceException {
+		try {
+			final Query query = getCurrentSession().createQuery(
+					FIND_HOTEL_WITH_USER.toString());
+			query.setParameter("pk", id);
+			final List<Hotel> list = query.list();
+			return list.isEmpty() ? null : list.get(0);
+		} catch (final HibernateException e) {
+			throw new PersistenceException(e);
+		}
 	}
-    }
 
-    @Override
-    public int deleteHotel(final Long id) throws PersistenceException {
-	try {
-	    final Hotel hotel = (Hotel) getCurrentSession()
-		    .get(Hotel.class, id);
-	    hotel.getSuperUser().clear();
-	    getCurrentSession().delete(hotel);
-	    return 1;
-	} catch (final HibernateException e) {
-	    throw new PersistenceException(e);
+	@Override
+	public int deleteHotel(final Long id) throws PersistenceException {
+		try {
+			final Hotel hotel = (Hotel) getCurrentSession()
+					.get(Hotel.class, id);
+			hotel.getSuperUser().clear();
+			getCurrentSession().delete(hotel);
+			return 1;
+		} catch (final HibernateException e) {
+			throw new PersistenceException(e);
+		}
 	}
-    }
 
-    @Override
-    protected Class getEntityClass() {
-	return Hotel.class;
-    }
+	@Override
+	protected Class getEntityClass() {
+		return Hotel.class;
+	}
 
 }

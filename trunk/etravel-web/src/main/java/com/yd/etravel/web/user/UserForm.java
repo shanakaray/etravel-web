@@ -26,189 +26,189 @@ import com.yd.etravel.web.common.BaseForm;
  */
 public class UserForm extends BaseForm {
 
-    private User user;
-    private Long id;
-    private String repassword;
-    private Long[] roleIds;
-    private List<Role> allRoles;
-    private List<User> allUsers;
+	private User user;
+	private Long id;
+	private String repassword;
+	private Long[] roleIds;
+	private List<Role> allRoles;
+	private List<User> allUsers;
 
-    private boolean passwordReset;
+	private boolean passwordReset;
 
-    /**
+	/**
 	 * 
 	 */
-    public UserForm() {
-    }
-
-    public User getUser() {
-	return this.user;
-    }
-
-    public void setUser(final User user) {
-	this.user = user;
-    }
-
-    public String getName() {
-	return this.user.getName();
-    }
-
-    public void setName(final String name) {
-	this.user.setName(name);
-    }
-
-    public String getPw() {
-	return this.user.getPassword();
-    }
-
-    public void setPw(final String password) {
-	this.user.setPassword(password);
-    }
-
-    public String getAddress() {
-	return this.user.getAddress();
-    }
-
-    public void setAddress(final String address) {
-	this.user.setAddress(address);
-    }
-
-    public String getContact() {
-	return this.user.getContact();
-    }
-
-    public void setContact(final String contact) {
-	this.user.setContact(contact);
-    }
-
-    public String getEmail() {
-	return this.user.getEmail();
-    }
-
-    public void setEmail(final String email) {
-	this.user.setEmail(email);
-    }
-
-    public String getFirstName() {
-	return this.user.getFirstName();
-    }
-
-    public void setFirstName(final String firstName) {
-	this.user.setFirstName(firstName);
-    }
-
-    public String getLastName() {
-	return this.user.getLastName();
-    }
-
-    public void setLastName(final String lastName) {
-	this.user.setLastName(lastName);
-    }
-
-    public String getRepw() {
-	return this.repassword;
-    }
-
-    public void setRepw(final String repassword) {
-	this.repassword = repassword;
-    }
-
-    public Long[] getRoleIds() {
-	return this.roleIds;
-    }
-
-    public void setRoleIds(final Long[] roleIds) {
-	this.roleIds = roleIds;
-    }
-
-    public List<Role> getAllRoles() {
-	return this.allRoles;
-    }
-
-    public void setAllRoles(final List<Role> allRoles) {
-	this.allRoles = allRoles;
-    }
-
-    public List<User> getAllUsers() {
-	return this.allUsers;
-    }
-
-    public void setAllUsers(final List<User> allUsers) {
-	this.allUsers = allUsers;
-    }
-
-    public Boolean getActive() {
-	return this.user.isActive();
-    }
-
-    public void setActive(final Boolean active) {
-	this.user.setActive(active);
-    }
-
-    public Long getId() {
-	return this.id;
-    }
-
-    public void setId(final Long id) {
-	this.id = id;
-    }
-
-    public boolean isPasswordReset() {
-	return this.passwordReset;
-    }
-
-    public void setPasswordReset(final boolean passwordReset) {
-	this.passwordReset = passwordReset;
-    }
-
-    @Override
-    public void resetBean(final ActionMapping mapping,
-	    final HttpServletRequest request) {
-
-	this.id = 0L;
-	this.user = new User();
-	this.repassword = IConstants.ICommon.EMPTY_STRING;
-	this.roleIds = null;
-	this.allRoles = Collections.emptyList();
-	this.allUsers = Collections.emptyList();
-	this.passwordReset = false;
-    }
-
-    @Override
-    public ActionErrors validateBean(final ActionMapping mapping,
-	    final HttpServletRequest request) {
-	final ActionErrors errors = new ActionErrors();
-
-	if (StringUtils.isEmpty(this.user.getFirstName())) {
-	    addErrors(errors, "etravel.error.fistname.required");
-	}
-	if (StringUtils.isEmpty(this.user.getLastName())) {
-	    addErrors(errors, "etravel.error.lastname.required");
-	}
-	if (StringUtils.isEmpty(this.user.getName())) {
-	    addErrors(errors, "etravel.error.username.required");
+	public UserForm() {
 	}
 
-	if (!StringUtils.isEmpty(this.user.getEmail())
-		&& !StringUtils.isValidEmail(this.user.getEmail())) {
-	    addErrors(errors, "etravel.error.email.invalid");
-	    this.user.setEmail(EMPTY_STRING);
+	public User getUser() {
+		return this.user;
 	}
 
-	if (this.passwordReset || getId() == null || getId().longValue() <= 0) {
-	    if (StringUtils.isEmpty(this.user.getPassword())) {
-		addErrors(errors, "etravel.error.pw.required");
-	    } else if (!this.user.getPassword().equals(this.repassword)) {
-		addErrors(errors, "etravel.error.pw.notmached");
-
-		setRepw(EMPTY_STRING);
-		setPw(EMPTY_STRING);
-
-		setPasswordReset(false);
-	    }
+	public void setUser(final User user) {
+		this.user = user;
 	}
 
-	return errors;
-    }
+	public String getName() {
+		return this.user.getName();
+	}
+
+	public void setName(final String name) {
+		this.user.setName(name);
+	}
+
+	public String getPw() {
+		return this.user.getPassword();
+	}
+
+	public void setPw(final String password) {
+		this.user.setPassword(password);
+	}
+
+	public String getAddress() {
+		return this.user.getAddress();
+	}
+
+	public void setAddress(final String address) {
+		this.user.setAddress(address);
+	}
+
+	public String getContact() {
+		return this.user.getContact();
+	}
+
+	public void setContact(final String contact) {
+		this.user.setContact(contact);
+	}
+
+	public String getEmail() {
+		return this.user.getEmail();
+	}
+
+	public void setEmail(final String email) {
+		this.user.setEmail(email);
+	}
+
+	public String getFirstName() {
+		return this.user.getFirstName();
+	}
+
+	public void setFirstName(final String firstName) {
+		this.user.setFirstName(firstName);
+	}
+
+	public String getLastName() {
+		return this.user.getLastName();
+	}
+
+	public void setLastName(final String lastName) {
+		this.user.setLastName(lastName);
+	}
+
+	public String getRepw() {
+		return this.repassword;
+	}
+
+	public void setRepw(final String repassword) {
+		this.repassword = repassword;
+	}
+
+	public Long[] getRoleIds() {
+		return this.roleIds;
+	}
+
+	public void setRoleIds(final Long[] roleIds) {
+		this.roleIds = roleIds;
+	}
+
+	public List<Role> getAllRoles() {
+		return this.allRoles;
+	}
+
+	public void setAllRoles(final List<Role> allRoles) {
+		this.allRoles = allRoles;
+	}
+
+	public List<User> getAllUsers() {
+		return this.allUsers;
+	}
+
+	public void setAllUsers(final List<User> allUsers) {
+		this.allUsers = allUsers;
+	}
+
+	public Boolean getActive() {
+		return this.user.isActive();
+	}
+
+	public void setActive(final Boolean active) {
+		this.user.setActive(active);
+	}
+
+	public Long getId() {
+		return this.id;
+	}
+
+	public void setId(final Long id) {
+		this.id = id;
+	}
+
+	public boolean isPasswordReset() {
+		return this.passwordReset;
+	}
+
+	public void setPasswordReset(final boolean passwordReset) {
+		this.passwordReset = passwordReset;
+	}
+
+	@Override
+	public void resetBean(final ActionMapping mapping,
+			final HttpServletRequest request) {
+
+		this.id = 0L;
+		this.user = new User();
+		this.repassword = IConstants.ICommon.EMPTY_STRING;
+		this.roleIds = null;
+		this.allRoles = Collections.emptyList();
+		this.allUsers = Collections.emptyList();
+		this.passwordReset = false;
+	}
+
+	@Override
+	public ActionErrors validateBean(final ActionMapping mapping,
+			final HttpServletRequest request) {
+		final ActionErrors errors = new ActionErrors();
+
+		if (StringUtils.isEmpty(this.user.getFirstName())) {
+			addErrors(errors, "etravel.error.fistname.required");
+		}
+		if (StringUtils.isEmpty(this.user.getLastName())) {
+			addErrors(errors, "etravel.error.lastname.required");
+		}
+		if (StringUtils.isEmpty(this.user.getName())) {
+			addErrors(errors, "etravel.error.username.required");
+		}
+
+		if (!StringUtils.isEmpty(this.user.getEmail())
+				&& !StringUtils.isValidEmail(this.user.getEmail())) {
+			addErrors(errors, "etravel.error.email.invalid");
+			this.user.setEmail(EMPTY_STRING);
+		}
+
+		if (this.passwordReset || getId() == null || getId().longValue() <= 0) {
+			if (StringUtils.isEmpty(this.user.getPassword())) {
+				addErrors(errors, "etravel.error.pw.required");
+			} else if (!this.user.getPassword().equals(this.repassword)) {
+				addErrors(errors, "etravel.error.pw.notmached");
+
+				setRepw(EMPTY_STRING);
+				setPw(EMPTY_STRING);
+
+				setPasswordReset(false);
+			}
+		}
+
+		return errors;
+	}
 
 }

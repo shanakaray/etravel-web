@@ -19,52 +19,52 @@ import com.yd.etravel.domain.extraitem.ExtraItem;
 @Table(name = "T_EXTRA_ITEM_BOOKING")
 public class ExtraItemBooking extends BaseObject {
 
-    private static final long serialVersionUID = 3158821878330977859L;
+	private static final long serialVersionUID = 3158821878330977859L;
 
-    @ManyToOne
-    @ForeignKey(name = "FK_BOOKING")
-    private Booking booking;
+	@ManyToOne
+	@ForeignKey(name = "FK_BOOKING")
+	private Booking booking;
 
-    @Column
-    private String comments;
+	@Column
+	private String comments;
 
-    @ManyToOne
-    @ForeignKey(name = "FK_EXTRA_ITEM")
-    private ExtraItem extraItem;
+	@ManyToOne
+	@ForeignKey(name = "FK_EXTRA_ITEM")
+	private ExtraItem extraItem;
 
-    @Column
-    private BigDecimal price;
+	@Column
+	private BigDecimal price;
 
-    public ExtraItem getExtraItem() {
-	return this.extraItem;
-    }
+	public ExtraItem getExtraItem() {
+		return this.extraItem;
+	}
 
-    public void setExtraItem(final ExtraItem extraItem) {
-	this.extraItem = extraItem;
-    }
+	public void setExtraItem(final ExtraItem extraItem) {
+		this.extraItem = extraItem;
+	}
 
-    public Booking getBooking() {
-	return this.booking;
-    }
+	public Booking getBooking() {
+		return this.booking;
+	}
 
-    public void setBooking(final Booking booking) {
-	this.booking = booking;
-    }
+	public void setBooking(final Booking booking) {
+		this.booking = booking;
+	}
 
-    public String getComments() {
-	return this.comments;
-    }
+	public String getComments() {
+		return this.comments;
+	}
 
-    public void setComments(final String comments) {
-	this.comments = comments;
-    }
+	public void setComments(final String comments) {
+		this.comments = comments;
+	}
 
-    public BigDecimal getPrice() {
-	return this.price;
-    }
+	public BigDecimal getPrice() {
+		return this.price;
+	}
 
-    public void setPrice(final BigDecimal price) {
-	this.price = price;
-    }
+	public void setPrice(final BigDecimal price) {
+		this.price = price;
+	}
 
 }

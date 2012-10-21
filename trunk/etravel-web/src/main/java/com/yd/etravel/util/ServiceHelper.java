@@ -17,50 +17,50 @@ import com.yd.etravel.util.IConstants.IServiceNames;
  * 
  */
 public final class ServiceHelper implements IServiceNames {
-    private static ServiceHelper instance = null;
-    private WebApplicationContext applicationContext;
+	private static ServiceHelper instance = null;
+	private WebApplicationContext applicationContext;
 
-    private ServiceHelper() {
-    }
-
-    public static ServiceHelper getInstance() {
-	if (instance == null) {
-	    instance = new ServiceHelper();
+	private ServiceHelper() {
 	}
-	return instance;
-    }
 
-    public WebApplicationContext getApplicationContext() {
-	return this.applicationContext;
-    }
+	public static ServiceHelper getInstance() {
+		if (instance == null) {
+			instance = new ServiceHelper();
+		}
+		return instance;
+	}
 
-    public void setApplicationContext(
-	    final WebApplicationContext applicationContext) {
-	this.applicationContext = applicationContext;
-    }
+	public WebApplicationContext getApplicationContext() {
+		return this.applicationContext;
+	}
 
-    public IBookingManager getBookingManager() {
-	return (IBookingManager) this.applicationContext.getBean(BOOKING);
-    }
+	public void setApplicationContext(
+			final WebApplicationContext applicationContext) {
+		this.applicationContext = applicationContext;
+	}
 
-    public IUserManager getUserManager() {
-	return (IUserManager) this.applicationContext.getBean(USER);
-    }
+	public IBookingManager getBookingManager() {
+		return (IBookingManager) this.applicationContext.getBean(BOOKING);
+	}
 
-    public IRoomManager getRoomManager() {
-	return (IRoomManager) this.applicationContext.getBean(ROOM);
-    }
+	public IUserManager getUserManager() {
+		return (IUserManager) this.applicationContext.getBean(USER);
+	}
 
-    public IHotelManager getHotelManager() {
-	return (IHotelManager) this.applicationContext.getBean(HOTEL);
-    }
+	public IRoomManager getRoomManager() {
+		return (IRoomManager) this.applicationContext.getBean(ROOM);
+	}
 
-    public IpgUtil getIpgUtil() {
-	return (IpgUtil) this.applicationContext.getBean(IPG);
-    }
+	public IHotelManager getHotelManager() {
+		return (IHotelManager) this.applicationContext.getBean(HOTEL);
+	}
 
-    public IContentManager getContentService() {
-	return (IContentManager) this.applicationContext.getBean(CONTENT);
-    }
+	public IpgUtil getIpgUtil() {
+		return (IpgUtil) this.applicationContext.getBean(IPG);
+	}
+
+	public IContentManager getContentService() {
+		return (IContentManager) this.applicationContext.getBean(CONTENT);
+	}
 
 }

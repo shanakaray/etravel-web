@@ -18,115 +18,115 @@ import com.yd.etravel.service.message.ValidationHelper;
 @Service(value = "occupancyService")
 @Transactional(propagation = Propagation.SUPPORTS)
 public class OccupancyManagerImpl implements IOccupancyManager {
-    @Autowired(required = true)
-    private IOccupancyDAO occupancyDAO;
-    @Autowired(required = true)
-    private IRoomTypeDAO roomTypeDAO;
+	@Autowired(required = true)
+	private IOccupancyDAO occupancyDAO;
+	@Autowired(required = true)
+	private IRoomTypeDAO roomTypeDAO;
 
-    public void setOccupancyDAO(final IOccupancyDAO occupancyDAO) {
-	this.occupancyDAO = occupancyDAO;
-    }
-
-    public void setRoomTypeDAO(final IRoomTypeDAO roomTypeDAO) {
-	this.roomTypeDAO = roomTypeDAO;
-    }
-
-    @Transactional
-    @Override
-    public Occupancy save(final Occupancy occupancy) throws ServiceException {
-	try {
-
-	    if (this.occupancyDAO.isOccupancyNameExist(occupancy.getName(),
-		    occupancy.getId())) {
-		throw new ServiceException(
-			ValidationHelper
-				.getMessageHolder("etravel.occupancyName.exist"));
-	    }
-
-	    if (occupancy.getId() == null
-		    && !this.occupancyDAO.findAllOccupancyByPaxInfo(occupancy)) {
-
-		throw new ServiceException(
-			ValidationHelper
-				.getMessageHolder("etravel.occupancy.paxCombination.exist"));
-
-	    }
-	    final RoomType roomType = this.roomTypeDAO.findById(occupancy
-		    .getRoomType().getId());
-
-	    occupancy.setRoomType(roomType);
-	    this.occupancyDAO.saveOrUpdate(occupancy);
-
-	} catch (final PersistenceException e) {
-	    throw new ServiceException(null, e);
+	public void setOccupancyDAO(final IOccupancyDAO occupancyDAO) {
+		this.occupancyDAO = occupancyDAO;
 	}
-	return occupancy;
-    }
 
-    @Override
-    public Occupancy findOccupancyById(final Long id) throws ServiceException {
-	Occupancy occupancy = null;
-	try {
-	    occupancy = this.occupancyDAO.findById(id);
-
-	} catch (final PersistenceException e) {
-	    throw new ServiceException(null, e);
+	public void setRoomTypeDAO(final IRoomTypeDAO roomTypeDAO) {
+		this.roomTypeDAO = roomTypeDAO;
 	}
-	return occupancy;
-    }
 
-    @Transactional
-    @Override
-    public int deleteOccupancy(final Long id) throws ServiceException {
-	int flag = 0;
-	try {
-	    flag = this.occupancyDAO.deleteAny(id);
+	@Transactional
+	@Override
+	public Occupancy save(final Occupancy occupancy) throws ServiceException {
+		try {
 
-	} catch (final PersistenceException e) {
-	    throw new ServiceException(null, e);
+			if (this.occupancyDAO.isOccupancyNameExist(occupancy.getName(),
+					occupancy.getId())) {
+				throw new ServiceException(
+						ValidationHelper
+								.getMessageHolder("etravel.occupancyName.exist"));
+			}
+
+			if (occupancy.getId() == null
+					&& !this.occupancyDAO.findAllOccupancyByPaxInfo(occupancy)) {
+
+				throw new ServiceException(
+						ValidationHelper
+								.getMessageHolder("etravel.occupancy.paxCombination.exist"));
+
+			}
+			final RoomType roomType = this.roomTypeDAO.findById(occupancy
+					.getRoomType().getId());
+
+			occupancy.setRoomType(roomType);
+			this.occupancyDAO.saveOrUpdate(occupancy);
+
+		} catch (final PersistenceException e) {
+			throw new ServiceException(null, e);
+		}
+		return occupancy;
 	}
-	return flag;
-    }
 
-    @Override
-    public List<Occupancy> findAllOccupancy() throws ServiceException {
-	try {
-	    return this.occupancyDAO.findAll();
+	@Override
+	public Occupancy findOccupancyById(final Long id) throws ServiceException {
+		Occupancy occupancy = null;
+		try {
+			occupancy = this.occupancyDAO.findById(id);
 
-	} catch (final PersistenceException e) {
-	    throw new ServiceException(null, e);
+		} catch (final PersistenceException e) {
+			throw new ServiceException(null, e);
+		}
+		return occupancy;
 	}
-    }
 
-    @Override
-    public List<Occupancy> findAllOccupancyWithRoomType()
-	    throws ServiceException {
-	try {
-	    return this.occupancyDAO.findAllOccupancyWithRoomType();
+	@Transactional
+	@Override
+	public int deleteOccupancy(final Long id) throws ServiceException {
+		int flag = 0;
+		try {
+			flag = this.occupancyDAO.deleteAny(id);
 
-	} catch (final PersistenceException e) {
-	    throw new ServiceException(null, e);
+		} catch (final PersistenceException e) {
+			throw new ServiceException(null, e);
+		}
+		return flag;
 	}
-    }
 
-    @Override
-    public List<Occupancy> findAllActiveOccupancy() throws ServiceException {
-	try {
-	    return this.occupancyDAO.findAllActive();
-	} catch (final PersistenceException e) {
-	    throw new ServiceException(null, e);
+	@Override
+	public List<Occupancy> findAllOccupancy() throws ServiceException {
+		try {
+			return this.occupancyDAO.findAll();
+
+		} catch (final PersistenceException e) {
+			throw new ServiceException(null, e);
+		}
 	}
-    }
 
-    @Override
-    public List<Occupancy> findAllOccupancyByRoomType(final Long roomTypeId)
-	    throws ServiceException {
-	try {
+	@Override
+	public List<Occupancy> findAllOccupancyWithRoomType()
+			throws ServiceException {
+		try {
+			return this.occupancyDAO.findAllOccupancyWithRoomType();
 
-	    return this.occupancyDAO.findAllOccupancyByRoomType(roomTypeId);
-
-	} catch (final PersistenceException e) {
-	    throw new ServiceException(null, e);
+		} catch (final PersistenceException e) {
+			throw new ServiceException(null, e);
+		}
 	}
-    }
+
+	@Override
+	public List<Occupancy> findAllActiveOccupancy() throws ServiceException {
+		try {
+			return this.occupancyDAO.findAllActive();
+		} catch (final PersistenceException e) {
+			throw new ServiceException(null, e);
+		}
+	}
+
+	@Override
+	public List<Occupancy> findAllOccupancyByRoomType(final Long roomTypeId)
+			throws ServiceException {
+		try {
+
+			return this.occupancyDAO.findAllOccupancyByRoomType(roomTypeId);
+
+		} catch (final PersistenceException e) {
+			throw new ServiceException(null, e);
+		}
+	}
 }

@@ -23,94 +23,94 @@ import com.yd.etravel.service.message.ValidationHelper;
 @Service(value = "paxService")
 @Transactional(propagation = Propagation.SUPPORTS)
 public class PaxManagerImpl implements IPaxManager {
-    @Autowired(required = true)
-    private IPaxDAO paxDAO;
+	@Autowired(required = true)
+	private IPaxDAO paxDAO;
 
-    public void setPaxDAO(final IPaxDAO paxDAO) {
-	this.paxDAO = paxDAO;
-    }
-
-    @Transactional
-    @Override
-    public int deletePax(final Long id) throws ServiceException {
-	int count = 0;
-	try {
-	    count = this.paxDAO.deleteAny(id);
-	} catch (final PersistenceException e) {
-	    throw new ServiceException(null, e);
+	public void setPaxDAO(final IPaxDAO paxDAO) {
+		this.paxDAO = paxDAO;
 	}
-	return count;
-    }
 
-    @Override
-    public List<Pax> findAllActivePax() throws ServiceException {
-	try {
-	    return this.paxDAO.findAllActive();
-	} catch (final PersistenceException e) {
-	    throw new ServiceException(null, e);
+	@Transactional
+	@Override
+	public int deletePax(final Long id) throws ServiceException {
+		int count = 0;
+		try {
+			count = this.paxDAO.deleteAny(id);
+		} catch (final PersistenceException e) {
+			throw new ServiceException(null, e);
+		}
+		return count;
 	}
-    }
 
-    @Override
-    public List<Pax> findAllPax() throws ServiceException {
-	try {
-	    return this.paxDAO.findAll();
-	} catch (final PersistenceException e) {
-	    throw new ServiceException(null, e);
+	@Override
+	public List<Pax> findAllActivePax() throws ServiceException {
+		try {
+			return this.paxDAO.findAllActive();
+		} catch (final PersistenceException e) {
+			throw new ServiceException(null, e);
+		}
 	}
-    }
 
-    @Override
-    public List<Pax> findPaxByHotel(final Long hotelId) throws ServiceException {
-	try {
-	    final PaxSearchDTO searchDTO = new PaxSearchDTO();
-	    searchDTO.setHotelId(hotelId);
-	    return this.paxDAO.findPax(searchDTO);
-	} catch (final PersistenceException e) {
-	    throw new ServiceException(null, e);
+	@Override
+	public List<Pax> findAllPax() throws ServiceException {
+		try {
+			return this.paxDAO.findAll();
+		} catch (final PersistenceException e) {
+			throw new ServiceException(null, e);
+		}
 	}
-    }
 
-    @Override
-    public Pax findPaxById(final Long id) throws ServiceException {
-	Pax pax = null;
-	try {
-
-	    pax = this.paxDAO.findById(id);
-
-	} catch (final PersistenceException e) {
-	    throw new ServiceException(null, e);
+	@Override
+	public List<Pax> findPaxByHotel(final Long hotelId) throws ServiceException {
+		try {
+			final PaxSearchDTO searchDTO = new PaxSearchDTO();
+			searchDTO.setHotelId(hotelId);
+			return this.paxDAO.findPax(searchDTO);
+		} catch (final PersistenceException e) {
+			throw new ServiceException(null, e);
+		}
 	}
-	return pax;
 
-    }
+	@Override
+	public Pax findPaxById(final Long id) throws ServiceException {
+		Pax pax = null;
+		try {
 
-    @Transactional
-    @Override
-    public Pax savePax(Pax pax) throws ServiceException {
-	try {
+			pax = this.paxDAO.findById(id);
 
-	    if (this.paxDAO.isPaxTypeExist(pax.getHotel().getId(), pax.getId())) {
-		throw new ServiceException(
-			ValidationHelper
-				.getMessageHolder("etravel.pax.type.exist"));
-	    }
-	    pax = this.paxDAO.saveOrUpdate(pax);
+		} catch (final PersistenceException e) {
+			throw new ServiceException(null, e);
+		}
+		return pax;
 
-	} catch (final PersistenceException e) {
-	    throw new ServiceException(null, e);
 	}
-	return pax;
-    }
 
-    @Override
-    public List<Pax> findPax(final PaxSearchDTO paxSearchDTO)
-	    throws ServiceException {
-	try {
-	    return this.paxDAO.findPax(paxSearchDTO);
-	} catch (final PersistenceException e) {
-	    throw new ServiceException(null, e);
+	@Transactional
+	@Override
+	public Pax savePax(Pax pax) throws ServiceException {
+		try {
+
+			if (this.paxDAO.isPaxTypeExist(pax.getHotel().getId(), pax.getId())) {
+				throw new ServiceException(
+						ValidationHelper
+								.getMessageHolder("etravel.pax.type.exist"));
+			}
+			pax = this.paxDAO.saveOrUpdate(pax);
+
+		} catch (final PersistenceException e) {
+			throw new ServiceException(null, e);
+		}
+		return pax;
 	}
-    }
+
+	@Override
+	public List<Pax> findPax(final PaxSearchDTO paxSearchDTO)
+			throws ServiceException {
+		try {
+			return this.paxDAO.findPax(paxSearchDTO);
+		} catch (final PersistenceException e) {
+			throw new ServiceException(null, e);
+		}
+	}
 
 }

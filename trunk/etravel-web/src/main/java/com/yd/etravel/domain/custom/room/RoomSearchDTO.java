@@ -12,36 +12,36 @@ import java.io.Serializable;
  */
 public class RoomSearchDTO implements Serializable {
 
-    private Integer noOfRoom;
-    private Long roomTypeId;
-    private Long hotelId;
+	private Integer noOfRoom;
+	private Long roomTypeId;
+	private Long hotelId;
 
-    public RoomSearchDTO() {
-	// TODO Auto-generated constructor stub
-    }
+	public RoomSearchDTO() {
+		// TODO Auto-generated constructor stub
+	}
 
-    public Integer getNoOfRoom() {
-	return this.noOfRoom;
-    }
+	public Integer getNoOfRoom() {
+		return this.noOfRoom;
+	}
 
-    public void setNoOfRoom(final Integer noOfRoom) {
-	this.noOfRoom = noOfRoom;
-    }
+	public void setNoOfRoom(final Integer noOfRoom) {
+		this.noOfRoom = noOfRoom;
+	}
 
-    public Long getRoomTypeId() {
-	return this.roomTypeId;
-    }
+	public Long getRoomTypeId() {
+		return this.roomTypeId;
+	}
 
-    public void setRoomTypeId(final Long roomTypeId) {
-	this.roomTypeId = roomTypeId;
-    }
+	public void setRoomTypeId(final Long roomTypeId) {
+		this.roomTypeId = roomTypeId;
+	}
 
-    public Long getHotelId() {
-	return this.hotelId;
-    }
+	public Long getHotelId() {
+		return this.hotelId;
+	}
 
-    public void setHotelId(final Long hotelId) {
-	this.hotelId = hotelId;
-    }
+	public void setHotelId(final Long hotelId) {
+		this.hotelId = hotelId;
+	}
 
 }

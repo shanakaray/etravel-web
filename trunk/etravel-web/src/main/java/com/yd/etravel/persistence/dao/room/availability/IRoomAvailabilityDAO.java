@@ -17,42 +17,42 @@ import com.yd.etravel.service.exception.ServiceException;
  */
 public interface IRoomAvailabilityDAO extends IBaseDAO<RoomAvailability> {
 
-    public boolean isDataRangeValid(final Long hotelId, Date fromDate,
-	    Date toDate) throws PersistenceException;
+	public boolean isDataRangeValid(final Long hotelId, Date fromDate,
+			Date toDate) throws PersistenceException;
 
-    @Deprecated
-    /**
-     * use List<RoomAvailabilityDTO> findAllRoomAvailabilityDTO(Long hotelId)
-     * instead
-     */
-    public List<RoomAvailability> findAllRoomAvailabilityWithRoomAndOccu(
-	    Long hotelId) throws PersistenceException;
+	@Deprecated
+	/**
+	 * use List<RoomAvailabilityDTO> findAllRoomAvailabilityDTO(Long hotelId)
+	 * instead
+	 */
+	public List<RoomAvailability> findAllRoomAvailabilityWithRoomAndOccu(
+			Long hotelId) throws PersistenceException;
 
-    public List<RoomDailyAvailability> findAllRoomDailyAvailability(Long id)
-	    throws PersistenceException;
+	public List<RoomDailyAvailability> findAllRoomDailyAvailability(Long id)
+			throws PersistenceException;
 
-    public List<RoomAvailabilityDTO> findAllRoomAvailabilityDTO(
-	    RoomAvailabilityDTO dto) throws PersistenceException;
+	public List<RoomAvailabilityDTO> findAllRoomAvailabilityDTO(
+			RoomAvailabilityDTO dto) throws PersistenceException;
 
-    public List<RoomDailyAvailability> findAllRoomDailyAvailability()
-	    throws PersistenceException;
+	public List<RoomDailyAvailability> findAllRoomDailyAvailability()
+			throws PersistenceException;
 
-    public RoomAvailability findRoomAvailabilityById(final Long id)
-	    throws ServiceException, PersistenceException;
+	public RoomAvailability findRoomAvailabilityById(final Long id)
+			throws ServiceException, PersistenceException;
 
-    public List<RoomDailyAvailability> findAllRoomDailyAvailabilityByRoomAvailabilityId(
-	    Long id) throws PersistenceException;
+	public List<RoomDailyAvailability> findAllRoomDailyAvailabilityByRoomAvailabilityId(
+			Long id) throws PersistenceException;
 
-    public List<RoomDailyAvailability> findAllRoomDailyAvailabilityByRoomAvailabilityIdAndDateRange(
-	    Long id, Date checkIn, Date checkOut) throws PersistenceException;
+	public List<RoomDailyAvailability> findAllRoomDailyAvailabilityByRoomAvailabilityIdAndDateRange(
+			Long id, Date checkIn, Date checkOut) throws PersistenceException;
 
-    public List<DailyAvailabilityDTO> findDailyAvailability(Long id)
-	    throws PersistenceException;
+	public List<DailyAvailabilityDTO> findDailyAvailability(Long id)
+			throws PersistenceException;
 
-    public void update(RoomDailyAvailability roomDailyAvailability)
-	    throws PersistenceException;
+	public void update(RoomDailyAvailability roomDailyAvailability)
+			throws PersistenceException;
 
-    public void save(RoomDailyAvailability dailyAvailability)
-	    throws PersistenceException;
+	public void save(RoomDailyAvailability dailyAvailability)
+			throws PersistenceException;
 
 }

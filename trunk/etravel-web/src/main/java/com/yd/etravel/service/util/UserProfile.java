@@ -17,194 +17,194 @@ import com.yd.etravel.util.StringUtils;
  */
 public class UserProfile implements IUserProfile, Serializable {
 
-    private String username;
-    private String firstname;
-    private String lastname;
-    private String contact;
-    private String email;
-    private String nic;
-    private String address;
-    private String password;
+	private String username;
+	private String firstname;
+	private String lastname;
+	private String contact;
+	private String email;
+	private String nic;
+	private String address;
+	private String password;
 
-    private Long id;
-    private Set<String> roles = Collections.emptySet();
-    private Set<String> functionKeySet = Collections.emptySet();
-    private Map<Long, String> assignedHotels;
+	private Long id;
+	private Set<String> roles = Collections.emptySet();
+	private Set<String> functionKeySet = Collections.emptySet();
+	private Map<Long, String> assignedHotels;
 
-    public UserProfile() {
-	this.assignedHotels = new HashMap<Long, String>();
+	public UserProfile() {
+		this.assignedHotels = new HashMap<Long, String>();
 
-    }
-
-    public UserProfile(final String username, final String firstname,
-	    final String lastname, final Set<String> roles) {
-	super();
-	this.username = username;
-	this.firstname = firstname;
-	this.lastname = lastname;
-	this.roles = roles;
-    }
-
-    @Override
-    public String getUsername() {
-	return this.username;
-    }
-
-    @Override
-    public void setUsername(final String username) {
-	this.username = username;
-    }
-
-    @Override
-    public String getFirstname() {
-	if (!StringUtils.isEmpty(this.firstname)) {
-	    String str = new String(new char[] { this.firstname.trim()
-		    .charAt(0) });
-	    str = str.toUpperCase();
-	    return new StringBuilder(this.firstname.trim()).replace(0, 1, str)
-		    .toString();
-	} else {
-	    return this.firstname;
 	}
-    }
 
-    @Override
-    public void setFirstname(final String firstname) {
-	this.firstname = firstname;
-    }
-
-    @Override
-    public String getLastname() {
-	if (!StringUtils.isEmpty(this.lastname)) {
-	    String str = new String(
-		    new char[] { this.lastname.trim().charAt(0) });
-	    str = str.toUpperCase();
-	    return new StringBuilder(this.lastname.trim()).replace(0, 1, str)
-		    .toString();
-	} else {
-	    return this.lastname;
+	public UserProfile(final String username, final String firstname,
+			final String lastname, final Set<String> roles) {
+		super();
+		this.username = username;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.roles = roles;
 	}
-    }
 
-    @Override
-    public void setLastname(final String lastname) {
-	this.lastname = lastname;
-    }
+	@Override
+	public String getUsername() {
+		return this.username;
+	}
 
-    @Override
-    public Set<String> getRoles() {
-	return this.roles;
-    }
+	@Override
+	public void setUsername(final String username) {
+		this.username = username;
+	}
 
-    @Override
-    public void setRoles(final Set<String> roles) {
-	this.roles = roles;
-    }
+	@Override
+	public String getFirstname() {
+		if (!StringUtils.isEmpty(this.firstname)) {
+			String str = new String(new char[] { this.firstname.trim()
+					.charAt(0) });
+			str = str.toUpperCase();
+			return new StringBuilder(this.firstname.trim()).replace(0, 1, str)
+					.toString();
+		} else {
+			return this.firstname;
+		}
+	}
 
-    @Override
-    public boolean hasRole(final String rolename) {
-	return this.roles.contains(rolename);
-    }
+	@Override
+	public void setFirstname(final String firstname) {
+		this.firstname = firstname;
+	}
 
-    @Override
-    public boolean hasAllRoles(final Set<String> rolenames) {
-	return this.roles.containsAll(rolenames);
-    }
+	@Override
+	public String getLastname() {
+		if (!StringUtils.isEmpty(this.lastname)) {
+			String str = new String(
+					new char[] { this.lastname.trim().charAt(0) });
+			str = str.toUpperCase();
+			return new StringBuilder(this.lastname.trim()).replace(0, 1, str)
+					.toString();
+		} else {
+			return this.lastname;
+		}
+	}
 
-    @Override
-    public String getContact() {
-	return this.contact;
-    }
+	@Override
+	public void setLastname(final String lastname) {
+		this.lastname = lastname;
+	}
 
-    @Override
-    public void setContact(final String contact) {
-	this.contact = contact;
-    }
+	@Override
+	public Set<String> getRoles() {
+		return this.roles;
+	}
 
-    @Override
-    public String getEmail() {
-	return this.email;
-    }
+	@Override
+	public void setRoles(final Set<String> roles) {
+		this.roles = roles;
+	}
 
-    @Override
-    public void setEmail(final String email) {
-	this.email = email;
-    }
+	@Override
+	public boolean hasRole(final String rolename) {
+		return this.roles.contains(rolename);
+	}
 
-    @Override
-    public String getNic() {
-	return this.nic;
-    }
+	@Override
+	public boolean hasAllRoles(final Set<String> rolenames) {
+		return this.roles.containsAll(rolenames);
+	}
 
-    @Override
-    public void setNic(final String nic) {
-	this.nic = nic;
-    }
+	@Override
+	public String getContact() {
+		return this.contact;
+	}
 
-    @Override
-    public String getAddress() {
-	return this.address;
-    }
+	@Override
+	public void setContact(final String contact) {
+		this.contact = contact;
+	}
 
-    @Override
-    public void setAddress(final String address) {
-	this.address = address;
-    }
+	@Override
+	public String getEmail() {
+		return this.email;
+	}
 
-    @Override
-    public Long getId() {
-	return this.id;
-    }
+	@Override
+	public void setEmail(final String email) {
+		this.email = email;
+	}
 
-    @Override
-    public void setId(final Long id) {
-	this.id = id;
-    }
+	@Override
+	public String getNic() {
+		return this.nic;
+	}
 
-    @Override
-    public Set<String> getFunctionKeySet() {
-	return this.functionKeySet;
-    }
+	@Override
+	public void setNic(final String nic) {
+		this.nic = nic;
+	}
 
-    @Override
-    public void setFunctionKeySet(final Set<String> functionKeySet) {
-	this.functionKeySet = functionKeySet;
-    }
+	@Override
+	public String getAddress() {
+		return this.address;
+	}
 
-    @Override
-    public boolean hasFunction(final String key) {
-	return this.functionKeySet.contains(key);
-    }
+	@Override
+	public void setAddress(final String address) {
+		this.address = address;
+	}
 
-    @Override
-    public String getPassword() {
-	return this.password;
-    }
+	@Override
+	public Long getId() {
+		return this.id;
+	}
 
-    @Override
-    public void setPassword(final String password) {
-	this.password = password;
-    }
+	@Override
+	public void setId(final Long id) {
+		this.id = id;
+	}
 
-    @Override
-    public Map<String, String> getParams() {
-	final Map<String, String> map = new HashMap<String, String>();
-	map.put("user.firstname", getFirstname());
-	map.put("user.lastname", getLastname());
-	map.put("user.name", getUsername());
-	map.put("user.password", getPassword());
-	map.put("user.email", getEmail());
-	return map;
-    }
+	@Override
+	public Set<String> getFunctionKeySet() {
+		return this.functionKeySet;
+	}
 
-    @Override
-    public Map<Long, String> getAssignedHotels() {
-	return this.assignedHotels;
-    }
+	@Override
+	public void setFunctionKeySet(final Set<String> functionKeySet) {
+		this.functionKeySet = functionKeySet;
+	}
 
-    @Override
-    public void putHotel(final Long id, final String name) {
-	this.assignedHotels.put(id, name);
-    }
+	@Override
+	public boolean hasFunction(final String key) {
+		return this.functionKeySet.contains(key);
+	}
+
+	@Override
+	public String getPassword() {
+		return this.password;
+	}
+
+	@Override
+	public void setPassword(final String password) {
+		this.password = password;
+	}
+
+	@Override
+	public Map<String, String> getParams() {
+		final Map<String, String> map = new HashMap<String, String>();
+		map.put("user.firstname", getFirstname());
+		map.put("user.lastname", getLastname());
+		map.put("user.name", getUsername());
+		map.put("user.password", getPassword());
+		map.put("user.email", getEmail());
+		return map;
+	}
+
+	@Override
+	public Map<Long, String> getAssignedHotels() {
+		return this.assignedHotels;
+	}
+
+	@Override
+	public void putHotel(final Long id, final String name) {
+		this.assignedHotels.put(id, name);
+	}
 
 }

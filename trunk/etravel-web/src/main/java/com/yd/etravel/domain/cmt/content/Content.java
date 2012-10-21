@@ -14,81 +14,81 @@ import com.yd.etravel.domain.common.BaseObject;
  */
 public class Content extends BaseObject {
 
-    private static final long serialVersionUID = 4577466925804323125L;
-    private String text;
-    private String url;
-    private Category category;
-    private Long pk;
-    private String object;
+	private static final long serialVersionUID = 4577466925804323125L;
+	private String text;
+	private String url;
+	private Category category;
+	private Long pk;
+	private String object;
 
-    /**
+	/**
 	 * 
 	 */
-    public Content() {
-    }
+	public Content() {
+	}
 
-    /**
-     * @param id
-     * @param name
-     * @param code
-     */
-    public Content(final Long id, final String name, final String code) {
-	super(id, name, code);
-    }
+	/**
+	 * @param id
+	 * @param name
+	 * @param code
+	 */
+	public Content(final Long id, final String name, final String code) {
+		super(id, name, code);
+	}
 
-    /**
-     * @hibernate.many-to-one cascade="save-update"
-     */
-    public Category getCategory() {
-	return this.category;
-    }
+	/**
+	 * @hibernate.many-to-one cascade="save-update"
+	 */
+	public Category getCategory() {
+		return this.category;
+	}
 
-    public void setCategory(final Category category) {
-	this.category = category;
-    }
+	public void setCategory(final Category category) {
+		this.category = category;
+	}
 
-    /**
-     * @hibernate.property length="1000"
-     */
-    public String getText() {
-	return this.text;
-    }
+	/**
+	 * @hibernate.property length="1000"
+	 */
+	public String getText() {
+		return this.text;
+	}
 
-    public void setText(final String text) {
-	this.text = text;
-    }
+	public void setText(final String text) {
+		this.text = text;
+	}
 
-    /**
-     * @hibernate.property
-     */
-    public String getUrl() {
-	return this.url;
-    }
+	/**
+	 * @hibernate.property
+	 */
+	public String getUrl() {
+		return this.url;
+	}
 
-    public void setUrl(final String url) {
-	this.url = url;
-    }
+	public void setUrl(final String url) {
+		this.url = url;
+	}
 
-    /**
-     * @hibernate.property
-     */
-    public Long getPk() {
-	return this.pk;
-    }
+	/**
+	 * @hibernate.property
+	 */
+	public Long getPk() {
+		return this.pk;
+	}
 
-    public void setPk(final Long pk) {
-	this.pk = pk;
-    }
+	public void setPk(final Long pk) {
+		this.pk = pk;
+	}
 
-    /**
-     * @hibernate.property
-     */
-    public String getObject() {
-	return this.object;
-    }
+	/**
+	 * @hibernate.property
+	 */
+	public String getObject() {
+		return this.object;
+	}
 
-    public void setObject(final String object) {
-	this.object = object;
-    }
+	public void setObject(final String object) {
+		this.object = object;
+	}
 
 }

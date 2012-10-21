@@ -20,28 +20,28 @@ import com.yd.etravel.util.ServiceHelper;
  */
 public class ApplicationListener implements ServletContextListener {
 
-    private static Log log = LogFactory.getLog(ApplicationListener.class);
+	private static Log log = LogFactory.getLog(ApplicationListener.class);
 
-    public ApplicationListener() {
-	// TODO Auto-generated constructor stub
-    }
-
-    @Override
-    public void contextDestroyed(final ServletContextEvent event) {
-
-    }
-
-    @Override
-    public void contextInitialized(final ServletContextEvent event) {
-	try {
-	    final ServletContext servletContext = event.getServletContext();
-	    final WebApplicationContext wac = WebApplicationContextUtils
-		    .getWebApplicationContext(servletContext);
-	    ServiceHelper.getInstance().setApplicationContext(wac);
-
-	} catch (final Exception e) {
-	    log.fatal(e.getMessage(), e);
+	public ApplicationListener() {
+		// TODO Auto-generated constructor stub
 	}
-    }
+
+	@Override
+	public void contextDestroyed(final ServletContextEvent event) {
+
+	}
+
+	@Override
+	public void contextInitialized(final ServletContextEvent event) {
+		try {
+			final ServletContext servletContext = event.getServletContext();
+			final WebApplicationContext wac = WebApplicationContextUtils
+					.getWebApplicationContext(servletContext);
+			ServiceHelper.getInstance().setApplicationContext(wac);
+
+		} catch (final Exception e) {
+			log.fatal(e.getMessage(), e);
+		}
+	}
 
 }

@@ -13,26 +13,26 @@ import com.yd.etravel.domain.discount.Discount;
 @Entity
 @Table(name = "T_ROOM_DISCOUNT")
 public class RoomDiscount extends BaseObject {
-    @ManyToOne
-    private Room room;
+	@ManyToOne
+	private Room room;
 
-    @ManyToOne
-    private Discount discount;
+	@ManyToOne
+	private Discount discount;
 
-    public Room getRoom() {
-	return this.room;
-    }
+	public Room getRoom() {
+		return this.room;
+	}
 
-    public void setRoom(final Room room) {
-	this.room = room;
-    }
+	public void setRoom(final Room room) {
+		this.room = room;
+	}
 
-    public Discount getDiscount() {
-	return this.discount;
-    }
+	public Discount getDiscount() {
+		return this.discount;
+	}
 
-    public void setDiscount(final Discount discount) {
-	this.discount = discount;
-    }
+	public void setDiscount(final Discount discount) {
+		this.discount = discount;
+	}
 
 }

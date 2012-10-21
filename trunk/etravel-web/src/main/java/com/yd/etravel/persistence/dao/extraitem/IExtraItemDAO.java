@@ -18,13 +18,13 @@ import com.yd.etravel.persistence.exception.PersistenceException;
  */
 public interface IExtraItemDAO extends IBaseDAO<ExtraItem> {
 
-    public boolean isExist(String name, String code, Long id)
-	    throws PersistenceException;
+	public boolean isExist(String name, String code, Long id)
+			throws PersistenceException;
 
-    public List<ExtraItemBooking> findByBookingId(Long bookingId)
-	    throws PersistenceException;
+	public List<ExtraItemBooking> findByBookingId(Long bookingId)
+			throws PersistenceException;
 
-    public List<ExtraItem> findAllByHotelId(Long id)
-	    throws PersistenceException;
+	public List<ExtraItem> findAllByHotelId(Long id)
+			throws PersistenceException;
 
 }

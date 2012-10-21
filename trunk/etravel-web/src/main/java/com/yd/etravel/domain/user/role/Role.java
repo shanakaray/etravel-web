@@ -20,57 +20,57 @@ import com.yd.etravel.domain.common.BaseObject;
 @Table(name = "T_ROLE")
 public class Role extends BaseObject {
 
-    @ManyToMany(cascade = { ALL })
-    @JoinTable(name = "T_ROLE_T_FUNC", joinColumns = @JoinColumn(name = "T_ROLE_ID", nullable = false), inverseJoinColumns = @JoinColumn(name = "FUNCTION_ID", nullable = false), uniqueConstraints = @UniqueConstraint(columnNames = {
-	    "T_ROLE_ID", "FUNCTION_ID" }))
-    private List<Function> function;
+	@ManyToMany(cascade = { ALL })
+	@JoinTable(name = "T_ROLE_T_FUNC", joinColumns = @JoinColumn(name = "T_ROLE_ID", nullable = false), inverseJoinColumns = @JoinColumn(name = "FUNCTION_ID", nullable = false), uniqueConstraints = @UniqueConstraint(columnNames = {
+			"T_ROLE_ID", "FUNCTION_ID" }))
+	private List<Function> function;
 
-    public Role(final String name) {
-	super(name);
-    }
-
-    public Role() {
-	super();
-    }
-
-    @Override
-    @Column(unique = true, nullable = true)
-    public String getName() {
-	return super.getName();
-    }
-
-    @Override
-    public void setName(final String name) {
-	super.setName(name);
-    }
-
-    public List<Function> getFunction() {
-	return this.function;
-    }
-
-    public void setFunction(final List<Function> function) {
-	this.function = function;
-    }
-
-    public boolean hasFunction(final String key) {
-	return this.function.contains(new Function(key));
-    }
-
-    public boolean hasFunctionId(final Long key) {
-	for (final Function function : getFunction()) {
-	    if (function.getId().equals(key)) {
-		return true;
-	    }
+	public Role(final String name) {
+		super(name);
 	}
-	return false;
-    }
 
-    public Set<String> getFunctionNames() {
-	final Set<String> set = new HashSet<String>();
-	for (final Function function : getFunction()) {
-	    set.add(function.getKey());
+	public Role() {
+		super();
 	}
-	return set;
-    }
+
+	@Override
+	@Column(unique = true, nullable = true)
+	public String getName() {
+		return super.getName();
+	}
+
+	@Override
+	public void setName(final String name) {
+		super.setName(name);
+	}
+
+	public List<Function> getFunction() {
+		return this.function;
+	}
+
+	public void setFunction(final List<Function> function) {
+		this.function = function;
+	}
+
+	public boolean hasFunction(final String key) {
+		return this.function.contains(new Function(key));
+	}
+
+	public boolean hasFunctionId(final Long key) {
+		for (final Function function : getFunction()) {
+			if (function.getId().equals(key)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public Set<String> getFunctionNames() {
+		final Set<String> set = new HashSet<String>();
+		for (final Function function : getFunction()) {
+			set.add(function.getKey());
+		}
+		return set;
+	}
 
 }

@@ -26,213 +26,213 @@ import com.yd.etravel.web.common.BaseForm;
  */
 public class PaxFrom extends BaseForm {
 
-    private Long id;
+	private Long id;
 
-    private int childMax;
-    private int childMin;
+	private int childMax;
+	private int childMin;
 
-    private int infantMax;
-    private int infantMin;
+	private int infantMax;
+	private int infantMin;
 
-    private int adultMax;
-    private int adultMin;
+	private int adultMax;
+	private int adultMin;
 
-    private Long hotelId;
-    private List<Hotel> hotelList;
-    private List<Pax> paxList;
-    private Map<Long, String> hotelNameMap;
+	private Long hotelId;
+	private List<Hotel> hotelList;
+	private List<Pax> paxList;
+	private Map<Long, String> hotelNameMap;
 
-    public Long getHotelId() {
-	return this.hotelId;
-    }
-
-    public void setHotelId(final Long hotelId) {
-	this.hotelId = hotelId;
-    }
-
-    public List<Hotel> getHotelList() {
-	return this.hotelList;
-    }
-
-    public Hotel getHotel(final Long id) {
-	Hotel hotel = null;
-	for (final Hotel hot : this.hotelList) {
-	    if (hot.getId().equals(id)) {
-		hotel = hot;
-		break;
-	    }
-	}
-	return hotel;
-    }
-
-    public void setHotelList(final List<Hotel> hotelList) {
-	this.hotelList = hotelList;
-	this.hotelNameMap = new HashMap<Long, String>();
-	for (final Hotel hotel : hotelList) {
-	    this.hotelNameMap.put(hotel.getId(), hotel.getName());
-	}
-    }
-
-    public String getHotelName(final Long id) {
-	if (this.hotelNameMap != null && this.hotelNameMap.containsKey(id)) {
-	    return this.hotelNameMap.get(id).toString();
-	}
-	return EMPTY_STRING;
-    }
-
-    public Long getId() {
-	return this.id;
-    }
-
-    public void setId(final Long id) {
-	this.id = id;
-    }
-
-    public List<Pax> getPaxList() {
-	return this.paxList;
-    }
-
-    public void setPaxList(final List<Pax> paxList) {
-	this.paxList = paxList;
-    }
-
-    public int getChildMax() {
-	return this.childMax;
-    }
-
-    public void setChildMax(final int childMax) {
-	this.childMax = childMax;
-    }
-
-    public int getChildMin() {
-	return this.childMin;
-    }
-
-    public void setChildMin(final int childMin) {
-	this.childMin = childMin;
-    }
-
-    public int getInfantMax() {
-	return this.infantMax;
-    }
-
-    public void setInfantMax(final int infantMax) {
-	this.infantMax = infantMax;
-    }
-
-    public int getInfantMin() {
-	return this.infantMin;
-    }
-
-    public void setInfantMin(final int infantMin) {
-	this.infantMin = infantMin;
-    }
-
-    public int getAdultMax() {
-	return this.adultMax;
-    }
-
-    public void setAdultMax(final int adultMax) {
-	this.adultMax = adultMax;
-    }
-
-    public int getAdultMin() {
-	return this.adultMin;
-    }
-
-    public void setAdultMin(final int adultMin) {
-	this.adultMin = adultMin;
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * com.yd.etravel.web.common.BaseForm#resetBean(org.apache.struts.action
-     * .ActionMapping, javax.servlet.http.HttpServletRequest)
-     */
-    @Override
-    public void resetBean(final ActionMapping mapping,
-	    final HttpServletRequest request) {
-	this.childMax = 0;
-	this.childMin = 0;
-
-	this.infantMax = 0;
-	this.infantMin = 0;
-
-	this.adultMax = 0;
-	this.adultMin = 0;
-
-	this.hotelId = 0L;
-	this.hotelList = Collections.emptyList();
-
-	this.paxList = Collections.emptyList();
-	this.hotelNameMap = Collections.emptyMap();
-	this.id = 0L;
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * com.yd.etravel.web.common.BaseForm#validateBean(org.apache.struts.action
-     * .ActionMapping, javax.servlet.http.HttpServletRequest)
-     */
-    @Override
-    public ActionErrors validateBean(final ActionMapping mapping,
-	    final HttpServletRequest request) {
-	final ActionErrors errors = new ActionErrors();
-
-	if (StringUtils.isEmpty(this.hotelId)) {
-	    addErrors(errors, "etravel.error.pax.hotelid.required");
+	public Long getHotelId() {
+		return this.hotelId;
 	}
 
-	if (this.infantMin < 0 || this.infantMin > 150) {
-	    addErrors(errors, "etravel.error.pax.infant.minage");
-	    this.infantMin = 0;
+	public void setHotelId(final Long hotelId) {
+		this.hotelId = hotelId;
 	}
 
-	if (this.infantMax < 0 || this.infantMax > 150) {
-	    addErrors(errors, "etravel.error.pax.infant.maxage");
-	    this.infantMax = 0;
+	public List<Hotel> getHotelList() {
+		return this.hotelList;
 	}
 
-	if (this.childMin < 0 || this.childMin > 150) {
-	    addErrors(errors, "etravel.error.pax.child.minage");
-	    this.childMin = 0;
+	public Hotel getHotel(final Long id) {
+		Hotel hotel = null;
+		for (final Hotel hot : this.hotelList) {
+			if (hot.getId().equals(id)) {
+				hotel = hot;
+				break;
+			}
+		}
+		return hotel;
 	}
 
-	if (this.childMax < 0 || this.childMax > 150) {
-	    addErrors(errors, "etravel.error.pax.child.maxage");
-	    this.childMax = 0;
+	public void setHotelList(final List<Hotel> hotelList) {
+		this.hotelList = hotelList;
+		this.hotelNameMap = new HashMap<Long, String>();
+		for (final Hotel hotel : hotelList) {
+			this.hotelNameMap.put(hotel.getId(), hotel.getName());
+		}
 	}
 
-	if (this.adultMin < 0 || this.adultMin > 150) {
-	    addErrors(errors, "etravel.error.pax.adult.minage");
-	    this.adultMin = 0;
+	public String getHotelName(final Long id) {
+		if (this.hotelNameMap != null && this.hotelNameMap.containsKey(id)) {
+			return this.hotelNameMap.get(id).toString();
+		}
+		return EMPTY_STRING;
 	}
 
-	if (this.adultMax < 0 || this.adultMax > 150) {
-	    addErrors(errors, "etravel.error.pax.adult.maxage");
-	    this.adultMax = 0;
+	public Long getId() {
+		return this.id;
 	}
 
-	if (this.infantMin > this.infantMax || this.infantMax > this.childMin
-		|| this.childMin > this.childMax
-		|| this.childMax > this.adultMin
-		|| this.adultMin > this.adultMax) {
-	    addErrors(errors, "etravel.error.pax.invalidage");
-	    this.childMax = 0;
-	    this.childMin = 0;
-
-	    this.infantMax = 0;
-	    this.infantMin = 0;
-
-	    this.adultMax = 0;
-	    this.adultMin = 0;
+	public void setId(final Long id) {
+		this.id = id;
 	}
 
-	return errors;
-    }
+	public List<Pax> getPaxList() {
+		return this.paxList;
+	}
+
+	public void setPaxList(final List<Pax> paxList) {
+		this.paxList = paxList;
+	}
+
+	public int getChildMax() {
+		return this.childMax;
+	}
+
+	public void setChildMax(final int childMax) {
+		this.childMax = childMax;
+	}
+
+	public int getChildMin() {
+		return this.childMin;
+	}
+
+	public void setChildMin(final int childMin) {
+		this.childMin = childMin;
+	}
+
+	public int getInfantMax() {
+		return this.infantMax;
+	}
+
+	public void setInfantMax(final int infantMax) {
+		this.infantMax = infantMax;
+	}
+
+	public int getInfantMin() {
+		return this.infantMin;
+	}
+
+	public void setInfantMin(final int infantMin) {
+		this.infantMin = infantMin;
+	}
+
+	public int getAdultMax() {
+		return this.adultMax;
+	}
+
+	public void setAdultMax(final int adultMax) {
+		this.adultMax = adultMax;
+	}
+
+	public int getAdultMin() {
+		return this.adultMin;
+	}
+
+	public void setAdultMin(final int adultMin) {
+		this.adultMin = adultMin;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.yd.etravel.web.common.BaseForm#resetBean(org.apache.struts.action
+	 * .ActionMapping, javax.servlet.http.HttpServletRequest)
+	 */
+	@Override
+	public void resetBean(final ActionMapping mapping,
+			final HttpServletRequest request) {
+		this.childMax = 0;
+		this.childMin = 0;
+
+		this.infantMax = 0;
+		this.infantMin = 0;
+
+		this.adultMax = 0;
+		this.adultMin = 0;
+
+		this.hotelId = 0L;
+		this.hotelList = Collections.emptyList();
+
+		this.paxList = Collections.emptyList();
+		this.hotelNameMap = Collections.emptyMap();
+		this.id = 0L;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.yd.etravel.web.common.BaseForm#validateBean(org.apache.struts.action
+	 * .ActionMapping, javax.servlet.http.HttpServletRequest)
+	 */
+	@Override
+	public ActionErrors validateBean(final ActionMapping mapping,
+			final HttpServletRequest request) {
+		final ActionErrors errors = new ActionErrors();
+
+		if (StringUtils.isEmpty(this.hotelId)) {
+			addErrors(errors, "etravel.error.pax.hotelid.required");
+		}
+
+		if (this.infantMin < 0 || this.infantMin > 150) {
+			addErrors(errors, "etravel.error.pax.infant.minage");
+			this.infantMin = 0;
+		}
+
+		if (this.infantMax < 0 || this.infantMax > 150) {
+			addErrors(errors, "etravel.error.pax.infant.maxage");
+			this.infantMax = 0;
+		}
+
+		if (this.childMin < 0 || this.childMin > 150) {
+			addErrors(errors, "etravel.error.pax.child.minage");
+			this.childMin = 0;
+		}
+
+		if (this.childMax < 0 || this.childMax > 150) {
+			addErrors(errors, "etravel.error.pax.child.maxage");
+			this.childMax = 0;
+		}
+
+		if (this.adultMin < 0 || this.adultMin > 150) {
+			addErrors(errors, "etravel.error.pax.adult.minage");
+			this.adultMin = 0;
+		}
+
+		if (this.adultMax < 0 || this.adultMax > 150) {
+			addErrors(errors, "etravel.error.pax.adult.maxage");
+			this.adultMax = 0;
+		}
+
+		if (this.infantMin > this.infantMax || this.infantMax > this.childMin
+				|| this.childMin > this.childMax
+				|| this.childMax > this.adultMin
+				|| this.adultMin > this.adultMax) {
+			addErrors(errors, "etravel.error.pax.invalidage");
+			this.childMax = 0;
+			this.childMin = 0;
+
+			this.infantMax = 0;
+			this.infantMin = 0;
+
+			this.adultMax = 0;
+			this.adultMin = 0;
+		}
+
+		return errors;
+	}
 
 }

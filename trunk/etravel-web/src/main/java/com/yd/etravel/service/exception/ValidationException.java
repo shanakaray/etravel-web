@@ -11,33 +11,33 @@ import com.yd.etravel.service.message.UIMesssage;
  */
 public class ValidationException extends ServiceException {
 
-    /**
+	/**
      * 
      */
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
+	/**
 	 * 
 	 */
-    public ValidationException() {
-	// TODO Auto-generated constructor stub
-    }
+	public ValidationException() {
+		// TODO Auto-generated constructor stub
+	}
 
-    /**
-     * @param uiMesssage
-     */
-    public ValidationException(final UIMesssage uiMesssage) {
-	super(uiMesssage);
-	// TODO Auto-generated constructor stub
-    }
+	/**
+	 * @param uiMesssage
+	 */
+	public ValidationException(final UIMesssage uiMesssage) {
+		super(uiMesssage);
+		// TODO Auto-generated constructor stub
+	}
 
-    /**
-     * @param uiMesssage
-     * @param arg1
-     */
-    public ValidationException(final UIMesssage uiMesssage, final Throwable arg1) {
-	super(uiMesssage, arg1);
-	// TODO Auto-generated constructor stub
-    }
+	/**
+	 * @param uiMesssage
+	 * @param arg1
+	 */
+	public ValidationException(final UIMesssage uiMesssage, final Throwable arg1) {
+		super(uiMesssage, arg1);
+		// TODO Auto-generated constructor stub
+	}
 
 }

@@ -18,46 +18,46 @@ import sun.misc.BASE64Encoder;
  * 
  */
 public class PasswordEncrypt {
-    static MessageDigest md = null;
-    protected static final Log LOG = LogFactory.getLog(PasswordEncrypt.class);
+	static MessageDigest md = null;
+	protected static final Log LOG = LogFactory.getLog(PasswordEncrypt.class);
 
-    static {
-	try {
-	    md = MessageDigest.getInstance("SHA");
-	} catch (final NoSuchAlgorithmException e) {
-	    LOG.fatal(e.getMessage(), e);
+	static {
+		try {
+			md = MessageDigest.getInstance("SHA");
+		} catch (final NoSuchAlgorithmException e) {
+			LOG.fatal(e.getMessage(), e);
+		}
 	}
-    }
 
-    public static String encrypt(final String plaintext) {
-	try {
-	    md.update(plaintext.getBytes("UTF-8"));
-	} catch (final UnsupportedEncodingException e) {
-	    LOG.fatal(e.getMessage(), e);
+	public static String encrypt(final String plaintext) {
+		try {
+			md.update(plaintext.getBytes("UTF-8"));
+		} catch (final UnsupportedEncodingException e) {
+			LOG.fatal(e.getMessage(), e);
+		}
+		final byte raw[] = md.digest();
+		final String hash = new BASE64Encoder().encode(raw);
+		return hash;
 	}
-	final byte raw[] = md.digest();
-	final String hash = new BASE64Encoder().encode(raw);
-	return hash;
-    }
 
-    public static String decrypt(final String plaintext) {
-	try {
-	    md.update(plaintext.getBytes());
+	public static String decrypt(final String plaintext) {
+		try {
+			md.update(plaintext.getBytes());
 
-	    final byte raw[] = md.digest();
-	    StringBuffer hash = null;
+			final byte raw[] = md.digest();
+			StringBuffer hash = null;
 
-	    hash = new StringBuffer().append(new BASE64Decoder()
-		    .decodeBuffer(new String(raw)));
-	    return new String(hash);
-	} catch (final Exception e) {
-	    LOG.fatal(e.getMessage(), e);
+			hash = new StringBuffer().append(new BASE64Decoder()
+					.decodeBuffer(new String(raw)));
+			return new String(hash);
+		} catch (final Exception e) {
+			LOG.fatal(e.getMessage(), e);
+		}
+		return "";
 	}
-	return "";
-    }
 
-    public static void main(final String[] args) {
-	System.out.println(decrypt("wLE3/i15JFnyb/djzORFdKW1qwM="));
-    }
+	public static void main(final String[] args) {
+		System.out.println(decrypt("wLE3/i15JFnyb/djzORFdKW1qwM="));
+	}
 
 }
