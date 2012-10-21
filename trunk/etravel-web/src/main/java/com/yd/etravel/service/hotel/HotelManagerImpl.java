@@ -36,14 +36,12 @@ public class HotelManagerImpl implements IHotelManager {
 
 	@Transactional
 	@Override
-	public int deleteHotel(final Long id) throws ServiceException {
-		int val = 0;
+	public int deleteHotel(final Long key) throws ServiceException {
 		try {
-			val = this.hotelDAO.deleteHotel(id);
+			return this.hotelDAO.deleteHotel(key);
 		} catch (final PersistenceException e) {
 			throw new ServiceException(null, e);
 		}
-		return val;
 	}
 
 	@Override
@@ -65,21 +63,20 @@ public class HotelManagerImpl implements IHotelManager {
 	}
 
 	@Override
-	public Hotel findHotelById(final Long id) throws ServiceException {
-		Hotel hotel = null;
+	public Hotel findHotelById(final Long key) throws ServiceException {
 		try {
-			hotel = this.hotelDAO.findById(id);
+			final Hotel hotel = this.hotelDAO.findById(key);
 			hotel.getUserIds();
+			return hotel;
 		} catch (final PersistenceException e) {
 			throw new ServiceException(null, e);
 		}
-		return hotel;
 	}
 
 	@Override
-	public List<Hotel> findHotelsById(final Long id[]) throws ServiceException {
+	public List<Hotel> findHotelsById(final Long keys[]) throws ServiceException {
 		try {
-			return this.hotelDAO.findAll(id);
+			return this.hotelDAO.findAll(keys);
 		} catch (final PersistenceException e) {
 			throw new ServiceException(null, e);
 		}
@@ -87,7 +84,7 @@ public class HotelManagerImpl implements IHotelManager {
 
 	@Transactional
 	@Override
-	public Hotel saveHotel(Hotel hotel, final Long[] userids)
+	public Hotel saveHotel(final Hotel hotel, final Long[] userids)
 			throws ServiceException {
 		try {
 
@@ -103,7 +100,7 @@ public class HotelManagerImpl implements IHotelManager {
 				hotel.getSuperUser().clear();
 			}
 			hotel.setSuperUser(this.userDAO.findUsers(userSearchDTO));
-			hotel = this.hotelDAO.saveOrUpdate(hotel);
+			this.hotelDAO.saveOrUpdate(hotel);
 
 		} catch (final PersistenceException e) {
 			throw new ServiceException(null, e);
