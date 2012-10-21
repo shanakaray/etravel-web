@@ -16,27 +16,27 @@ import com.yd.etravel.domain.common.BaseObject;
 @Table(name = "T_PAYMENT")
 public class Payment extends BaseObject {
 
-    private static final long serialVersionUID = -2912368260338991279L;
+	private static final long serialVersionUID = -2912368260338991279L;
 
-    @ManyToOne
-    private Booking booking;
+	@ManyToOne
+	private Booking booking;
 
-    @Column
-    private BigDecimal totalPrice;
+	@Column
+	private BigDecimal totalPrice;
 
-    public Booking getBooking() {
-	return this.booking;
-    }
+	public Booking getBooking() {
+		return this.booking;
+	}
 
-    public void setBooking(final Booking booking) {
-	this.booking = booking;
-    }
+	public void setBooking(final Booking booking) {
+		this.booking = booking;
+	}
 
-    public BigDecimal getTotalPrice() {
-	return this.totalPrice;
-    }
+	public BigDecimal getTotalPrice() {
+		return this.totalPrice;
+	}
 
-    public void setTotalPrice(final BigDecimal totalPrice) {
-	this.totalPrice = totalPrice;
-    }
+	public void setTotalPrice(final BigDecimal totalPrice) {
+		this.totalPrice = totalPrice;
+	}
 }

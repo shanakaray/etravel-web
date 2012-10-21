@@ -13,15 +13,15 @@ import com.yd.etravel.persistence.exception.PersistenceException;
  */
 public interface ISearchDAO extends IBaseDAO<RoomAvailability> {
 
-    public List<RoomAvailability> findRooms(
-	    final SearchRequestDTO searchRequestDTO)
-	    throws PersistenceException;
+	public List<RoomAvailability> findRooms(
+			final SearchRequestDTO searchRequestDTO)
+			throws PersistenceException;
 
-    public List<RoomAvailability> findRoomsByCheckOutDate(
-	    final SearchRequestDTO searchRequestDTO)
-	    throws PersistenceException;
+	public List<RoomAvailability> findRoomsByCheckOutDate(
+			final SearchRequestDTO searchRequestDTO)
+			throws PersistenceException;
 
-    public List<RoomAvailability> findRoomsByCheckInDate(
-	    final SearchRequestDTO searchRequestDTO)
-	    throws PersistenceException;
+	public List<RoomAvailability> findRoomsByCheckInDate(
+			final SearchRequestDTO searchRequestDTO)
+			throws PersistenceException;
 }

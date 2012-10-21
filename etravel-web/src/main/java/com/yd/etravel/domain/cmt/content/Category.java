@@ -14,18 +14,18 @@ import com.yd.etravel.domain.common.BaseObject;
  */
 public class Category extends BaseObject {
 
-    private static final long serialVersionUID = 6473139219266050582L;
+	private static final long serialVersionUID = 6473139219266050582L;
 
-    public Category() {
-    }
+	public Category() {
+	}
 
-    /**
-     * @param id
-     * @param name
-     * @param code
-     */
-    public Category(final Long id, final String name, final String code) {
-	super(id, name, code);
-    }
+	/**
+	 * @param id
+	 * @param name
+	 * @param code
+	 */
+	public Category(final Long id, final String name, final String code) {
+		super(id, name, code);
+	}
 
 }

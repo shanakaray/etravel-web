@@ -5,60 +5,60 @@ import java.util.Map;
 import java.util.Set;
 
 public interface IUserProfile extends Serializable {
-    public String getPassword();
+	public String getPassword();
 
-    public void setPassword(String username);
+	public void setPassword(String username);
 
-    public String getUsername();
+	public String getUsername();
 
-    public void setUsername(String username);
+	public void setUsername(String username);
 
-    public String getFirstname();
+	public String getFirstname();
 
-    public void setFirstname(String firstname);
+	public void setFirstname(String firstname);
 
-    public String getLastname();
+	public String getLastname();
 
-    public void setLastname(String lastname);
+	public void setLastname(String lastname);
 
-    public Set<String> getRoles();
+	public Set<String> getRoles();
 
-    public void setRoles(Set<String> roles);
+	public void setRoles(Set<String> roles);
 
-    public boolean hasRole(String rolename);
+	public boolean hasRole(String rolename);
 
-    public boolean hasAllRoles(Set<String> rolenames);
+	public boolean hasAllRoles(Set<String> rolenames);
 
-    public String getContact();
+	public String getContact();
 
-    public void setContact(String contact);
+	public void setContact(String contact);
 
-    public String getEmail();
+	public String getEmail();
 
-    public void setEmail(String email);
+	public void setEmail(String email);
 
-    public String getNic();
+	public String getNic();
 
-    public void setNic(String nic);
+	public void setNic(String nic);
 
-    public String getAddress();
+	public String getAddress();
 
-    public void setAddress(String adress);
+	public void setAddress(String adress);
 
-    public Long getId();
+	public Long getId();
 
-    public void setId(Long id);
+	public void setId(Long id);
 
-    public Set<String> getFunctionKeySet();
+	public Set<String> getFunctionKeySet();
 
-    public void setFunctionKeySet(Set<String> functionKeySet);
+	public void setFunctionKeySet(Set<String> functionKeySet);
 
-    public boolean hasFunction(String key);
+	public boolean hasFunction(String key);
 
-    public Map<String, String> getParams();
+	public Map<String, String> getParams();
 
-    public Map<Long, String> getAssignedHotels();
+	public Map<Long, String> getAssignedHotels();
 
-    public void putHotel(Long id, String name);
+	public void putHotel(Long id, String name);
 
 }

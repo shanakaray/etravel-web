@@ -18,59 +18,59 @@ import com.yd.etravel.service.exception.ServiceException;
 @Service(value = "contentService")
 @Transactional(propagation = Propagation.SUPPORTS)
 public class ContentManager implements IContentManager {
-    @Autowired(required = true)
-    private IImageDAO imageDao;
+	@Autowired(required = true)
+	private IImageDAO imageDao;
 
-    @Override
-    @Transactional(propagation = Propagation.REQUIRED)
-    public Image saveImage(final Image image) throws ServiceException {
-	try {
-	    this.imageDao.saveOrUpdate(image);
-	} catch (final PersistenceException exception) {
-	    throw new ServiceException(null, exception);
-	}
-	return image;
-    }
-
-    @Override
-    @Transactional(propagation = Propagation.NOT_SUPPORTED)
-    public Image getImage(final Long id) throws ServiceException {
-	Image image = null;
-	FileOutputStream fos = null;
-	try {
-	    image = this.imageDao.findById(id);
-	    final File img = new File(System.getProperty("java.io.tmpdir")
-		    + image.getId() + image.getCode());
-	    if (!img.exists()) {
-		final byte[] bytes = image.getSource();
-		fos = new FileOutputStream(System.getProperty("java.io.tmpdir")
-			+ image.getId() + image.getCode());
-		fos.write(bytes);
-	    }
-	    image.setFile(img);
-	} catch (final Exception exception) {
-	    throw new ServiceException(null, exception);
-	} finally {
-	    try {
-		if (fos != null) {
-		    fos.close();
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED)
+	public Image saveImage(final Image image) throws ServiceException {
+		try {
+			this.imageDao.saveOrUpdate(image);
+		} catch (final PersistenceException exception) {
+			throw new ServiceException(null, exception);
 		}
-	    } catch (final IOException e) {
-		e.printStackTrace();
-	    }
-	}
-	return image;
-    }
-
-    @Override
-    @Transactional(propagation = Propagation.NOT_SUPPORTED)
-    public List<Long> getImageList(final Image image) throws ServiceException {
-	try {
-	    return this.imageDao.getIds(image);
-	} catch (final PersistenceException exception) {
-	    throw new ServiceException(null, exception);
+		return image;
 	}
 
-    }
+	@Override
+	@Transactional(propagation = Propagation.NOT_SUPPORTED)
+	public Image getImage(final Long id) throws ServiceException {
+		Image image = null;
+		FileOutputStream fos = null;
+		try {
+			image = this.imageDao.findById(id);
+			final File img = new File(System.getProperty("java.io.tmpdir")
+					+ image.getId() + image.getCode());
+			if (!img.exists()) {
+				final byte[] bytes = image.getSource();
+				fos = new FileOutputStream(System.getProperty("java.io.tmpdir")
+						+ image.getId() + image.getCode());
+				fos.write(bytes);
+			}
+			image.setFile(img);
+		} catch (final Exception exception) {
+			throw new ServiceException(null, exception);
+		} finally {
+			try {
+				if (fos != null) {
+					fos.close();
+				}
+			} catch (final IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return image;
+	}
+
+	@Override
+	@Transactional(propagation = Propagation.NOT_SUPPORTED)
+	public List<Long> getImageList(final Image image) throws ServiceException {
+		try {
+			return this.imageDao.getIds(image);
+		} catch (final PersistenceException exception) {
+			throw new ServiceException(null, exception);
+		}
+
+	}
 
 }

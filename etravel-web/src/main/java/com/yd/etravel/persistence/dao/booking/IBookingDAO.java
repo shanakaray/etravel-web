@@ -22,27 +22,27 @@ import com.yd.etravel.persistence.exception.PersistenceException;
  * 
  */
 public interface IBookingDAO extends IBaseDAO<Booking> {
-    public List<RoomBooking> findAllBooking() throws PersistenceException;
+	public List<RoomBooking> findAllBooking() throws PersistenceException;
 
-    public List<BookingReportDTO> findBookingDetail(BookingReportSearchDTO dto)
-	    throws PersistenceException;
+	public List<BookingReportDTO> findBookingDetail(BookingReportSearchDTO dto)
+			throws PersistenceException;
 
-    public RoomBooking findRoomBooking(String bookingid)
-	    throws PersistenceException;
+	public RoomBooking findRoomBooking(String bookingid)
+			throws PersistenceException;
 
-    public List<RoomBooking> findExpiredBookings(final Date date,
-	    final String status, final String paymentMethod)
-	    throws PersistenceException;
+	public List<RoomBooking> findExpiredBookings(final Date date,
+			final String status, final String paymentMethod)
+			throws PersistenceException;
 
-    public HotelBooking save(HotelBooking hotelBooking)
-	    throws PersistenceException;
+	public HotelBooking save(HotelBooking hotelBooking)
+			throws PersistenceException;
 
-    public RoomBooking save(RoomBooking roomBooking)
-	    throws PersistenceException;
+	public RoomBooking save(RoomBooking roomBooking)
+			throws PersistenceException;
 
-    public Payment save(Payment payment) throws PersistenceException;
+	public Payment save(Payment payment) throws PersistenceException;
 
-    public ExtraItemBooking merge(ExtraItemBooking extraItemBooking)
-	    throws PersistenceException;
+	public ExtraItemBooking merge(ExtraItemBooking extraItemBooking)
+			throws PersistenceException;
 
 }

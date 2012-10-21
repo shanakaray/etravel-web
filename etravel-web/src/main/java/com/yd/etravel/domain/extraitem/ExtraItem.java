@@ -32,80 +32,80 @@ import com.yd.etravel.domain.hotel.Hotel;
 @Entity
 @Table(name = "T_EXTRA_ITEM")
 public class ExtraItem extends BaseObject {
-    @Column
-    private BigDecimal cost;
+	@Column
+	private BigDecimal cost;
 
-    @Column
-    private String comments;
+	@Column
+	private String comments;
 
-    @Column
-    private String bookingComments;
+	@Column
+	private String bookingComments;
 
-    @Column
-    private String currency;
+	@Column
+	private String currency;
 
-    @ManyToMany(cascade = { ALL })
-    @JoinTable(joinColumns = @JoinColumn(name = "ITEM_ID", nullable = false), inverseJoinColumns = @JoinColumn(name = "HOTEL_ID", nullable = false), uniqueConstraints = @UniqueConstraint(columnNames = {
-	    "ITEM_ID", "HOTEL_ID" }))
-    private List<Hotel> hotel;
+	@ManyToMany(cascade = { ALL })
+	@JoinTable(joinColumns = @JoinColumn(name = "ITEM_ID", nullable = false), inverseJoinColumns = @JoinColumn(name = "HOTEL_ID", nullable = false), uniqueConstraints = @UniqueConstraint(columnNames = {
+			"ITEM_ID", "HOTEL_ID" }))
+	private List<Hotel> hotel;
 
-    public ExtraItem() {
-    }
-
-    public ExtraItem(final Long id, final String name, final String code) {
-	super(id, name, code);
-    }
-
-    public BigDecimal getCost() {
-	return this.cost;
-    }
-
-    public void setCost(final BigDecimal cost) {
-	this.cost = cost;
-    }
-
-    public String getComments() {
-	return this.comments;
-    }
-
-    public void setComments(final String comments) {
-	this.comments = comments;
-    }
-
-    /**
-     * 
-     * @hibernate.property
-     */
-    public String getCurrency() {
-	return this.currency;
-    }
-
-    public void setCurrency(final String currency) {
-	this.currency = currency;
-    }
-
-    public List<Hotel> getHotel() {
-	return this.hotel;
-    }
-
-    public void setHotel(final List<Hotel> hotel) {
-	this.hotel = hotel;
-    }
-
-    public Long[] getHotelIds() {
-	final Set<Long> idSet = new HashSet<Long>();
-	for (final Hotel ho : this.hotel) {
-	    idSet.add(ho.getId());
+	public ExtraItem() {
 	}
-	return idSet.toArray(new Long[0]);
-    }
 
-    public String getBookingComments() {
-	return this.bookingComments;
-    }
+	public ExtraItem(final Long id, final String name, final String code) {
+		super(id, name, code);
+	}
 
-    public void setBookingComments(final String bookingComments) {
-	this.bookingComments = bookingComments;
-    }
+	public BigDecimal getCost() {
+		return this.cost;
+	}
+
+	public void setCost(final BigDecimal cost) {
+		this.cost = cost;
+	}
+
+	public String getComments() {
+		return this.comments;
+	}
+
+	public void setComments(final String comments) {
+		this.comments = comments;
+	}
+
+	/**
+	 * 
+	 * @hibernate.property
+	 */
+	public String getCurrency() {
+		return this.currency;
+	}
+
+	public void setCurrency(final String currency) {
+		this.currency = currency;
+	}
+
+	public List<Hotel> getHotel() {
+		return this.hotel;
+	}
+
+	public void setHotel(final List<Hotel> hotel) {
+		this.hotel = hotel;
+	}
+
+	public Long[] getHotelIds() {
+		final Set<Long> idSet = new HashSet<Long>();
+		for (final Hotel ho : this.hotel) {
+			idSet.add(ho.getId());
+		}
+		return idSet.toArray(new Long[0]);
+	}
+
+	public String getBookingComments() {
+		return this.bookingComments;
+	}
+
+	public void setBookingComments(final String bookingComments) {
+		this.bookingComments = bookingComments;
+	}
 
 }

@@ -18,99 +18,99 @@ import com.yd.etravel.service.message.ValidationHelper;
 @Transactional(propagation = Propagation.SUPPORTS)
 public class ExtraItemManagerImpl implements IExtraItemManager {
 
-    @Autowired(required = true)
-    private IExtraItemDAO itemDAO;
+	@Autowired(required = true)
+	private IExtraItemDAO itemDAO;
 
-    public IExtraItemDAO getItemDAO() {
-	return this.itemDAO;
-    }
-
-    public void setItemDAO(final IExtraItemDAO itemDAO) {
-	this.itemDAO = itemDAO;
-    }
-
-    @Transactional
-    @Override
-    public int deleteExtraItem(final Long id) throws ServiceException {
-	final int val = 0;
-	try {
-	    final ExtraItem extraItem = this.itemDAO.findById(id);
-	    extraItem.getHotel().clear();
-	    this.itemDAO.delete(extraItem);
-	} catch (final PersistenceException e) {
-	    throw new ServiceException(null, e);
+	public IExtraItemDAO getItemDAO() {
+		return this.itemDAO;
 	}
-	return val;
-    }
 
-    @Override
-    public List<ExtraItem> findAllActiveExtraItems() throws ServiceException {
-	try {
-	    return this.itemDAO.findAllActive();
-	} catch (final PersistenceException e) {
-	    throw new ServiceException(null, e);
+	public void setItemDAO(final IExtraItemDAO itemDAO) {
+		this.itemDAO = itemDAO;
 	}
-    }
 
-    @Override
-    public List<ExtraItem> findAllExtraItem() throws ServiceException {
-	try {
-	    return this.itemDAO.findAll();
-	} catch (final PersistenceException e) {
-	    throw new ServiceException(null, e);
+	@Transactional
+	@Override
+	public int deleteExtraItem(final Long id) throws ServiceException {
+		final int val = 0;
+		try {
+			final ExtraItem extraItem = this.itemDAO.findById(id);
+			extraItem.getHotel().clear();
+			this.itemDAO.delete(extraItem);
+		} catch (final PersistenceException e) {
+			throw new ServiceException(null, e);
+		}
+		return val;
 	}
-    }
 
-    @Override
-    public ExtraItem findExtraItemById(final Long id) throws ServiceException {
-	ExtraItem extraItem = null;
-	try {
-
-	    extraItem = this.itemDAO.findById(id);
-
-	} catch (final PersistenceException e) {
-	    throw new ServiceException(null, e);
+	@Override
+	public List<ExtraItem> findAllActiveExtraItems() throws ServiceException {
+		try {
+			return this.itemDAO.findAllActive();
+		} catch (final PersistenceException e) {
+			throw new ServiceException(null, e);
+		}
 	}
-	return extraItem;
-    }
 
-    @Transactional
-    @Override
-    public ExtraItem saveExtraItem(ExtraItem item) throws ServiceException {
-	try {
-	    if (this.itemDAO.isExist(item.getName(), item.getCode(),
-		    item.getId())) {
-		throw new ServiceException(
-			ValidationHelper
-				.getMessageHolder("etravel.hotel.extraitem.exist"));
-	    }
-
-	    item = this.itemDAO.saveOrUpdate(item);
-
-	} catch (final PersistenceException e) {
-	    throw new ServiceException(null, e);
+	@Override
+	public List<ExtraItem> findAllExtraItem() throws ServiceException {
+		try {
+			return this.itemDAO.findAll();
+		} catch (final PersistenceException e) {
+			throw new ServiceException(null, e);
+		}
 	}
-	return item;
-    }
 
-    @Override
-    public List<ExtraItemBooking> findByBookingId(final Long bookingId)
-	    throws ServiceException {
-	try {
-	    return this.itemDAO.findByBookingId(bookingId);
-	} catch (final PersistenceException e) {
-	    throw new ServiceException(null, e);
-	}
-    }
+	@Override
+	public ExtraItem findExtraItemById(final Long id) throws ServiceException {
+		ExtraItem extraItem = null;
+		try {
 
-    @Override
-    public List<ExtraItem> findExtraItemsByHotel(final Long hotelId)
-	    throws ServiceException {
-	try {
-	    return this.itemDAO.findAllByHotelId(hotelId);
-	} catch (final PersistenceException e) {
-	    throw new ServiceException(null, e);
+			extraItem = this.itemDAO.findById(id);
+
+		} catch (final PersistenceException e) {
+			throw new ServiceException(null, e);
+		}
+		return extraItem;
 	}
-    }
+
+	@Transactional
+	@Override
+	public ExtraItem saveExtraItem(ExtraItem item) throws ServiceException {
+		try {
+			if (this.itemDAO.isExist(item.getName(), item.getCode(),
+					item.getId())) {
+				throw new ServiceException(
+						ValidationHelper
+								.getMessageHolder("etravel.hotel.extraitem.exist"));
+			}
+
+			item = this.itemDAO.saveOrUpdate(item);
+
+		} catch (final PersistenceException e) {
+			throw new ServiceException(null, e);
+		}
+		return item;
+	}
+
+	@Override
+	public List<ExtraItemBooking> findByBookingId(final Long bookingId)
+			throws ServiceException {
+		try {
+			return this.itemDAO.findByBookingId(bookingId);
+		} catch (final PersistenceException e) {
+			throw new ServiceException(null, e);
+		}
+	}
+
+	@Override
+	public List<ExtraItem> findExtraItemsByHotel(final Long hotelId)
+			throws ServiceException {
+		try {
+			return this.itemDAO.findAllByHotelId(hotelId);
+		} catch (final PersistenceException e) {
+			throw new ServiceException(null, e);
+		}
+	}
 
 }

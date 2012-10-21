@@ -15,10 +15,10 @@ import com.yd.etravel.persistence.exception.PersistenceException;
  */
 public interface IHotelDAO extends IBaseDAO<Hotel> {
 
-    public boolean isHotelNameExist(final String name, Long id)
-	    throws PersistenceException;
+	public boolean isHotelNameExist(final String name, Long id)
+			throws PersistenceException;
 
-    public Hotel findHotelWithUser(Long id) throws PersistenceException;
+	public Hotel findHotelWithUser(Long id) throws PersistenceException;
 
-    public int deleteHotel(Long id) throws PersistenceException;
+	public int deleteHotel(Long id) throws PersistenceException;
 }
