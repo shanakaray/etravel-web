@@ -76,9 +76,9 @@ public class CustomerAction extends BaseAction {
 			final HttpServletResponse response) throws Exception {
 		final CustomerForm customerForm = (CustomerForm) form;
 		final User user = new User();
-		user.setId(customerForm.getId() != null
-				&& customerForm.getId().longValue() > 0 ? customerForm.getId()
-				: null);
+		user.setId((customerForm.getId() != null)
+				&& (customerForm.getId().longValue() > 0) ? customerForm
+				.getId() : null);
 		user.setName(customerForm.getCusUsername());
 		user.setAddress(customerForm.getAddress());
 		user.setContact(customerForm.getContact());
@@ -209,6 +209,14 @@ public class CustomerAction extends BaseAction {
 		return null;
 	}
 
+	@Override
+	public ActionForward search(final ActionMapping mapping,
+			final ActionForm form, final HttpServletRequest request,
+			final HttpServletResponse response) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -235,14 +243,6 @@ public class CustomerAction extends BaseAction {
 	 */
 	@Override
 	protected ActionForward sort(final ActionMapping mapping,
-			final ActionForm form, final HttpServletRequest request,
-			final HttpServletResponse response) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ActionForward search(final ActionMapping mapping,
 			final ActionForm form, final HttpServletRequest request,
 			final HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub

@@ -30,19 +30,57 @@ public class BookingDTO extends BaseObject {
 	private ArrayList<ExtraItemBooking> extraItemBookingList;
 	private Payment payment;
 
-	public BigDecimal getTotalPrice() {
-		return this.totalPrice;
-	}
-
-	public void setTotalPrice(final BigDecimal totalPrice) {
-		this.totalPrice = totalPrice;
-	}
-
 	/**
 	 * @return the booking
 	 */
 	public Booking getBooking() {
 		return this.booking;
+	}
+
+	/**
+	 * @return the bookingNumber
+	 */
+	public String getBookingNumber() {
+		return this.bookingNumber;
+	}
+
+	/**
+	 * @return the extraItemBookingList
+	 */
+	public ArrayList<ExtraItemBooking> getExtraItemBookingList() {
+		return this.extraItemBookingList;
+	}
+
+	/**
+	 * @return the hotelBooking
+	 */
+	public HotelBooking getHotelBooking() {
+		return this.hotelBooking;
+	}
+
+	/**
+	 * @return the payment
+	 */
+	public Payment getPayment() {
+		return this.payment;
+	}
+
+	/**
+	 * @return the roomAvalabiltyId
+	 */
+	public Long getRoomAvalabiltyId() {
+		return this.roomAvalabiltyId;
+	}
+
+	/**
+	 * @return the roomBooking
+	 */
+	public RoomBooking getRoomBooking() {
+		return this.roomBooking;
+	}
+
+	public BigDecimal getTotalPrice() {
+		return this.totalPrice;
 	}
 
 	/**
@@ -54,10 +92,20 @@ public class BookingDTO extends BaseObject {
 	}
 
 	/**
-	 * @return the hotelBooking
+	 * @param bookingNumber
+	 *            the bookingNumber to set
 	 */
-	public HotelBooking getHotelBooking() {
-		return this.hotelBooking;
+	public void setBookingNumber(final String bookingNumber) {
+		this.bookingNumber = bookingNumber;
+	}
+
+	/**
+	 * @param extraItemBookingList
+	 *            the extraItemBookingList to set
+	 */
+	public void setExtraItemBookingList(
+			final ArrayList<ExtraItemBooking> extraItemBookingList) {
+		this.extraItemBookingList = extraItemBookingList;
 	}
 
 	/**
@@ -69,40 +117,11 @@ public class BookingDTO extends BaseObject {
 	}
 
 	/**
-	 * @return the roomBooking
+	 * @param payment
+	 *            the payment to set
 	 */
-	public RoomBooking getRoomBooking() {
-		return this.roomBooking;
-	}
-
-	/**
-	 * @param roomBooking
-	 *            the roomBooking to set
-	 */
-	public void setRoomBooking(final RoomBooking roomBooking) {
-		this.roomBooking = roomBooking;
-	}
-
-	/**
-	 * @return the bookingNumber
-	 */
-	public String getBookingNumber() {
-		return this.bookingNumber;
-	}
-
-	/**
-	 * @param bookingNumber
-	 *            the bookingNumber to set
-	 */
-	public void setBookingNumber(final String bookingNumber) {
-		this.bookingNumber = bookingNumber;
-	}
-
-	/**
-	 * @return the roomAvalabiltyId
-	 */
-	public Long getRoomAvalabiltyId() {
-		return this.roomAvalabiltyId;
+	public void setPayment(final Payment payment) {
+		this.payment = payment;
 	}
 
 	/**
@@ -114,34 +133,15 @@ public class BookingDTO extends BaseObject {
 	}
 
 	/**
-	 * @return the payment
+	 * @param roomBooking
+	 *            the roomBooking to set
 	 */
-	public Payment getPayment() {
-		return this.payment;
+	public void setRoomBooking(final RoomBooking roomBooking) {
+		this.roomBooking = roomBooking;
 	}
 
-	/**
-	 * @param payment
-	 *            the payment to set
-	 */
-	public void setPayment(final Payment payment) {
-		this.payment = payment;
-	}
-
-	/**
-	 * @return the extraItemBookingList
-	 */
-	public ArrayList<ExtraItemBooking> getExtraItemBookingList() {
-		return this.extraItemBookingList;
-	}
-
-	/**
-	 * @param extraItemBookingList
-	 *            the extraItemBookingList to set
-	 */
-	public void setExtraItemBookingList(
-			final ArrayList<ExtraItemBooking> extraItemBookingList) {
-		this.extraItemBookingList = extraItemBookingList;
+	public void setTotalPrice(final BigDecimal totalPrice) {
+		this.totalPrice = totalPrice;
 	}
 
 }

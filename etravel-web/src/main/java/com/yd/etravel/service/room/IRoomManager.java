@@ -16,20 +16,20 @@ import com.yd.etravel.service.exception.ServiceException;
  */
 public interface IRoomManager {
 
-	public List<Room> findRooms(RoomSearchDTO roomSearchDTO)
-			throws ServiceException;
-
-	public Room saveRoom(final Room Room) throws ServiceException;
-
-	public List<Room> findAllRooms() throws ServiceException;
-
-	public Room findRoomById(Long id) throws ServiceException;
-
 	public int deleteRoom(Long id) throws ServiceException;
 
 	public List<Room> findAllActiveRoom() throws ServiceException;
 
+	public List<Room> findAllRooms() throws ServiceException;
+
 	public List<Room> findAllRoomWithRoomType(Long hotelid)
 			throws ServiceException;
+
+	public Room findRoomById(Long id) throws ServiceException;
+
+	public List<Room> findRooms(RoomSearchDTO roomSearchDTO)
+			throws ServiceException;
+
+	public Room saveRoom(final Room Room) throws ServiceException;
 
 }

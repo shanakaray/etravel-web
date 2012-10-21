@@ -26,6 +26,10 @@ import com.yd.etravel.web.common.BaseForm;
  */
 public class UserForm extends BaseForm {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2236879976181160458L;
 	private User user;
 	private Long id;
 	private String repassword;
@@ -41,124 +45,64 @@ public class UserForm extends BaseForm {
 	public UserForm() {
 	}
 
-	public User getUser() {
-		return this.user;
-	}
-
-	public void setUser(final User user) {
-		this.user = user;
-	}
-
-	public String getName() {
-		return this.user.getName();
-	}
-
-	public void setName(final String name) {
-		this.user.setName(name);
-	}
-
-	public String getPw() {
-		return this.user.getPassword();
-	}
-
-	public void setPw(final String password) {
-		this.user.setPassword(password);
+	public Boolean getActive() {
+		return this.user.isActive();
 	}
 
 	public String getAddress() {
 		return this.user.getAddress();
 	}
 
-	public void setAddress(final String address) {
-		this.user.setAddress(address);
-	}
-
-	public String getContact() {
-		return this.user.getContact();
-	}
-
-	public void setContact(final String contact) {
-		this.user.setContact(contact);
-	}
-
-	public String getEmail() {
-		return this.user.getEmail();
-	}
-
-	public void setEmail(final String email) {
-		this.user.setEmail(email);
-	}
-
-	public String getFirstName() {
-		return this.user.getFirstName();
-	}
-
-	public void setFirstName(final String firstName) {
-		this.user.setFirstName(firstName);
-	}
-
-	public String getLastName() {
-		return this.user.getLastName();
-	}
-
-	public void setLastName(final String lastName) {
-		this.user.setLastName(lastName);
-	}
-
-	public String getRepw() {
-		return this.repassword;
-	}
-
-	public void setRepw(final String repassword) {
-		this.repassword = repassword;
-	}
-
-	public Long[] getRoleIds() {
-		return this.roleIds;
-	}
-
-	public void setRoleIds(final Long[] roleIds) {
-		this.roleIds = roleIds;
-	}
-
 	public List<Role> getAllRoles() {
 		return this.allRoles;
-	}
-
-	public void setAllRoles(final List<Role> allRoles) {
-		this.allRoles = allRoles;
 	}
 
 	public List<User> getAllUsers() {
 		return this.allUsers;
 	}
 
-	public void setAllUsers(final List<User> allUsers) {
-		this.allUsers = allUsers;
+	public String getContact() {
+		return this.user.getContact();
 	}
 
-	public Boolean getActive() {
-		return this.user.isActive();
+	public String getEmail() {
+		return this.user.getEmail();
 	}
 
-	public void setActive(final Boolean active) {
-		this.user.setActive(active);
+	public String getFirstName() {
+		return this.user.getFirstName();
 	}
 
 	public Long getId() {
 		return this.id;
 	}
 
-	public void setId(final Long id) {
-		this.id = id;
+	public String getLastName() {
+		return this.user.getLastName();
+	}
+
+	public String getName() {
+		return this.user.getName();
+	}
+
+	public String getPw() {
+		return this.user.getPassword();
+	}
+
+	public String getRepw() {
+		return this.repassword;
+	}
+
+	public Long[] getRoleIds() {
+		return this.roleIds;
+	}
+
+	public User getUser() {
+		return this.user;
 	}
 
 	public boolean isPasswordReset() {
 		return this.passwordReset;
-	}
-
-	public void setPasswordReset(final boolean passwordReset) {
-		this.passwordReset = passwordReset;
 	}
 
 	@Override
@@ -172,6 +116,66 @@ public class UserForm extends BaseForm {
 		this.allRoles = Collections.emptyList();
 		this.allUsers = Collections.emptyList();
 		this.passwordReset = false;
+	}
+
+	public void setActive(final Boolean active) {
+		this.user.setActive(active);
+	}
+
+	public void setAddress(final String address) {
+		this.user.setAddress(address);
+	}
+
+	public void setAllRoles(final List<Role> allRoles) {
+		this.allRoles = allRoles;
+	}
+
+	public void setAllUsers(final List<User> allUsers) {
+		this.allUsers = allUsers;
+	}
+
+	public void setContact(final String contact) {
+		this.user.setContact(contact);
+	}
+
+	public void setEmail(final String email) {
+		this.user.setEmail(email);
+	}
+
+	public void setFirstName(final String firstName) {
+		this.user.setFirstName(firstName);
+	}
+
+	public void setId(final Long id) {
+		this.id = id;
+	}
+
+	public void setLastName(final String lastName) {
+		this.user.setLastName(lastName);
+	}
+
+	public void setName(final String name) {
+		this.user.setName(name);
+	}
+
+	public void setPasswordReset(final boolean passwordReset) {
+		this.passwordReset = passwordReset;
+	}
+
+	public void setPw(final String password) {
+		this.user.setPassword(password);
+	}
+
+	public void setRepw(final String repassword) {
+		this.repassword = repassword;
+	}
+
+	public void setRoleIds(final Long[] roleIds) {
+		this.roleIds = roleIds;
+	}
+
+	public void setUser(final User user) {
+		this.user = user;
 	}
 
 	@Override
@@ -195,7 +199,8 @@ public class UserForm extends BaseForm {
 			this.user.setEmail(EMPTY_STRING);
 		}
 
-		if (this.passwordReset || getId() == null || getId().longValue() <= 0) {
+		if (this.passwordReset || (getId() == null)
+				|| (getId().longValue() <= 0)) {
 			if (StringUtils.isEmpty(this.user.getPassword())) {
 				addErrors(errors, "etravel.error.pw.required");
 			} else if (!this.user.getPassword().equals(this.repassword)) {

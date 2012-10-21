@@ -12,6 +12,10 @@ import java.io.Serializable;
  */
 public class RoomSearchDTO implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8334235750806020322L;
 	private Integer noOfRoom;
 	private Long roomTypeId;
 	private Long hotelId;
@@ -20,28 +24,28 @@ public class RoomSearchDTO implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Integer getNoOfRoom() {
-		return this.noOfRoom;
+	public Long getHotelId() {
+		return this.hotelId;
 	}
 
-	public void setNoOfRoom(final Integer noOfRoom) {
-		this.noOfRoom = noOfRoom;
+	public Integer getNoOfRoom() {
+		return this.noOfRoom;
 	}
 
 	public Long getRoomTypeId() {
 		return this.roomTypeId;
 	}
 
-	public void setRoomTypeId(final Long roomTypeId) {
-		this.roomTypeId = roomTypeId;
-	}
-
-	public Long getHotelId() {
-		return this.hotelId;
-	}
-
 	public void setHotelId(final Long hotelId) {
 		this.hotelId = hotelId;
+	}
+
+	public void setNoOfRoom(final Integer noOfRoom) {
+		this.noOfRoom = noOfRoom;
+	}
+
+	public void setRoomTypeId(final Long roomTypeId) {
+		this.roomTypeId = roomTypeId;
 	}
 
 }

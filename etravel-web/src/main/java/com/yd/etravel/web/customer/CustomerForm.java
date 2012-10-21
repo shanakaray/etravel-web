@@ -17,6 +17,10 @@ import com.yd.etravel.web.common.BaseForm;
  * 
  */
 public class CustomerForm extends BaseForm {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2983829208384874214L;
 	private Long id;
 	private String cusUsername;
 	private String cusPassword;
@@ -38,80 +42,40 @@ public class CustomerForm extends BaseForm {
 		return this.address;
 	}
 
-	public void setAddress(final String address) {
-		this.address = address;
-	}
-
 	public String getContact() {
 		return this.contact;
-	}
-
-	public void setContact(final String contact) {
-		this.contact = contact;
-	}
-
-	public String getEmail() {
-		return this.email;
-	}
-
-	public void setEmail(final String email) {
-		this.email = email;
-	}
-
-	public String getFirstName() {
-		return this.firstName;
-	}
-
-	public void setFirstName(final String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return this.lastName;
-	}
-
-	public void setLastName(final String lastName) {
-		this.lastName = lastName;
-	}
-
-	public String getNic() {
-		return this.nic;
-	}
-
-	public void setNic(final String nic) {
-		this.nic = nic;
-	}
-
-	public String getCusUsername() {
-		return this.cusUsername;
-	}
-
-	public void setCusUsername(final String cusUsername) {
-		this.cusUsername = cusUsername;
 	}
 
 	public String getCusPassword() {
 		return this.cusPassword;
 	}
 
-	public void setCusPassword(final String cusPassword) {
-		this.cusPassword = cusPassword;
+	public String getCusUsername() {
+		return this.cusUsername;
+	}
+
+	public String getEmail() {
+		return this.email;
+	}
+
+	public String getFirstName() {
+		return this.firstName;
 	}
 
 	public Long getId() {
 		return this.id;
 	}
 
-	public void setId(final Long id) {
-		this.id = id;
+	public String getLastName() {
+		return this.lastName;
+	}
+
+	public String getNic() {
+		return this.nic;
 	}
 
 	public String getRepassword() {
 		return this.repassword;
-	}
-
-	public void setRepassword(final String repassword) {
-		this.repassword = repassword;
 	}
 
 	/*
@@ -134,6 +98,46 @@ public class CustomerForm extends BaseForm {
 		this.cusPassword = EMPTY_STRING;
 		this.repassword = EMPTY_STRING;
 		this.id = 0L;
+	}
+
+	public void setAddress(final String address) {
+		this.address = address;
+	}
+
+	public void setContact(final String contact) {
+		this.contact = contact;
+	}
+
+	public void setCusPassword(final String cusPassword) {
+		this.cusPassword = cusPassword;
+	}
+
+	public void setCusUsername(final String cusUsername) {
+		this.cusUsername = cusUsername;
+	}
+
+	public void setEmail(final String email) {
+		this.email = email;
+	}
+
+	public void setFirstName(final String firstName) {
+		this.firstName = firstName;
+	}
+
+	public void setId(final Long id) {
+		this.id = id;
+	}
+
+	public void setLastName(final String lastName) {
+		this.lastName = lastName;
+	}
+
+	public void setNic(final String nic) {
+		this.nic = nic;
+	}
+
+	public void setRepassword(final String repassword) {
+		this.repassword = repassword;
 	}
 
 	/*

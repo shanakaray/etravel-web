@@ -19,6 +19,10 @@ import com.yd.etravel.web.common.BaseForm;
  */
 public class PaymentForm extends BaseForm {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4661265258786033944L;
 	private Long id;
 	private Integer cardNumber;
 	private Date expirDate;
@@ -31,138 +35,10 @@ public class PaymentForm extends BaseForm {
 	private BigDecimal amount;
 
 	/**
-	 * @return the id
-	 */
-	public Long getId() {
-		return this.id;
-	}
-
-	/**
-	 * @param id
-	 *            the id to set
-	 */
-	public void setId(final Long id) {
-		this.id = id;
-	}
-
-	/**
-	 * @return the cardNumber
-	 */
-	public Integer getCardNumber() {
-		return this.cardNumber;
-	}
-
-	/**
-	 * @param cardNumber
-	 *            the cardNumber to set
-	 */
-	public void setCardNumber(final Integer cardNumber) {
-		this.cardNumber = cardNumber;
-	}
-
-	/**
-	 * @return the expirDate
-	 */
-	public Date getExpirDate() {
-		return this.expirDate;
-	}
-
-	/**
-	 * @param expirDate
-	 *            the expirDate to set
-	 */
-	public void setExpirDate(final Date expirDate) {
-		this.expirDate = expirDate;
-	}
-
-	/**
-	 * @return the securityCode
-	 */
-	public String getSecurityCode() {
-		return this.securityCode;
-	}
-
-	/**
-	 * @param securityCode
-	 *            the securityCode to set
-	 */
-	public void setSecurityCode(final String securityCode) {
-		this.securityCode = securityCode;
-	}
-
-	/**
 	 * @return the address
 	 */
 	public String getAddress() {
 		return this.address;
-	}
-
-	/**
-	 * @param address
-	 *            the address to set
-	 */
-	public void setAddress(final String address) {
-		this.address = address;
-	}
-
-	/**
-	 * @return the city
-	 */
-	public String getCity() {
-		return this.city;
-	}
-
-	/**
-	 * @param city
-	 *            the city to set
-	 */
-	public void setCity(final String city) {
-		this.city = city;
-	}
-
-	/**
-	 * @return the province
-	 */
-	public String getProvince() {
-		return this.province;
-	}
-
-	/**
-	 * @param province
-	 *            the province to set
-	 */
-	public void setProvince(final String province) {
-		this.province = province;
-	}
-
-	/**
-	 * @return the zipCode
-	 */
-	public String getZipCode() {
-		return this.zipCode;
-	}
-
-	/**
-	 * @param zipCode
-	 *            the zipCode to set
-	 */
-	public void setZipCode(final String zipCode) {
-		this.zipCode = zipCode;
-	}
-
-	/**
-	 * @return the country
-	 */
-	public String getCountry() {
-		return this.country;
-	}
-
-	/**
-	 * @param country
-	 *            the country to set
-	 */
-	public void setCountry(final String country) {
-		this.country = country;
 	}
 
 	/**
@@ -173,11 +49,59 @@ public class PaymentForm extends BaseForm {
 	}
 
 	/**
-	 * @param amount
-	 *            the amount to set
+	 * @return the cardNumber
 	 */
-	public void setAmount(final BigDecimal amount) {
-		this.amount = amount;
+	public Integer getCardNumber() {
+		return this.cardNumber;
+	}
+
+	/**
+	 * @return the city
+	 */
+	public String getCity() {
+		return this.city;
+	}
+
+	/**
+	 * @return the country
+	 */
+	public String getCountry() {
+		return this.country;
+	}
+
+	/**
+	 * @return the expirDate
+	 */
+	public Date getExpirDate() {
+		return this.expirDate;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public Long getId() {
+		return this.id;
+	}
+
+	/**
+	 * @return the province
+	 */
+	public String getProvince() {
+		return this.province;
+	}
+
+	/**
+	 * @return the securityCode
+	 */
+	public String getSecurityCode() {
+		return this.securityCode;
+	}
+
+	/**
+	 * @return the zipCode
+	 */
+	public String getZipCode() {
+		return this.zipCode;
 	}
 
 	/*
@@ -192,6 +116,86 @@ public class PaymentForm extends BaseForm {
 			final HttpServletRequest request) {
 		// TODO Auto-generated method stub
 
+	}
+
+	/**
+	 * @param address
+	 *            the address to set
+	 */
+	public void setAddress(final String address) {
+		this.address = address;
+	}
+
+	/**
+	 * @param amount
+	 *            the amount to set
+	 */
+	public void setAmount(final BigDecimal amount) {
+		this.amount = amount;
+	}
+
+	/**
+	 * @param cardNumber
+	 *            the cardNumber to set
+	 */
+	public void setCardNumber(final Integer cardNumber) {
+		this.cardNumber = cardNumber;
+	}
+
+	/**
+	 * @param city
+	 *            the city to set
+	 */
+	public void setCity(final String city) {
+		this.city = city;
+	}
+
+	/**
+	 * @param country
+	 *            the country to set
+	 */
+	public void setCountry(final String country) {
+		this.country = country;
+	}
+
+	/**
+	 * @param expirDate
+	 *            the expirDate to set
+	 */
+	public void setExpirDate(final Date expirDate) {
+		this.expirDate = expirDate;
+	}
+
+	/**
+	 * @param id
+	 *            the id to set
+	 */
+	public void setId(final Long id) {
+		this.id = id;
+	}
+
+	/**
+	 * @param province
+	 *            the province to set
+	 */
+	public void setProvince(final String province) {
+		this.province = province;
+	}
+
+	/**
+	 * @param securityCode
+	 *            the securityCode to set
+	 */
+	public void setSecurityCode(final String securityCode) {
+		this.securityCode = securityCode;
+	}
+
+	/**
+	 * @param zipCode
+	 *            the zipCode to set
+	 */
+	public void setZipCode(final String zipCode) {
+		this.zipCode = zipCode;
 	}
 
 	/*

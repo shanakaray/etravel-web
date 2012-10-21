@@ -21,6 +21,10 @@ import com.yd.etravel.web.common.BaseForm;
  * 
  */
 public class SeasonForm extends BaseForm {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -86205972061017676L;
 	private Long id;
 	private String code;
 	private String fromDate;
@@ -39,84 +43,44 @@ public class SeasonForm extends BaseForm {
 		// TODO Auto-generated constructor stub
 	}
 
-	public String getCode() {
-		return this.code;
-	}
-
-	public void setCode(final String code) {
-		this.code = code;
-	}
-
-	public String getFromDate() {
-		return this.fromDate;
-	}
-
-	public void setFromDate(final String fromDate) {
-		this.fromDate = fromDate;
-	}
-
-	public String getToDate() {
-		return this.toDate;
-	}
-
-	public void setToDate(final String toDate) {
-		this.toDate = toDate;
-	}
-
-	public String getName() {
-		return this.name;
-	}
-
-	public void setName(final String name) {
-		this.name = name;
-	}
-
 	public boolean getActive() {
 		return this.active;
-	}
-
-	public void setActive(final boolean active) {
-		this.active = active;
-	}
-
-	public List<Season> getAllSeason() {
-		return this.allSeason;
-	}
-
-	public void setAllSeason(final List<Season> allSeason) {
-		this.allSeason = allSeason;
-	}
-
-	public Long getId() {
-		return this.id;
-	}
-
-	public void setId(final Long id) {
-		this.id = id;
 	}
 
 	public List<Hotel> getAllHotel() {
 		return this.allHotel;
 	}
 
-	public void setAllHotel(final List<Hotel> allHotel) {
-		this.allHotel = allHotel;
+	public List<Season> getAllSeason() {
+		return this.allSeason;
 	}
 
-	public Long[] getHotelIds() {
-		return this.hotelIds;
-	}
-
-	public void setHotelIds(final Long[] hotelIds) {
-		this.hotelIds = hotelIds;
+	public String getCode() {
+		return this.code;
 	}
 
 	public String getComments() {
 		return this.comments;
 	}
 
-	public void setComments(final String comments) {
-		this.comments = comments;
+	public String getFromDate() {
+		return this.fromDate;
+	}
+
+	public Long[] getHotelIds() {
+		return this.hotelIds;
+	}
+
+	public Long getId() {
+		return this.id;
+	}
+
+	public String getName() {
+		return this.name;
+	}
+
+	public String getToDate() {
+		return this.toDate;
 	}
 
 	/*
@@ -140,6 +104,46 @@ public class SeasonForm extends BaseForm {
 		this.active = true;
 		this.id = null;
 
+	}
+
+	public void setActive(final boolean active) {
+		this.active = active;
+	}
+
+	public void setAllHotel(final List<Hotel> allHotel) {
+		this.allHotel = allHotel;
+	}
+
+	public void setAllSeason(final List<Season> allSeason) {
+		this.allSeason = allSeason;
+	}
+
+	public void setCode(final String code) {
+		this.code = code;
+	}
+
+	public void setComments(final String comments) {
+		this.comments = comments;
+	}
+
+	public void setFromDate(final String fromDate) {
+		this.fromDate = fromDate;
+	}
+
+	public void setHotelIds(final Long[] hotelIds) {
+		this.hotelIds = hotelIds;
+	}
+
+	public void setId(final Long id) {
+		this.id = id;
+	}
+
+	public void setName(final String name) {
+		this.name = name;
+	}
+
+	public void setToDate(final String toDate) {
+		this.toDate = toDate;
 	}
 
 	/*

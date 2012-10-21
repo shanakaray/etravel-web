@@ -16,10 +16,9 @@ import com.yd.etravel.service.exception.ServiceException;
  */
 public interface IHotelManager {
 
-	public List<Hotel> findAllActiveHotels() throws ServiceException;
+	public int deleteHotel(Long id) throws ServiceException;
 
-	public Hotel saveHotel(final Hotel hotel, final Long[] userids)
-			throws ServiceException;
+	public List<Hotel> findAllActiveHotels() throws ServiceException;
 
 	public List<Hotel> findAllHotel() throws ServiceException;
 
@@ -27,5 +26,6 @@ public interface IHotelManager {
 
 	public List<Hotel> findHotelsById(Long id[]) throws ServiceException;
 
-	public int deleteHotel(Long id) throws ServiceException;
+	public Hotel saveHotel(final Hotel hotel, final Long[] userids)
+			throws ServiceException;
 }

@@ -41,45 +41,6 @@ public class OccupancyDAO extends BaseDAO<Occupancy> implements IOccupancyDAO {
 	}
 
 	@Override
-	public boolean isOccupancyNameExist(final String occupancyName,
-			final Long id) throws PersistenceException {
-		try {
-
-			final StringBuilder IS_OCCUPANCY_NAME_EXIST = new StringBuilder(
-					"SELECT occupancy FROM com.yd.etravel.domain.occupancy.Occupancy as occupancy where ")
-					.append(" UPPER(occupancy.name)= UPPER(:name) ");
-
-			if (id != null) {
-				IS_OCCUPANCY_NAME_EXIST.append(" AND occupancy.id != :id");
-			}
-
-			final Query query = getCurrentSession().createQuery(
-					IS_OCCUPANCY_NAME_EXIST.toString());
-			query.setParameter("name", occupancyName);
-			if (id != null) {
-				query.setParameter("id", id);
-			}
-
-			return !query.list().isEmpty();
-		} catch (final HibernateException e) {
-			throw new PersistenceException(e);
-		}
-	}
-
-	@Override
-	@SuppressWarnings("unchecked")
-	public List<Occupancy> findAllOccupancyWithRoomType()
-			throws PersistenceException {
-		try {
-			return getHibernateTemplate().find(
-					FIND_ALL_OCCUPANCY_WITH_ROOM_TYPE.toString());
-
-		} catch (final HibernateException e) {
-			throw new PersistenceException(e);
-		}
-	}
-
-	@Override
 	public boolean findAllOccupancyByPaxInfo(final Occupancy occupancy)
 			throws PersistenceException {
 
@@ -120,7 +81,46 @@ public class OccupancyDAO extends BaseDAO<Occupancy> implements IOccupancyDAO {
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
+	public List<Occupancy> findAllOccupancyWithRoomType()
+			throws PersistenceException {
+		try {
+			return getHibernateTemplate().find(
+					FIND_ALL_OCCUPANCY_WITH_ROOM_TYPE.toString());
+
+		} catch (final HibernateException e) {
+			throw new PersistenceException(e);
+		}
+	}
+
+	@Override
 	protected Class getEntityClass() {
 		return Occupancy.class;
+	}
+
+	@Override
+	public boolean isOccupancyNameExist(final String occupancyName,
+			final Long id) throws PersistenceException {
+		try {
+
+			final StringBuilder IS_OCCUPANCY_NAME_EXIST = new StringBuilder(
+					"SELECT occupancy FROM com.yd.etravel.domain.occupancy.Occupancy as occupancy where ")
+					.append(" UPPER(occupancy.name)= UPPER(:name) ");
+
+			if (id != null) {
+				IS_OCCUPANCY_NAME_EXIST.append(" AND occupancy.id != :id");
+			}
+
+			final Query query = getCurrentSession().createQuery(
+					IS_OCCUPANCY_NAME_EXIST.toString());
+			query.setParameter("name", occupancyName);
+			if (id != null) {
+				query.setParameter("id", id);
+			}
+
+			return !query.list().isEmpty();
+		} catch (final HibernateException e) {
+			throw new PersistenceException(e);
+		}
 	}
 }

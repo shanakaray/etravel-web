@@ -41,8 +41,11 @@ public abstract class BaseAction extends Action implements
 		com.yd.etravel.util.IConstants.IForwards,
 		com.yd.etravel.util.IConstants.IMsg {
 
-	protected static final Log LOG = LogFactory.getLog(BaseAction.class);
+	public enum WebMethod {
+		process, init, create, save, search, delete, edit, send, back, find, forward, add, sort, OnChange, roomOnChange, hotelOnChange;
+	}
 
+	protected static final Log LOG = LogFactory.getLog(BaseAction.class);
 	// Spring Managers
 	private IUserManager userManager;
 	private ISeasonManager seasonManager;
@@ -55,19 +58,50 @@ public abstract class BaseAction extends Action implements
 	private IExtraItemManager itemManager;
 	private ISearchManager searchManager;
 	private IBookingManager bookingManager;
+
 	private IContentManager contentManager;
 	// Spring Managers End
-
 	protected volatile ActionMessages actionMessages; // NOPMD by yohan on
-	// 1/28/12 5:28 PM
-	protected volatile List<String> infoMessages; // NOPMD by yohan on 1/28/12
 
 	// 5:28 PM
+
+	// 1/28/12 5:28 PM
+	protected volatile List<String> infoMessages; // NOPMD by yohan on 1/28/12
 
 	protected BaseAction() {
 		this.actionMessages = new ActionMessages();
 		this.infoMessages = new ArrayList<String>();
 	}
+
+	protected abstract ActionForward add(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception;
+
+	protected void addActionMessages(final String key,
+			final ActionMessage actionMessage) {
+		this.actionMessages.add(key, actionMessage);
+	}
+
+	protected void addInfoMessages(final String msg) {
+		this.infoMessages.add(MessageResources.getMessageResources(
+				ICommon.MSG_RES).getMessage(msg));
+	}
+
+	protected abstract ActionForward back(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception;
+
+	public abstract ActionForward create(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception;
+
+	protected abstract ActionForward delete(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception;
+
+	protected abstract ActionForward edit(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception;
 
 	@Override
 	public ActionForward execute(final ActionMapping mapping,
@@ -165,7 +199,7 @@ public abstract class BaseAction extends Action implements
 
 			actionForward = mapping.getInputForward();
 
-			if (actionForward == null
+			if ((actionForward == null)
 					|| StringUtils.isEmpty(actionForward.getPath())) {
 
 				actionForward = init(mapping, form, request, response);
@@ -186,7 +220,7 @@ public abstract class BaseAction extends Action implements
 				msgList.addAll(e.getUIMessage().getInformations());
 				msgList.addAll(e.getUIMessage().getErrors());
 				actionForward = mapping.getInputForward();
-				if (actionForward == null
+				if ((actionForward == null)
 						|| StringUtils.isEmpty(actionForward.getPath())) {
 
 					actionForward = init(mapping, form, request, response);
@@ -215,17 +249,82 @@ public abstract class BaseAction extends Action implements
 		return actionForward;
 	}
 
-	private boolean historyCheck(final BaseForm baseForm,
-			final HttpServletRequest request) {
-		final long historyVal = request.getSession().getAttribute(
-				IUser.HISTORY_TOKEN) != null ? Long.valueOf(request
-				.getSession().getAttribute(IUser.HISTORY_TOKEN).toString())
-				: 0l;
-		if (baseForm.getTjwToken() > 0 && baseForm.getTjwToken() != historyVal) {
-			return false;
-		}
+	protected abstract ActionForward find(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception;
 
-		return true;
+	protected abstract ActionForward forward(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception;
+
+	/**
+	 * @return the bookingManager
+	 */
+	public IBookingManager getBookingManager() {
+		return this.bookingManager;
+	}
+
+	public IContentManager getContentManager() {
+		return this.contentManager;
+	}
+
+	protected IHotelManager getHotelManager() {
+		return this.hotelManager;
+	}
+
+	public IExtraItemManager getItemManager() {
+		return this.itemManager;
+	}
+
+	/**
+	 * @return the occupancyManager
+	 */
+
+	public IOccupancyManager getOccupancyManager() {
+		return this.occupancyManager;
+	}
+
+	public IPaxManager getPaxManager() {
+		return this.paxManager;
+	}
+
+	/**
+	 * @return the roomAvailabilityManager
+	 */
+	public IRoomAvailabilityManager getRoomAvailabilityManager() {
+		return this.roomAvailabilityManager;
+	}
+
+	public IRoomManager getRoomManager() {
+		return this.roomManager;
+	}
+
+	/**
+	 * @return the roomTypeManager
+	 */
+
+	public IRoomTypeManager getRoomTypeManager() {
+		return this.roomTypeManager;
+	}
+
+	/**
+	 * @return the searchManager
+	 */
+	public ISearchManager getSearchManager() {
+		return this.searchManager;
+	}
+
+	protected ISeasonManager getSeasonManager() {
+		return this.seasonManager;
+	}
+
+	protected IUserManager getUserManager() {
+		return this.userManager;
+	}
+
+	protected IUserProfile getUserProfile(final HttpServletRequest request) {
+		return (IUserProfile) request.getSession().getAttribute(
+				IUser.USER_PROFILE);
 	}
 
 	protected boolean hasAccess(final String function,
@@ -237,49 +336,19 @@ public abstract class BaseAction extends Action implements
 		return false;
 	}
 
-	private void setHistoryToken(final BaseForm baseForm,
+	private boolean historyCheck(final BaseForm baseForm,
 			final HttpServletRequest request) {
-		final long historyVal = System.nanoTime();
-		request.getSession().setAttribute(IUser.HISTORY_TOKEN, historyVal);
-		baseForm.setTjwToken(historyVal);
+		final long historyVal = request.getSession().getAttribute(
+				IUser.HISTORY_TOKEN) != null ? Long.valueOf(request
+				.getSession().getAttribute(IUser.HISTORY_TOKEN).toString())
+				: 0l;
+		if ((baseForm.getTjwToken() > 0)
+				&& (baseForm.getTjwToken() != historyVal)) {
+			return false;
+		}
 
+		return true;
 	}
-
-	protected abstract ActionForward sort(ActionMapping mapping,
-			ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception;
-
-	protected abstract ActionForward add(ActionMapping mapping,
-			ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception;
-
-	protected abstract ActionForward forward(ActionMapping mapping,
-			ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception;
-
-	protected abstract ActionForward find(ActionMapping mapping,
-			ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception;
-
-	protected abstract ActionForward back(ActionMapping mapping,
-			ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception;
-
-	protected abstract ActionForward send(ActionMapping mapping,
-			ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception;
-
-	protected abstract ActionForward edit(ActionMapping mapping,
-			ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception;
-
-	protected abstract ActionForward delete(ActionMapping mapping,
-			ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception;
-
-	protected abstract ActionForward save(ActionMapping mapping,
-			ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception;
 
 	protected abstract ActionForward init(ActionMapping mapping,
 			ActionForm form, HttpServletRequest request,
@@ -289,54 +358,70 @@ public abstract class BaseAction extends Action implements
 			ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception;
 
+	protected abstract ActionForward save(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception;
+
 	public abstract ActionForward search(ActionMapping mapping,
 			ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception;
 
-	public abstract ActionForward create(ActionMapping mapping,
+	protected abstract ActionForward send(ActionMapping mapping,
 			ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception;
 
-	protected void addActionMessages(final String key,
-			final ActionMessage actionMessage) {
-		this.actionMessages.add(key, actionMessage);
+	/**
+	 * @param bookingManager
+	 *            the bookingManager to set
+	 */
+	public void setBookingManager(final IBookingManager bookingManager) {
+		this.bookingManager = bookingManager;
 	}
 
-	protected void addInfoMessages(final String msg) {
-		this.infoMessages.add(MessageResources.getMessageResources(
-				ICommon.MSG_RES).getMessage(msg));
+	public void setContentManager(final IContentManager contentManager) {
+		this.contentManager = contentManager;
 	}
 
-	public void setUserManager(final IUserManager userManager) {
-		this.userManager = userManager;
-	}
+	private void setHistoryToken(final BaseForm baseForm,
+			final HttpServletRequest request) {
+		final long historyVal = System.nanoTime();
+		request.getSession().setAttribute(IUser.HISTORY_TOKEN, historyVal);
+		baseForm.setTjwToken(historyVal);
 
-	protected IUserManager getUserManager() {
-		return this.userManager;
-	}
-
-	protected ISeasonManager getSeasonManager() {
-		return this.seasonManager;
-	}
-
-	public void setSeasonManager(final ISeasonManager seasonManager) {
-		this.seasonManager = seasonManager;
-	}
-
-	protected IHotelManager getHotelManager() {
-		return this.hotelManager;
 	}
 
 	public void setHotelManager(final IHotelManager hotelManager) {
 		this.hotelManager = hotelManager;
 	}
 
+	public void setItemManager(final IExtraItemManager itemManager) {
+		this.itemManager = itemManager;
+	}
+
 	/**
-	 * @return the roomTypeManager
+	 * @param occupancyManager
+	 *            the occupancyManager to set
 	 */
 
-	public IRoomTypeManager getRoomTypeManager() {
-		return this.roomTypeManager;
+	public void setOccupancyManager(final IOccupancyManager occupancyManager) {
+		this.occupancyManager = occupancyManager;
+	}
+
+	public void setPaxManager(final IPaxManager paxManager) {
+		this.paxManager = paxManager;
+	}
+
+	/**
+	 * @param roomAvailabilityManager
+	 *            the roomAvailabilityManager to set
+	 */
+	public void setRoomAvailabilityManager(
+			final IRoomAvailabilityManager roomAvailabilityManager) {
+		this.roomAvailabilityManager = roomAvailabilityManager;
+	}
+
+	public void setRoomManager(final IRoomManager roomManager) {
+		this.roomManager = roomManager;
 	}
 
 	/**
@@ -349,62 +434,6 @@ public abstract class BaseAction extends Action implements
 	}
 
 	/**
-	 * @return the occupancyManager
-	 */
-
-	public IOccupancyManager getOccupancyManager() {
-		return this.occupancyManager;
-	}
-
-	/**
-	 * @param occupancyManager
-	 *            the occupancyManager to set
-	 */
-
-	public void setOccupancyManager(final IOccupancyManager occupancyManager) {
-		this.occupancyManager = occupancyManager;
-	}
-
-	public IPaxManager getPaxManager() {
-		return this.paxManager;
-	}
-
-	public void setPaxManager(final IPaxManager paxManager) {
-		this.paxManager = paxManager;
-	}
-
-	/**
-	 * @return the roomAvailabilityManager
-	 */
-	public IRoomAvailabilityManager getRoomAvailabilityManager() {
-		return this.roomAvailabilityManager;
-	}
-
-	/**
-	 * @param roomAvailabilityManager
-	 *            the roomAvailabilityManager to set
-	 */
-	public void setRoomAvailabilityManager(
-			final IRoomAvailabilityManager roomAvailabilityManager) {
-		this.roomAvailabilityManager = roomAvailabilityManager;
-	}
-
-	public IRoomManager getRoomManager() {
-		return this.roomManager;
-	}
-
-	public void setRoomManager(final IRoomManager roomManager) {
-		this.roomManager = roomManager;
-	}
-
-	/**
-	 * @return the searchManager
-	 */
-	public ISearchManager getSearchManager() {
-		return this.searchManager;
-	}
-
-	/**
 	 * @param searchManager
 	 *            the searchManager to set
 	 */
@@ -412,44 +441,16 @@ public abstract class BaseAction extends Action implements
 		this.searchManager = searchManager;
 	}
 
-	public IExtraItemManager getItemManager() {
-		return this.itemManager;
+	public void setSeasonManager(final ISeasonManager seasonManager) {
+		this.seasonManager = seasonManager;
 	}
 
-	public void setItemManager(final IExtraItemManager itemManager) {
-		this.itemManager = itemManager;
+	public void setUserManager(final IUserManager userManager) {
+		this.userManager = userManager;
 	}
 
-	/**
-	 * @return the bookingManager
-	 */
-	public IBookingManager getBookingManager() {
-		return this.bookingManager;
-	}
-
-	/**
-	 * @param bookingManager
-	 *            the bookingManager to set
-	 */
-	public void setBookingManager(final IBookingManager bookingManager) {
-		this.bookingManager = bookingManager;
-	}
-
-	public IContentManager getContentManager() {
-		return this.contentManager;
-	}
-
-	public void setContentManager(final IContentManager contentManager) {
-		this.contentManager = contentManager;
-	}
-
-	protected IUserProfile getUserProfile(final HttpServletRequest request) {
-		return (IUserProfile) request.getSession().getAttribute(
-				IUser.USER_PROFILE);
-	}
-
-	public enum WebMethod {
-		process, init, create, save, search, delete, edit, send, back, find, forward, add, sort, OnChange, roomOnChange, hotelOnChange;
-	}
+	protected abstract ActionForward sort(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception;
 
 }

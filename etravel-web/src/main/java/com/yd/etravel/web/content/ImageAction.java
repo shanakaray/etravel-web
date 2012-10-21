@@ -23,28 +23,7 @@ public class ImageAction extends BaseAction {
 	}
 
 	@Override
-	protected ActionForward sort(final ActionMapping mapping,
-			final ActionForm form, final HttpServletRequest request,
-			final HttpServletResponse response) throws Exception {
-		return null;
-	}
-
-	@Override
 	protected ActionForward add(final ActionMapping mapping,
-			final ActionForm form, final HttpServletRequest request,
-			final HttpServletResponse response) throws Exception {
-		return null;
-	}
-
-	@Override
-	protected ActionForward forward(final ActionMapping mapping,
-			final ActionForm form, final HttpServletRequest request,
-			final HttpServletResponse response) throws Exception {
-		return null;
-	}
-
-	@Override
-	protected ActionForward find(final ActionMapping mapping,
 			final ActionForm form, final HttpServletRequest request,
 			final HttpServletResponse response) throws Exception {
 		return null;
@@ -58,15 +37,7 @@ public class ImageAction extends BaseAction {
 	}
 
 	@Override
-	protected ActionForward send(final ActionMapping mapping,
-			final ActionForm form, final HttpServletRequest request,
-			final HttpServletResponse response) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected ActionForward edit(final ActionMapping mapping,
+	public ActionForward create(final ActionMapping mapping,
 			final ActionForm form, final HttpServletRequest request,
 			final HttpServletResponse response) throws Exception {
 		return null;
@@ -80,7 +51,21 @@ public class ImageAction extends BaseAction {
 	}
 
 	@Override
-	protected ActionForward save(final ActionMapping mapping,
+	protected ActionForward edit(final ActionMapping mapping,
+			final ActionForm form, final HttpServletRequest request,
+			final HttpServletResponse response) throws Exception {
+		return null;
+	}
+
+	@Override
+	protected ActionForward find(final ActionMapping mapping,
+			final ActionForm form, final HttpServletRequest request,
+			final HttpServletResponse response) throws Exception {
+		return null;
+	}
+
+	@Override
+	protected ActionForward forward(final ActionMapping mapping,
 			final ActionForm form, final HttpServletRequest request,
 			final HttpServletResponse response) throws Exception {
 		return null;
@@ -117,6 +102,13 @@ public class ImageAction extends BaseAction {
 	}
 
 	@Override
+	protected ActionForward save(final ActionMapping mapping,
+			final ActionForm form, final HttpServletRequest request,
+			final HttpServletResponse response) throws Exception {
+		return null;
+	}
+
+	@Override
 	public ActionForward search(final ActionMapping mapping,
 			final ActionForm form, final HttpServletRequest request,
 			final HttpServletResponse response) throws Exception {
@@ -124,7 +116,15 @@ public class ImageAction extends BaseAction {
 	}
 
 	@Override
-	public ActionForward create(final ActionMapping mapping,
+	protected ActionForward send(final ActionMapping mapping,
+			final ActionForm form, final HttpServletRequest request,
+			final HttpServletResponse response) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected ActionForward sort(final ActionMapping mapping,
 			final ActionForm form, final HttpServletRequest request,
 			final HttpServletResponse response) throws Exception {
 		return null;

@@ -48,6 +48,11 @@ public class BaseObject implements Serializable {
 		super();
 	}
 
+	public BaseObject(final Long id) {
+		super();
+		this.id = id;
+	}
+
 	public BaseObject(final Long id, final String name, final String code) {
 		super();
 		this.id = id;
@@ -55,29 +60,8 @@ public class BaseObject implements Serializable {
 		this.code = code;
 	}
 
-	public BaseObject(final Long id) {
-		super();
-		this.id = id;
-	}
-
 	public BaseObject(final String name) {
 		super();
-		this.name = name;
-	}
-
-	public Long getId() {
-		return this.id;
-	}
-
-	public void setId(final Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return this.name;
-	}
-
-	public void setName(final String name) {
 		this.name = name;
 	}
 
@@ -85,48 +69,32 @@ public class BaseObject implements Serializable {
 		return this.code;
 	}
 
-	public void setCode(final String code) {
-		this.code = code;
+	public String getCreatedBy() {
+		return this.createdBy;
 	}
 
 	public Date getCreatedDate() {
 		return this.createdDate;
 	}
 
-	public void setCreatedDate(final Date createdDate) {
-		this.createdDate = createdDate;
-	}
-
-	public Date getModifiedDate() {
-		return this.modifiedDate;
-	}
-
-	public void setModifiedDate(final Date modifiedDate) {
-		this.modifiedDate = modifiedDate;
-	}
-
-	public String getCreatedBy() {
-		return this.createdBy;
-	}
-
-	public void setCreatedBy(final String createdBy) {
-		this.createdBy = createdBy;
+	public Long getId() {
+		return this.id;
 	}
 
 	public String getModifiedBy() {
 		return this.modifiedBy;
 	}
 
-	public void setModifiedBy(final String modifiedBy) {
-		this.modifiedBy = modifiedBy;
+	public Date getModifiedDate() {
+		return this.modifiedDate;
+	}
+
+	public String getName() {
+		return this.name;
 	}
 
 	public String getStatus() {
 		return this.status;
-	}
-
-	public void setStatus(final String status) {
-		this.status = status;
 	}
 
 	public boolean isActive() {
@@ -135,6 +103,38 @@ public class BaseObject implements Serializable {
 
 	public void setActive(final boolean active) {
 		this.active = active;
+	}
+
+	public void setCode(final String code) {
+		this.code = code;
+	}
+
+	public void setCreatedBy(final String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public void setCreatedDate(final Date createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	public void setId(final Long id) {
+		this.id = id;
+	}
+
+	public void setModifiedBy(final String modifiedBy) {
+		this.modifiedBy = modifiedBy;
+	}
+
+	public void setModifiedDate(final Date modifiedDate) {
+		this.modifiedDate = modifiedDate;
+	}
+
+	public void setName(final String name) {
+		this.name = name;
+	}
+
+	public void setStatus(final String status) {
+		this.status = status;
 	}
 
 }

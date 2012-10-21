@@ -24,6 +24,10 @@ import com.yd.etravel.web.common.BaseForm;
  * 
  */
 public class RoomSeasonalRateForm extends BaseForm {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2028064367879052713L;
 	private Long id;
 	private Long hotelId;
 	private BigDecimal adultCost;
@@ -40,18 +44,10 @@ public class RoomSeasonalRateForm extends BaseForm {
 	private List<Hotel> hotelList;
 
 	/**
-	 * @return the id
+	 * @return the active
 	 */
-	public Long getId() {
-		return this.id;
-	}
-
-	/**
-	 * @param id
-	 *            the id to set
-	 */
-	public void setId(final Long id) {
-		this.id = id;
+	public boolean getActive() {
+		return this.active;
 	}
 
 	/**
@@ -62,116 +58,10 @@ public class RoomSeasonalRateForm extends BaseForm {
 	}
 
 	/**
-	 * @param adultCost
-	 *            the adultCost to set
-	 */
-	public void setAdultCost(final BigDecimal adultCost) {
-		this.adultCost = adultCost;
-	}
-
-	/**
-	 * @return the childCost
-	 */
-	public BigDecimal getChildCost() {
-		return this.childCost;
-	}
-
-	/**
-	 * @param childCost
-	 *            the childCost to set
-	 */
-	public void setChildCost(final BigDecimal childCost) {
-		this.childCost = childCost;
-	}
-
-	/**
-	 * @return the infantCost
-	 */
-	public BigDecimal getInfantCost() {
-		return this.infantCost;
-	}
-
-	/**
-	 * @param infantCost
-	 *            the infantCost to set
-	 */
-	public void setInfantCost(final BigDecimal infantCost) {
-		this.infantCost = infantCost;
-	}
-
-	/**
-	 * @return the totalCost
-	 */
-	public BigDecimal getTotalCost() {
-		return this.totalCost;
-	}
-
-	/**
-	 * @param totalCost
-	 *            the totalCost to set
-	 */
-	public void setTotalCost(final BigDecimal totalCost) {
-		this.totalCost = totalCost;
-	}
-
-	/**
-	 * @return the comments
-	 */
-	public String getComments() {
-		return this.comments;
-	}
-
-	/**
-	 * @param comments
-	 *            the comments to set
-	 */
-	public void setComments(final String comments) {
-		this.comments = comments;
-	}
-
-	/**
-	 * @return the active
-	 */
-	public boolean getActive() {
-		return this.active;
-	}
-
-	/**
-	 * @param active
-	 *            the active to set
-	 */
-	public void setActive(final boolean active) {
-		this.active = active;
-	}
-
-	/**
-	 * @return the allSeason
-	 */
-	public List<Season> getAllSeason() {
-		return this.allSeason;
-	}
-
-	/**
-	 * @param allSeason
-	 *            the allSeason to set
-	 */
-	public void setAllSeason(final List<Season> allSeason) {
-		this.allSeason = allSeason;
-	}
-
-	/**
 	 * @return the allRoom
 	 */
 	public List<Room> getAllRoom() {
 		return this.allRoom;
-	}
-
-	/**
-	 * @param allRoom
-	 *            the allRoom to set
-	 */
-	public void setAllRoom(final List<Room> allRoom) {
-		this.allRoom = allRoom;
 	}
 
 	/**
@@ -182,28 +72,61 @@ public class RoomSeasonalRateForm extends BaseForm {
 	}
 
 	/**
-	 * @param allRoomSeasonalRate
-	 *            the allRoomSeasonalRate to set
+	 * @return the allSeason
 	 */
-	public void setAllRoomSeasonalRate(
-			final List<RoomSeasonalRate> allRoomSeasonalRate) {
-		this.allRoomSeasonalRate = allRoomSeasonalRate;
+	public List<Season> getAllSeason() {
+		return this.allSeason;
+	}
+
+	/**
+	 * @return the childCost
+	 */
+	public BigDecimal getChildCost() {
+		return this.childCost;
+	}
+
+	/**
+	 * @return the comments
+	 */
+	public String getComments() {
+		return this.comments;
+	}
+
+	public Long getHotelId() {
+		return this.hotelId;
+	}
+
+	public List<Hotel> getHotelList() {
+		return this.hotelList;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public Long getId() {
+		return this.id;
+	}
+
+	/**
+	 * @return the infantCost
+	 */
+	public BigDecimal getInfantCost() {
+		return this.infantCost;
 	}
 
 	public Long getRoomId() {
 		return this.roomId;
 	}
 
-	public void setRoomId(final Long roomId) {
-		this.roomId = roomId;
-	}
-
 	public Long getSeasonId() {
 		return this.seasonId;
 	}
 
-	public void setSeasonId(final Long seasonId) {
-		this.seasonId = seasonId;
+	/**
+	 * @return the totalCost
+	 */
+	public BigDecimal getTotalCost() {
+		return this.totalCost;
 	}
 
 	/*
@@ -235,6 +158,103 @@ public class RoomSeasonalRateForm extends BaseForm {
 
 	}
 
+	/**
+	 * @param active
+	 *            the active to set
+	 */
+	public void setActive(final boolean active) {
+		this.active = active;
+	}
+
+	/**
+	 * @param adultCost
+	 *            the adultCost to set
+	 */
+	public void setAdultCost(final BigDecimal adultCost) {
+		this.adultCost = adultCost;
+	}
+
+	/**
+	 * @param allRoom
+	 *            the allRoom to set
+	 */
+	public void setAllRoom(final List<Room> allRoom) {
+		this.allRoom = allRoom;
+	}
+
+	/**
+	 * @param allRoomSeasonalRate
+	 *            the allRoomSeasonalRate to set
+	 */
+	public void setAllRoomSeasonalRate(
+			final List<RoomSeasonalRate> allRoomSeasonalRate) {
+		this.allRoomSeasonalRate = allRoomSeasonalRate;
+	}
+
+	/**
+	 * @param allSeason
+	 *            the allSeason to set
+	 */
+	public void setAllSeason(final List<Season> allSeason) {
+		this.allSeason = allSeason;
+	}
+
+	/**
+	 * @param childCost
+	 *            the childCost to set
+	 */
+	public void setChildCost(final BigDecimal childCost) {
+		this.childCost = childCost;
+	}
+
+	/**
+	 * @param comments
+	 *            the comments to set
+	 */
+	public void setComments(final String comments) {
+		this.comments = comments;
+	}
+
+	public void setHotelId(final Long hotelId) {
+		this.hotelId = hotelId;
+	}
+
+	public void setHotelList(final List<Hotel> hotelList) {
+		this.hotelList = hotelList;
+	}
+
+	/**
+	 * @param id
+	 *            the id to set
+	 */
+	public void setId(final Long id) {
+		this.id = id;
+	}
+
+	/**
+	 * @param infantCost
+	 *            the infantCost to set
+	 */
+	public void setInfantCost(final BigDecimal infantCost) {
+		this.infantCost = infantCost;
+	}
+
+	public void setRoomId(final Long roomId) {
+		this.roomId = roomId;
+	}
+
+	public void setSeasonId(final Long seasonId) {
+		this.seasonId = seasonId;
+	}
+
+	/**
+	 * @param totalCost
+	 *            the totalCost to set
+	 */
+	public void setTotalCost(final BigDecimal totalCost) {
+		this.totalCost = totalCost;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -259,22 +279,6 @@ public class RoomSeasonalRateForm extends BaseForm {
 
 		return errors;
 
-	}
-
-	public Long getHotelId() {
-		return this.hotelId;
-	}
-
-	public void setHotelId(final Long hotelId) {
-		this.hotelId = hotelId;
-	}
-
-	public List<Hotel> getHotelList() {
-		return this.hotelList;
-	}
-
-	public void setHotelList(final List<Hotel> hotelList) {
-		this.hotelList = hotelList;
 	}
 
 }

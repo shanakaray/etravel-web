@@ -17,6 +17,10 @@ import com.yd.etravel.util.StringUtils;
  */
 public class UserProfile implements IUserProfile, Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8725526197334299989L;
 	private String username;
 	private String firstname;
 	private String lastname;
@@ -46,13 +50,23 @@ public class UserProfile implements IUserProfile, Serializable {
 	}
 
 	@Override
-	public String getUsername() {
-		return this.username;
+	public String getAddress() {
+		return this.address;
 	}
 
 	@Override
-	public void setUsername(final String username) {
-		this.username = username;
+	public Map<Long, String> getAssignedHotels() {
+		return this.assignedHotels;
+	}
+
+	@Override
+	public String getContact() {
+		return this.contact;
+	}
+
+	@Override
+	public String getEmail() {
+		return this.email;
 	}
 
 	@Override
@@ -69,8 +83,13 @@ public class UserProfile implements IUserProfile, Serializable {
 	}
 
 	@Override
-	public void setFirstname(final String firstname) {
-		this.firstname = firstname;
+	public Set<String> getFunctionKeySet() {
+		return this.functionKeySet;
+	}
+
+	@Override
+	public Long getId() {
+		return this.id;
 	}
 
 	@Override
@@ -87,103 +106,8 @@ public class UserProfile implements IUserProfile, Serializable {
 	}
 
 	@Override
-	public void setLastname(final String lastname) {
-		this.lastname = lastname;
-	}
-
-	@Override
-	public Set<String> getRoles() {
-		return this.roles;
-	}
-
-	@Override
-	public void setRoles(final Set<String> roles) {
-		this.roles = roles;
-	}
-
-	@Override
-	public boolean hasRole(final String rolename) {
-		return this.roles.contains(rolename);
-	}
-
-	@Override
-	public boolean hasAllRoles(final Set<String> rolenames) {
-		return this.roles.containsAll(rolenames);
-	}
-
-	@Override
-	public String getContact() {
-		return this.contact;
-	}
-
-	@Override
-	public void setContact(final String contact) {
-		this.contact = contact;
-	}
-
-	@Override
-	public String getEmail() {
-		return this.email;
-	}
-
-	@Override
-	public void setEmail(final String email) {
-		this.email = email;
-	}
-
-	@Override
 	public String getNic() {
 		return this.nic;
-	}
-
-	@Override
-	public void setNic(final String nic) {
-		this.nic = nic;
-	}
-
-	@Override
-	public String getAddress() {
-		return this.address;
-	}
-
-	@Override
-	public void setAddress(final String address) {
-		this.address = address;
-	}
-
-	@Override
-	public Long getId() {
-		return this.id;
-	}
-
-	@Override
-	public void setId(final Long id) {
-		this.id = id;
-	}
-
-	@Override
-	public Set<String> getFunctionKeySet() {
-		return this.functionKeySet;
-	}
-
-	@Override
-	public void setFunctionKeySet(final Set<String> functionKeySet) {
-		this.functionKeySet = functionKeySet;
-	}
-
-	@Override
-	public boolean hasFunction(final String key) {
-		return this.functionKeySet.contains(key);
-	}
-
-	@Override
-	public String getPassword() {
-		return this.password;
-	}
-
-	@Override
-	public void setPassword(final String password) {
-		this.password = password;
 	}
 
 	@Override
@@ -198,13 +122,93 @@ public class UserProfile implements IUserProfile, Serializable {
 	}
 
 	@Override
-	public Map<Long, String> getAssignedHotels() {
-		return this.assignedHotels;
+	public String getPassword() {
+		return this.password;
+	}
+
+	@Override
+	public Set<String> getRoles() {
+		return this.roles;
+	}
+
+	@Override
+	public String getUsername() {
+		return this.username;
+	}
+
+	@Override
+	public boolean hasAllRoles(final Set<String> rolenames) {
+		return this.roles.containsAll(rolenames);
+	}
+
+	@Override
+	public boolean hasFunction(final String key) {
+		return this.functionKeySet.contains(key);
+	}
+
+	@Override
+	public boolean hasRole(final String rolename) {
+		return this.roles.contains(rolename);
 	}
 
 	@Override
 	public void putHotel(final Long id, final String name) {
 		this.assignedHotels.put(id, name);
+	}
+
+	@Override
+	public void setAddress(final String address) {
+		this.address = address;
+	}
+
+	@Override
+	public void setContact(final String contact) {
+		this.contact = contact;
+	}
+
+	@Override
+	public void setEmail(final String email) {
+		this.email = email;
+	}
+
+	@Override
+	public void setFirstname(final String firstname) {
+		this.firstname = firstname;
+	}
+
+	@Override
+	public void setFunctionKeySet(final Set<String> functionKeySet) {
+		this.functionKeySet = functionKeySet;
+	}
+
+	@Override
+	public void setId(final Long id) {
+		this.id = id;
+	}
+
+	@Override
+	public void setLastname(final String lastname) {
+		this.lastname = lastname;
+	}
+
+	@Override
+	public void setNic(final String nic) {
+		this.nic = nic;
+	}
+
+	@Override
+	public void setPassword(final String password) {
+		this.password = password;
+	}
+
+	@Override
+	public void setRoles(final Set<String> roles) {
+		this.roles = roles;
+	}
+
+	@Override
+	public void setUsername(final String username) {
+		this.username = username;
 	}
 
 }

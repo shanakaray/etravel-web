@@ -14,14 +14,14 @@ import com.yd.etravel.service.exception.ServiceException;
  */
 public interface IRoomTypeManager {
 
-	public RoomType save(final RoomType roomType) throws ServiceException;
-
-	public RoomType findRoomTypeById(Long id) throws ServiceException;
-
-	public List<RoomType> findAllRoomType() throws ServiceException;
-
 	public int deleteRoomType(Long id) throws ServiceException;
 
 	public List<RoomType> findAllActiveRoomType() throws ServiceException;
+
+	public List<RoomType> findAllRoomType() throws ServiceException;
+
+	public RoomType findRoomTypeById(Long id) throws ServiceException;
+
+	public RoomType save(final RoomType roomType) throws ServiceException;
 
 }

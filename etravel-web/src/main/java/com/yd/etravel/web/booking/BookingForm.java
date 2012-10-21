@@ -22,6 +22,10 @@ import com.yd.etravel.web.common.BaseForm;
  */
 public class BookingForm extends BaseForm {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6144823869574934966L;
 	private Long uid;
 	private String cusUsername;
 	private String cusPassword;
@@ -58,43 +62,8 @@ public class BookingForm extends BaseForm {
 	private String bookingId;
 	private String payed;
 
-	public boolean isRegisterd() {
-		return this.registerd;
-	}
-
-	public void setRegisterd(final boolean registerd) {
-		this.registerd = registerd;
-	}
-
-	public String getRUsername() {
-		return this.rUsername;
-	}
-
-	public void setRUsername(final String username) {
-		this.rUsername = username;
-	}
-
-	public String getRPassword() {
-		return this.rPassword;
-	}
-
-	public void setRPassword(final String password) {
-		this.rPassword = password;
-	}
-
-	/**
-	 * @return the totalPax
-	 */
-	public Integer getTotalPax() {
-		return this.totalPax;
-	}
-
-	/**
-	 * @param totalPax
-	 *            the totalPax to set
-	 */
-	public void setTotalPax(final Integer totalPax) {
-		this.totalPax = totalPax;
+	public String getAddress() {
+		return this.address;
 	}
 
 	/**
@@ -105,11 +74,29 @@ public class BookingForm extends BaseForm {
 	}
 
 	/**
-	 * @param adult
-	 *            the adult to set
+	 * @return the agentId
 	 */
-	public void setAdult(final Integer adult) {
-		this.adult = adult;
+	public Long getAgentId() {
+		return this.agentId;
+	}
+
+	/**
+	 * @return the allAgent
+	 */
+	public List<User> getAllAgent() {
+		return this.allAgent;
+	}
+
+	public List<User> getAllCustomers() {
+		return this.allCustomers;
+	}
+
+	public Long getBookedUserId() {
+		return this.bookedUserId;
+	}
+
+	public String getBookingId() {
+		return this.bookingId;
 	}
 
 	/**
@@ -120,11 +107,37 @@ public class BookingForm extends BaseForm {
 	}
 
 	/**
-	 * @param child
-	 *            the child to set
+	 * @return the comments
 	 */
-	public void setChild(final Integer child) {
-		this.child = child;
+	public String getComments() {
+		return this.comments;
+	}
+
+	public String getContact() {
+		return this.contact;
+	}
+
+	public String getCusPassword() {
+		return this.cusPassword;
+	}
+
+	public String getCusUsername() {
+		return this.cusUsername;
+	}
+
+	public String getEmail() {
+		return this.email;
+	}
+
+	public String getFirstName() {
+		return this.firstName;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public Long getId() {
+		return this.id;
 	}
 
 	/**
@@ -134,12 +147,12 @@ public class BookingForm extends BaseForm {
 		return this.infant;
 	}
 
-	/**
-	 * @param infant
-	 *            the infant to set
-	 */
-	public void setInfant(final Integer infant) {
-		this.infant = infant;
+	public String getLastName() {
+		return this.lastName;
+	}
+
+	public String getNic() {
+		return this.nic;
 	}
 
 	/**
@@ -149,42 +162,8 @@ public class BookingForm extends BaseForm {
 		return this.noOfRoom;
 	}
 
-	/**
-	 * @param noOfRoom
-	 *            the noOfRoom to set
-	 */
-	public void setNoOfRoom(final Integer noOfRoom) {
-		this.noOfRoom = noOfRoom;
-	}
-
-	/**
-	 * @return the comments
-	 */
-	public String getComments() {
-		return this.comments;
-	}
-
-	/**
-	 * @param comments
-	 *            the comments to set
-	 */
-	public void setComments(final String comments) {
-		this.comments = comments;
-	}
-
-	/**
-	 * @return the roomDTO
-	 */
-	public RoomDTO getRoomDTO() {
-		return this.roomDTO;
-	}
-
-	/**
-	 * @param roomDTO
-	 *            the roomDTO to set
-	 */
-	public void setRoomDTO(final RoomDTO roomDTO) {
-		this.roomDTO = roomDTO;
+	public String getPayed() {
+		return this.payed;
 	}
 
 	/**
@@ -194,12 +173,50 @@ public class BookingForm extends BaseForm {
 		return this.paymentMethodId;
 	}
 
+	public String getRepassword() {
+		return this.repassword;
+	}
+
 	/**
-	 * @param paymentMethodId
-	 *            the paymentMethodId to set
+	 * @return the roomDTO
 	 */
-	public void setPaymentMethodId(final String paymentMethodId) {
-		this.paymentMethodId = paymentMethodId;
+	public RoomDTO getRoomDTO() {
+		return this.roomDTO;
+	}
+
+	public String getRPassword() {
+		return this.rPassword;
+	}
+
+	public String getRUsername() {
+		return this.rUsername;
+	}
+
+	/**
+	 * @return the totalPax
+	 */
+	public Integer getTotalPax() {
+		return this.totalPax;
+	}
+
+	public Long getUid() {
+		return this.uid;
+	}
+
+	public boolean isGuest() {
+		return this.guest;
+	}
+
+	public boolean isNewCustomer() {
+		return this.newCustomer;
+	}
+
+	public boolean isRegisterd() {
+		return this.registerd;
+	}
+
+	public boolean isSingleNight() {
+		return this.singleNight;
 	}
 
 	/*
@@ -229,44 +246,172 @@ public class BookingForm extends BaseForm {
 		this.allCustomers = Collections.emptyList();
 	}
 
-	public List<User> getAllCustomers() {
-		return this.allCustomers;
+	public void setAddress(final String address) {
+		this.address = address;
+	}
+
+	/**
+	 * @param adult
+	 *            the adult to set
+	 */
+	public void setAdult(final Integer adult) {
+		this.adult = adult;
+	}
+
+	/**
+	 * @param agentId
+	 *            the agentId to set
+	 */
+	public void setAgentId(final Long agentId) {
+		this.agentId = agentId;
+	}
+
+	/**
+	 * @param allAgent
+	 *            the allAgent to set
+	 */
+	public void setAllAgent(final List<User> allAgent) {
+		this.allAgent = allAgent;
 	}
 
 	public void setAllCustomers(final List<User> allCustomers) {
 		this.allCustomers = allCustomers;
 	}
 
-	public Long getBookedUserId() {
-		return this.bookedUserId;
-	}
-
 	public void setBookedUserId(final Long bookedUserId) {
 		this.bookedUserId = bookedUserId;
-	}
-
-	public boolean isNewCustomer() {
-		return this.newCustomer;
-	}
-
-	public void setNewCustomer(final boolean newCustomer) {
-		this.newCustomer = newCustomer;
-	}
-
-	public String getBookingId() {
-		return this.bookingId;
 	}
 
 	public void setBookingId(final String bookingId) {
 		this.bookingId = bookingId;
 	}
 
-	public String getPayed() {
-		return this.payed;
+	/**
+	 * @param child
+	 *            the child to set
+	 */
+	public void setChild(final Integer child) {
+		this.child = child;
+	}
+
+	/**
+	 * @param comments
+	 *            the comments to set
+	 */
+	public void setComments(final String comments) {
+		this.comments = comments;
+	}
+
+	public void setContact(final String contact) {
+		this.contact = contact;
+	}
+
+	public void setCusPassword(final String cusPassword) {
+		this.cusPassword = cusPassword;
+	}
+
+	public void setCusUsername(final String cusUsername) {
+		this.cusUsername = cusUsername;
+	}
+
+	public void setEmail(final String email) {
+		this.email = email;
+	}
+
+	public void setFirstName(final String firstName) {
+		this.firstName = firstName;
+	}
+
+	public void setGuest(final boolean guest) {
+		this.guest = guest;
+	}
+
+	/**
+	 * @param id
+	 *            the id to set
+	 */
+	public void setId(final Long id) {
+		this.id = id;
+	}
+
+	/**
+	 * @param infant
+	 *            the infant to set
+	 */
+	public void setInfant(final Integer infant) {
+		this.infant = infant;
+	}
+
+	public void setLastName(final String lastName) {
+		this.lastName = lastName;
+	}
+
+	public void setNewCustomer(final boolean newCustomer) {
+		this.newCustomer = newCustomer;
+	}
+
+	public void setNic(final String nic) {
+		this.nic = nic;
+	}
+
+	/**
+	 * @param noOfRoom
+	 *            the noOfRoom to set
+	 */
+	public void setNoOfRoom(final Integer noOfRoom) {
+		this.noOfRoom = noOfRoom;
 	}
 
 	public void setPayed(final String payed) {
 		this.payed = payed;
+	}
+
+	/**
+	 * @param paymentMethodId
+	 *            the paymentMethodId to set
+	 */
+	public void setPaymentMethodId(final String paymentMethodId) {
+		this.paymentMethodId = paymentMethodId;
+	}
+
+	public void setRegisterd(final boolean registerd) {
+		this.registerd = registerd;
+	}
+
+	public void setRepassword(final String repassword) {
+		this.repassword = repassword;
+	}
+
+	/**
+	 * @param roomDTO
+	 *            the roomDTO to set
+	 */
+	public void setRoomDTO(final RoomDTO roomDTO) {
+		this.roomDTO = roomDTO;
+	}
+
+	public void setRPassword(final String password) {
+		this.rPassword = password;
+	}
+
+	public void setRUsername(final String username) {
+		this.rUsername = username;
+	}
+
+	public void setSingleNight(final boolean singleNight) {
+		this.singleNight = singleNight;
+	}
+
+	/**
+	 * @param totalPax
+	 *            the totalPax to set
+	 */
+	public void setTotalPax(final Integer totalPax) {
+		this.totalPax = totalPax;
+	}
+
+	public void setUid(final Long uid) {
+		this.uid = uid;
 	}
 
 	/*
@@ -282,7 +427,7 @@ public class BookingForm extends BaseForm {
 		// TODO Auto-generated method stub
 
 		final ActionErrors errors = new ActionErrors();
-		if (isGuest() && !isRegisterd() || isNewCustomer()) {
+		if ((isGuest() && !isRegisterd()) || isNewCustomer()) {
 			if (StringUtils.isEmpty(this.firstName)) {
 				addErrors(errors, "etravel.error.customer.firstname.required");
 			}
@@ -344,153 +489,12 @@ public class BookingForm extends BaseForm {
 			addErrors(errors, "etravel.error.booking.pax.count.zero");
 
 		}
-		if (this.paymentMethodId == null || this.paymentMethodId.equals("0")) {
+		if ((this.paymentMethodId == null) || this.paymentMethodId.equals("0")) {
 			addErrors(errors, "etravel.error.booking.select.payment.method");
 
 		}
 
 		return errors;
-	}
-
-	/**
-	 * @return the id
-	 */
-	public Long getId() {
-		return this.id;
-	}
-
-	/**
-	 * @param id
-	 *            the id to set
-	 */
-	public void setId(final Long id) {
-		this.id = id;
-	}
-
-	/**
-	 * @return the allAgent
-	 */
-	public List<User> getAllAgent() {
-		return this.allAgent;
-	}
-
-	/**
-	 * @param allAgent
-	 *            the allAgent to set
-	 */
-	public void setAllAgent(final List<User> allAgent) {
-		this.allAgent = allAgent;
-	}
-
-	/**
-	 * @return the agentId
-	 */
-	public Long getAgentId() {
-		return this.agentId;
-	}
-
-	/**
-	 * @param agentId
-	 *            the agentId to set
-	 */
-	public void setAgentId(final Long agentId) {
-		this.agentId = agentId;
-	}
-
-	public Long getUid() {
-		return this.uid;
-	}
-
-	public void setUid(final Long uid) {
-		this.uid = uid;
-	}
-
-	public String getCusUsername() {
-		return this.cusUsername;
-	}
-
-	public void setCusUsername(final String cusUsername) {
-		this.cusUsername = cusUsername;
-	}
-
-	public String getCusPassword() {
-		return this.cusPassword;
-	}
-
-	public void setCusPassword(final String cusPassword) {
-		this.cusPassword = cusPassword;
-	}
-
-	public String getRepassword() {
-		return this.repassword;
-	}
-
-	public void setRepassword(final String repassword) {
-		this.repassword = repassword;
-	}
-
-	public String getAddress() {
-		return this.address;
-	}
-
-	public void setAddress(final String address) {
-		this.address = address;
-	}
-
-	public String getContact() {
-		return this.contact;
-	}
-
-	public void setContact(final String contact) {
-		this.contact = contact;
-	}
-
-	public String getEmail() {
-		return this.email;
-	}
-
-	public void setEmail(final String email) {
-		this.email = email;
-	}
-
-	public String getFirstName() {
-		return this.firstName;
-	}
-
-	public void setFirstName(final String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return this.lastName;
-	}
-
-	public void setLastName(final String lastName) {
-		this.lastName = lastName;
-	}
-
-	public String getNic() {
-		return this.nic;
-	}
-
-	public void setNic(final String nic) {
-		this.nic = nic;
-	}
-
-	public boolean isGuest() {
-		return this.guest;
-	}
-
-	public void setGuest(final boolean guest) {
-		this.guest = guest;
-	}
-
-	public boolean isSingleNight() {
-		return this.singleNight;
-	}
-
-	public void setSingleNight(final boolean singleNight) {
-		this.singleNight = singleNight;
 	}
 
 }

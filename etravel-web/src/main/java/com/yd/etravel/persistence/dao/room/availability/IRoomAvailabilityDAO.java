@@ -17,8 +17,8 @@ import com.yd.etravel.service.exception.ServiceException;
  */
 public interface IRoomAvailabilityDAO extends IBaseDAO<RoomAvailability> {
 
-	public boolean isDataRangeValid(final Long hotelId, Date fromDate,
-			Date toDate) throws PersistenceException;
+	public List<RoomAvailabilityDTO> findAllRoomAvailabilityDTO(
+			RoomAvailabilityDTO dto) throws PersistenceException;
 
 	@Deprecated
 	/**
@@ -28,17 +28,11 @@ public interface IRoomAvailabilityDAO extends IBaseDAO<RoomAvailability> {
 	public List<RoomAvailability> findAllRoomAvailabilityWithRoomAndOccu(
 			Long hotelId) throws PersistenceException;
 
-	public List<RoomDailyAvailability> findAllRoomDailyAvailability(Long id)
-			throws PersistenceException;
-
-	public List<RoomAvailabilityDTO> findAllRoomAvailabilityDTO(
-			RoomAvailabilityDTO dto) throws PersistenceException;
-
 	public List<RoomDailyAvailability> findAllRoomDailyAvailability()
 			throws PersistenceException;
 
-	public RoomAvailability findRoomAvailabilityById(final Long id)
-			throws ServiceException, PersistenceException;
+	public List<RoomDailyAvailability> findAllRoomDailyAvailability(Long id)
+			throws PersistenceException;
 
 	public List<RoomDailyAvailability> findAllRoomDailyAvailabilityByRoomAvailabilityId(
 			Long id) throws PersistenceException;
@@ -49,10 +43,16 @@ public interface IRoomAvailabilityDAO extends IBaseDAO<RoomAvailability> {
 	public List<DailyAvailabilityDTO> findDailyAvailability(Long id)
 			throws PersistenceException;
 
-	public void update(RoomDailyAvailability roomDailyAvailability)
-			throws PersistenceException;
+	public RoomAvailability findRoomAvailabilityById(final Long id)
+			throws ServiceException, PersistenceException;
+
+	public boolean isDataRangeValid(final Long hotelId, Date fromDate,
+			Date toDate) throws PersistenceException;
 
 	public void save(RoomDailyAvailability dailyAvailability)
+			throws PersistenceException;
+
+	public void update(RoomDailyAvailability roomDailyAvailability)
 			throws PersistenceException;
 
 }

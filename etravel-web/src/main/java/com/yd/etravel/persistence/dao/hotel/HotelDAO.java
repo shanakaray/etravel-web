@@ -27,6 +27,37 @@ public class HotelDAO extends BaseDAO<Hotel> implements IHotelDAO {
 			" as hot inner join fetch hot.superUser WHERE hot.id=:pk");
 
 	@Override
+	public int deleteHotel(final Long id) throws PersistenceException {
+		try {
+			final Hotel hotel = (Hotel) getCurrentSession()
+					.get(Hotel.class, id);
+			hotel.getSuperUser().clear();
+			getCurrentSession().delete(hotel);
+			return 1;
+		} catch (final HibernateException e) {
+			throw new PersistenceException(e);
+		}
+	}
+
+	@Override
+	public Hotel findHotelWithUser(final Long id) throws PersistenceException {
+		try {
+			final Query query = getCurrentSession().createQuery(
+					FIND_HOTEL_WITH_USER.toString());
+			query.setParameter("pk", id);
+			final List<Hotel> list = query.list();
+			return list.isEmpty() ? null : list.get(0);
+		} catch (final HibernateException e) {
+			throw new PersistenceException(e);
+		}
+	}
+
+	@Override
+	protected Class getEntityClass() {
+		return Hotel.class;
+	}
+
+	@Override
 	public boolean isHotelNameExist(final String name, final Long id)
 			throws PersistenceException {
 		try {
@@ -49,37 +80,6 @@ public class HotelDAO extends BaseDAO<Hotel> implements IHotelDAO {
 		} catch (final HibernateException e) {
 			throw new PersistenceException(e);
 		}
-	}
-
-	@Override
-	public Hotel findHotelWithUser(final Long id) throws PersistenceException {
-		try {
-			final Query query = getCurrentSession().createQuery(
-					FIND_HOTEL_WITH_USER.toString());
-			query.setParameter("pk", id);
-			final List<Hotel> list = query.list();
-			return list.isEmpty() ? null : list.get(0);
-		} catch (final HibernateException e) {
-			throw new PersistenceException(e);
-		}
-	}
-
-	@Override
-	public int deleteHotel(final Long id) throws PersistenceException {
-		try {
-			final Hotel hotel = (Hotel) getCurrentSession()
-					.get(Hotel.class, id);
-			hotel.getSuperUser().clear();
-			getCurrentSession().delete(hotel);
-			return 1;
-		} catch (final HibernateException e) {
-			throw new PersistenceException(e);
-		}
-	}
-
-	@Override
-	protected Class getEntityClass() {
-		return Hotel.class;
 	}
 
 }

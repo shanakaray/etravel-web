@@ -20,6 +20,10 @@ import com.yd.etravel.web.common.BaseForm;
  * 
  */
 public class RoomTypeForm extends BaseForm {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9165463381263646588L;
 	private Long id;
 	private String code;
 	private String name;
@@ -29,78 +33,10 @@ public class RoomTypeForm extends BaseForm {
 	private int maxPassengers;
 
 	/**
-	 * @return the id
-	 */
-	public Long getId() {
-		return this.id;
-	}
-
-	/**
-	 * @param id
-	 *            the id to set
-	 */
-	public void setId(final Long id) {
-		this.id = id;
-	}
-
-	/**
-	 * @return the code
-	 */
-	public String getCode() {
-		return this.code;
-	}
-
-	/**
-	 * @param code
-	 *            the code to set
-	 */
-	public void setCode(final String code) {
-		this.code = code;
-	}
-
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return this.name;
-	}
-
-	/**
-	 * @param name
-	 *            the name to set
-	 */
-	public void setName(final String name) {
-		this.name = name;
-	}
-
-	/**
-	 * @return the comments
-	 */
-	public String getComments() {
-		return this.comments;
-	}
-
-	/**
-	 * @param comments
-	 *            the comments to set
-	 */
-	public void setComments(final String comments) {
-		this.comments = comments;
-	}
-
-	/**
 	 * @return the active
 	 */
 	public boolean getActive() {
 		return this.active;
-	}
-
-	/**
-	 * @param active
-	 *            the active to set
-	 */
-	public void setActive(final boolean active) {
-		this.active = active;
 	}
 
 	/**
@@ -111,19 +47,35 @@ public class RoomTypeForm extends BaseForm {
 	}
 
 	/**
-	 * @param allRoomType
-	 *            the allRoomType to set
+	 * @return the code
 	 */
-	public void setAllRoomType(final List<RoomType> allRoomType) {
-		this.allRoomType = allRoomType;
+	public String getCode() {
+		return this.code;
+	}
+
+	/**
+	 * @return the comments
+	 */
+	public String getComments() {
+		return this.comments;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public Long getId() {
+		return this.id;
 	}
 
 	public int getMaxPassengers() {
 		return this.maxPassengers;
 	}
 
-	public void setMaxPassengers(final int maxPassengers) {
-		this.maxPassengers = maxPassengers;
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return this.name;
 	}
 
 	/*
@@ -143,6 +95,58 @@ public class RoomTypeForm extends BaseForm {
 		this.id = 0L;
 		this.allRoomType = Collections.emptyList();
 		this.maxPassengers = 0;
+	}
+
+	/**
+	 * @param active
+	 *            the active to set
+	 */
+	public void setActive(final boolean active) {
+		this.active = active;
+	}
+
+	/**
+	 * @param allRoomType
+	 *            the allRoomType to set
+	 */
+	public void setAllRoomType(final List<RoomType> allRoomType) {
+		this.allRoomType = allRoomType;
+	}
+
+	/**
+	 * @param code
+	 *            the code to set
+	 */
+	public void setCode(final String code) {
+		this.code = code;
+	}
+
+	/**
+	 * @param comments
+	 *            the comments to set
+	 */
+	public void setComments(final String comments) {
+		this.comments = comments;
+	}
+
+	/**
+	 * @param id
+	 *            the id to set
+	 */
+	public void setId(final Long id) {
+		this.id = id;
+	}
+
+	public void setMaxPassengers(final int maxPassengers) {
+		this.maxPassengers = maxPassengers;
+	}
+
+	/**
+	 * @param name
+	 *            the name to set
+	 */
+	public void setName(final String name) {
+		this.name = name;
 	}
 
 	/*

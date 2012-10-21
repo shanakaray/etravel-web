@@ -21,6 +21,10 @@ import com.yd.etravel.web.common.BaseForm;
  * 
  */
 public class RoleForm extends BaseForm {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2691494386815051316L;
 	private Long id;
 	private String name;
 	private String discription;
@@ -34,44 +38,24 @@ public class RoleForm extends BaseForm {
 
 	}
 
-	public String getName() {
-		return this.name;
-	}
-
-	public void setName(final String name) {
-		this.name = name;
-	}
-
 	public List<Role> getAllRoles() {
 		return this.allRoles;
-	}
-
-	public void setAllRoles(final List<Role> allRoles) {
-		this.allRoles = allRoles;
-	}
-
-	public boolean isActive() {
-		return this.active;
-	}
-
-	public void setActive(final boolean active) {
-		this.active = active;
 	}
 
 	public String getDiscription() {
 		return this.discription;
 	}
 
-	public void setDiscription(final String discription) {
-		this.discription = discription;
-	}
-
 	public Long getId() {
 		return this.id;
 	}
 
-	public void setId(final Long id) {
-		this.id = id;
+	public String getName() {
+		return this.name;
+	}
+
+	public boolean isActive() {
+		return this.active;
 	}
 
 	/*
@@ -89,6 +73,26 @@ public class RoleForm extends BaseForm {
 		this.active = false;
 		this.allRoles = Collections.emptyList();
 		this.id = null;
+	}
+
+	public void setActive(final boolean active) {
+		this.active = active;
+	}
+
+	public void setAllRoles(final List<Role> allRoles) {
+		this.allRoles = allRoles;
+	}
+
+	public void setDiscription(final String discription) {
+		this.discription = discription;
+	}
+
+	public void setId(final Long id) {
+		this.id = id;
+	}
+
+	public void setName(final String name) {
+		this.name = name;
 	}
 
 	/*

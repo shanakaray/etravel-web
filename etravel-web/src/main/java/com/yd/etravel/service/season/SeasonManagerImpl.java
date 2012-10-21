@@ -28,62 +28,17 @@ public class SeasonManagerImpl implements ISeasonManager {
 	@Autowired(required = true)
 	private IRoomDAO roomDAO;
 
-	public void setSeasonDAO(final ISeasonDAO seasonDAO) {
-		this.seasonDAO = seasonDAO;
-	}
-
-	public void setHotelDAO(final IHotelDAO hotelDAO) {
-		this.hotelDAO = hotelDAO;
-	}
-
-	public IRoomDAO getRoomDAO() {
-		return this.roomDAO;
-	}
-
-	public void setRoomDAO(final IRoomDAO roomDAO) {
-		this.roomDAO = roomDAO;
-	}
-
-	@Transactional(propagation = Propagation.REQUIRED)
+	@Transactional(propagation = Propagation.SUPPORTS)
 	@Override
-	public Season save(final Season season) throws ServiceException {
+	public int deleteRoomSeasonalRate(final Long id) throws ServiceException {
+		int flag = 0;
 		try {
-			if (season.getId() == null) {
-				if (this.seasonDAO.isSeasonNameExist(season.getName())) {
-					throw new ServiceException(
-							ValidationHelper
-									.getMessageHolder("etravel.seasonName.exist"));
-				} else if (!this.seasonDAO.isDataRangeValid(season.getHotel()
-						.getId(), season.getFromDate(), season.getToDate())) {
-					throw new ServiceException(
-							ValidationHelper
-									.getMessageHolder("etravel.season.dateRange.valid"));
-
-				}
-			}
-
-			final Hotel hotel = this.hotelDAO.findById(season.getHotel()
-					.getId());
-
-			season.setHotel(hotel);
-			this.seasonDAO.saveOrUpdate(season);
+			flag = this.seasonDAO.deleteAny(id);
 
 		} catch (final PersistenceException e) {
 			throw new ServiceException(null, e);
 		}
-		return season;
-	}
-
-	@Override
-	public Season findSeasonById(final Long id) throws ServiceException {
-		Season season = null;
-		try {
-			season = this.seasonDAO.findById(id);
-			season.toString();
-		} catch (final PersistenceException e) {
-			throw new ServiceException(null, e);
-		}
-		return season;
+		return flag;
 	}
 
 	@Transactional(propagation = Propagation.SUPPORTS)
@@ -97,6 +52,38 @@ public class SeasonManagerImpl implements ISeasonManager {
 			throw new ServiceException(null, e);
 		}
 		return flag;
+	}
+
+	@Override
+	public List<Season> findAllActiveSeason() throws ServiceException {
+		try {
+			return this.seasonDAO.findAllActive();
+		} catch (final PersistenceException e) {
+			throw new ServiceException(null, e);
+		}
+	}
+
+	@Override
+	public List<RoomSeasonalRate> findAllRoomSeasonalRate()
+			throws ServiceException {
+		try {
+			return this.seasonDAO.findAllRoomSeasonalRateList();
+
+		} catch (final PersistenceException e) {
+			throw new ServiceException(null, e);
+		}
+	}
+
+	@Override
+	public List<RoomSeasonalRate> findAllRoomSeasonalRateWithRoomAndSeason(
+			final Long hotelId) throws ServiceException {
+		try {
+			return this.seasonDAO
+					.findAllRoomSeasonalRateWithRoomAndSeason(hotelId);
+
+		} catch (final PersistenceException e) {
+			throw new ServiceException(null, e);
+		}
 	}
 
 	@Override
@@ -119,12 +106,42 @@ public class SeasonManagerImpl implements ISeasonManager {
 	}
 
 	@Override
-	public List<Season> findAllActiveSeason() throws ServiceException {
+	public RoomSeasonalRate findRoomSeasonalRateById(final Long id)
+			throws ServiceException {
+		RoomSeasonalRate roomSeasonalRate = null;
 		try {
-			return this.seasonDAO.findAllActive();
+			roomSeasonalRate = this.seasonDAO.findSeasonRate(id);
 		} catch (final PersistenceException e) {
 			throw new ServiceException(null, e);
 		}
+		return roomSeasonalRate;
+	}
+
+	@Override
+	public List<Season> findSeasonByHotel(final Long hotelId)
+			throws ServiceException {
+		try {
+			return this.seasonDAO.findSeasonByHotel(hotelId);
+
+		} catch (final PersistenceException e) {
+			throw new ServiceException(null, e);
+		}
+	}
+
+	@Override
+	public Season findSeasonById(final Long id) throws ServiceException {
+		Season season = null;
+		try {
+			season = this.seasonDAO.findById(id);
+			season.toString();
+		} catch (final PersistenceException e) {
+			throw new ServiceException(null, e);
+		}
+		return season;
+	}
+
+	public IRoomDAO getRoomDAO() {
+		return this.roomDAO;
 	}
 
 	@Transactional(propagation = Propagation.SUPPORTS)
@@ -164,62 +181,45 @@ public class SeasonManagerImpl implements ISeasonManager {
 		return roomSeasonalRate;
 	}
 
+	@Transactional(propagation = Propagation.REQUIRED)
 	@Override
-	public RoomSeasonalRate findRoomSeasonalRateById(final Long id)
-			throws ServiceException {
-		RoomSeasonalRate roomSeasonalRate = null;
+	public Season save(final Season season) throws ServiceException {
 		try {
-			roomSeasonalRate = this.seasonDAO.findSeasonRate(id);
+			if (season.getId() == null) {
+				if (this.seasonDAO.isSeasonNameExist(season.getName())) {
+					throw new ServiceException(
+							ValidationHelper
+									.getMessageHolder("etravel.seasonName.exist"));
+				} else if (!this.seasonDAO.isDataRangeValid(season.getHotel()
+						.getId(), season.getFromDate(), season.getToDate())) {
+					throw new ServiceException(
+							ValidationHelper
+									.getMessageHolder("etravel.season.dateRange.valid"));
+
+				}
+			}
+
+			final Hotel hotel = this.hotelDAO.findById(season.getHotel()
+					.getId());
+
+			season.setHotel(hotel);
+			this.seasonDAO.saveOrUpdate(season);
+
 		} catch (final PersistenceException e) {
 			throw new ServiceException(null, e);
 		}
-		return roomSeasonalRate;
+		return season;
 	}
 
-	@Transactional(propagation = Propagation.SUPPORTS)
-	@Override
-	public int deleteRoomSeasonalRate(final Long id) throws ServiceException {
-		int flag = 0;
-		try {
-			flag = this.seasonDAO.deleteAny(id);
-
-		} catch (final PersistenceException e) {
-			throw new ServiceException(null, e);
-		}
-		return flag;
+	public void setHotelDAO(final IHotelDAO hotelDAO) {
+		this.hotelDAO = hotelDAO;
 	}
 
-	@Override
-	public List<RoomSeasonalRate> findAllRoomSeasonalRate()
-			throws ServiceException {
-		try {
-			return this.seasonDAO.findAllRoomSeasonalRateList();
-
-		} catch (final PersistenceException e) {
-			throw new ServiceException(null, e);
-		}
+	public void setRoomDAO(final IRoomDAO roomDAO) {
+		this.roomDAO = roomDAO;
 	}
 
-	@Override
-	public List<RoomSeasonalRate> findAllRoomSeasonalRateWithRoomAndSeason(
-			final Long hotelId) throws ServiceException {
-		try {
-			return this.seasonDAO
-					.findAllRoomSeasonalRateWithRoomAndSeason(hotelId);
-
-		} catch (final PersistenceException e) {
-			throw new ServiceException(null, e);
-		}
-	}
-
-	@Override
-	public List<Season> findSeasonByHotel(final Long hotelId)
-			throws ServiceException {
-		try {
-			return this.seasonDAO.findSeasonByHotel(hotelId);
-
-		} catch (final PersistenceException e) {
-			throw new ServiceException(null, e);
-		}
+	public void setSeasonDAO(final ISeasonDAO seasonDAO) {
+		this.seasonDAO = seasonDAO;
 	}
 }

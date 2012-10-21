@@ -19,16 +19,16 @@ public class UIMesssage {
 			this.arguments = arguments;
 		}
 
-		public String getKey() {
-			return this.key;
+		public Object[] getArguments() {
+			return this.arguments;
 		}
 
 		public String getBundle() {
 			return this.bundle;
 		}
 
-		public Object[] getArguments() {
-			return this.arguments;
+		public String getKey() {
+			return this.key;
 		}
 	}
 
@@ -52,16 +52,18 @@ public class UIMesssage {
 		}
 	}
 
-	public boolean hasInformations() {
-		return getInformations().size() > 0;
-	}
-
-	public boolean hasErrors() {
-		return getErrors().size() > 0;
-	}
-
 	public void addError(final Message message, final int index) {
 		this.errors.add(index, message);
+	}
+
+	public void addError(final String key, final String bundle,
+			final Object arguments[]) {
+		this.errors.add(new Message(key, bundle, arguments));
+	}
+
+	public void addError(final String key, final String bundle,
+			final Object arguments[], final int index) {
+		this.errors.add(index, new Message(key, bundle, arguments));
 	}
 
 	public void addInformation(final Message message, final int index) {
@@ -78,22 +80,6 @@ public class UIMesssage {
 		this.informations.add(index, new Message(key, bundle, arguments));
 	}
 
-	public void addError(final String key, final String bundle,
-			final Object arguments[]) {
-		this.errors.add(new Message(key, bundle, arguments));
-	}
-
-	public void addError(final String key, final String bundle,
-			final Object arguments[], final int index) {
-		this.errors.add(index, new Message(key, bundle, arguments));
-	}
-
-	public UIMesssage merge(final UIMesssage uiMesssage) {
-		getErrors().addAll(uiMesssage.getErrors());
-		getInformations().addAll(uiMesssage.getInformations());
-		return this;
-	}
-
 	public List<Message> getErrors() {
 		if (this.errors == null) {
 			this.errors = new ArrayList<Message>();
@@ -106,6 +92,20 @@ public class UIMesssage {
 			this.informations = new ArrayList<Message>();
 		}
 		return this.informations;
+	}
+
+	public boolean hasErrors() {
+		return getErrors().size() > 0;
+	}
+
+	public boolean hasInformations() {
+		return getInformations().size() > 0;
+	}
+
+	public UIMesssage merge(final UIMesssage uiMesssage) {
+		getErrors().addAll(uiMesssage.getErrors());
+		getInformations().addAll(uiMesssage.getInformations());
+		return this;
 	}
 
 }

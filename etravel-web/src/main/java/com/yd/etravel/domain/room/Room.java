@@ -13,6 +13,11 @@ import com.yd.etravel.domain.season.RoomSeasonalRate;
 @Entity
 @Table(name = "T_ROOM")
 public class Room extends BaseObject {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1301309249472280953L;
+
 	@Column
 	private int noOfRoom;
 
@@ -25,36 +30,36 @@ public class Room extends BaseObject {
 	@ManyToOne
 	private RoomSeasonalRate roomSeasonalRate;
 
-	public RoomType getRoomType() {
-		return this.roomType;
-	}
-
-	public void setRoomType(final RoomType roomType) {
-		this.roomType = roomType;
+	public Hotel getHotel() {
+		return this.hotel;
 	}
 
 	public int getNoOfRoom() {
 		return this.noOfRoom;
 	}
 
-	public void setNoOfRoom(final int noOfRoom) {
-		this.noOfRoom = noOfRoom;
+	public RoomSeasonalRate getRoomSeasonalRate() {
+		return this.roomSeasonalRate;
 	}
 
-	public Hotel getHotel() {
-		return this.hotel;
+	public RoomType getRoomType() {
+		return this.roomType;
 	}
 
 	public void setHotel(final Hotel hotel) {
 		this.hotel = hotel;
 	}
 
-	public RoomSeasonalRate getRoomSeasonalRate() {
-		return this.roomSeasonalRate;
+	public void setNoOfRoom(final int noOfRoom) {
+		this.noOfRoom = noOfRoom;
 	}
 
 	public void setRoomSeasonalRate(final RoomSeasonalRate roomSeasonalRate) {
 		this.roomSeasonalRate = roomSeasonalRate;
+	}
+
+	public void setRoomType(final RoomType roomType) {
+		this.roomType = roomType;
 	}
 
 }

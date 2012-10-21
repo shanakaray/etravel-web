@@ -72,128 +72,28 @@ public class Booking extends BaseObject {
 		super.setCode(code);
 	}
 
-	public User getBookingUser() {
-		return this.bookingUser;
-	}
-
-	/**
-	 * @param user
-	 *            the user to set
-	 */
-	public void setBookingUser(final User bookingUser) {
-		this.bookingUser = bookingUser;
-	}
-
-	public Date getDepatureDate() {
-		return this.depatureDate;
-	}
-
-	/**
-	 * @param depatureDate
-	 *            the depatureDate to set
-	 */
-	public void setDepatureDate(final Date depatureDate) {
-		this.depatureDate = depatureDate;
+	public User getAgent() {
+		return this.agent;
 	}
 
 	public Date getBookingDate() {
 		return this.bookingDate;
 	}
 
-	public void setBookingDate(final Date bookingDate) {
-		this.bookingDate = bookingDate;
-	}
-
-	public BigDecimal getTotalPrice() {
-		return this.totalPrice;
-	}
-
-	public void setTotalPrice(final BigDecimal totalPrice) {
-		this.totalPrice = totalPrice;
-	}
-
-	public BigDecimal getTotalCost() {
-		return this.totalCost;
-	}
-
-	/**
-	 * @param totalCost
-	 *            the totalCost to set
-	 */
-	public void setTotalCost(final BigDecimal totalCost) {
-		this.totalCost = totalCost;
-	}
-
-	public Date getPayDueDate() {
-		return this.payDueDate;
-	}
-
-	/**
-	 * @param payDueDate
-	 *            the payDueDate to set
-	 */
-	public void setPayDueDate(final Date payDueDate) {
-		this.payDueDate = payDueDate;
+	public User getBookingUser() {
+		return this.bookingUser;
 	}
 
 	public Date getCancelDate() {
 		return this.cancelDate;
 	}
 
-	/**
-	 * @param cancelDate
-	 *            the cancelDate to set
-	 */
-	public void setCancelDate(final Date cancelDate) {
-		this.cancelDate = cancelDate;
+	public Date getDepatureDate() {
+		return this.depatureDate;
 	}
 
 	public Date getExpireDate() {
 		return this.expireDate;
-	}
-
-	public void setExpireDate(final Date expireDate) {
-		this.expireDate = expireDate;
-	}
-
-	public String getStatusDes() {
-		return this.statusDes;
-	}
-
-	public void setStatusDes(final String statusDes) {
-		this.statusDes = statusDes;
-	}
-
-	public String getPaymentMethod() {
-		return this.paymentMethod;
-	}
-
-	public void setPaymentMethod(final String paymentMethod) {
-		this.paymentMethod = paymentMethod;
-	}
-
-	public BigDecimal getRoomPrice() {
-		return this.roomPrice;
-	}
-
-	/**
-	 * @param roomPrice
-	 *            the roomPrice to set
-	 */
-	public void setRoomPrice(final BigDecimal roomPrice) {
-		this.roomPrice = roomPrice;
-	}
-
-	public User getAgent() {
-		return this.agent;
-	}
-
-	/**
-	 * @param agent
-	 *            the agent to set
-	 */
-	public void setAgent(final User agent) {
-		this.agent = agent;
 	}
 
 	public BigDecimal getPaidAmount() {
@@ -205,24 +105,124 @@ public class Booking extends BaseObject {
 				.intValue());
 	}
 
-	public void setPaidAmount(final BigDecimal paidAmount) {
-		this.paidAmount = paidAmount;
+	public Date getPayDueDate() {
+		return this.payDueDate;
 	}
 
-	public void setPay(final BigDecimal paidAmount) {
-		if (this.paidAmount == null || this.paidAmount.doubleValue() < 0) {
-			this.paidAmount = paidAmount;
-		} else {
-			this.paidAmount.add(paidAmount);
-		}
+	public String getPaymentMethod() {
+		return this.paymentMethod;
+	}
+
+	public BigDecimal getRoomPrice() {
+		return this.roomPrice;
+	}
+
+	public String getStatusDes() {
+		return this.statusDes;
+	}
+
+	public BigDecimal getTotalCost() {
+		return this.totalCost;
+	}
+
+	public BigDecimal getTotalPrice() {
+		return this.totalPrice;
 	}
 
 	public boolean isSingleNight() {
 		return this.singleNight;
 	}
 
+	/**
+	 * @param agent
+	 *            the agent to set
+	 */
+	public void setAgent(final User agent) {
+		this.agent = agent;
+	}
+
+	public void setBookingDate(final Date bookingDate) {
+		this.bookingDate = bookingDate;
+	}
+
+	/**
+	 * @param user
+	 *            the user to set
+	 */
+	public void setBookingUser(final User bookingUser) {
+		this.bookingUser = bookingUser;
+	}
+
+	/**
+	 * @param cancelDate
+	 *            the cancelDate to set
+	 */
+	public void setCancelDate(final Date cancelDate) {
+		this.cancelDate = cancelDate;
+	}
+
+	/**
+	 * @param depatureDate
+	 *            the depatureDate to set
+	 */
+	public void setDepatureDate(final Date depatureDate) {
+		this.depatureDate = depatureDate;
+	}
+
+	public void setExpireDate(final Date expireDate) {
+		this.expireDate = expireDate;
+	}
+
+	public void setPaidAmount(final BigDecimal paidAmount) {
+		this.paidAmount = paidAmount;
+	}
+
+	public void setPay(final BigDecimal paidAmount) {
+		if ((this.paidAmount == null) || (this.paidAmount.doubleValue() < 0)) {
+			this.paidAmount = paidAmount;
+		} else {
+			this.paidAmount.add(paidAmount);
+		}
+	}
+
+	/**
+	 * @param payDueDate
+	 *            the payDueDate to set
+	 */
+	public void setPayDueDate(final Date payDueDate) {
+		this.payDueDate = payDueDate;
+	}
+
+	public void setPaymentMethod(final String paymentMethod) {
+		this.paymentMethod = paymentMethod;
+	}
+
+	/**
+	 * @param roomPrice
+	 *            the roomPrice to set
+	 */
+	public void setRoomPrice(final BigDecimal roomPrice) {
+		this.roomPrice = roomPrice;
+	}
+
 	public void setSingleNight(final boolean singleNight) {
 		this.singleNight = singleNight;
+	}
+
+	public void setStatusDes(final String statusDes) {
+		this.statusDes = statusDes;
+	}
+
+	/**
+	 * @param totalCost
+	 *            the totalCost to set
+	 */
+	public void setTotalCost(final BigDecimal totalCost) {
+		this.totalCost = totalCost;
+	}
+
+	public void setTotalPrice(final BigDecimal totalPrice) {
+		this.totalPrice = totalPrice;
 	}
 
 }

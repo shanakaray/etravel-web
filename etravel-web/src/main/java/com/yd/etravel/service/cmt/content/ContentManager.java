@@ -22,17 +22,6 @@ public class ContentManager implements IContentManager {
 	private IImageDAO imageDao;
 
 	@Override
-	@Transactional(propagation = Propagation.REQUIRED)
-	public Image saveImage(final Image image) throws ServiceException {
-		try {
-			this.imageDao.saveOrUpdate(image);
-		} catch (final PersistenceException exception) {
-			throw new ServiceException(null, exception);
-		}
-		return image;
-	}
-
-	@Override
 	@Transactional(propagation = Propagation.NOT_SUPPORTED)
 	public Image getImage(final Long id) throws ServiceException {
 		Image image = null;
@@ -71,6 +60,17 @@ public class ContentManager implements IContentManager {
 			throw new ServiceException(null, exception);
 		}
 
+	}
+
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED)
+	public Image saveImage(final Image image) throws ServiceException {
+		try {
+			this.imageDao.saveOrUpdate(image);
+		} catch (final PersistenceException exception) {
+			throw new ServiceException(null, exception);
+		}
+		return image;
 	}
 
 }

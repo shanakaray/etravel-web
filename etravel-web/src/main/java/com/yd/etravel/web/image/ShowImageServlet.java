@@ -20,6 +20,11 @@ import com.yd.etravel.util.ServiceHelper;
  */
 public class ShowImageServlet extends javax.servlet.http.HttpServlet {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2661861809147878385L;
+
 	@Override
 	protected void doGet(final HttpServletRequest req,
 			final HttpServletResponse response) throws ServletException,

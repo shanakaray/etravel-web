@@ -34,60 +34,60 @@ public class Image extends BaseObject {
 	@Column
 	private int sequence;
 
-	public int getSequence() {
-		return this.sequence;
-	}
-
-	public void setSequence(final int sequence) {
-		this.sequence = sequence;
-	}
-
-	public byte[] getSource() {
-		return this.source;
-	}
-
-	public void setSource(final byte[] source) {
-		this.source = source;
-	}
-
-	public Long getPk() {
-		return this.pk;
-	}
-
-	public void setPk(final Long pk) {
-		this.pk = pk;
+	public File getFile() {
+		return this.file;
 	}
 
 	public String getObject() {
 		return this.object;
 	}
 
-	public void setObject(final String object) {
-		this.object = object;
+	public Long getPk() {
+		return this.pk;
+	}
+
+	public int getSequence() {
+		return this.sequence;
+	}
+
+	public byte[] getSource() {
+		return this.source;
 	}
 
 	public String getTitle() {
 		return this.title;
 	}
 
-	public void setTitle(final String title) {
-		this.title = title;
-	}
-
 	public String getType() {
 		return this.type;
 	}
 
-	public void setType(final String type) {
-		this.type = type;
-	}
-
-	public File getFile() {
-		return this.file;
-	}
-
 	public void setFile(final File file) {
 		this.file = file;
+	}
+
+	public void setObject(final String object) {
+		this.object = object;
+	}
+
+	public void setPk(final Long pk) {
+		this.pk = pk;
+	}
+
+	public void setSequence(final int sequence) {
+		this.sequence = sequence;
+	}
+
+	public void setSource(final byte[] source) {
+		this.source = source;
+	}
+
+	public void setTitle(final String title) {
+		this.title = title;
+	}
+
+	public void setType(final String type) {
+		this.type = type;
 	}
 
 }

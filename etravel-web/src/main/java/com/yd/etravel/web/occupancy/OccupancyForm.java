@@ -22,6 +22,10 @@ import com.yd.etravel.web.common.BaseForm;
  */
 public class OccupancyForm extends BaseForm {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5617232549682739959L;
 	private String name;
 	private Long id;
 	private String comments;
@@ -35,33 +39,10 @@ public class OccupancyForm extends BaseForm {
 	private Long[] roomTypeids;
 
 	/**
-	 * @return the id
+	 * @return the active
 	 */
-	public Long getId() {
-		return this.id;
-	}
-
-	/**
-	 * @param id
-	 *            the id to set
-	 */
-	public void setId(final Long id) {
-		this.id = id;
-	}
-
-	/**
-	 * @return the comments
-	 */
-	public String getComments() {
-		return this.comments;
-	}
-
-	/**
-	 * @param comments
-	 *            the comments to set
-	 */
-	public void setComments(final String comments) {
-		this.comments = comments;
+	public boolean getActive() {
+		return this.active;
 	}
 
 	/**
@@ -72,86 +53,10 @@ public class OccupancyForm extends BaseForm {
 	}
 
 	/**
-	 * @param adult
-	 *            the adult to set
-	 */
-	public void setAdult(final int adult) {
-		this.adult = adult;
-	}
-
-	/**
-	 * @return the child
-	 */
-	public int getChild() {
-		return this.child;
-	}
-
-	/**
-	 * @param child
-	 *            the child to set
-	 */
-	public void setChild(final int child) {
-		this.child = child;
-	}
-
-	/**
-	 * @return the infant
-	 */
-	public int getInfant() {
-		return this.infant;
-	}
-
-	/**
-	 * @param infant
-	 *            the infant to set
-	 */
-	public void setInfant(final int infant) {
-		this.infant = infant;
-	}
-
-	/**
-	 * @return the totalPax
-	 */
-	public int getTotalPax() {
-		return this.totalPax;
-	}
-
-	/**
-	 * @param totalPax
-	 *            the totalPax to set
-	 */
-	public void setTotalPax(final int totalPax) {
-		this.totalPax = totalPax;
-	}
-
-	/**
-	 * @return the active
-	 */
-	public boolean getActive() {
-		return this.active;
-	}
-
-	/**
-	 * @param active
-	 *            the active to set
-	 */
-	public void setActive(final boolean active) {
-		this.active = active;
-	}
-
-	/**
 	 * @return the allOccupancy
 	 */
 	public List<Occupancy> getAllOccupancy() {
 		return this.allOccupancy;
-	}
-
-	/**
-	 * @param allOccupancy
-	 *            the allOccupancy to set
-	 */
-	public void setAllOccupancy(final List<Occupancy> allOccupancy) {
-		this.allOccupancy = allOccupancy;
 	}
 
 	/**
@@ -162,26 +67,31 @@ public class OccupancyForm extends BaseForm {
 	}
 
 	/**
-	 * @param allRoomType
-	 *            the allRoomType to set
+	 * @return the child
 	 */
-	public void setAllRoomType(final List<RoomType> allRoomType) {
-		this.allRoomType = allRoomType;
+	public int getChild() {
+		return this.child;
 	}
 
 	/**
-	 * @return the roomTypeids
+	 * @return the comments
 	 */
-	public Long[] getRoomTypeids() {
-		return this.roomTypeids;
+	public String getComments() {
+		return this.comments;
 	}
 
 	/**
-	 * @param roomTypeids
-	 *            the roomTypeids to set
+	 * @return the id
 	 */
-	public void setRoomTypeids(final Long[] roomTypeids) {
-		this.roomTypeids = roomTypeids;
+	public Long getId() {
+		return this.id;
+	}
+
+	/**
+	 * @return the infant
+	 */
+	public int getInfant() {
+		return this.infant;
 	}
 
 	/**
@@ -192,11 +102,17 @@ public class OccupancyForm extends BaseForm {
 	}
 
 	/**
-	 * @param name
-	 *            the name to set
+	 * @return the roomTypeids
 	 */
-	public void setName(final String name) {
-		this.name = name;
+	public Long[] getRoomTypeids() {
+		return this.roomTypeids;
+	}
+
+	/**
+	 * @return the totalPax
+	 */
+	public int getTotalPax() {
+		return this.totalPax;
 	}
 
 	/*
@@ -222,6 +138,94 @@ public class OccupancyForm extends BaseForm {
 		this.allOccupancy = Collections.emptyList();
 		this.allRoomType = Collections.emptyList();
 
+	}
+
+	/**
+	 * @param active
+	 *            the active to set
+	 */
+	public void setActive(final boolean active) {
+		this.active = active;
+	}
+
+	/**
+	 * @param adult
+	 *            the adult to set
+	 */
+	public void setAdult(final int adult) {
+		this.adult = adult;
+	}
+
+	/**
+	 * @param allOccupancy
+	 *            the allOccupancy to set
+	 */
+	public void setAllOccupancy(final List<Occupancy> allOccupancy) {
+		this.allOccupancy = allOccupancy;
+	}
+
+	/**
+	 * @param allRoomType
+	 *            the allRoomType to set
+	 */
+	public void setAllRoomType(final List<RoomType> allRoomType) {
+		this.allRoomType = allRoomType;
+	}
+
+	/**
+	 * @param child
+	 *            the child to set
+	 */
+	public void setChild(final int child) {
+		this.child = child;
+	}
+
+	/**
+	 * @param comments
+	 *            the comments to set
+	 */
+	public void setComments(final String comments) {
+		this.comments = comments;
+	}
+
+	/**
+	 * @param id
+	 *            the id to set
+	 */
+	public void setId(final Long id) {
+		this.id = id;
+	}
+
+	/**
+	 * @param infant
+	 *            the infant to set
+	 */
+	public void setInfant(final int infant) {
+		this.infant = infant;
+	}
+
+	/**
+	 * @param name
+	 *            the name to set
+	 */
+	public void setName(final String name) {
+		this.name = name;
+	}
+
+	/**
+	 * @param roomTypeids
+	 *            the roomTypeids to set
+	 */
+	public void setRoomTypeids(final Long[] roomTypeids) {
+		this.roomTypeids = roomTypeids;
+	}
+
+	/**
+	 * @param totalPax
+	 *            the totalPax to set
+	 */
+	public void setTotalPax(final int totalPax) {
+		this.totalPax = totalPax;
 	}
 
 	/*

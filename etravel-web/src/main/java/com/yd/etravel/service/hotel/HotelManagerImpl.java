@@ -34,14 +34,6 @@ public class HotelManagerImpl implements IHotelManager {
 	@Autowired(required = true)
 	private IUserDAO userDAO;
 
-	public void setHotelDAO(final IHotelDAO hotelDAO) {
-		this.hotelDAO = hotelDAO;
-	}
-
-	public void setUserDAO(final IUserDAO userDAO) {
-		this.userDAO = userDAO;
-	}
-
 	@Transactional
 	@Override
 	public int deleteHotel(final Long id) throws ServiceException {
@@ -106,7 +98,8 @@ public class HotelManagerImpl implements IHotelManager {
 			}
 			final UserSearchDTO userSearchDTO = new UserSearchDTO();
 			userSearchDTO.setIds(userids);
-			if (hotel.getSuperUser() != null && !hotel.getSuperUser().isEmpty()) {
+			if ((hotel.getSuperUser() != null)
+					&& !hotel.getSuperUser().isEmpty()) {
 				hotel.getSuperUser().clear();
 			}
 			hotel.setSuperUser(this.userDAO.findUsers(userSearchDTO));
@@ -116,6 +109,14 @@ public class HotelManagerImpl implements IHotelManager {
 			throw new ServiceException(null, e);
 		}
 		return hotel;
+	}
+
+	public void setHotelDAO(final IHotelDAO hotelDAO) {
+		this.hotelDAO = hotelDAO;
+	}
+
+	public void setUserDAO(final IUserDAO userDAO) {
+		this.userDAO = userDAO;
 	}
 
 }

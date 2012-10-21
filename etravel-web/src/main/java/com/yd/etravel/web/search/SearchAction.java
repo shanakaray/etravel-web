@@ -136,8 +136,8 @@ public class SearchAction extends BaseAction {
 
 		searchRequestDTO.setCheckIn(DateUtil.parse(searchForm.getCheckIn()));
 		searchRequestDTO.setCheckOut(DateUtil.parse(searchForm.getCheckOut()));
-		searchRequestDTO.setRoomTypeId(searchForm.getRoomId() != null
-				&& searchForm.getRoomId().longValue() > 0 ? searchForm
+		searchRequestDTO.setRoomTypeId((searchForm.getRoomId() != null)
+				&& (searchForm.getRoomId().longValue() > 0) ? searchForm
 				.getRoomId() : null);
 		if (searchForm.getHotelId() != null) {
 			searchRequestDTO.setHotelId(searchForm.getHotelId());
@@ -145,7 +145,7 @@ public class SearchAction extends BaseAction {
 
 		searchResultsDTO = getSearchManager().searchRoom(searchRequestDTO);
 
-		if (searchResultsDTO.getRoomDTO() == null
+		if ((searchResultsDTO.getRoomDTO() == null)
 				|| searchResultsDTO.getRoomDTO().isEmpty()) {
 			throw new ServiceException(
 					ValidationHelper
@@ -196,7 +196,8 @@ public class SearchAction extends BaseAction {
 			final HttpServletResponse response) throws Exception {
 		final SearchForm searchForm = (SearchForm) form;
 
-		if (searchForm.getId() == null || searchForm.getId().longValue() < 1) {
+		if ((searchForm.getId() == null)
+				|| (searchForm.getId().longValue() < 1)) {
 			throw new ServiceException(
 					ValidationHelper
 							.getMessageHolder("etravel.booking.noroom.selected"));
@@ -240,8 +241,8 @@ public class SearchAction extends BaseAction {
 		searchForm.setAllHotel(allHotel);
 		request.getSession().setAttribute("hotelId", "");
 
-		if (searchForm.getHotelId() != null
-				&& searchForm.getHotelId().longValue() > 0) {
+		if ((searchForm.getHotelId() != null)
+				&& (searchForm.getHotelId().longValue() > 0)) {
 
 			final List<Room> roomList = getRoomManager()
 					.findAllRoomWithRoomType(searchForm.getHotelId());
@@ -270,7 +271,8 @@ public class SearchAction extends BaseAction {
 		final SearchForm searchForm = (SearchForm) form;
 		// SearchRequestDTO searchRequestDTO =(SearchRequestDTO)
 		// request.getSession().getAttribute("searchRequestDTO");
-		if (searchForm.getId() == null || searchForm.getId().longValue() < 1) {
+		if ((searchForm.getId() == null)
+				|| (searchForm.getId().longValue() < 1)) {
 			throw new ServiceException(
 					ValidationHelper
 							.getMessageHolder("etravel.booking.noroom.selected"));
@@ -330,6 +332,14 @@ public class SearchAction extends BaseAction {
 		return null;
 	}
 
+	@Override
+	public ActionForward search(final ActionMapping mapping,
+			final ActionForm form, final HttpServletRequest request,
+			final HttpServletResponse response) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -356,14 +366,6 @@ public class SearchAction extends BaseAction {
 	 */
 	@Override
 	protected ActionForward sort(final ActionMapping mapping,
-			final ActionForm form, final HttpServletRequest request,
-			final HttpServletResponse response) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ActionForward search(final ActionMapping mapping,
 			final ActionForm form, final HttpServletRequest request,
 			final HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub

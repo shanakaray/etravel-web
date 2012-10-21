@@ -17,41 +17,29 @@ import com.yd.etravel.web.common.BaseForm;
  */
 public class ChangePasswordForm extends BaseForm {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -142915448887081580L;
 	private String oldPw;
 	private String newPw;
 	private String newRepPw;
 	private Long userId;
 
-	public String getOldPw() {
-		return this.oldPw;
-	}
-
-	public void setOldPw(final String oldPw) {
-		this.oldPw = oldPw;
-	}
-
 	public String getNewPw() {
 		return this.newPw;
-	}
-
-	public void setNewPw(final String newPw) {
-		this.newPw = newPw;
 	}
 
 	public String getNewRepPw() {
 		return this.newRepPw;
 	}
 
-	public void setNewRepPw(final String newRepPw) {
-		this.newRepPw = newRepPw;
+	public String getOldPw() {
+		return this.oldPw;
 	}
 
 	public Long getUserId() {
 		return this.userId;
-	}
-
-	public void setUserId(final Long userId) {
-		this.userId = userId;
 	}
 
 	/*
@@ -68,6 +56,22 @@ public class ChangePasswordForm extends BaseForm {
 		this.newPw = EMPTY_STRING;
 		this.newRepPw = EMPTY_STRING;
 		this.userId = 0L;
+	}
+
+	public void setNewPw(final String newPw) {
+		this.newPw = newPw;
+	}
+
+	public void setNewRepPw(final String newRepPw) {
+		this.newRepPw = newRepPw;
+	}
+
+	public void setOldPw(final String oldPw) {
+		this.oldPw = oldPw;
+	}
+
+	public void setUserId(final Long userId) {
+		this.userId = userId;
 	}
 
 	/*

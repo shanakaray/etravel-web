@@ -17,6 +17,11 @@ import com.yd.etravel.util.IConstants.ICommon;
  */
 public class MessageTag extends TagSupport {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5046660280263949563L;
+
 	@Override
 	public int doStartTag() throws JspException {
 		ResponseUtils.write(this.pageContext, renderTag());

@@ -29,114 +29,101 @@ import com.yd.etravel.service.exception.ServiceException;
 @Service(value = "searchService")
 @Transactional(propagation = Propagation.SUPPORTS)
 public class SearchManagerImpl implements ISearchManager {
+	class RoomDailyAvailabilityComparatorAsc implements
+			Comparator<RoomDailyAvailability> {
+		@Override
+		public int compare(final RoomDailyAvailability o1,
+				final RoomDailyAvailability o2) {
+			return o1.getAvailableUnit().compareTo(o2.getAvailableUnit());
+		}
+	}
+
+	class RoomDailyAvailabilityComparatorDscs implements
+			Comparator<RoomDailyAvailability> {
+		@Override
+		public int compare(final RoomDailyAvailability o1,
+				final RoomDailyAvailability o2) {
+			return o2.getAvailableUnit().compareTo(o1.getAvailableUnit());
+		}
+	}
+
 	@Autowired(required = true)
 	private ISearchDAO searchDAO;
+
 	@Autowired(required = true)
 	private ISeasonDAO seasonDAO;
+
 	@Autowired(required = true)
 	private IRoomAvailabilityDAO roomAvailabilityDAO;
 
-	public void setSearchDAO(final ISearchDAO searchDAO) {
-		this.searchDAO = searchDAO;
-	}
-
-	public void setSeasonDAO(final ISeasonDAO seasonDAO) {
-		this.seasonDAO = seasonDAO;
-	}
-
-	public void setRoomAvailabilityDAO(
-			final IRoomAvailabilityDAO roomAvailabilityDAO) {
-		this.roomAvailabilityDAO = roomAvailabilityDAO;
-	}
-
-	@Override
-	public SearchResultsDTO searchRoom(final SearchRequestDTO searchRequestDTO)
+	private RoomDTO findCombineRoomAvailability(final RoomDTO roomDTO)
 			throws ServiceException {
-		final SearchResultsDTO searchResultsDTO = new SearchResultsDTO();
+
 		try {
-			final List<RoomAvailability> roomList = this.searchDAO
-					.findRooms(searchRequestDTO);
-			List<RoomDTO> roomDTOList = new ArrayList<RoomDTO>();
+			final RoomAvailability roomAvailabilityCheckIn = roomDTO
+					.getRoomAvailabilityCheckIn();
+			final RoomAvailability roomAvailabilityCheckOut = roomDTO
+					.getRoomAvailabilityCheckOut();
 
-			if (roomList == null || roomList.isEmpty()) {
+			final ArrayList<RoomDailyAvailability> roomDailyAvListCheckIn = (ArrayList<RoomDailyAvailability>) this.roomAvailabilityDAO
+					.findAllRoomDailyAvailabilityByRoomAvailabilityIdAndDateRange(
+							roomAvailabilityCheckIn.getId(), roomDTO
+									.getRoomAvailability().getFromDate(),
+							roomDTO.getRoomAvailability().getToDate());
 
-				roomDTOList = findRoomDateCrossAllocation(searchRequestDTO);
-			} else {
+			Collections.sort(roomDailyAvListCheckIn,
+					new RoomDailyAvailabilityComparatorAsc());
 
-				for (final RoomAvailability type : roomList) {
-					final RoomDTO room = new RoomDTO();
+			final ArrayList<RoomDailyAvailability> roomDailyAvListCheckOut = (ArrayList<RoomDailyAvailability>) this.roomAvailabilityDAO
+					.findAllRoomDailyAvailabilityByRoomAvailabilityIdAndDateRange(
+							roomAvailabilityCheckOut.getId(), roomDTO
+									.getRoomAvailability().getFromDate(),
+							roomDTO.getRoomAvailability().getToDate());
 
-					final RoomAvailability maxType =
+			Collections.sort(roomDailyAvListCheckOut,
+					new RoomDailyAvailabilityComparatorAsc());
 
-					findRoomAvailability(type, searchRequestDTO.getCheckIn(),
-							searchRequestDTO.getCheckOut());
-					if (maxType.getAvailableUnit() <= 0) {
-						continue;
+			int avalUnitCheckIn = 0;
+			int avalUnitCheckOut = 0;
 
-					}
-					room.setRoomAvailability(maxType);
-					room.setRoom(type.getRoom());
-					room.setRoomType(type.getRoom().getRoomType());
-					room.setHotel(type.getRoom().getHotel());
-					room.setId(type.getId());
+			if (!roomDailyAvListCheckIn.isEmpty()) {
 
-					List<RoomSeasonalRate> rsrList = new ArrayList<RoomSeasonalRate>();
-					rsrList = this.seasonDAO.findRoomSeasonalRateByRoomId(type
-							.getRoom().getId());
-					final RoomSeasonalRate roomSeasonalRate = findRoomSeasonalRate(
-							searchRequestDTO, rsrList);
-
-					if (roomSeasonalRate.getSeason() == null) {
-						roomSeasonalRate.setSeason(new Season());
-						continue;
-					}
-					room.setRoomSeasonalRate(roomSeasonalRate);
-					roomDTOList.add(room);
-				}
+				avalUnitCheckIn = roomDailyAvListCheckIn.get(0)
+						.getAvailableUnit();
 			}
-			searchResultsDTO.setRoomDTO(roomDTOList);
+			if (!roomDailyAvListCheckOut.isEmpty()) {
 
+				avalUnitCheckOut = roomDailyAvListCheckOut.get(0)
+						.getAvailableUnit();
+			}
+			if (avalUnitCheckIn > avalUnitCheckOut) {
+				roomDTO.getRoomAvailability()
+						.setAvailableUnit(avalUnitCheckOut);
+			} else {
+				roomDTO.getRoomAvailability().setAvailableUnit(avalUnitCheckIn);
+			}
+
+			int allocatedUnitCheckIn = 0;
+			int allocatedUnitCheckOut = 0;
+
+			if (!roomDailyAvListCheckIn.isEmpty()) {
+				allocatedUnitCheckIn = roomAvailabilityCheckIn.getUnit();
+			}
+			if (!roomDailyAvListCheckOut.isEmpty()) {
+				allocatedUnitCheckOut = roomAvailabilityCheckOut.getUnit();
+			}
+			if (allocatedUnitCheckIn > allocatedUnitCheckOut) {
+				roomDTO.getRoomAvailability().setUnit(allocatedUnitCheckOut);
+			} else {
+				roomDTO.getRoomAvailability().setUnit(allocatedUnitCheckIn);
+			}
 		} catch (final PersistenceException e) {
 			throw new ServiceException(null, e);
+		} catch (final Exception e) {
+			throw new ServiceException(null, e);
 		}
-		return searchResultsDTO;
-	}
 
-	private RoomSeasonalRate findRoomSeasonalRate(
-			final SearchRequestDTO searchRequestDTO,
-			final List<RoomSeasonalRate> rsrList) {
-
-		RoomSeasonalRate seasonrate = new RoomSeasonalRate();
-
-		boolean flag = false;
-
-		rsrList.iterator();
-
-		for (final RoomSeasonalRate type : rsrList) {
-
-			if (type.getSeason().getFromDate().getTime() <= searchRequestDTO
-					.getCheckIn().getTime()
-					&& searchRequestDTO.getCheckOut().getTime() <= type
-							.getSeason().getToDate().getTime()) {
-				seasonrate = type;
-				flag = true;
-				break;
-			}
-		}
-		if (!flag) {
-
-			for (final RoomSeasonalRate type : rsrList) {
-				if (type.getSeason().getFromDate().getTime() <= searchRequestDTO
-						.getCheckIn().getTime()
-						&& searchRequestDTO.getCheckIn().getTime() <= type
-								.getSeason().getToDate().getTime()) {
-					seasonrate = type;
-					flag = true;
-					break;
-				}
-			}
-		}
-		return seasonrate;
+		return roomDTO;
 
 	}
 
@@ -241,93 +228,108 @@ public class SearchManagerImpl implements ISearchManager {
 
 	}
 
-	private RoomDTO findCombineRoomAvailability(final RoomDTO roomDTO)
+	private RoomSeasonalRate findRoomSeasonalRate(
+			final SearchRequestDTO searchRequestDTO,
+			final List<RoomSeasonalRate> rsrList) {
+
+		RoomSeasonalRate seasonrate = new RoomSeasonalRate();
+
+		boolean flag = false;
+
+		rsrList.iterator();
+
+		for (final RoomSeasonalRate type : rsrList) {
+
+			if ((type.getSeason().getFromDate().getTime() <= searchRequestDTO
+					.getCheckIn().getTime())
+					&& (searchRequestDTO.getCheckOut().getTime() <= type
+							.getSeason().getToDate().getTime())) {
+				seasonrate = type;
+				flag = true;
+				break;
+			}
+		}
+		if (!flag) {
+
+			for (final RoomSeasonalRate type : rsrList) {
+				if ((type.getSeason().getFromDate().getTime() <= searchRequestDTO
+						.getCheckIn().getTime())
+						&& (searchRequestDTO.getCheckIn().getTime() <= type
+								.getSeason().getToDate().getTime())) {
+					seasonrate = type;
+					flag = true;
+					break;
+				}
+			}
+		}
+		return seasonrate;
+
+	}
+
+	@Override
+	public SearchResultsDTO searchRoom(final SearchRequestDTO searchRequestDTO)
 			throws ServiceException {
-
+		final SearchResultsDTO searchResultsDTO = new SearchResultsDTO();
 		try {
-			final RoomAvailability roomAvailabilityCheckIn = roomDTO
-					.getRoomAvailabilityCheckIn();
-			final RoomAvailability roomAvailabilityCheckOut = roomDTO
-					.getRoomAvailabilityCheckOut();
+			final List<RoomAvailability> roomList = this.searchDAO
+					.findRooms(searchRequestDTO);
+			List<RoomDTO> roomDTOList = new ArrayList<RoomDTO>();
 
-			final ArrayList<RoomDailyAvailability> roomDailyAvListCheckIn = (ArrayList<RoomDailyAvailability>) this.roomAvailabilityDAO
-					.findAllRoomDailyAvailabilityByRoomAvailabilityIdAndDateRange(
-							roomAvailabilityCheckIn.getId(), roomDTO
-									.getRoomAvailability().getFromDate(),
-							roomDTO.getRoomAvailability().getToDate());
+			if ((roomList == null) || roomList.isEmpty()) {
 
-			Collections.sort(roomDailyAvListCheckIn,
-					new RoomDailyAvailabilityComparatorAsc());
-
-			final ArrayList<RoomDailyAvailability> roomDailyAvListCheckOut = (ArrayList<RoomDailyAvailability>) this.roomAvailabilityDAO
-					.findAllRoomDailyAvailabilityByRoomAvailabilityIdAndDateRange(
-							roomAvailabilityCheckOut.getId(), roomDTO
-									.getRoomAvailability().getFromDate(),
-							roomDTO.getRoomAvailability().getToDate());
-
-			Collections.sort(roomDailyAvListCheckOut,
-					new RoomDailyAvailabilityComparatorAsc());
-
-			int avalUnitCheckIn = 0;
-			int avalUnitCheckOut = 0;
-
-			if (!roomDailyAvListCheckIn.isEmpty()) {
-
-				avalUnitCheckIn = roomDailyAvListCheckIn.get(0)
-						.getAvailableUnit();
-			}
-			if (!roomDailyAvListCheckOut.isEmpty()) {
-
-				avalUnitCheckOut = roomDailyAvListCheckOut.get(0)
-						.getAvailableUnit();
-			}
-			if (avalUnitCheckIn > avalUnitCheckOut) {
-				roomDTO.getRoomAvailability()
-						.setAvailableUnit(avalUnitCheckOut);
+				roomDTOList = findRoomDateCrossAllocation(searchRequestDTO);
 			} else {
-				roomDTO.getRoomAvailability().setAvailableUnit(avalUnitCheckIn);
-			}
 
-			int allocatedUnitCheckIn = 0;
-			int allocatedUnitCheckOut = 0;
+				for (final RoomAvailability type : roomList) {
+					final RoomDTO room = new RoomDTO();
 
-			if (!roomDailyAvListCheckIn.isEmpty()) {
-				allocatedUnitCheckIn = roomAvailabilityCheckIn.getUnit();
+					final RoomAvailability maxType =
+
+					findRoomAvailability(type, searchRequestDTO.getCheckIn(),
+							searchRequestDTO.getCheckOut());
+					if (maxType.getAvailableUnit() <= 0) {
+						continue;
+
+					}
+					room.setRoomAvailability(maxType);
+					room.setRoom(type.getRoom());
+					room.setRoomType(type.getRoom().getRoomType());
+					room.setHotel(type.getRoom().getHotel());
+					room.setId(type.getId());
+
+					List<RoomSeasonalRate> rsrList = new ArrayList<RoomSeasonalRate>();
+					rsrList = this.seasonDAO.findRoomSeasonalRateByRoomId(type
+							.getRoom().getId());
+					final RoomSeasonalRate roomSeasonalRate = findRoomSeasonalRate(
+							searchRequestDTO, rsrList);
+
+					if (roomSeasonalRate.getSeason() == null) {
+						roomSeasonalRate.setSeason(new Season());
+						continue;
+					}
+					room.setRoomSeasonalRate(roomSeasonalRate);
+					roomDTOList.add(room);
+				}
 			}
-			if (!roomDailyAvListCheckOut.isEmpty()) {
-				allocatedUnitCheckOut = roomAvailabilityCheckOut.getUnit();
-			}
-			if (allocatedUnitCheckIn > allocatedUnitCheckOut) {
-				roomDTO.getRoomAvailability().setUnit(allocatedUnitCheckOut);
-			} else {
-				roomDTO.getRoomAvailability().setUnit(allocatedUnitCheckIn);
-			}
+			searchResultsDTO.setRoomDTO(roomDTOList);
+
 		} catch (final PersistenceException e) {
 			throw new ServiceException(null, e);
-		} catch (final Exception e) {
-			throw new ServiceException(null, e);
 		}
-
-		return roomDTO;
-
+		return searchResultsDTO;
 	}
 
-	class RoomDailyAvailabilityComparatorAsc implements
-			Comparator<RoomDailyAvailability> {
-		@Override
-		public int compare(final RoomDailyAvailability o1,
-				final RoomDailyAvailability o2) {
-			return o1.getAvailableUnit().compareTo(o2.getAvailableUnit());
-		}
+	public void setRoomAvailabilityDAO(
+			final IRoomAvailabilityDAO roomAvailabilityDAO) {
+		this.roomAvailabilityDAO = roomAvailabilityDAO;
 	}
 
-	class RoomDailyAvailabilityComparatorDscs implements
-			Comparator<RoomDailyAvailability> {
-		@Override
-		public int compare(final RoomDailyAvailability o1,
-				final RoomDailyAvailability o2) {
-			return o2.getAvailableUnit().compareTo(o1.getAvailableUnit());
-		}
+	public void setSearchDAO(final ISearchDAO searchDAO) {
+		this.searchDAO = searchDAO;
+	}
+
+	public void setSeasonDAO(final ISeasonDAO seasonDAO) {
+		this.seasonDAO = seasonDAO;
 	}
 
 }

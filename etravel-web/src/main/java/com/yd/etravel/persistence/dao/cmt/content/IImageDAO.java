@@ -8,9 +8,9 @@ import com.yd.etravel.persistence.exception.PersistenceException;
 
 public interface IImageDAO extends IBaseDAO<Image> {
 
-	void saveContent(Image image) throws PersistenceException;
-
 	void deleteContent(Image image) throws PersistenceException;
 
 	List<Long> getIds(final Image image) throws PersistenceException;
+
+	void saveContent(Image image) throws PersistenceException;
 }

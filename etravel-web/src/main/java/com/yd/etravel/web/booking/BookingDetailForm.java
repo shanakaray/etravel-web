@@ -24,6 +24,10 @@ import com.yd.etravel.web.common.BaseForm;
 
 public class BookingDetailForm extends BaseForm {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4495071934442319318L;
 	private Long bookingId;
 	private List<ExtraItemBooking> itemBookingList;
 	private BookingReportDTO bookingReportDTO;
@@ -39,24 +43,12 @@ public class BookingDetailForm extends BaseForm {
 		return this.bookingId;
 	}
 
-	public void setBookingId(final Long bookingId) {
-		this.bookingId = bookingId;
-	}
-
-	public List<ExtraItemBooking> getItemBookingList() {
-		return this.itemBookingList;
-	}
-
-	public void setItemBookingList(final List<ExtraItemBooking> itemBookingList) {
-		this.itemBookingList = itemBookingList;
-	}
-
 	public BookingReportDTO getBookingReportDTO() {
 		return this.bookingReportDTO;
 	}
 
-	public void setBookingReportDTO(final BookingReportDTO bookingReportDTO) {
-		this.bookingReportDTO = bookingReportDTO;
+	public List<ExtraItemBooking> getItemBookingList() {
+		return this.itemBookingList;
 	}
 
 	/*
@@ -72,6 +64,18 @@ public class BookingDetailForm extends BaseForm {
 		this.bookingId = -1L;
 		this.itemBookingList = Collections.emptyList();
 		this.bookingReportDTO = null;
+	}
+
+	public void setBookingId(final Long bookingId) {
+		this.bookingId = bookingId;
+	}
+
+	public void setBookingReportDTO(final BookingReportDTO bookingReportDTO) {
+		this.bookingReportDTO = bookingReportDTO;
+	}
+
+	public void setItemBookingList(final List<ExtraItemBooking> itemBookingList) {
+		this.itemBookingList = itemBookingList;
 	}
 
 	/*

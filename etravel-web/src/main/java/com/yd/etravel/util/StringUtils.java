@@ -38,25 +38,6 @@ public class StringUtils implements ICommon {
 		return map;
 	}
 
-	public static void main(final String[] args) {
-		getProperties(new UserProfile());
-	}
-
-	public static boolean isEmpty(final String value) {
-		boolean flag = false;
-		if (value == null || value.trim().equals(ICommon.EMPTY_STRING)) {
-			flag = true;
-		}
-		return flag;
-	}
-
-	public static boolean isValidEmail(final String email) {
-		final Pattern p = Pattern.compile(EMAIL_VALIDATION);
-		final Matcher m = p.matcher(email);
-		// check whether match is found
-		return m.matches();
-	}
-
 	@SuppressWarnings("rawtypes")
 	public static boolean isEmpty(final Object obj) {
 		if (obj == null) {
@@ -81,8 +62,27 @@ public class StringUtils implements ICommon {
 		return false; // Object not null!
 	}
 
+	public static boolean isEmpty(final String value) {
+		boolean flag = false;
+		if ((value == null) || value.trim().equals(ICommon.EMPTY_STRING)) {
+			flag = true;
+		}
+		return flag;
+	}
+
 	public static boolean isNotEmpty(final Object obj) {
 		return !isEmpty(obj);
+	}
+
+	public static boolean isValidEmail(final String email) {
+		final Pattern p = Pattern.compile(EMAIL_VALIDATION);
+		final Matcher m = p.matcher(email);
+		// check whether match is found
+		return m.matches();
+	}
+
+	public static void main(final String[] args) {
+		getProperties(new UserProfile());
 	}
 
 	/**

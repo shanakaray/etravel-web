@@ -78,8 +78,8 @@ public class RoomTypeAction extends BaseAction {
 		boolean isnew = true;
 		final RoomType roomType = new RoomType();
 
-		if (roomTypeForm.getId() != null
-				&& roomTypeForm.getId().longValue() > 0) {
+		if ((roomTypeForm.getId() != null)
+				&& (roomTypeForm.getId().longValue() > 0)) {
 			roomType.setId(roomTypeForm.getId());
 		} else {
 			isnew = false;
@@ -229,6 +229,14 @@ public class RoomTypeAction extends BaseAction {
 		return null;
 	}
 
+	@Override
+	public ActionForward search(final ActionMapping mapping,
+			final ActionForm form, final HttpServletRequest request,
+			final HttpServletResponse response) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -255,14 +263,6 @@ public class RoomTypeAction extends BaseAction {
 	 */
 	@Override
 	protected ActionForward sort(final ActionMapping mapping,
-			final ActionForm form, final HttpServletRequest request,
-			final HttpServletResponse response) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ActionForward search(final ActionMapping mapping,
 			final ActionForm form, final HttpServletRequest request,
 			final HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub

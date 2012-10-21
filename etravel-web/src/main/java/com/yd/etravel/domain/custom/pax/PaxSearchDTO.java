@@ -23,44 +23,44 @@ public class PaxSearchDTO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public String getType() {
-		return this.type;
-	}
-
-	public void setType(final String type) {
-		this.type = type;
-	}
-
-	public Integer getMaxage() {
-		return this.maxage;
-	}
-
-	public void setMaxage(final Integer maxage) {
-		this.maxage = maxage;
-	}
-
-	public Integer getMinage() {
-		return this.minage;
-	}
-
-	public void setMinage(final Integer minage) {
-		this.minage = minage;
+	public Long getHotelId() {
+		return this.hotelId;
 	}
 
 	public Long getId() {
 		return this.id;
 	}
 
-	public void setId(final Long id) {
-		this.id = id;
+	public Integer getMaxage() {
+		return this.maxage;
 	}
 
-	public Long getHotelId() {
-		return this.hotelId;
+	public Integer getMinage() {
+		return this.minage;
+	}
+
+	public String getType() {
+		return this.type;
 	}
 
 	public void setHotelId(final Long hotelId) {
 		this.hotelId = hotelId;
+	}
+
+	public void setId(final Long id) {
+		this.id = id;
+	}
+
+	public void setMaxage(final Integer maxage) {
+		this.maxage = maxage;
+	}
+
+	public void setMinage(final Integer minage) {
+		this.minage = minage;
+	}
+
+	public void setType(final String type) {
+		this.type = type;
 	}
 
 }

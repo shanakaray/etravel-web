@@ -16,47 +16,15 @@ import com.yd.etravel.util.IConstants.IUser;
  */
 public class UserAccessTag extends TagSupport {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2618721780013697865L;
 	private String property;
 	private String name;
 
 	public UserAccessTag() {
 		super();
-		this.name = IUser.USER_PROFILE;
-	}
-
-	public String getProperty() {
-		return this.property;
-	}
-
-	public void setProperty(final String property) {
-		this.property = property;
-	}
-
-	public String getName() {
-		return this.name;
-	}
-
-	public void setName(final String name) {
-		this.name = name;
-	}
-
-	@Override
-	public int doStartTag() throws JspException {
-		if (condition()) {
-			return EVAL_BODY_INCLUDE;
-		} else {
-			return SKIP_BODY;
-		}
-	}
-
-	@Override
-	public int doEndTag() throws JspException {
-		return EVAL_PAGE;
-	}
-
-	@Override
-	public void release() {
-		super.release();
 		this.name = IUser.USER_PROFILE;
 	}
 
@@ -70,6 +38,42 @@ public class UserAccessTag extends TagSupport {
 		}
 
 		return false;
+	}
+
+	@Override
+	public int doEndTag() throws JspException {
+		return EVAL_PAGE;
+	}
+
+	@Override
+	public int doStartTag() throws JspException {
+		if (condition()) {
+			return EVAL_BODY_INCLUDE;
+		} else {
+			return SKIP_BODY;
+		}
+	}
+
+	public String getName() {
+		return this.name;
+	}
+
+	public String getProperty() {
+		return this.property;
+	}
+
+	@Override
+	public void release() {
+		super.release();
+		this.name = IUser.USER_PROFILE;
+	}
+
+	public void setName(final String name) {
+		this.name = name;
+	}
+
+	public void setProperty(final String property) {
+		this.property = property;
 	}
 
 }

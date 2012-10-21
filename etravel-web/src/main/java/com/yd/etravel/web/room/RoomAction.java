@@ -85,7 +85,7 @@ public class RoomAction extends BaseAction {
 		room.setHotel(roomForm.getHotel(roomForm.getHotelId()));
 		room.setNoOfRoom(roomForm.getNoOfRooms());
 		if (!StringUtils.isEmpty(roomForm.getId())
-				&& roomForm.getId().intValue() > 0) {
+				&& (roomForm.getId().intValue() > 0)) {
 			room.setId(roomForm.getId());
 		} else {
 			room.setId(null);
@@ -221,8 +221,8 @@ public class RoomAction extends BaseAction {
 		roomForm.setRoomTypeList(getRoomTypeManager().findAllActiveRoomType());
 
 		final RoomSearchDTO searchDTO = new RoomSearchDTO();
-		searchDTO.setHotelId(roomForm.getHotelId() != null
-				&& roomForm.getHotelId().longValue() > 0 ? roomForm
+		searchDTO.setHotelId((roomForm.getHotelId() != null)
+				&& (roomForm.getHotelId().longValue() > 0) ? roomForm
 				.getHotelId() : null);
 		roomForm.setRoomList(getRoomManager().findRooms(searchDTO));
 		return mapping.findForward(SUCCESS);
@@ -241,6 +241,14 @@ public class RoomAction extends BaseAction {
 			final ActionForm form, final HttpServletRequest request,
 			final HttpServletResponse response) throws Exception {
 		return mapping.findForward(SUCCESS);
+	}
+
+	@Override
+	public ActionForward search(final ActionMapping mapping,
+			final ActionForm form, final HttpServletRequest request,
+			final HttpServletResponse response) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	/*
@@ -269,14 +277,6 @@ public class RoomAction extends BaseAction {
 	 */
 	@Override
 	protected ActionForward sort(final ActionMapping mapping,
-			final ActionForm form, final HttpServletRequest request,
-			final HttpServletResponse response) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ActionForward search(final ActionMapping mapping,
 			final ActionForm form, final HttpServletRequest request,
 			final HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub

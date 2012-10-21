@@ -9,10 +9,12 @@ import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.upload.FormFile;
 
+import com.yd.etravel.util.IConstants.ICommon;
 import com.yd.etravel.util.StringUtils;
 import com.yd.etravel.web.common.BaseForm;
 
 public class ImageForm extends BaseForm {
+	private static final long serialVersionUID = 8580863183064265691L;
 	private FormFile formFile;
 	private Long pk;
 	private String object;
@@ -23,64 +25,64 @@ public class ImageForm extends BaseForm {
 	public ImageForm() {
 	}
 
-	@Override
-	public void resetBean(final ActionMapping mapping,
-			final HttpServletRequest request) {
-		this.images = Collections.emptyList();
-		this.formFile = null;
-		this.pk = null;
-		this.object = StringUtils.EMPTY_STRING;
-		this.title = StringUtils.EMPTY_STRING;
-		this.name = StringUtils.EMPTY_STRING;
-
-	}
-
 	public FormFile getFormFile() {
 		return this.formFile;
-	}
-
-	public void setFormFile(final FormFile formFile) {
-		this.formFile = formFile;
-	}
-
-	public Long getPk() {
-		return this.pk;
-	}
-
-	public void setPk(final Long pk) {
-		this.pk = pk;
-	}
-
-	public String getObject() {
-		return this.object;
-	}
-
-	public void setObject(final String object) {
-		this.object = object;
-	}
-
-	public String getTitle() {
-		return this.title;
-	}
-
-	public void setTitle(final String title) {
-		this.title = title;
-	}
-
-	public String getName() {
-		return this.name;
-	}
-
-	public void setName(final String name) {
-		this.name = name;
 	}
 
 	public List<Long> getImages() {
 		return this.images;
 	}
 
+	public String getName() {
+		return this.name;
+	}
+
+	public String getObject() {
+		return this.object;
+	}
+
+	public Long getPk() {
+		return this.pk;
+	}
+
+	public String getTitle() {
+		return this.title;
+	}
+
+	@Override
+	public void resetBean(final ActionMapping mapping,
+			final HttpServletRequest request) {
+		this.images = Collections.emptyList();
+		this.formFile = null;
+		this.pk = null;
+		this.object = ICommon.EMPTY_STRING;
+		this.title = ICommon.EMPTY_STRING;
+		this.name = ICommon.EMPTY_STRING;
+
+	}
+
+	public void setFormFile(final FormFile formFile) {
+		this.formFile = formFile;
+	}
+
 	public void setImages(final List<Long> images) {
 		this.images = images;
+	}
+
+	public void setName(final String name) {
+		this.name = name;
+	}
+
+	public void setObject(final String object) {
+		this.object = object;
+	}
+
+	public void setPk(final Long pk) {
+		this.pk = pk;
+	}
+
+	public void setTitle(final String title) {
+		this.title = title;
 	}
 
 	@Override
@@ -88,9 +90,9 @@ public class ImageForm extends BaseForm {
 			final HttpServletRequest request) {
 		final ActionErrors errors = new ActionErrors();
 
-		if (this.formFile == null || this.formFile.getFileSize() < 1) {
+		if ((this.formFile == null) || (this.formFile.getFileSize() < 1)) {
 			addErrors(errors, "etravel.error.image.required");
-		} else if (this.formFile != null
+		} else if ((this.formFile != null)
 				&& !this.formFile.getContentType().startsWith("image")) {
 			addErrors(errors, "etravel.error.image.invalid.contenttype");
 		}

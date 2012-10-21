@@ -103,8 +103,8 @@ public class RoomAvailabilityAction extends BaseAction {
 
 		}
 
-		if (roomAvailabilityForm.getId() != null
-				&& roomAvailabilityForm.getId() > 0) {
+		if ((roomAvailabilityForm.getId() != null)
+				&& (roomAvailabilityForm.getId() > 0)) {
 			roomAvailability.setId(roomAvailabilityForm.getId());
 			isnew = false;
 			Date fd = new Date();
@@ -131,8 +131,8 @@ public class RoomAvailabilityAction extends BaseAction {
 			}
 		}
 
-		if (roomAvailabilityForm.getRoomId() != null
-				&& roomAvailabilityForm.getRoomId().longValue() > 0) {
+		if ((roomAvailabilityForm.getRoomId() != null)
+				&& (roomAvailabilityForm.getRoomId().longValue() > 0)) {
 			final Room room = new Room();
 			room.setId(roomAvailabilityForm.getRoomId());
 			roomAvailability.setRoom(room);
@@ -200,8 +200,8 @@ public class RoomAvailabilityAction extends BaseAction {
 		roomAvaForm.setFromDate(ra.getFromDateString());
 		roomAvaForm.setToDate(ra.getToDateString());
 		final RoomAvailabilityDTO dto = new RoomAvailabilityDTO();
-		dto.setHotelId(roomAvaForm.getHotelId() == null
-				|| roomAvaForm.getHotelId().longValue() <= 0 ? null
+		dto.setHotelId((roomAvaForm.getHotelId() == null)
+				|| (roomAvaForm.getHotelId().longValue() <= 0) ? null
 				: roomAvaForm.getHotelId());
 		roomAvaForm.setAllRoomAvailability(getRoomAvailabilityManager()
 				.findAllRoomAvailabilityDTO(dto));
@@ -257,6 +257,13 @@ public class RoomAvailabilityAction extends BaseAction {
 		return init(mapping, form, request, response);
 	}
 
+	protected ActionForward hotelOnChange(final ActionMapping mapping,
+			final ActionForm form, final HttpServletRequest request,
+			final HttpServletResponse response) throws Exception {
+		init(mapping, form, request, response);
+		return mapping.findForward(SUCCESS);
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -273,21 +280,21 @@ public class RoomAvailabilityAction extends BaseAction {
 
 		roomAvaForm.setHotelList(getHotelManager().findAllActiveHotels());
 		final RoomAvailabilityDTO dto = new RoomAvailabilityDTO();
-		dto.setHotelId(roomAvaForm.getHotelId() == null
-				|| roomAvaForm.getHotelId().longValue() <= 0 ? null
+		dto.setHotelId((roomAvaForm.getHotelId() == null)
+				|| (roomAvaForm.getHotelId().longValue() <= 0) ? null
 				: roomAvaForm.getHotelId());
 		roomAvaForm.setAllRoomAvailability(getRoomAvailabilityManager()
 				.findAllRoomAvailabilityDTO(dto));
 
-		if (roomAvaForm.getHotelId() != null
-				&& roomAvaForm.getHotelId().longValue() > 0) {
+		if ((roomAvaForm.getHotelId() != null)
+				&& (roomAvaForm.getHotelId().longValue() > 0)) {
 
 			final List<Room> roomList = getRoomManager()
 					.findAllRoomWithRoomType(roomAvaForm.getHotelId());
 			roomAvaForm.setAllRoom(roomList);
 
-			if (roomAvaForm.getRoomId() != null
-					&& roomAvaForm.getRoomId().longValue() > 0) {
+			if ((roomAvaForm.getRoomId() != null)
+					&& (roomAvaForm.getRoomId().longValue() > 0)) {
 				for (final Room room : roomList) {
 					if (room.getId().longValue() == roomAvaForm.getRoomId()
 							.longValue()) {
@@ -332,6 +339,13 @@ public class RoomAvailabilityAction extends BaseAction {
 		return mapping.findForward(ERROR);
 	}
 
+	protected ActionForward roomOnChange(final ActionMapping mapping,
+			final ActionForm form, final HttpServletRequest request,
+			final HttpServletResponse response) throws Exception {
+		init(mapping, form, request, response);
+		return mapping.findForward(SUCCESS);
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -342,6 +356,14 @@ public class RoomAvailabilityAction extends BaseAction {
 	 */
 	@Override
 	protected ActionForward save(final ActionMapping mapping,
+			final ActionForm form, final HttpServletRequest request,
+			final HttpServletResponse response) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ActionForward search(final ActionMapping mapping,
 			final ActionForm form, final HttpServletRequest request,
 			final HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
@@ -374,28 +396,6 @@ public class RoomAvailabilityAction extends BaseAction {
 	 */
 	@Override
 	protected ActionForward sort(final ActionMapping mapping,
-			final ActionForm form, final HttpServletRequest request,
-			final HttpServletResponse response) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	protected ActionForward roomOnChange(final ActionMapping mapping,
-			final ActionForm form, final HttpServletRequest request,
-			final HttpServletResponse response) throws Exception {
-		init(mapping, form, request, response);
-		return mapping.findForward(SUCCESS);
-	}
-
-	protected ActionForward hotelOnChange(final ActionMapping mapping,
-			final ActionForm form, final HttpServletRequest request,
-			final HttpServletResponse response) throws Exception {
-		init(mapping, form, request, response);
-		return mapping.findForward(SUCCESS);
-	}
-
-	@Override
-	public ActionForward search(final ActionMapping mapping,
 			final ActionForm form, final HttpServletRequest request,
 			final HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub

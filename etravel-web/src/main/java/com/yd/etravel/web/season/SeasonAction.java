@@ -66,6 +66,10 @@ public class SeasonAction extends BaseAction {
 		return null;
 	}
 
+	public Date convertStringToDate(final String dateVal) {
+		return DateUtil.parse(dateVal);
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -100,7 +104,7 @@ public class SeasonAction extends BaseAction {
 
 		}
 
-		if (seasonForm.getId() != null && seasonForm.getId() > 0) {
+		if ((seasonForm.getId() != null) && (seasonForm.getId() > 0)) {
 			season.setId(seasonForm.getId());
 			Date fd = new Date();
 			Date td = new Date();
@@ -127,8 +131,8 @@ public class SeasonAction extends BaseAction {
 			isnew = false;
 		}
 
-		if (seasonForm.getHotelIds() != null
-				&& seasonForm.getHotelIds().length > 0) {
+		if ((seasonForm.getHotelIds() != null)
+				&& (seasonForm.getHotelIds().length > 0)) {
 			final Hotel hotel = new Hotel();
 			for (int i = 0; i < seasonForm.getHotelIds().length; i++) {
 
@@ -301,6 +305,14 @@ public class SeasonAction extends BaseAction {
 		return null;
 	}
 
+	@Override
+	public ActionForward search(final ActionMapping mapping,
+			final ActionForm form, final HttpServletRequest request,
+			final HttpServletResponse response) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -327,18 +339,6 @@ public class SeasonAction extends BaseAction {
 	 */
 	@Override
 	protected ActionForward sort(final ActionMapping mapping,
-			final ActionForm form, final HttpServletRequest request,
-			final HttpServletResponse response) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Date convertStringToDate(final String dateVal) {
-		return DateUtil.parse(dateVal);
-	}
-
-	@Override
-	public ActionForward search(final ActionMapping mapping,
 			final ActionForm form, final HttpServletRequest request,
 			final HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub

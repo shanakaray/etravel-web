@@ -57,6 +57,14 @@ public class BookingAction extends BaseAction {
 	private static final String LOCALE = "vpc_Locale";
 	private static final String TICKET_NO = "vpc_TicketNo";
 
+	private static BigDecimal format(final double val) {
+		synchronized (BookingAction.class) {
+			BigDecimal bigDecimal = new BigDecimal(val);
+			bigDecimal = bigDecimal.setScale(2, BigDecimal.ROUND_UP);
+			return bigDecimal;
+		}
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -70,6 +78,28 @@ public class BookingAction extends BaseAction {
 			final ActionForm form, final HttpServletRequest request,
 			final HttpServletResponse response) throws Exception {
 		return null;
+	}
+
+	private void addIpgPrams(final HttpServletRequest request,
+			final BookingDTO bookingDTO) {
+		addIpgPrams(request, bookingDTO.getBooking().getCode(), bookingDTO
+				.getBooking().getPaidAmountCts());
+	}
+
+	private void addIpgPrams(final HttpServletRequest request,
+			final String bookingId, final String annountInCts) {
+		final IpgUtil ipg = ServiceHelper.getInstance().getIpgUtil();
+		request.setAttribute(CLIENT_URL, ipg.getVirtualPaymentClientURL());
+		request.setAttribute(VERSION, ipg.getVpc_Version());
+		request.setAttribute(COMMAND, ipg.getVpc_Command());
+		request.setAttribute(ACCESS_CODE, ipg.getVpc_AccessCode());
+		request.setAttribute(MERCH_TX_REF, bookingId);
+		request.setAttribute(MERCHANT, ipg.getVpc_Merchant());
+		request.setAttribute(ORDER_INFO, ipg.getVpc_OrderInfo());
+		request.setAttribute(AMOUNT, annountInCts);
+		request.setAttribute(RETURN_URL, ipg.getVpc_ReturnURL());
+		request.setAttribute(LOCALE, ipg.getVpc_Locale());
+		request.setAttribute(TICKET_NO, bookingId);
 	}
 
 	/*
@@ -140,8 +170,8 @@ public class BookingAction extends BaseAction {
 					.getAttribute("extraItem");
 		}
 
-		if (roomDTO.getRoomType().getMaxPassengers() < bookingForm
-				.getTotalPax() / bookingForm.getNoOfRoom()) {
+		if (roomDTO.getRoomType().getMaxPassengers() < (bookingForm
+				.getTotalPax() / bookingForm.getNoOfRoom())) {
 			throw new ServiceException(
 					ValidationHelper
 							.getMessageHolder("etravel.booking.max.pax.limit.exceed"));
@@ -171,8 +201,8 @@ public class BookingAction extends BaseAction {
 						.getId();
 			} else {
 				// selects a existing customer.
-				if (bookingForm.getBookedUserId() != null
-						&& bookingForm.getBookedUserId().longValue() > 0) {
+				if ((bookingForm.getBookedUserId() != null)
+						&& (bookingForm.getBookedUserId().longValue() > 0)) {
 					userId = bookingForm.getBookedUserId();
 				}
 			}
@@ -182,8 +212,8 @@ public class BookingAction extends BaseAction {
 		booking.setBookingUser(getUserManager().findUserById(userId));
 		booking.setBookingDate(new Date());
 
-		if (bookingForm.getAgentId() != null
-				&& bookingForm.getAgentId().longValue() > 0) {
+		if ((bookingForm.getAgentId() != null)
+				&& (bookingForm.getAgentId().longValue() > 0)) {
 			booking.setAgent(getUserManager().findUserById(
 					bookingForm.getAgentId()));
 		}
@@ -204,9 +234,9 @@ public class BookingAction extends BaseAction {
 		booking.setRoomPrice(roomPrice);
 
 		if (bookingForm.isSingleNight()) {
-			payed = bookingForm.getNoOfRoom()
-					* roomDTO.getRoomSeasonalRate().getTotalCost()
-							.doubleValue() + extraItemPrice;
+			payed = (bookingForm.getNoOfRoom() * roomDTO.getRoomSeasonalRate()
+					.getTotalCost().doubleValue())
+					+ extraItemPrice;
 
 		} else {
 			payed = booking.getTotalPrice().doubleValue();
@@ -263,113 +293,6 @@ public class BookingAction extends BaseAction {
 		} else {
 			return mapping.findForward(SUCCESS);
 		}
-	}
-
-	protected ExtraItemBooking getExtraItemBooking(final ExtraItem object) {
-		final ExtraItemBooking eib = new ExtraItemBooking();
-		eib.setActive(true);
-		eib.setExtraItem(object);
-		eib.setComments(object.getBookingComments());
-		eib.setPrice(object.getCost());
-		return eib;
-	}
-
-	private User newUser(final BookingForm bookingForm) {
-		final User user = new User();
-		user.setName(bookingForm.getCusUsername());
-		user.setAddress(bookingForm.getAddress());
-		user.setContact(bookingForm.getContact());
-		user.setEmail(bookingForm.getEmail());
-		user.setCode(bookingForm.getNic());
-		user.setFirstName(bookingForm.getFirstName());
-		user.setLastName(bookingForm.getLastName());
-		user.setPassword(bookingForm.getCusPassword());
-		user.setActive(true);
-		return user;
-	}
-
-	private void handleOnlineBooking(final BookingDTO bookingDTO) {
-		bookingDTO.getBooking().setPaymentMethod(
-				IBooking.BOOKING_PAYMENT_METHOD_ONLINE_DES);
-		bookingDTO.getBooking().setStatusDes(
-				IBooking.BOOKING_SATATUS_ON_REQUEST_DES);
-		bookingDTO.getBooking().setStatus(IBooking.BOOKING_SATATUS_ON_REQUEST);
-	}
-
-	private void handleCashBooking(final double payed,
-			final BookingDTO bookingDTO) {
-		bookingDTO.getBooking().setStatusDes(IBooking.BOOKING_SATATUS_PAID_DES);
-		bookingDTO.getBooking().setStatus(IBooking.BOOKING_SATATUS_PAID);
-		bookingDTO.getBooking().setPaymentMethod(
-				IBooking.BOOKING_PAYMENT_METHOD_CASH_DES);
-
-		final Payment payment = new Payment();
-		payment.setTotalPrice(format(payed));
-		bookingDTO.setPayment(payment);
-		addInfoMessages(BOOKING_CONFIRM_MSG);
-	}
-
-	private void handleOnRequestBooking(final BookingDTO bookingDTO) {
-		bookingDTO.getBooking().setStatusDes(
-				IBooking.BOOKING_SATATUS_ON_REQUEST_DES);
-		bookingDTO.getBooking().setStatus(IBooking.BOOKING_SATATUS_ON_REQUEST);
-		bookingDTO.getBooking().setPaymentMethod(
-				IBooking.BOOKING_PAYMENT_METHOD_ON_REQUEST_DES);
-		addInfoMessages(BOOKING_CONFIRM_MSG);
-	}
-
-	private void switchUser(final HttpServletRequest request,
-			final IUserProfile profile) {
-		request.getSession().removeAttribute(IUser.USER_PROFILE);
-		request.getSession().setAttribute(IUser.USER_PROFILE, profile);
-		Thread.currentThread().setName(profile.getUsername());
-	}
-
-	private User getUser(final BookingForm bookingForm) {
-		final User user = new User();
-		user.setId(bookingForm.getUid() != null
-				&& bookingForm.getUid().longValue() > 0 ? bookingForm.getUid()
-				: null);
-		user.setName(bookingForm.getCusUsername());
-		user.setAddress(bookingForm.getAddress());
-		user.setContact(bookingForm.getContact());
-		user.setEmail(bookingForm.getEmail());
-		user.setCode(bookingForm.getNic());
-		user.setFirstName(bookingForm.getFirstName());
-		user.setLastName(bookingForm.getLastName());
-		user.setPassword(bookingForm.getCusPassword());
-		user.setActive(true);
-		return user;
-	}
-
-	private static BigDecimal format(final double val) {
-		synchronized (BookingAction.class) {
-			BigDecimal bigDecimal = new BigDecimal(val);
-			bigDecimal = bigDecimal.setScale(2, BigDecimal.ROUND_UP);
-			return bigDecimal;
-		}
-	}
-
-	private void addIpgPrams(final HttpServletRequest request,
-			final BookingDTO bookingDTO) {
-		addIpgPrams(request, bookingDTO.getBooking().getCode(), bookingDTO
-				.getBooking().getPaidAmountCts());
-	}
-
-	private void addIpgPrams(final HttpServletRequest request,
-			final String bookingId, final String annountInCts) {
-		final IpgUtil ipg = ServiceHelper.getInstance().getIpgUtil();
-		request.setAttribute(CLIENT_URL, ipg.getVirtualPaymentClientURL());
-		request.setAttribute(VERSION, ipg.getVpc_Version());
-		request.setAttribute(COMMAND, ipg.getVpc_Command());
-		request.setAttribute(ACCESS_CODE, ipg.getVpc_AccessCode());
-		request.setAttribute(MERCH_TX_REF, bookingId);
-		request.setAttribute(MERCHANT, ipg.getVpc_Merchant());
-		request.setAttribute(ORDER_INFO, ipg.getVpc_OrderInfo());
-		request.setAttribute(AMOUNT, annountInCts);
-		request.setAttribute(RETURN_URL, ipg.getVpc_ReturnURL());
-		request.setAttribute(LOCALE, ipg.getVpc_Locale());
-		request.setAttribute(TICKET_NO, bookingId);
 	}
 
 	/*
@@ -440,6 +363,62 @@ public class BookingAction extends BaseAction {
 		return mapping.findForward("ipg");
 	}
 
+	protected ExtraItemBooking getExtraItemBooking(final ExtraItem object) {
+		final ExtraItemBooking eib = new ExtraItemBooking();
+		eib.setActive(true);
+		eib.setExtraItem(object);
+		eib.setComments(object.getBookingComments());
+		eib.setPrice(object.getCost());
+		return eib;
+	}
+
+	private User getUser(final BookingForm bookingForm) {
+		final User user = new User();
+		user.setId((bookingForm.getUid() != null)
+				&& (bookingForm.getUid().longValue() > 0) ? bookingForm
+				.getUid() : null);
+		user.setName(bookingForm.getCusUsername());
+		user.setAddress(bookingForm.getAddress());
+		user.setContact(bookingForm.getContact());
+		user.setEmail(bookingForm.getEmail());
+		user.setCode(bookingForm.getNic());
+		user.setFirstName(bookingForm.getFirstName());
+		user.setLastName(bookingForm.getLastName());
+		user.setPassword(bookingForm.getCusPassword());
+		user.setActive(true);
+		return user;
+	}
+
+	private void handleCashBooking(final double payed,
+			final BookingDTO bookingDTO) {
+		bookingDTO.getBooking().setStatusDes(IBooking.BOOKING_SATATUS_PAID_DES);
+		bookingDTO.getBooking().setStatus(IBooking.BOOKING_SATATUS_PAID);
+		bookingDTO.getBooking().setPaymentMethod(
+				IBooking.BOOKING_PAYMENT_METHOD_CASH_DES);
+
+		final Payment payment = new Payment();
+		payment.setTotalPrice(format(payed));
+		bookingDTO.setPayment(payment);
+		addInfoMessages(BOOKING_CONFIRM_MSG);
+	}
+
+	private void handleOnlineBooking(final BookingDTO bookingDTO) {
+		bookingDTO.getBooking().setPaymentMethod(
+				IBooking.BOOKING_PAYMENT_METHOD_ONLINE_DES);
+		bookingDTO.getBooking().setStatusDes(
+				IBooking.BOOKING_SATATUS_ON_REQUEST_DES);
+		bookingDTO.getBooking().setStatus(IBooking.BOOKING_SATATUS_ON_REQUEST);
+	}
+
+	private void handleOnRequestBooking(final BookingDTO bookingDTO) {
+		bookingDTO.getBooking().setStatusDes(
+				IBooking.BOOKING_SATATUS_ON_REQUEST_DES);
+		bookingDTO.getBooking().setStatus(IBooking.BOOKING_SATATUS_ON_REQUEST);
+		bookingDTO.getBooking().setPaymentMethod(
+				IBooking.BOOKING_PAYMENT_METHOD_ON_REQUEST_DES);
+		addInfoMessages(BOOKING_CONFIRM_MSG);
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -483,6 +462,20 @@ public class BookingAction extends BaseAction {
 		return mapping.findForward(SUCCESS);
 	}
 
+	private User newUser(final BookingForm bookingForm) {
+		final User user = new User();
+		user.setName(bookingForm.getCusUsername());
+		user.setAddress(bookingForm.getAddress());
+		user.setContact(bookingForm.getContact());
+		user.setEmail(bookingForm.getEmail());
+		user.setCode(bookingForm.getNic());
+		user.setFirstName(bookingForm.getFirstName());
+		user.setLastName(bookingForm.getLastName());
+		user.setPassword(bookingForm.getCusPassword());
+		user.setActive(true);
+		return user;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -512,6 +505,14 @@ public class BookingAction extends BaseAction {
 	protected ActionForward save(final ActionMapping mapping,
 			final ActionForm form, final HttpServletRequest request,
 			final HttpServletResponse response) throws Exception {
+		return null;
+	}
+
+	@Override
+	public ActionForward search(final ActionMapping mapping,
+			final ActionForm form, final HttpServletRequest request,
+			final HttpServletResponse response) throws Exception {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -545,12 +546,11 @@ public class BookingAction extends BaseAction {
 		return null;
 	}
 
-	@Override
-	public ActionForward search(final ActionMapping mapping,
-			final ActionForm form, final HttpServletRequest request,
-			final HttpServletResponse response) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	private void switchUser(final HttpServletRequest request,
+			final IUserProfile profile) {
+		request.getSession().removeAttribute(IUser.USER_PROFILE);
+		request.getSession().setAttribute(IUser.USER_PROFILE, profile);
+		Thread.currentThread().setName(profile.getUsername());
 	}
 
 }

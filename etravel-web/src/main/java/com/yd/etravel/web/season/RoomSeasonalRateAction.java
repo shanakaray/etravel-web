@@ -87,8 +87,8 @@ public class RoomSeasonalRateAction extends BaseAction {
 		// roomRate.setInfantCost(roomSeasonalRateForm.getInfantCost());
 		roomRate.setTotalCost(roomSeasonalRateForm.getTotalCost());
 
-		if (roomSeasonalRateForm.getId() != null
-				&& roomSeasonalRateForm.getId() > 0) {
+		if ((roomSeasonalRateForm.getId() != null)
+				&& (roomSeasonalRateForm.getId() > 0)) {
 			roomRate.setId(roomSeasonalRateForm.getId());
 			isnew = false;
 		}
@@ -214,20 +214,20 @@ public class RoomSeasonalRateAction extends BaseAction {
 
 		roomForm.setAllRoomSeasonalRate(getSeasonManager()
 				.findAllRoomSeasonalRateWithRoomAndSeason(
-						roomForm.getHotelId() != null
-								&& roomForm.getHotelId().longValue() > 0 ? roomForm
+						(roomForm.getHotelId() != null)
+								&& (roomForm.getHotelId().longValue() > 0) ? roomForm
 								.getHotelId() : null));
 
-		if (roomForm.getHotelId() != null
-				&& roomForm.getHotelId().longValue() > 0) {
+		if ((roomForm.getHotelId() != null)
+				&& (roomForm.getHotelId().longValue() > 0)) {
 			final List<Room> rooms = getRoomManager().findAllRoomWithRoomType(
 					roomForm.getHotelId());
 			roomForm.setAllRoom(rooms);
 
 			final List<Season> allSeason = getSeasonManager()
 					.findSeasonByHotel(
-							roomForm.getHotelId() != null
-									&& roomForm.getHotelId().longValue() > 0 ? roomForm
+							(roomForm.getHotelId() != null)
+									&& (roomForm.getHotelId().longValue() > 0) ? roomForm
 									.getHotelId() : null);
 			roomForm.setAllSeason(allSeason);
 
@@ -269,6 +269,14 @@ public class RoomSeasonalRateAction extends BaseAction {
 		return null;
 	}
 
+	@Override
+	public ActionForward search(final ActionMapping mapping,
+			final ActionForm form, final HttpServletRequest request,
+			final HttpServletResponse response) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -295,14 +303,6 @@ public class RoomSeasonalRateAction extends BaseAction {
 	 */
 	@Override
 	protected ActionForward sort(final ActionMapping mapping,
-			final ActionForm form, final HttpServletRequest request,
-			final HttpServletResponse response) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ActionForward search(final ActionMapping mapping,
 			final ActionForm form, final HttpServletRequest request,
 			final HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub

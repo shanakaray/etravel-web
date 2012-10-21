@@ -42,7 +42,7 @@ public class SortedCollection {
 
 			// String methodName = "get" + field.substring(0,1).toUpperCase() +
 			// field.substring(1);
-			if (unsortedList != null && unsortedList.size() > 0) {
+			if ((unsortedList != null) && (unsortedList.size() > 0)) {
 				if (assendingOrder) {
 					for (int i = 0; i < unsortedList.size(); i++) {
 						final Date oldFieldValue = (Date) sortColl.getObject(
@@ -87,7 +87,7 @@ public class SortedCollection {
 
 					}
 				}
-				if (nullFieldList != null && nullFieldList.size() > 0) {
+				if ((nullFieldList != null) && (nullFieldList.size() > 0)) {
 					sortedList.addAll(nullFieldList);
 				}
 			}
@@ -121,7 +121,7 @@ public class SortedCollection {
 
 			// String methodName = "get" + field.substring(0,1).toUpperCase() +
 			// field.substring(1);
-			if (unsortedList != null && unsortedList.size() > 0) {
+			if ((unsortedList != null) && (unsortedList.size() > 0)) {
 				if (assendingOrder) {
 					for (int i = 0; i < unsortedList.size(); i++) {
 						final Object oldFieldValue = sortColl.getObject(
@@ -177,7 +177,7 @@ public class SortedCollection {
 						}
 					}
 				}
-				if (nullFieldList != null && nullFieldList.size() > 0) {
+				if ((nullFieldList != null) && (nullFieldList.size() > 0)) {
 					sortedList.addAll(nullFieldList);
 				}
 

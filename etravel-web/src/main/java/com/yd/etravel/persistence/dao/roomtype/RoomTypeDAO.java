@@ -23,6 +23,11 @@ public class RoomTypeDAO extends BaseDAO<RoomType> implements IRoomTypeDAO {
 	}
 
 	@Override
+	protected Class getEntityClass() {
+		return RoomType.class;
+	}
+
+	@Override
 	public boolean isRoomTypeNameExist(final String type, final Long id)
 			throws PersistenceException {
 		try {
@@ -45,11 +50,6 @@ public class RoomTypeDAO extends BaseDAO<RoomType> implements IRoomTypeDAO {
 		} catch (final HibernateException e) {
 			throw new PersistenceException(e);
 		}
-	}
-
-	@Override
-	protected Class getEntityClass() {
-		return RoomType.class;
 	}
 
 }

@@ -27,22 +27,22 @@ public interface IBookingDAO extends IBaseDAO<Booking> {
 	public List<BookingReportDTO> findBookingDetail(BookingReportSearchDTO dto)
 			throws PersistenceException;
 
+	public List<RoomBooking> findExpiredBookings(final Date date,
+			final String status, final String paymentMethod)
+			throws PersistenceException;
+
 	public RoomBooking findRoomBooking(String bookingid)
 			throws PersistenceException;
 
-	public List<RoomBooking> findExpiredBookings(final Date date,
-			final String status, final String paymentMethod)
+	public ExtraItemBooking merge(ExtraItemBooking extraItemBooking)
 			throws PersistenceException;
 
 	public HotelBooking save(HotelBooking hotelBooking)
 			throws PersistenceException;
 
-	public RoomBooking save(RoomBooking roomBooking)
-			throws PersistenceException;
-
 	public Payment save(Payment payment) throws PersistenceException;
 
-	public ExtraItemBooking merge(ExtraItemBooking extraItemBooking)
+	public RoomBooking save(RoomBooking roomBooking)
 			throws PersistenceException;
 
 }

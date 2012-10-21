@@ -14,6 +14,11 @@ import com.yd.etravel.domain.common.BaseObject;
 @Entity
 @Table(name = "T_MARKUP")
 public class Markup extends BaseObject {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5287110185253110589L;
+
 	@Column
 	private String marCode;
 
@@ -32,49 +37,49 @@ public class Markup extends BaseObject {
 	@Column
 	private String status;
 
-	public String getMarCode() {
-		return this.marCode;
+	public String getComment() {
+		return this.comment;
 	}
 
-	public void setMarCode(final String marCode) {
-		this.marCode = marCode;
+	public String getMarCode() {
+		return this.marCode;
 	}
 
 	public String getMarName() {
 		return this.marName;
 	}
 
-	public void setMarName(final String marName) {
-		this.marName = marName;
-	}
-
-	public String getComment() {
-		return this.comment;
-	}
-
-	public void setComment(final String comment) {
-		this.comment = comment;
+	public BigDecimal getMarPercenatge() {
+		return this.marPercenatge;
 	}
 
 	public BigDecimal getMarValue() {
 		return this.marValue;
 	}
 
-	public void setMarValue(final BigDecimal marValue) {
-		this.marValue = marValue;
+	@Override
+	public String getStatus() {
+		return this.status;
 	}
 
-	public BigDecimal getMarPercenatge() {
-		return this.marPercenatge;
+	public void setComment(final String comment) {
+		this.comment = comment;
+	}
+
+	public void setMarCode(final String marCode) {
+		this.marCode = marCode;
+	}
+
+	public void setMarName(final String marName) {
+		this.marName = marName;
 	}
 
 	public void setMarPercenatge(final BigDecimal marPercenatge) {
 		this.marPercenatge = marPercenatge;
 	}
 
-	@Override
-	public String getStatus() {
-		return this.status;
+	public void setMarValue(final BigDecimal marValue) {
+		this.marValue = marValue;
 	}
 
 	@Override

@@ -17,18 +17,18 @@ import com.yd.etravel.service.exception.ServiceException;
  */
 public interface IPaxManager {
 
-	public List<Pax> findAllActivePax() throws ServiceException;
+	public int deletePax(Long id) throws ServiceException;
 
-	public Pax savePax(final Pax pax) throws ServiceException;
+	public List<Pax> findAllActivePax() throws ServiceException;
 
 	public List<Pax> findAllPax() throws ServiceException;
 
-	public Pax findPaxById(Long id) throws ServiceException;
-
-	public int deletePax(Long id) throws ServiceException;
+	public List<Pax> findPax(PaxSearchDTO paxSearchDTO) throws ServiceException;
 
 	public List<Pax> findPaxByHotel(Long hotelid) throws ServiceException;
 
-	public List<Pax> findPax(PaxSearchDTO paxSearchDTO) throws ServiceException;
+	public Pax findPaxById(Long id) throws ServiceException;
+
+	public Pax savePax(final Pax pax) throws ServiceException;
 
 }

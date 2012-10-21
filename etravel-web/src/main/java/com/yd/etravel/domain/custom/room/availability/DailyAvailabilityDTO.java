@@ -16,6 +16,10 @@ import com.yd.etravel.util.DateUtil;
  */
 
 public class DailyAvailabilityDTO implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6933848531187336849L;
 	private Long id;
 	private Date date;
 	private Date createdDate;
@@ -56,96 +60,16 @@ public class DailyAvailabilityDTO implements Serializable {
 		this.createdDate = createdDate;
 	}
 
-	public Long getId() {
-		return this.id;
-	}
-
-	public void setId(final Long id) {
-		this.id = id;
-	}
-
-	public Date getDate() {
-		return this.date;
-	}
-
-	public String getDateString() {
-		return DateUtil.format(this.date);
-	}
-
-	public void setDate(final Date date) {
-		this.date = date;
+	public Boolean getActive() {
+		return this.active;
 	}
 
 	public Integer getAllocatedUnit() {
 		return this.allocatedUnit;
 	}
 
-	public void setAllocatedUnit(final Integer allocatedUnit) {
-		this.allocatedUnit = allocatedUnit;
-	}
-
 	public Integer getAvailableUnit() {
 		return this.availableUnit;
-	}
-
-	public void setAvailableUnit(final Integer availableUnit) {
-		this.availableUnit = availableUnit;
-	}
-
-	public Long getRoomId() {
-		return this.roomId;
-	}
-
-	public void setRoomId(final Long roomId) {
-		this.roomId = roomId;
-	}
-
-	public Long getRoomTypeId() {
-		return this.roomTypeId;
-	}
-
-	public void setRoomTypeId(final Long roomTypeId) {
-		this.roomTypeId = roomTypeId;
-	}
-
-	public Long getHotelId() {
-		return this.hotelId;
-	}
-
-	public void setHotelId(final Long hotelId) {
-		this.hotelId = hotelId;
-	}
-
-	public String getHotelName() {
-		return this.hotelName;
-	}
-
-	public void setHotelName(final String hotelName) {
-		this.hotelName = hotelName;
-	}
-
-	public String getRoomName() {
-		return this.roomName;
-	}
-
-	public void setRoomName(final String roomName) {
-		this.roomName = roomName;
-	}
-
-	public String getRoomTypeName() {
-		return this.roomTypeName;
-	}
-
-	public void setRoomTypeName(final String roomTypeName) {
-		this.roomTypeName = roomTypeName;
-	}
-
-	public Boolean getActive() {
-		return this.active;
-	}
-
-	public void setActive(final Boolean active) {
-		this.active = active;
 	}
 
 	public Date getCreatedDate() {
@@ -156,8 +80,88 @@ public class DailyAvailabilityDTO implements Serializable {
 		return DateUtil.format(this.createdDate);
 	}
 
+	public Date getDate() {
+		return this.date;
+	}
+
+	public String getDateString() {
+		return DateUtil.format(this.date);
+	}
+
+	public Long getHotelId() {
+		return this.hotelId;
+	}
+
+	public String getHotelName() {
+		return this.hotelName;
+	}
+
+	public Long getId() {
+		return this.id;
+	}
+
+	public Long getRoomId() {
+		return this.roomId;
+	}
+
+	public String getRoomName() {
+		return this.roomName;
+	}
+
+	public Long getRoomTypeId() {
+		return this.roomTypeId;
+	}
+
+	public String getRoomTypeName() {
+		return this.roomTypeName;
+	}
+
+	public void setActive(final Boolean active) {
+		this.active = active;
+	}
+
+	public void setAllocatedUnit(final Integer allocatedUnit) {
+		this.allocatedUnit = allocatedUnit;
+	}
+
+	public void setAvailableUnit(final Integer availableUnit) {
+		this.availableUnit = availableUnit;
+	}
+
 	public void setCreatedDate(final Date createdDate) {
 		this.createdDate = createdDate;
+	}
+
+	public void setDate(final Date date) {
+		this.date = date;
+	}
+
+	public void setHotelId(final Long hotelId) {
+		this.hotelId = hotelId;
+	}
+
+	public void setHotelName(final String hotelName) {
+		this.hotelName = hotelName;
+	}
+
+	public void setId(final Long id) {
+		this.id = id;
+	}
+
+	public void setRoomId(final Long roomId) {
+		this.roomId = roomId;
+	}
+
+	public void setRoomName(final String roomName) {
+		this.roomName = roomName;
+	}
+
+	public void setRoomTypeId(final Long roomTypeId) {
+		this.roomTypeId = roomTypeId;
+	}
+
+	public void setRoomTypeName(final String roomTypeName) {
+		this.roomTypeName = roomTypeName;
 	}
 
 }

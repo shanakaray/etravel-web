@@ -17,11 +17,11 @@ public interface ISearchDAO extends IBaseDAO<RoomAvailability> {
 			final SearchRequestDTO searchRequestDTO)
 			throws PersistenceException;
 
-	public List<RoomAvailability> findRoomsByCheckOutDate(
+	public List<RoomAvailability> findRoomsByCheckInDate(
 			final SearchRequestDTO searchRequestDTO)
 			throws PersistenceException;
 
-	public List<RoomAvailability> findRoomsByCheckInDate(
+	public List<RoomAvailability> findRoomsByCheckOutDate(
 			final SearchRequestDTO searchRequestDTO)
 			throws PersistenceException;
 }

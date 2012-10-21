@@ -37,42 +37,6 @@ public class RoomBooking extends BaseObject {
 		return this.hotelBooking;
 	}
 
-	public void setHotelBooking(final HotelBooking hotelBooking) {
-		this.hotelBooking = hotelBooking;
-	}
-
-	public Room getRoom() {
-		return this.room;
-	}
-
-	public void setRoom(final Room room) {
-		this.room = room;
-	}
-
-	public BigDecimal getPrice() {
-		return this.price;
-	}
-
-	public void setPrice(final BigDecimal price) {
-		this.price = price;
-	}
-
-	public Integer getTotalPax() {
-		return this.totalPax;
-	}
-
-	public void setTotalPax(final Integer totalPax) {
-		this.totalPax = totalPax;
-	}
-
-	public Integer getRoomNumber() {
-		return this.roomNumber;
-	}
-
-	public void setRoomNumber(final Integer roomNumber) {
-		this.roomNumber = roomNumber;
-	}
-
 	public Map<String, String> getParams() {
 		final Map<String, String> map = new HashMap<String, String>();
 		map.put("hotel.name", getHotelBooking().getHotel().getName());
@@ -91,6 +55,42 @@ public class RoomBooking extends BaseObject {
 		map.put("room.name", getRoom().getRoomType().getName());
 		map.put("room.count", getHotelBooking().getNoOfRoom().toString());
 		return map;
+	}
+
+	public BigDecimal getPrice() {
+		return this.price;
+	}
+
+	public Room getRoom() {
+		return this.room;
+	}
+
+	public Integer getRoomNumber() {
+		return this.roomNumber;
+	}
+
+	public Integer getTotalPax() {
+		return this.totalPax;
+	}
+
+	public void setHotelBooking(final HotelBooking hotelBooking) {
+		this.hotelBooking = hotelBooking;
+	}
+
+	public void setPrice(final BigDecimal price) {
+		this.price = price;
+	}
+
+	public void setRoom(final Room room) {
+		this.room = room;
+	}
+
+	public void setRoomNumber(final Integer roomNumber) {
+		this.roomNumber = roomNumber;
+	}
+
+	public void setTotalPax(final Integer totalPax) {
+		this.totalPax = totalPax;
 	}
 
 }

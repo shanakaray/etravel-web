@@ -57,7 +57,7 @@ public class BookingDAO extends BaseDAO<Booking> implements IBookingDAO {
 					.append(" JOIN rb.room as r JOIN r.roomType as rt LEFT JOIN b.agent agt ")
 					.append(" WHERE 1=1 ");
 
-			if (searchDTO.getHotelId() != null
+			if ((searchDTO.getHotelId() != null)
 					&& !searchDTO.getHotelId().isEmpty()) {
 				stringBuilder.append(" AND h.id IN (:hid)");
 			}
@@ -98,13 +98,13 @@ public class BookingDAO extends BaseDAO<Booking> implements IBookingDAO {
 				stringBuilder.append(" AND UPPER(b.code)=UPPER(:bcode) ");
 			}
 
-			if (searchDTO.getCheckInFrom() != null
-					&& searchDTO.getCheckInTo() != null) {
+			if ((searchDTO.getCheckInFrom() != null)
+					&& (searchDTO.getCheckInTo() != null)) {
 				stringBuilder
 						.append(" AND (hb.checkInDate>=:cfdate OR (hb.checkOutDate>=:cfdate  AND hb.checkInDate<:cfdate)) AND hb.checkInDate<=:ctdate ");
 			}
 
-			if (searchDTO.getStatusList() != null
+			if ((searchDTO.getStatusList() != null)
 					&& !searchDTO.getStatusList().isEmpty()) {
 				stringBuilder.append(" AND b.status IN (:stalst) ");
 			}
@@ -113,7 +113,7 @@ public class BookingDAO extends BaseDAO<Booking> implements IBookingDAO {
 			final Query query = getCurrentSession().createQuery(
 					stringBuilder.toString());
 
-			if (searchDTO.getHotelId() != null
+			if ((searchDTO.getHotelId() != null)
 					&& !searchDTO.getHotelId().isEmpty()) {
 				query.setParameterList("hid", searchDTO.getHotelId());
 			}
@@ -145,8 +145,8 @@ public class BookingDAO extends BaseDAO<Booking> implements IBookingDAO {
 				query.setParameter("bto", searchDTO.getBookedTo());
 			}
 
-			if (searchDTO.getCheckInFrom() != null
-					&& searchDTO.getCheckInTo() != null) {
+			if ((searchDTO.getCheckInFrom() != null)
+					&& (searchDTO.getCheckInTo() != null)) {
 				query.setParameter("cfdate", searchDTO.getCheckInFrom());
 				query.setParameter("ctdate", searchDTO.getCheckInTo());
 			}
@@ -154,7 +154,7 @@ public class BookingDAO extends BaseDAO<Booking> implements IBookingDAO {
 				query.setParameter("bid", searchDTO.getId());
 			}
 
-			if (searchDTO.getStatusList() != null
+			if ((searchDTO.getStatusList() != null)
 					&& !searchDTO.getStatusList().isEmpty()) {
 				query.setParameterList("stalst", searchDTO.getStatusList());
 			}
@@ -212,22 +212,22 @@ public class BookingDAO extends BaseDAO<Booking> implements IBookingDAO {
 	}
 
 	@Override
-	public HotelBooking save(final HotelBooking hotelBooking)
+	public ExtraItemBooking merge(final ExtraItemBooking extraItemBooking)
 			throws PersistenceException {
 		try {
-			getCurrentSession().save(hotelBooking);
-			return hotelBooking;
+			getCurrentSession().save(extraItemBooking);
+			return extraItemBooking;
 		} catch (final HibernateException e) {
 			throw new PersistenceException(e);
 		}
 	}
 
 	@Override
-	public RoomBooking save(final RoomBooking roomBooking)
+	public HotelBooking save(final HotelBooking hotelBooking)
 			throws PersistenceException {
 		try {
-			getCurrentSession().save(roomBooking);
-			return roomBooking;
+			getCurrentSession().save(hotelBooking);
+			return hotelBooking;
 		} catch (final HibernateException e) {
 			throw new PersistenceException(e);
 		}
@@ -244,11 +244,11 @@ public class BookingDAO extends BaseDAO<Booking> implements IBookingDAO {
 	}
 
 	@Override
-	public ExtraItemBooking merge(final ExtraItemBooking extraItemBooking)
+	public RoomBooking save(final RoomBooking roomBooking)
 			throws PersistenceException {
 		try {
-			getCurrentSession().save(extraItemBooking);
-			return extraItemBooking;
+			getCurrentSession().save(roomBooking);
+			return roomBooking;
 		} catch (final HibernateException e) {
 			throw new PersistenceException(e);
 		}
