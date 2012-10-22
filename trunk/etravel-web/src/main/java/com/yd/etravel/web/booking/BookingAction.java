@@ -189,11 +189,11 @@ public class BookingAction extends BaseAction {
 
 		bookingDTO.setExtraItemBookingList(etbList);
 
-		final IUserProfile profile1 = (IUserProfile) request.getSession()
+		final IUserProfile profile = (IUserProfile) request.getSession()
 				.getAttribute(IUser.USER_PROFILE);
-		Long userId = profile1.getId();
+		Long userId = profile.getId();
 		// current user can change booking user(Hotel Admin)
-		if (profile1.hasFunction(IUserFunctions.BOOKING_USER_CAN_CHANGE)) {
+		if (profile.hasFunction(IUserFunctions.BOOKING_USER_CAN_CHANGE)) {
 			// creates a new Customer.
 			if (bookingForm.isNewCustomer()) {
 				userId = getUserManager().saveCustomer(newUser(bookingForm))
@@ -248,12 +248,8 @@ public class BookingAction extends BaseAction {
 		bookingDTO.setBooking(booking);
 		bookingDTO.setRoomAvalabiltyId(roomDTO.getId());
 
-		final HotelBooking hotelBooking = new HotelBooking();
-		hotelBooking.setActive(true);
-		hotelBooking.setBooking(booking);
-		hotelBooking.setCheckInDate(searchRequestDTO.getCheckIn());
-		hotelBooking.setCheckOutDate(searchRequestDTO.getCheckOut());
-		hotelBooking.setHotel(roomDTO.getHotel());
+		final HotelBooking hotelBooking = getHotelbooking(searchRequestDTO,
+				roomDTO, booking);
 		hotelBooking.setNoOfRoom(bookingForm.getNoOfRoom());
 		bookingDTO.setHotelBooking(hotelBooking);
 
@@ -292,6 +288,17 @@ public class BookingAction extends BaseAction {
 		} else {
 			return mapping.findForward(SUCCESS);
 		}
+	}
+
+	private HotelBooking getHotelbooking(SearchRequestDTO searchRequestDTO,
+			RoomDTO roomDTO, final Booking booking) {
+		final HotelBooking hotelBooking = new HotelBooking();
+		hotelBooking.setActive(true);
+		hotelBooking.setBooking(booking);
+		hotelBooking.setCheckInDate(searchRequestDTO.getCheckIn());
+		hotelBooking.setCheckOutDate(searchRequestDTO.getCheckOut());
+		hotelBooking.setHotel(roomDTO.getHotel());
+		return hotelBooking;
 	}
 
 	@SuppressWarnings("unchecked")

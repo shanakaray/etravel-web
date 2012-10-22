@@ -45,7 +45,7 @@ public class SessionCheckingFilter implements Filter {
 		final String[] valStrings = url.split(APP_NAME);
 		String urlEnd = "";
 		boolean hasAppname = true;
-		if (StringUtils.isEmpty(valStrings)) {
+		if (!StringUtils.isEmpty(valStrings) && valStrings.length >= 2) {
 			urlEnd = valStrings[valStrings.length - 1];
 		} else {
 			urlEnd = url;
@@ -60,8 +60,7 @@ public class SessionCheckingFilter implements Filter {
 			final HttpServletResponse httpResponse = (HttpServletResponse) response;
 			if (url.contains("/admin/")) {
 				if (isSessionNull(session)) {
-					redirect("/admin/login.jsp", hasAppname,
-							httpResponse);
+					redirect("/admin/login.jsp", hasAppname, httpResponse);
 					return;
 				}
 			} else if (url.contains("/customer/")) {
