@@ -160,7 +160,7 @@ public class OccupancyAction extends BaseAction {
 
 		occupancyForm.setAllOccupancy(getOccupancyManager()
 				.findAllOccupancyWithRoomType());
-		List<RoomType> allRoomType = new ArrayList();
+		List<RoomType> allRoomType = new ArrayList<RoomType>();
 		request.getSession().setAttribute("roomTypeId",
 				occupancy.getRoomType().getId());
 
@@ -201,14 +201,10 @@ public class OccupancyAction extends BaseAction {
 			final HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
 		final OccupancyForm occupancyForm = (OccupancyForm) form;
-
 		occupancyForm.setAllOccupancy(getOccupancyManager()
 				.findAllOccupancyWithRoomType());
-		List<RoomType> allRoomType = new ArrayList();
-
-		allRoomType = getRoomTypeManager().findAllActiveRoomType();
-
-		occupancyForm.setAllRoomType(allRoomType);
+		occupancyForm.setAllRoomType(getRoomTypeManager()
+				.findAllActiveRoomType());
 		return mapping.findForward(SUCCESS);
 	}
 
@@ -226,17 +222,11 @@ public class OccupancyAction extends BaseAction {
 			final HttpServletResponse response) throws Exception {
 		final OccupancyForm occupancyForm = (OccupancyForm) form;
 		occupancyForm.reset(mapping, request);
-
 		occupancyForm.setAllOccupancy(getOccupancyManager()
 				.findAllOccupancyWithRoomType());
-
-		List<RoomType> allRoomType = new ArrayList();
-
-		allRoomType = getRoomTypeManager().findAllActiveRoomType();
-
-		occupancyForm.setAllRoomType(allRoomType);
+		occupancyForm.setAllRoomType(getRoomTypeManager()
+				.findAllActiveRoomType());
 		request.getSession().setAttribute("roomTypeId", "");
-
 		return mapping.findForward(SUCCESS);
 	}
 

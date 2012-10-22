@@ -1,13 +1,7 @@
-/**
- * 
- */
-
 package com.yd.etravel.persistence.dao.cmt.content;
 
 import java.util.List;
 
-import org.hibernate.Query;
-import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
 import com.yd.etravel.domain.cmt.content.Image;
@@ -29,11 +23,9 @@ public class ImageDAO extends BaseDAO<Image> implements IImageDAO {
 
 	@Override
 	public List<Long> getIds(final Image image) throws PersistenceException {
-		final Session session = getCurrentSession();
-		final Query query = session
-				.createQuery("select i.id from Image i where i.object='"
-						+ image.getObject() + "' and i.pk=" + image.getPk());
-		return query.list();
+		return getCurrentSession().createQuery(
+				"select i.id from Image i where i.object='" + image.getObject()
+						+ "' and i.pk=" + image.getPk()).list();
 	}
 
 	@Override
