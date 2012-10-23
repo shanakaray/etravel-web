@@ -3,7 +3,6 @@
  */
 package com.yd.etravel.web.booking;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -57,22 +56,6 @@ public class BookingAction extends BaseAction {
 	private static final String LOCALE = "vpc_Locale";
 	private static final String TICKET_NO = "vpc_TicketNo";
 
-	private static BigDecimal format(final double val) {
-		synchronized (BookingAction.class) {
-			BigDecimal bigDecimal = new BigDecimal(val);
-			bigDecimal = bigDecimal.setScale(2, BigDecimal.ROUND_UP);
-			return bigDecimal;
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.yd.etravel.web.common.BaseAction#add(org.apache.struts.action.
-	 * ActionMapping, org.apache.struts.action.ActionForm,
-	 * javax.servlet.http.HttpServletRequest,
-	 * javax.servlet.http.HttpServletResponse)
-	 */
 	@Override
 	protected ActionForward add(final ActionMapping mapping,
 			final ActionForm form, final HttpServletRequest request,
@@ -102,14 +85,6 @@ public class BookingAction extends BaseAction {
 		request.setAttribute(TICKET_NO, bookingId);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.yd.etravel.web.common.BaseAction#back(org.apache.struts.action.
-	 * ActionMapping, org.apache.struts.action.ActionForm,
-	 * javax.servlet.http.HttpServletRequest,
-	 * javax.servlet.http.HttpServletResponse)
-	 */
 	@Override
 	protected ActionForward back(final ActionMapping mapping,
 			final ActionForm form, final HttpServletRequest request,
@@ -117,15 +92,6 @@ public class BookingAction extends BaseAction {
 		return null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.yd.etravel.web.common.BaseAction#create(org.apache.struts.action.
-	 * ActionMapping, org.apache.struts.action.ActionForm,
-	 * javax.servlet.http.HttpServletRequest,
-	 * javax.servlet.http.HttpServletResponse)
-	 */
 	@Override
 	public ActionForward create(final ActionMapping mapping,
 			final ActionForm form, final HttpServletRequest request,
@@ -224,11 +190,11 @@ public class BookingAction extends BaseAction {
 				* searchRequestDTO.getNoOfNights();
 		final double tot = totalPrice + extraItemPrice;
 
-		booking.setTotalPrice(format(tot));
+		booking.setTotalPrice(tot);
 
-		final BigDecimal roomPrice = format(bookingForm.getNoOfRoom()
+		final double roomPrice = bookingForm.getNoOfRoom()
 				* roomDTO.getRoomSeasonalRate().getTotalCost().doubleValue()
-				* searchRequestDTO.getNoOfNights());
+				* searchRequestDTO.getNoOfNights();
 
 		booking.setRoomPrice(roomPrice);
 
@@ -241,7 +207,7 @@ public class BookingAction extends BaseAction {
 			payed = booking.getTotalPrice().doubleValue();
 		}
 
-		booking.setPaidAmount(format(payed));
+		booking.setPaidAmount(payed);
 		booking.setSingleNight(bookingForm.isSingleNight());
 
 		booking.setActive(true);
@@ -253,16 +219,8 @@ public class BookingAction extends BaseAction {
 		hotelBooking.setNoOfRoom(bookingForm.getNoOfRoom());
 		bookingDTO.setHotelBooking(hotelBooking);
 
-		final RoomBooking roomBooking = new RoomBooking();
-		roomBooking.setHotelBooking(hotelBooking);
-		roomBooking.setActive(true);
-		roomBooking.setRoom(roomDTO.getRoom());
-		// roomBooking.setAdult(bookingForm.getAdult());
-		// roomBooking.setChild(bookingForm.getChild());
-		// roomBooking.setInfant(bookingForm.getInfant());
-		roomBooking.setTotalPax(bookingForm.getTotalPax());
-		roomBooking.setPrice(roomDTO.getRoomSeasonalRate().getTotalCost());
-		bookingDTO.setRoomBooking(roomBooking);
+		bookingDTO.setRoomBooking(getRoomBooking(bookingForm, roomDTO,
+				hotelBooking));
 
 		// On request
 
@@ -290,8 +248,20 @@ public class BookingAction extends BaseAction {
 		}
 	}
 
-	private HotelBooking getHotelbooking(SearchRequestDTO searchRequestDTO,
-			RoomDTO roomDTO, final Booking booking) {
+	private RoomBooking getRoomBooking(final BookingForm bookingForm,
+			final RoomDTO roomDTO, final HotelBooking hotelBooking) {
+		final RoomBooking roomBooking = new RoomBooking();
+		roomBooking.setHotelBooking(hotelBooking);
+		roomBooking.setActive(true);
+		roomBooking.setRoom(roomDTO.getRoom());
+		roomBooking.setTotalPax(bookingForm.getTotalPax());
+		roomBooking.setPrice(roomDTO.getRoomSeasonalRate().getTotalCost());
+		return roomBooking;
+	}
+
+	private HotelBooking getHotelbooking(
+			final SearchRequestDTO searchRequestDTO, final RoomDTO roomDTO,
+			final Booking booking) {
 		final HotelBooking hotelBooking = new HotelBooking();
 		hotelBooking.setActive(true);
 		hotelBooking.setBooking(booking);
@@ -308,15 +278,6 @@ public class BookingAction extends BaseAction {
 				"extraItem"));
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.yd.etravel.web.common.BaseAction#delete(org.apache.struts.action.
-	 * ActionMapping, org.apache.struts.action.ActionForm,
-	 * javax.servlet.http.HttpServletRequest,
-	 * javax.servlet.http.HttpServletResponse)
-	 */
 	@Override
 	protected ActionForward delete(final ActionMapping mapping,
 			final ActionForm form, final HttpServletRequest request,
@@ -324,14 +285,6 @@ public class BookingAction extends BaseAction {
 		return null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.yd.etravel.web.common.BaseAction#edit(org.apache.struts.action.
-	 * ActionMapping, org.apache.struts.action.ActionForm,
-	 * javax.servlet.http.HttpServletRequest,
-	 * javax.servlet.http.HttpServletResponse)
-	 */
 	@Override
 	protected ActionForward edit(final ActionMapping mapping,
 			final ActionForm form, final HttpServletRequest request,
@@ -339,14 +292,6 @@ public class BookingAction extends BaseAction {
 		return null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.yd.etravel.web.common.BaseAction#find(org.apache.struts.action.
-	 * ActionMapping, org.apache.struts.action.ActionForm,
-	 * javax.servlet.http.HttpServletRequest,
-	 * javax.servlet.http.HttpServletResponse)
-	 */
 	@Override
 	protected ActionForward find(final ActionMapping mapping,
 			final ActionForm form, final HttpServletRequest request,
@@ -355,15 +300,6 @@ public class BookingAction extends BaseAction {
 		return mapping.findForward(SUCCESS);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.yd.etravel.web.common.BaseAction#forward(org.apache.struts.action
-	 * .ActionMapping, org.apache.struts.action.ActionForm,
-	 * javax.servlet.http.HttpServletRequest,
-	 * javax.servlet.http.HttpServletResponse)
-	 */
 	@Override
 	protected ActionForward forward(final ActionMapping mapping,
 			final ActionForm form, final HttpServletRequest request,
@@ -410,7 +346,7 @@ public class BookingAction extends BaseAction {
 				IBooking.BOOKING_PAYMENT_METHOD_CASH_DES);
 
 		final Payment payment = new Payment();
-		payment.setTotalPrice(format(payed));
+		payment.setTotalPrice(payed);
 		bookingDTO.setPayment(payment);
 		addInfoMessages(BOOKING_CONFIRM_MSG);
 	}
@@ -432,14 +368,6 @@ public class BookingAction extends BaseAction {
 		addInfoMessages(BOOKING_CONFIRM_MSG);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.yd.etravel.web.common.BaseAction#init(org.apache.struts.action.
-	 * ActionMapping, org.apache.struts.action.ActionForm,
-	 * javax.servlet.http.HttpServletRequest,
-	 * javax.servlet.http.HttpServletResponse)
-	 */
 	@Override
 	protected ActionForward init(final ActionMapping mapping,
 			final ActionForm form, final HttpServletRequest request,
@@ -463,13 +391,10 @@ public class BookingAction extends BaseAction {
 
 		if (hasAccess(IUserFunctions.BOOKING_USER_CAN_CHANGE, request)) {
 
-			new HashSet<Long>();
 			roleIds.add(IUserRoles.CUSTOMER_ROLE_ID);
 			userSearchDTO.setRoleIds(roleIds);
-
-			final ArrayList<User> customers = (ArrayList<User>) getUserManager()
-					.findUsers(userSearchDTO);
-			bookingForm.setAllCustomers(customers);
+			bookingForm.setAllCustomers(getUserManager().findUsers(
+					userSearchDTO));
 		}
 
 		return mapping.findForward(SUCCESS);
@@ -489,15 +414,6 @@ public class BookingAction extends BaseAction {
 		return user;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.yd.etravel.web.common.BaseAction#process(org.apache.struts.action
-	 * .ActionMapping, org.apache.struts.action.ActionForm,
-	 * javax.servlet.http.HttpServletRequest,
-	 * javax.servlet.http.HttpServletResponse)
-	 */
 	@Override
 	public ActionForward process(final ActionMapping mapping,
 			final ActionForm form, final HttpServletRequest request,
@@ -506,14 +422,6 @@ public class BookingAction extends BaseAction {
 		return mapping.findForward(SUCCESS);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.yd.etravel.web.common.BaseAction#save(org.apache.struts.action.
-	 * ActionMapping, org.apache.struts.action.ActionForm,
-	 * javax.servlet.http.HttpServletRequest,
-	 * javax.servlet.http.HttpServletResponse)
-	 */
 	@Override
 	protected ActionForward save(final ActionMapping mapping,
 			final ActionForm form, final HttpServletRequest request,
@@ -525,18 +433,9 @@ public class BookingAction extends BaseAction {
 	public ActionForward search(final ActionMapping mapping,
 			final ActionForm form, final HttpServletRequest request,
 			final HttpServletResponse response) throws Exception {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.yd.etravel.web.common.BaseAction#send(org.apache.struts.action.
-	 * ActionMapping, org.apache.struts.action.ActionForm,
-	 * javax.servlet.http.HttpServletRequest,
-	 * javax.servlet.http.HttpServletResponse)
-	 */
 	@Override
 	protected ActionForward send(final ActionMapping mapping,
 			final ActionForm form, final HttpServletRequest request,
@@ -544,14 +443,6 @@ public class BookingAction extends BaseAction {
 		return null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.yd.etravel.web.common.BaseAction#sort(org.apache.struts.action.
-	 * ActionMapping, org.apache.struts.action.ActionForm,
-	 * javax.servlet.http.HttpServletRequest,
-	 * javax.servlet.http.HttpServletResponse)
-	 */
 	@Override
 	protected ActionForward sort(final ActionMapping mapping,
 			final ActionForm form, final HttpServletRequest request,

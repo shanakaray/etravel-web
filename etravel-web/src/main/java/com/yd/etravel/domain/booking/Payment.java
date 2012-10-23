@@ -39,4 +39,9 @@ public class Payment extends BaseObject {
 	public void setTotalPrice(final BigDecimal totalPrice) {
 		this.totalPrice = totalPrice;
 	}
+
+	public void setTotalPrice(final double payed) {
+		setTotalPrice(format(payed));
+
+	}
 }

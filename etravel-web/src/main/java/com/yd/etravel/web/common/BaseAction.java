@@ -45,7 +45,7 @@ public abstract class BaseAction extends Action implements
 		process, init, create, save, search, delete, edit, send, back, find, forward, add, sort, OnChange, roomOnChange, hotelOnChange;
 	}
 
-	protected static final Log LOG = LogFactory.getLog(BaseAction.class);
+	private static final Log LOG = LogFactory.getLog(BaseAction.class);
 	// Spring Managers
 	private IUserManager userManager;
 	private ISeasonManager seasonManager;

@@ -221,4 +221,17 @@ public class Booking extends BaseObject {
 		this.totalPrice = totalPrice;
 	}
 
+	public void setTotalPrice(final double tot) {
+		setTotalPrice(format(tot));
+
+	}
+
+	public void setRoomPrice(final double roomPrice) {
+		setRoomPrice(format(roomPrice));
+
+	}
+
+	public void setPaidAmount(final double payed) {
+		setPaidAmount(format(payed));
+	}
 }
