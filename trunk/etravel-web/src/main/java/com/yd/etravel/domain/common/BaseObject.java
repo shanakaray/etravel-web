@@ -4,6 +4,7 @@
 package com.yd.etravel.domain.common;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -135,6 +136,12 @@ public class BaseObject implements Serializable {
 
 	public void setStatus(final String status) {
 		this.status = status;
+	}
+
+	protected synchronized BigDecimal format(final double val) {
+		BigDecimal bigDecimal = new BigDecimal(val);
+		bigDecimal = bigDecimal.setScale(2, BigDecimal.ROUND_UP);
+		return bigDecimal;
 	}
 
 }
