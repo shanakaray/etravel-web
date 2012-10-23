@@ -223,7 +223,6 @@ public class Booking extends BaseObject {
 
 	public void setTotalPrice(final double tot) {
 		setTotalPrice(format(tot));
-
 	}
 
 	public void setRoomPrice(final double roomPrice) {
