@@ -2,6 +2,8 @@ package com.yd.etravel.util.mail;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -27,6 +29,8 @@ public abstract class MailMessage {
 	protected String bc;
 	protected String cc;
 	protected Map<String, String> param;
+	private static ExecutorService threadPool = Executors
+			.newFixedThreadPool(10);
 
 	public void addParam(final Map<String, String> param) {
 		if (this.param == null) {
@@ -91,7 +95,13 @@ public abstract class MailMessage {
 			prepareBody();
 			prepareHeader();
 
-			this.mailSender.send(message);
+			threadPool.execute(new Runnable() {
+				@Override
+				public void run() {
+					mailSender.send(message);
+				}
+			});
+
 		} catch (final Exception ex) {
 			LOGGER.fatal(ex.getMessage(), ex);
 		}

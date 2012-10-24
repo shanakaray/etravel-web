@@ -113,26 +113,26 @@
 		<property name="host" value="smtp.gmail.com" />
 		<property name="port" value="587" />
 		<property name="username" value="shanakaray@gmail.com" />
-		<property name="password" value="dieselpower123" />
+		<property name="password" value="abc1234def" />
 		<property name="javaMailProperties">
 			<props>
 				<prop key="mail.smtp.starttls.enable">true</prop>
 			</props>
 		</property>
 	</bean>
-	<bean id="userMailTarget" class="com.yd.etravel.util.mail.user.UserNotificationMail">
+	<bean id="userNotificationMail" scope="prototype" class="com.yd.etravel.util.mail.user.UserNotificationMail">
 		<property name="mailSender" ref="mailSender" />
 		<property name="subject" value="Successful User Registration" />
 		<property name="from" value="shanakaray@gmail.com" />
 	</bean>
-	<bean id="bookingMailTarget"
+	<bean id="bookingOverDueNotification" scope="prototype"
 		class="com.yd.etravel.util.mail.booking.BookingOverDueNotification">
 		<property name="mailSender" ref="mailSender" />
 		<property name="subject" value="Booking Overdue" />
 		<property name="from" value="shanakaray@gmail.com" />
 		<property name="cc" value="shanakaray@gmail.com" />
 	</bean>
-	<bean id="bookingConfirmMailTarget" class="com.yd.etravel.util.mail.booking.BookingConfirmation">
+	<bean id="bookingConfirmation" scope="prototype" class="com.yd.etravel.util.mail.booking.BookingConfirmation">
 		<property name="mailSender" ref="mailSender" />
 		<property name="subject" value="Booking Confirmation" />
 		<property name="from" value="shanakaray@gmail.com" />
