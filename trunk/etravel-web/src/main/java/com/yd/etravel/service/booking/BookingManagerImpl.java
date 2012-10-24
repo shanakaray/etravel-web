@@ -47,10 +47,11 @@ public class BookingManagerImpl implements IBookingManager {
 	private IRoomAvailabilityDAO roomAvailabilityDAO;
 	@Autowired(required = true)
 	private IUserDAO userDAO;
+	@Autowired(required = true)
 	private MailMessage bookingOverDueNotification;
 	@Autowired(required = true)
 	private MailMessage bookingConfirmation;
-	@Autowired
+	@Autowired(required = true)
 	private JavaMailSenderImpl mailSender;
 	private int onlineExpire;
 	private int onrequestExpire;
