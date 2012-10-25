@@ -24,7 +24,6 @@ public class ExtraItemManagerImpl implements IExtraItemManager {
 	@Transactional
 	@Override
 	public int deleteExtraItem(final Long id) throws ServiceException {
-		final int val = 0;
 		try {
 			final ExtraItem extraItem = this.itemDAO.findById(id);
 			extraItem.getHotel().clear();
@@ -32,7 +31,7 @@ public class ExtraItemManagerImpl implements IExtraItemManager {
 		} catch (final PersistenceException e) {
 			throw new ServiceException(null, e);
 		}
-		return val;
+		return 0;
 	}
 
 	@Override
@@ -65,15 +64,11 @@ public class ExtraItemManagerImpl implements IExtraItemManager {
 
 	@Override
 	public ExtraItem findExtraItemById(final Long id) throws ServiceException {
-		ExtraItem extraItem = null;
 		try {
-
-			extraItem = this.itemDAO.findById(id);
-
+			return this.itemDAO.findById(id);
 		} catch (final PersistenceException e) {
 			throw new ServiceException(null, e);
 		}
-		return extraItem;
 	}
 
 	@Override
@@ -92,7 +87,8 @@ public class ExtraItemManagerImpl implements IExtraItemManager {
 
 	@Transactional
 	@Override
-	public ExtraItem saveExtraItem(ExtraItem item) throws ServiceException {
+	public ExtraItem saveExtraItem(final ExtraItem item)
+			throws ServiceException {
 		try {
 			if (this.itemDAO.isExist(item.getName(), item.getCode(),
 					item.getId())) {
@@ -101,7 +97,7 @@ public class ExtraItemManagerImpl implements IExtraItemManager {
 								.getMessageHolder("etravel.hotel.extraitem.exist"));
 			}
 
-			item = this.itemDAO.saveOrUpdate(item);
+			this.itemDAO.saveOrUpdate(item);
 
 		} catch (final PersistenceException e) {
 			throw new ServiceException(null, e);

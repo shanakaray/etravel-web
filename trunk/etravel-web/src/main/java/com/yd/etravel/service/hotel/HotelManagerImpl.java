@@ -74,7 +74,8 @@ public class HotelManagerImpl implements IHotelManager {
 	}
 
 	@Override
-	public List<Hotel> findHotelsById(final Long keys[]) throws ServiceException {
+	public List<Hotel> findHotelsById(final Long keys[])
+			throws ServiceException {
 		try {
 			return this.hotelDAO.findAll(keys);
 		} catch (final PersistenceException e) {
@@ -100,12 +101,11 @@ public class HotelManagerImpl implements IHotelManager {
 				hotel.getSuperUser().clear();
 			}
 			hotel.setSuperUser(this.userDAO.findUsers(userSearchDTO));
-			this.hotelDAO.saveOrUpdate(hotel);
+			return this.hotelDAO.saveOrUpdate(hotel);
 
 		} catch (final PersistenceException e) {
 			throw new ServiceException(null, e);
 		}
-		return hotel;
 	}
 
 	public void setHotelDAO(final IHotelDAO hotelDAO) {

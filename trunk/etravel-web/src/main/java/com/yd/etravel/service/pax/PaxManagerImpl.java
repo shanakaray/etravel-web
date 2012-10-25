@@ -29,13 +29,11 @@ public class PaxManagerImpl implements IPaxManager {
 	@Transactional
 	@Override
 	public int deletePax(final Long id) throws ServiceException {
-		int count = 0;
 		try {
-			count = this.paxDAO.deleteAny(id);
+			return this.paxDAO.deleteAny(id);
 		} catch (final PersistenceException e) {
 			throw new ServiceException(null, e);
 		}
-		return count;
 	}
 
 	@Override
@@ -79,21 +77,16 @@ public class PaxManagerImpl implements IPaxManager {
 
 	@Override
 	public Pax findPaxById(final Long id) throws ServiceException {
-		Pax pax = null;
 		try {
-
-			pax = this.paxDAO.findById(id);
-
+			return this.paxDAO.findById(id);
 		} catch (final PersistenceException e) {
 			throw new ServiceException(null, e);
 		}
-		return pax;
-
 	}
 
 	@Transactional
 	@Override
-	public Pax savePax(Pax pax) throws ServiceException {
+	public Pax savePax(final Pax pax) throws ServiceException {
 		try {
 
 			if (this.paxDAO.isPaxTypeExist(pax.getHotel().getId(), pax.getId())) {
@@ -101,12 +94,11 @@ public class PaxManagerImpl implements IPaxManager {
 						ValidationHelper
 								.getMessageHolder("etravel.pax.type.exist"));
 			}
-			pax = this.paxDAO.saveOrUpdate(pax);
+			return this.paxDAO.saveOrUpdate(pax);
 
 		} catch (final PersistenceException e) {
 			throw new ServiceException(null, e);
 		}
-		return pax;
 	}
 
 	public void setPaxDAO(final IPaxDAO paxDAO) {

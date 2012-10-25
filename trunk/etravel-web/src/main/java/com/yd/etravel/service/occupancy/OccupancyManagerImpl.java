@@ -26,14 +26,12 @@ public class OccupancyManagerImpl implements IOccupancyManager {
 	@Transactional
 	@Override
 	public int deleteOccupancy(final Long id) throws ServiceException {
-		int flag = 0;
 		try {
-			flag = this.occupancyDAO.deleteAny(id);
+			return this.occupancyDAO.deleteAny(id);
 
 		} catch (final PersistenceException e) {
 			throw new ServiceException(null, e);
 		}
-		return flag;
 	}
 
 	@Override
@@ -80,14 +78,12 @@ public class OccupancyManagerImpl implements IOccupancyManager {
 
 	@Override
 	public Occupancy findOccupancyById(final Long id) throws ServiceException {
-		Occupancy occupancy = null;
 		try {
-			occupancy = this.occupancyDAO.findById(id);
+			return this.occupancyDAO.findById(id);
 
 		} catch (final PersistenceException e) {
 			throw new ServiceException(null, e);
 		}
-		return occupancy;
 	}
 
 	@Transactional
