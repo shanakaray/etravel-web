@@ -119,7 +119,6 @@ public class ImageAction extends BaseAction {
 	protected ActionForward send(final ActionMapping mapping,
 			final ActionForm form, final HttpServletRequest request,
 			final HttpServletResponse response) throws Exception {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

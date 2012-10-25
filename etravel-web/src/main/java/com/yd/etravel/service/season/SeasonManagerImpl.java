@@ -44,14 +44,12 @@ public class SeasonManagerImpl implements ISeasonManager {
 	@Transactional(propagation = Propagation.SUPPORTS)
 	@Override
 	public int deleteSeason(final Long id) throws ServiceException {
-		int flag = 0;
 		try {
-			flag = this.seasonDAO.deleteAny(id);
+			return this.seasonDAO.deleteAny(id);
 
 		} catch (final PersistenceException e) {
 			throw new ServiceException(null, e);
 		}
-		return flag;
 	}
 
 	@Override
@@ -108,13 +106,11 @@ public class SeasonManagerImpl implements ISeasonManager {
 	@Override
 	public RoomSeasonalRate findRoomSeasonalRateById(final Long id)
 			throws ServiceException {
-		RoomSeasonalRate roomSeasonalRate = null;
 		try {
-			roomSeasonalRate = this.seasonDAO.findSeasonRate(id);
+			return this.seasonDAO.findSeasonRate(id);
 		} catch (final PersistenceException e) {
 			throw new ServiceException(null, e);
 		}
-		return roomSeasonalRate;
 	}
 
 	@Override
@@ -130,14 +126,13 @@ public class SeasonManagerImpl implements ISeasonManager {
 
 	@Override
 	public Season findSeasonById(final Long id) throws ServiceException {
-		Season season = null;
 		try {
-			season = this.seasonDAO.findById(id);
+			final Season season = this.seasonDAO.findById(id);
 			season.toString();
+			return season;
 		} catch (final PersistenceException e) {
 			throw new ServiceException(null, e);
 		}
-		return season;
 	}
 
 	public IRoomDAO getRoomDAO() {

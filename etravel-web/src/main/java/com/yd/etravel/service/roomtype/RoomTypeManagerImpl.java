@@ -22,14 +22,11 @@ public class RoomTypeManagerImpl implements IRoomTypeManager {
 	@Transactional
 	@Override
 	public int deleteRoomType(final Long id) throws ServiceException {
-		int flag = 0;
 		try {
-			flag = this.roomTypeDAO.deleteAny(id);
-
+			return this.roomTypeDAO.deleteAny(id);
 		} catch (final PersistenceException e) {
 			throw new ServiceException(null, e);
 		}
-		return flag;
 	}
 
 	@Override
@@ -52,14 +49,13 @@ public class RoomTypeManagerImpl implements IRoomTypeManager {
 
 	@Override
 	public RoomType findRoomTypeById(final Long id) throws ServiceException {
-		RoomType roomType = null;
 		try {
-			roomType = this.roomTypeDAO.findById(id);
+			final RoomType roomType = this.roomTypeDAO.findById(id);
 			roomType.toString();
+			return roomType;
 		} catch (final PersistenceException e) {
 			throw new ServiceException(null, e);
 		}
-		return roomType;
 	}
 
 	@Transactional
@@ -72,11 +68,10 @@ public class RoomTypeManagerImpl implements IRoomTypeManager {
 						ValidationHelper
 								.getMessageHolder("etravel.roomTypeName.exist"));
 			}
-			this.roomTypeDAO.saveOrUpdate(roomType);
+			return this.roomTypeDAO.saveOrUpdate(roomType);
 		} catch (final PersistenceException e) {
 			throw new ServiceException(null, e);
 		}
-		return roomType;
 	}
 
 	public void setRoomTypeDAO(final IRoomTypeDAO roomTypeDAO) {

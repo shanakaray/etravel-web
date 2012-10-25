@@ -29,13 +29,11 @@ public class RoomManagerImpl implements IRoomManager {
 	@Transactional
 	@Override
 	public int deleteRoom(final Long id) throws ServiceException {
-		int val = 0;
 		try {
-			val = this.roomDAO.deleteAny(id);
+			return this.roomDAO.deleteAny(id);
 		} catch (final PersistenceException e) {
 			throw new ServiceException(null, e);
 		}
-		return val;
 	}
 
 	@Override
@@ -71,14 +69,13 @@ public class RoomManagerImpl implements IRoomManager {
 
 	@Override
 	public Room findRoomById(final Long id) throws ServiceException {
-		Room room;
 		try {
-			room = this.roomDAO.findById(id);
+			final Room room = this.roomDAO.findById(id);
 			room.toString();
+			return room;
 		} catch (final PersistenceException e) {
 			throw new ServiceException(null, e);
 		}
-		return room;
 	}
 
 	@Override
@@ -86,7 +83,6 @@ public class RoomManagerImpl implements IRoomManager {
 			throws ServiceException {
 		try {
 			return this.roomDAO.findRooms(roomSearchDTO);
-
 		} catch (final PersistenceException e) {
 			throw new ServiceException(null, e);
 		}
@@ -99,7 +95,7 @@ public class RoomManagerImpl implements IRoomManager {
 
 	@Transactional
 	@Override
-	public Room saveRoom(Room room) throws ServiceException {
+	public Room saveRoom(final Room room) throws ServiceException {
 		try {
 
 			if (this.roomDAO.isExist(room.getHotel().getId(), room
@@ -109,7 +105,7 @@ public class RoomManagerImpl implements IRoomManager {
 								.getMessageHolder("etravel.hotel.room.exist"));
 			}
 
-			room = this.roomDAO.saveOrUpdate(room);
+			this.roomDAO.saveOrUpdate(room);
 
 		} catch (final PersistenceException e) {
 			throw new ServiceException(null, e);

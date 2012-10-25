@@ -31,14 +31,12 @@ public class RoomAvailabilityManagerImpl implements IRoomAvailabilityManager {
 	@Transactional
 	@Override
 	public int deleteRoomAvailability(final Long id) throws ServiceException {
-		int flag = 0;
 		try {
-			flag = this.roomAvailabilityDAO.deleteAny(id);
+			return this.roomAvailabilityDAO.deleteAny(id);
 
 		} catch (final PersistenceException e) {
 			throw new ServiceException(null, e);
 		}
-		return flag;
 	}
 
 	@Override
@@ -115,14 +113,12 @@ public class RoomAvailabilityManagerImpl implements IRoomAvailabilityManager {
 	@Override
 	public RoomAvailability findRoomAvailabilityById(final Long id)
 			throws ServiceException {
-		RoomAvailability roomAvailability = null;
 		try {
-			roomAvailability = this.roomAvailabilityDAO.findById(id);
+			return this.roomAvailabilityDAO.findById(id);
 
 		} catch (final PersistenceException e) {
 			throw new ServiceException(null, e);
 		}
-		return roomAvailability;
 	}
 
 	@Override
@@ -139,7 +135,7 @@ public class RoomAvailabilityManagerImpl implements IRoomAvailabilityManager {
 
 	@Transactional
 	@Override
-	public RoomAvailability save(RoomAvailability roomAvail)
+	public RoomAvailability save(final RoomAvailability roomAvail)
 			throws ServiceException {
 		try {
 			if (roomAvail.getId() == null) {
@@ -164,8 +160,7 @@ public class RoomAvailabilityManagerImpl implements IRoomAvailabilityManager {
 					}
 
 					roomAvail.setRoom(room);
-					roomAvail = this.roomAvailabilityDAO
-							.saveOrUpdate(roomAvail);
+					this.roomAvailabilityDAO.saveOrUpdate(roomAvail);
 
 					boolean flag = true;
 

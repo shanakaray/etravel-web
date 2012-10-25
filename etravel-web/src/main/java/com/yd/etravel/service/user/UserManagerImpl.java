@@ -4,6 +4,7 @@
 package com.yd.etravel.service.user;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -39,15 +40,9 @@ import com.yd.etravel.util.mail.MailMessage;
 @Transactional(propagation = Propagation.SUPPORTS)
 public class UserManagerImpl implements IUserManager {
 
-	private static List<String> ACCESS_USER_ROLES = new ArrayList<String>();
-	private static List<String> ACCESS_CUSTOMER_ROLES = new ArrayList<String>();
-
-	static {
-		ACCESS_USER_ROLES.add(IConstants.IUserRoles.SYSADMIN_ROLE_NAME);
-		ACCESS_USER_ROLES.add(IConstants.IUserRoles.HOTEL_ADMIN_ROLE_NAME);
-		ACCESS_CUSTOMER_ROLES.add(IConstants.IUserRoles.CUSTOMER_ROLE_NAME);
-		ACCESS_CUSTOMER_ROLES.add(IConstants.IUserRoles.AGENT_ROLE_NAME);
-	}
+	private static List<String> ACCESS_CUSTOMER_ROLES = Arrays
+			.asList(new String[] { IConstants.IUserRoles.CUSTOMER_ROLE_NAME,
+					IConstants.IUserRoles.AGENT_ROLE_NAME });
 
 	@Autowired(required = true)
 	private IUserDAO userDAO;
@@ -175,8 +170,7 @@ public class UserManagerImpl implements IUserManager {
 	public List<Function> findFindByRoleId(final Long id)
 			throws ServiceException {
 		try {
-			final List<Function> list = this.userDAO.findFunctionByRoleId(id);
-			return list;
+			return this.userDAO.findFunctionByRoleId(id);
 		} catch (final PersistenceException e) {
 			throw new ServiceException(null, e);
 		}
@@ -184,22 +178,21 @@ public class UserManagerImpl implements IUserManager {
 
 	@Override
 	public Role findRoleById(final Long id) throws ServiceException {
-		Role role = null;
 		try {
-			role = this.userDAO.findAllUserRoles(new Long[] { id }).get(0);
+			final Role role = this.userDAO.findAllUserRoles(new Long[] { id })
+					.get(0);
 			role.toString();
+			return role;
 
 		} catch (final PersistenceException e) {
 			throw new ServiceException(null, e);
 		}
-		return role;
 	}
 
 	@Override
 	public List<Role> findRolesById(final Long[] id) throws ServiceException {
 		try {
-			final List<Role> list = this.userDAO.findAllUserRoles(id);
-			return list;
+			return this.userDAO.findAllUserRoles(id);
 		} catch (final PersistenceException e) {
 			throw new ServiceException(null, e);
 		}
@@ -208,13 +201,11 @@ public class UserManagerImpl implements IUserManager {
 
 	@Override
 	public User findUserById(final Long id) throws ServiceException {
-		User usr;
 		try {
-			usr = this.userDAO.findById(id);
+			return this.userDAO.findById(id);
 		} catch (final PersistenceException e) {
 			throw new ServiceException(null, e);
 		}
-		return usr;
 	}
 
 	@Override
@@ -270,12 +261,11 @@ public class UserManagerImpl implements IUserManager {
 			if (user.getId() == null) {
 				user.encriptPW();
 			}
-			this.userDAO.saveOrUpdate(user);
+			return this.userDAO.saveOrUpdate(user);
 
 		} catch (final PersistenceException e) {
 			throw new ServiceException(null, e);
 		}
-		return user;
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED)
@@ -298,12 +288,11 @@ public class UserManagerImpl implements IUserManager {
 			if (user.getId() == null) {
 				user.encriptPW();
 			}
-			this.userDAO.saveOrUpdate(user);
+			return this.userDAO.saveOrUpdate(user);
 
 		} catch (final PersistenceException e) {
 			throw new ServiceException(null, e);
 		}
-		return user;
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED)

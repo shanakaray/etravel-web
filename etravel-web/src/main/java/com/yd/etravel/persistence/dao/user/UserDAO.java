@@ -110,7 +110,7 @@ public class UserDAO extends BaseDAO<User> implements IUserDAO {
 		try {
 			final StringBuilder sb = new StringBuilder("SELECT obj FROM ")
 					.append(Role.class.getName()).append(
-							" as obj Where obj.id IN (:ids) AND obj.active=1 ");
+							" as obj Where obj.id IN (:ids) ");
 
 			final Session session = getHibernateTemplate().getSessionFactory()
 					.getCurrentSession();
