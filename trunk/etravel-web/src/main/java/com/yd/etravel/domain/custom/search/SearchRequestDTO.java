@@ -109,7 +109,13 @@ public class SearchRequestDTO implements Serializable {
 
 		final long diff = startDate.getTimeInMillis()
 				- endDate.getTimeInMillis();
-		return Long.valueOf(diff / (24 * 60 * 60 * 1000)).intValue(); // NOPMD by yohan on 10/22/12 12:03 AM
+		return Long.valueOf(diff / (24 * 60 * 60 * 1000)).intValue(); // NOPMD
+																		// by
+																		// yohan
+																		// on
+																		// 10/22/12
+																		// 12:03
+																		// AM
 	}
 
 	/**

@@ -40,9 +40,9 @@ import com.yd.etravel.util.mail.MailMessage;
 @Transactional(propagation = Propagation.SUPPORTS)
 public class UserManagerImpl implements IUserManager {
 
-	private static List<String> ACCESS_CUSTOMER_ROLES = Arrays
-			.asList(new String[] { IConstants.IUserRoles.CUSTOMER_ROLE_NAME,
-					IConstants.IUserRoles.AGENT_ROLE_NAME });
+	private static List<String> ACCESSCUSTOMERROLES = Arrays
+			.asList(new String[] { IConstants.IUserRoles.CUSTOMERROLENAME,
+					IConstants.IUserRoles.AGENTROLENAME });
 
 	@Autowired(required = true)
 	private IUserDAO userDAO;
@@ -55,7 +55,7 @@ public class UserManagerImpl implements IUserManager {
 		IUserProfile userProfile = getProfile();
 		try {
 			final User user = this.userDAO.findAuth(username,
-					PasswordEncrypt.encrypt(password), ACCESS_CUSTOMER_ROLES);
+					PasswordEncrypt.encrypt(password), ACCESSCUSTOMERROLES);
 			if (user == null) {
 				throw new ServiceException(
 						ValidationHelper
