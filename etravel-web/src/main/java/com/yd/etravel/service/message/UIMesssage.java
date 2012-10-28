@@ -5,32 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UIMesssage {
-	public static class Message implements Serializable {
-
-		private static final long serialVersionUID = 5804503046875538903L;
-		private final String key;
-		private final String bundle;
-		private final Object[] arguments;
-
-		public Message(final String key, final String bundle,
-				final Object[] arguments) {
-			this.key = key;
-			this.bundle = bundle;
-			this.arguments = arguments;
-		}
-
-		public Object[] getArguments() {
-			return this.arguments;
-		}
-
-		public String getBundle() {
-			return this.bundle;
-		}
-
-		public String getKey() {
-			return this.key;
-		}
-	}
 
 	private List<Message> errors = null;
 
@@ -108,4 +82,30 @@ public class UIMesssage {
 		return this;
 	}
 
+	public static class Message implements Serializable {
+
+		private static final long serialVersionUID = 5804503046875538903L;
+		private final String key;
+		private final String bundle;
+		private final Object[] arguments;
+
+		public Message(final String key, final String bundle,
+				final Object[] arguments) {
+			this.key = key;
+			this.bundle = bundle;
+			this.arguments = arguments;
+		}
+
+		public Object[] getArguments() {
+			return this.arguments;
+		}
+
+		public String getBundle() {
+			return this.bundle;
+		}
+
+		public String getKey() {
+			return this.key;
+		}
+	}
 }

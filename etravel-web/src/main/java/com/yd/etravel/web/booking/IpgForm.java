@@ -398,8 +398,6 @@ public class IpgForm extends BaseForm {
 		return this.vpc_3DSECI;
 	}
 
-	// ----------------------------------------------------------------------------
-
 	public String getVpc_3DSenrolled() {
 		return this.vpc_3DSenrolled;
 	}
@@ -762,17 +760,9 @@ public class IpgForm extends BaseForm {
 		this.vpc_VerType = vpc_VerType;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.yd.etravel.web.common.BaseForm#validateBean(org.apache.struts.action
-	 * .ActionMapping, javax.servlet.http.HttpServletRequest)
-	 */
 	@Override
 	public ActionErrors validateBean(final ActionMapping mapping,
 			final HttpServletRequest request) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

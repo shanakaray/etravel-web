@@ -165,7 +165,7 @@ public class BookingReportAction extends BaseAction {
 		final IUserProfile profile = getUserProfile(request);
 		filUpSelects(reportForm, profile);
 
-		if (profile.getRoles().contains(IUserRoles.CUSTOMER_ROLE_NAME)) {
+		if (profile.getRoles().contains(IUserRoles.CUSTOMERROLENAME)) {
 			bookingDto.setBookedBy(profile.getId());
 		}
 
@@ -231,7 +231,7 @@ public class BookingReportAction extends BaseAction {
 				|| reportForm.getBookingList().isEmpty()) {
 			final BookingReportSearchDTO bookinDto = new BookingReportSearchDTO();
 
-			if (profile.getRoles().contains(IUserRoles.CUSTOMER_ROLE_NAME)) {
+			if (profile.getRoles().contains(IUserRoles.CUSTOMERROLENAME)) {
 				bookinDto.setBookedBy(profile.getId());
 			}
 

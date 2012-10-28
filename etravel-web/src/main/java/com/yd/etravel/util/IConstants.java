@@ -97,10 +97,10 @@ public interface IConstants {
 	}
 
 	public interface IUserRoles {
-		public static final String HOTEL_ADMIN_ROLE_NAME = "Hotel_Admin";
+		public static final String HOTELADMINROLENAME = "Hotel_Admin";
 		public static final String SYSADMIN_ROLE_NAME = "Sys_Admin";
-		public static final String CUSTOMER_ROLE_NAME = "Customer";
-		public static final String AGENT_ROLE_NAME = "Agent";
+		public static final String CUSTOMERROLENAME = "Customer";
+		public static final String AGENTROLENAME = "Agent";
 		public static final Long HOTEL_ADMIN_ROLE_ID = 1L;
 		public static final Long SYSADMIN_ROLE_ID = 2L;
 		public static final Long CUSTOMER_ROLE_ID = 3L;
