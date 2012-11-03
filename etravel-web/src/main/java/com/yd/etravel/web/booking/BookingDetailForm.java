@@ -24,19 +24,12 @@ import com.yd.etravel.web.common.BaseForm;
 
 public class BookingDetailForm extends BaseForm {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 4495071934442319318L;
 	private Long bookingId;
 	private List<ExtraItemBooking> itemBookingList;
 	private BookingReportDTO bookingReportDTO;
 
-	/**
-	 * 
-	 */
 	public BookingDetailForm() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public Long getBookingId() {
@@ -51,13 +44,6 @@ public class BookingDetailForm extends BaseForm {
 		return this.itemBookingList;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.yd.etravel.web.common.BaseForm#resetBean(org.apache.struts.action
-	 * .ActionMapping, javax.servlet.http.HttpServletRequest)
-	 */
 	@Override
 	public void resetBean(final ActionMapping mapping,
 			final HttpServletRequest request) {
@@ -78,17 +64,9 @@ public class BookingDetailForm extends BaseForm {
 		this.itemBookingList = itemBookingList;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.yd.etravel.web.common.BaseForm#validateBean(org.apache.struts.action
-	 * .ActionMapping, javax.servlet.http.HttpServletRequest)
-	 */
 	@Override
 	public ActionErrors validateBean(final ActionMapping mapping,
 			final HttpServletRequest request) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

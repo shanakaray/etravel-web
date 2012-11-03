@@ -52,9 +52,9 @@ public class ChangePasswordForm extends BaseForm {
 	@Override
 	public void resetBean(final ActionMapping mapping,
 			final HttpServletRequest request) {
-		this.oldPw = EMPTY_STRING;
-		this.newPw = EMPTY_STRING;
-		this.newRepPw = EMPTY_STRING;
+		this.oldPw = EMPTYSTRING;
+		this.newPw = EMPTYSTRING;
+		this.newRepPw = EMPTYSTRING;
 		this.userId = 0L;
 	}
 
@@ -96,8 +96,8 @@ public class ChangePasswordForm extends BaseForm {
 		} else if (!this.newPw.equals(this.newRepPw)) {
 			addErrors(errors, "etravel.error.pw.notmached");
 
-			this.newPw = EMPTY_STRING;
-			this.newRepPw = EMPTY_STRING;
+			this.newPw = EMPTYSTRING;
+			this.newRepPw = EMPTYSTRING;
 
 		}
 

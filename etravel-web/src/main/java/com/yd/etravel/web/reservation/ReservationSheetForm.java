@@ -116,8 +116,8 @@ public class ReservationSheetForm extends BaseForm {
 		this.roomAvailabilitySet = Collections.emptySet();
 		this.bookingList = Collections.emptyList();
 		this.hotelId = 1L;
-		this.startDate = EMPTY_STRING;
-		this.endDate = EMPTY_STRING;
+		this.startDate = EMPTYSTRING;
+		this.endDate = EMPTYSTRING;
 	}
 
 	public void setBookingList(final List<BookingReportDTO> bookingList) {

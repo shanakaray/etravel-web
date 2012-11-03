@@ -83,7 +83,7 @@ public abstract class BaseAction extends Action implements
 
 	protected void addInfoMessages(final String msg) {
 		this.infoMessages.add(MessageResources.getMessageResources(
-				ICommon.MSG_RES).getMessage(msg));
+				ICommon.MSGRES).getMessage(msg));
 	}
 
 	protected abstract ActionForward back(ActionMapping mapping,

@@ -88,15 +88,15 @@ public class CustomerForm extends BaseForm {
 	@Override
 	public void resetBean(final ActionMapping mapping,
 			final HttpServletRequest request) {
-		this.address = EMPTY_STRING;
-		this.contact = EMPTY_STRING;
-		this.email = EMPTY_STRING;
-		this.firstName = EMPTY_STRING;
-		this.lastName = EMPTY_STRING;
-		this.nic = EMPTY_STRING;
-		this.cusUsername = EMPTY_STRING;
-		this.cusPassword = EMPTY_STRING;
-		this.repassword = EMPTY_STRING;
+		this.address = EMPTYSTRING;
+		this.contact = EMPTYSTRING;
+		this.email = EMPTYSTRING;
+		this.firstName = EMPTYSTRING;
+		this.lastName = EMPTYSTRING;
+		this.nic = EMPTYSTRING;
+		this.cusUsername = EMPTYSTRING;
+		this.cusPassword = EMPTYSTRING;
+		this.repassword = EMPTYSTRING;
 		this.id = 0L;
 	}
 
@@ -177,19 +177,19 @@ public class CustomerForm extends BaseForm {
 
 		} else if (!StringUtils.isValidEmail(this.email)) {
 			addErrors(errors, "etravel.error.email.invalid");
-			this.email = EMPTY_STRING;
+			this.email = EMPTYSTRING;
 		}
 
 		if (StringUtils.isEmpty(this.cusPassword)) {
 			addErrors(errors, "etravel.error.pw.required");
 		} else if (this.cusPassword.trim().length() < 6) {
 			addErrors(errors, "etravel.error.pw.length");
-			this.cusPassword = EMPTY_STRING;
-			this.repassword = EMPTY_STRING;
+			this.cusPassword = EMPTYSTRING;
+			this.repassword = EMPTYSTRING;
 		} else if (!this.cusPassword.equals(this.repassword)) {
 			addErrors(errors, "etravel.error.pw.notmached");
-			this.cusPassword = EMPTY_STRING;
-			this.repassword = EMPTY_STRING;
+			this.cusPassword = EMPTYSTRING;
+			this.repassword = EMPTYSTRING;
 		}
 
 		return errors;

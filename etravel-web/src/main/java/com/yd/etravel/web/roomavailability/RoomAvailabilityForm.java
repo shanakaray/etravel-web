@@ -155,9 +155,9 @@ public class RoomAvailabilityForm extends BaseForm {
 		this.allRoom = Collections.emptyList();
 		// allOccupancy = Collections.emptyList();
 		this.allRoomDailyAvailability = Collections.emptyList();
-		this.fromDate = EMPTY_STRING;
-		this.toDate = EMPTY_STRING;
-		this.roomType = EMPTY_STRING;
+		this.fromDate = EMPTYSTRING;
+		this.toDate = EMPTYSTRING;
+		this.roomType = EMPTYSTRING;
 		this.hotelId = -1l;
 		this.roomId = -1l;
 		this.occupancyId = -1l;

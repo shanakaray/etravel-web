@@ -106,12 +106,12 @@ public class HotelForm extends BaseForm {
 			final HttpServletRequest request) {
 		this.adminList = Collections.emptyList();
 		this.hotelList = Collections.emptyList();
-		this.address = EMPTY_STRING;
-		this.city = EMPTY_STRING;
-		this.contact = EMPTY_STRING;
-		this.email = EMPTY_STRING;
-		this.name = EMPTY_STRING;
-		this.country = EMPTY_STRING;
+		this.address = EMPTYSTRING;
+		this.city = EMPTYSTRING;
+		this.contact = EMPTYSTRING;
+		this.email = EMPTYSTRING;
+		this.name = EMPTYSTRING;
+		this.country = EMPTYSTRING;
 		this.rating = 0;
 		this.superUserId = null;
 		this.active = true;
@@ -198,7 +198,7 @@ public class HotelForm extends BaseForm {
 		if (!StringUtils.isEmpty(this.email)
 				&& !StringUtils.isValidEmail(this.email)) {
 			addErrors(errors, "etravel.error.hotel.email.invalid");
-			this.email = EMPTY_STRING;
+			this.email = EMPTYSTRING;
 		}
 
 		return errors;

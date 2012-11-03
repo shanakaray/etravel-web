@@ -127,8 +127,8 @@ public class OccupancyForm extends BaseForm {
 			final HttpServletRequest request) {
 		// TODO Auto-generated method stub
 
-		this.name = EMPTY_STRING;
-		this.comments = EMPTY_STRING;
+		this.name = EMPTYSTRING;
+		this.comments = EMPTYSTRING;
 		this.adult = 0;
 		this.child = 0;
 		this.infant = 0;

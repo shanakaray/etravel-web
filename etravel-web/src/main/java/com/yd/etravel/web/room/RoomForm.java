@@ -63,7 +63,7 @@ public class RoomForm extends BaseForm {
 		if ((this.hotelMap != null) && this.hotelMap.containsKey(id)) {
 			return this.hotelMap.get(id).getName();
 		}
-		return EMPTY_STRING;
+		return EMPTYSTRING;
 	}
 
 	public Long getId() {
@@ -94,7 +94,7 @@ public class RoomForm extends BaseForm {
 		if ((this.roomTypeMap != null) && this.roomTypeMap.containsKey(id)) {
 			return this.roomTypeMap.get(id).getName();
 		}
-		return EMPTY_STRING;
+		return EMPTYSTRING;
 	}
 
 	/*

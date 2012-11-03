@@ -97,10 +97,10 @@ public class SeasonForm extends BaseForm {
 
 		this.allSeason = Collections.emptyList();
 		this.allHotel = Collections.emptyList();
-		this.fromDate = EMPTY_STRING;
-		this.toDate = EMPTY_STRING;
-		this.comments = EMPTY_STRING;
-		this.name = EMPTY_STRING;
+		this.fromDate = EMPTYSTRING;
+		this.toDate = EMPTYSTRING;
+		this.comments = EMPTYSTRING;
+		this.name = EMPTYSTRING;
 		this.active = true;
 		this.id = null;
 
