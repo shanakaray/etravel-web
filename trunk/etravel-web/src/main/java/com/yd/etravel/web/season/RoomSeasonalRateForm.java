@@ -144,7 +144,7 @@ public class RoomSeasonalRateForm extends BaseForm {
 		this.allSeason = Collections.emptyList();
 		this.allRoom = Collections.emptyList();
 		this.allRoomSeasonalRate = Collections.emptyList();
-		this.comments = EMPTY_STRING;
+		this.comments = EMPTYSTRING;
 		this.adultCost = new BigDecimal(0.0);
 		this.childCost = new BigDecimal(0.0);
 		this.infantCost = new BigDecimal(0.0);

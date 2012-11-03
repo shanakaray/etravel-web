@@ -28,8 +28,8 @@ public class AuthanticationForm extends BaseForm {
 	@Override
 	public void resetBean(final ActionMapping mapping,
 			final HttpServletRequest request) {
-		this.username = EMPTY_STRING;
-		this.password = EMPTY_STRING;
+		this.username = EMPTYSTRING;
+		this.password = EMPTYSTRING;
 	}
 
 	public void setPassword(final String password) {

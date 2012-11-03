@@ -99,8 +99,8 @@ public class AuthanticationAction extends BaseAction {
 					authForm.getPassword());
 
 		} catch (final ServiceException ex) {
-			authForm.setUsername(ICommon.EMPTY_STRING);
-			authForm.setPassword(ICommon.EMPTY_STRING);
+			authForm.setUsername(ICommon.EMPTYSTRING);
+			authForm.setPassword(ICommon.EMPTYSTRING);
 			throw ex;
 		}
 		if (profile != null) {
@@ -109,8 +109,8 @@ public class AuthanticationAction extends BaseAction {
 			Thread.currentThread().setName(profile.getUsername());
 			return mapping.findForward(SUCCESS);
 		} else {
-			authForm.setPassword(ICommon.EMPTY_STRING);
-			authForm.setUsername(ICommon.EMPTY_STRING);
+			authForm.setPassword(ICommon.EMPTYSTRING);
+			authForm.setUsername(ICommon.EMPTYSTRING);
 			return mapping.findForward(ERROR);
 		}
 	}

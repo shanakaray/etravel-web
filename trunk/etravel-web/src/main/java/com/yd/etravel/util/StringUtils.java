@@ -64,7 +64,7 @@ public class StringUtils implements ICommon {
 
 	public static boolean isEmpty(final String value) {
 		boolean flag = false;
-		if ((value == null) || value.trim().equals(ICommon.EMPTY_STRING)) {
+		if ((value == null) || value.trim().equals(ICommon.EMPTYSTRING)) {
 			flag = true;
 		}
 		return flag;
@@ -75,7 +75,7 @@ public class StringUtils implements ICommon {
 	}
 
 	public static boolean isValidEmail(final String email) {
-		final Pattern p = Pattern.compile(EMAIL_VALIDATION);
+		final Pattern p = Pattern.compile(EMAILVALIDATION);
 		final Matcher m = p.matcher(email);
 		// check whether match is found
 		return m.matches();

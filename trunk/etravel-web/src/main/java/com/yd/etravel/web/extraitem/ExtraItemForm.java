@@ -96,10 +96,10 @@ public class ExtraItemForm extends BaseForm {
 		this.extraItemList = Collections.emptyList();
 		this.currencyList = new ArrayList<String>();
 		this.currencyList.add(ICurrency.USD);
-		this.code = EMPTY_STRING;
+		this.code = EMPTYSTRING;
 		this.cost = new BigDecimal(0.00);
 		this.currency = ICurrency.USD;
-		this.name = EMPTY_STRING;
+		this.name = EMPTYSTRING;
 		this.id = 0L;
 	}
 

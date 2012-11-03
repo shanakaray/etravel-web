@@ -55,9 +55,9 @@ public class ImageForm extends BaseForm {
 		this.images = Collections.emptyList();
 		this.formFile = null;
 		this.pk = null;
-		this.object = ICommon.EMPTY_STRING;
-		this.title = ICommon.EMPTY_STRING;
-		this.name = ICommon.EMPTY_STRING;
+		this.object = ICommon.EMPTYSTRING;
+		this.title = ICommon.EMPTYSTRING;
+		this.name = ICommon.EMPTYSTRING;
 
 	}
 

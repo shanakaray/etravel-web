@@ -12,17 +12,14 @@ public interface IConstants {
 		public static final String BOOKING_SATATUS_PAID_DES = "Payment_Confirmed";
 		public static final String BOOKING_SATATUS_PAYMENT_FAILD = "Payment_Failed";
 		public static final int BOOKING_NUMBER_LENGTH = 6;
-
 		public static final String BOOKING_PAYMENT_METHOD_PLEASE_SELECT = "0";
 		public static final String BOOKING_PAYMENT_METHOD_ONLINE = "1";
 		public static final String BOOKING_PAYMENT_METHOD_CASH = "2";
 		public static final String BOOKING_PAYMENT_METHOD_ON_REQUEST = "3";
-
 		public static final String BOOKING_PAYMENT_METHOD_PLEASE_SELECT_DES = "Please Select";
 		public static final String BOOKING_PAYMENT_METHOD_ONLINE_DES = "Online";
 		public static final String BOOKING_PAYMENT_METHOD_CASH_DES = "Cash";
 		public static final String BOOKING_PAYMENT_METHOD_ON_REQUEST_DES = "On Request";
-
 	}
 
 	public interface IBundle {
@@ -31,13 +28,12 @@ public interface IConstants {
 
 	public interface ICommon {
 		public static final String INFO_MSG_KEY = "com.yd.web.infomsg";
-		public static final String EMPTY_STRING = "";
+		public static final String EMPTYSTRING = "";
 		public static final char LINE_FEED = '\r'; // (aka u000A);
 		public static final String STRING_ZERO = "0";
 		public static final int CHOMP_LENGTH = 32;
-		public static final String EMAIL_VALIDATION = ".+@.+\\.[a-z]+";
-
-		public static final String MSG_RES = "MessageResources";
+		public static final String EMAILVALIDATION = ".+@.+\\.[a-z]+";
+		public static final String MSGRES = "MessageResources";
 	}
 
 	public interface ICurrency {
@@ -62,7 +58,6 @@ public interface IConstants {
 		public static final String COM_DELETE_MSG = "etravel.info.common.delete";
 		public static final String BOOKING_CONFIRM_MSG = "etravel.info.booking.successful";
 		public static final String USER_REGISTRATION_MSG = "etravel.info.user.registration.successful";
-
 	}
 
 	public interface IOccupancy {

@@ -118,11 +118,11 @@ public class BookingReportForm extends BaseForm {
 		this.bookingList = Collections.emptyList();
 		this.hotelList = Collections.emptyList();
 		this.allRoom = Collections.emptyList();
-		this.bookingId = EMPTY_STRING;
-		this.userName = EMPTY_STRING;
-		this.userCode = EMPTY_STRING;
-		this.bookedFromString = EMPTY_STRING;
-		this.bookedToString = EMPTY_STRING;
+		this.bookingId = EMPTYSTRING;
+		this.userName = EMPTYSTRING;
+		this.userCode = EMPTYSTRING;
+		this.bookedFromString = EMPTYSTRING;
+		this.bookedToString = EMPTYSTRING;
 		this.roomTypeId = -1L;
 		this.hotelId = -1L;
 		this.roomId = -1L;

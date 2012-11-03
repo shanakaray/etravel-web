@@ -111,7 +111,7 @@ public class UserForm extends BaseForm {
 
 		this.id = 0L;
 		this.user = new User();
-		this.repassword = IConstants.ICommon.EMPTY_STRING;
+		this.repassword = IConstants.ICommon.EMPTYSTRING;
 		this.roleIds = null;
 		this.allRoles = Collections.emptyList();
 		this.allUsers = Collections.emptyList();
@@ -196,7 +196,7 @@ public class UserForm extends BaseForm {
 		if (!StringUtils.isEmpty(this.user.getEmail())
 				&& !StringUtils.isValidEmail(this.user.getEmail())) {
 			addErrors(errors, "etravel.error.email.invalid");
-			this.user.setEmail(EMPTY_STRING);
+			this.user.setEmail(EMPTYSTRING);
 		}
 
 		if (this.passwordReset || (getId() == null)
@@ -206,8 +206,8 @@ public class UserForm extends BaseForm {
 			} else if (!this.user.getPassword().equals(this.repassword)) {
 				addErrors(errors, "etravel.error.pw.notmached");
 
-				setRepw(EMPTY_STRING);
-				setPw(EMPTY_STRING);
+				setRepw(EMPTYSTRING);
+				setPw(EMPTYSTRING);
 
 				setPasswordReset(false);
 			}

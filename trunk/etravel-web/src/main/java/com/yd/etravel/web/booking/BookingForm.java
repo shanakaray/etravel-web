@@ -233,13 +233,13 @@ public class BookingForm extends BaseForm {
 		// this.contact = EMPTY_STRING;
 		// this.email = EMPTY_STRING;
 		// this.firstName = EMPTY_STRING;
-		this.cusUsername = EMPTY_STRING;
-		this.rPassword = EMPTY_STRING;
-		this.rUsername = EMPTY_STRING;
-		this.cusPassword = EMPTY_STRING;
-		this.repassword = EMPTY_STRING;
-		this.bookingId = EMPTY_STRING;
-		this.payed = EMPTY_STRING;
+		this.cusUsername = EMPTYSTRING;
+		this.rPassword = EMPTYSTRING;
+		this.rUsername = EMPTYSTRING;
+		this.cusPassword = EMPTYSTRING;
+		this.repassword = EMPTYSTRING;
+		this.bookingId = EMPTYSTRING;
+		this.payed = EMPTYSTRING;
 		this.uid = 0L;
 		this.guest = false;
 		this.newCustomer = false;
@@ -453,19 +453,19 @@ public class BookingForm extends BaseForm {
 
 			} else if (!StringUtils.isValidEmail(this.email)) {
 				addErrors(errors, "etravel.error.email.invalid");
-				this.email = EMPTY_STRING;
+				this.email = EMPTYSTRING;
 			}
 
 			if (StringUtils.isEmpty(this.cusPassword)) {
 				addErrors(errors, "etravel.error.pw.required");
 			} else if (this.cusPassword.trim().length() < 6) {
 				addErrors(errors, "etravel.error.pw.length");
-				this.cusPassword = EMPTY_STRING;
-				this.repassword = EMPTY_STRING;
+				this.cusPassword = EMPTYSTRING;
+				this.repassword = EMPTYSTRING;
 			} else if (!this.cusPassword.equals(this.repassword)) {
 				addErrors(errors, "etravel.error.pw.notmached");
-				this.cusPassword = EMPTY_STRING;
-				this.repassword = EMPTY_STRING;
+				this.cusPassword = EMPTYSTRING;
+				this.repassword = EMPTYSTRING;
 			}
 
 		} else if (isRegisterd()) {

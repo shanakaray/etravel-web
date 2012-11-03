@@ -106,8 +106,8 @@ public class BookingAction extends BaseAction {
 				switchUser(request, profile);
 
 			} catch (final ServiceException ex) {
-				bookingForm.setRUsername(ICommon.EMPTY_STRING);
-				bookingForm.setRPassword(ICommon.EMPTY_STRING);
+				bookingForm.setRUsername(ICommon.EMPTYSTRING);
+				bookingForm.setRPassword(ICommon.EMPTYSTRING);
 				throw ex;
 			}
 

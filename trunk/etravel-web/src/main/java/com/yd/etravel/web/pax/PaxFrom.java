@@ -86,7 +86,7 @@ public class PaxFrom extends BaseForm {
 		if ((this.hotelNameMap != null) && this.hotelNameMap.containsKey(id)) {
 			return this.hotelNameMap.get(id).toString();
 		}
-		return EMPTY_STRING;
+		return EMPTYSTRING;
 	}
 
 	public Long getId() {

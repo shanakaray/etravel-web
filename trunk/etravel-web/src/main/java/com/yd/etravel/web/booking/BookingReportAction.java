@@ -31,92 +31,41 @@ import com.yd.etravel.web.common.BaseAction;
 
 public class BookingReportAction extends BaseAction {
 
-	/**
-	 * 
-	 */
 	public BookingReportAction() {
-		// TODO Auto-generated constructor stub
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.yd.etravel.web.common.BaseAction#add(org.apache.struts.action.
-	 * ActionMapping, org.apache.struts.action.ActionForm,
-	 * javax.servlet.http.HttpServletRequest,
-	 * javax.servlet.http.HttpServletResponse)
-	 */
 	@Override
 	protected ActionForward add(final ActionMapping mapping,
 			final ActionForm form, final HttpServletRequest request,
 			final HttpServletResponse response) throws Exception {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.yd.etravel.web.common.BaseAction#back(org.apache.struts.action.
-	 * ActionMapping, org.apache.struts.action.ActionForm,
-	 * javax.servlet.http.HttpServletRequest,
-	 * javax.servlet.http.HttpServletResponse)
-	 */
 	@Override
 	protected ActionForward back(final ActionMapping mapping,
 			final ActionForm form, final HttpServletRequest request,
 			final HttpServletResponse response) throws Exception {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.yd.etravel.web.common.BaseAction#create(org.apache.struts.action.
-	 * ActionMapping, org.apache.struts.action.ActionForm,
-	 * javax.servlet.http.HttpServletRequest,
-	 * javax.servlet.http.HttpServletResponse)
-	 */
 	@Override
 	public ActionForward create(final ActionMapping mapping,
 			final ActionForm form, final HttpServletRequest request,
 			final HttpServletResponse response) throws Exception {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.yd.etravel.web.common.BaseAction#delete(org.apache.struts.action.
-	 * ActionMapping, org.apache.struts.action.ActionForm,
-	 * javax.servlet.http.HttpServletRequest,
-	 * javax.servlet.http.HttpServletResponse)
-	 */
 	@Override
 	protected ActionForward delete(final ActionMapping mapping,
 			final ActionForm form, final HttpServletRequest request,
 			final HttpServletResponse response) throws Exception {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.yd.etravel.web.common.BaseAction#edit(org.apache.struts.action.
-	 * ActionMapping, org.apache.struts.action.ActionForm,
-	 * javax.servlet.http.HttpServletRequest,
-	 * javax.servlet.http.HttpServletResponse)
-	 */
 	@Override
 	protected ActionForward edit(final ActionMapping mapping,
 			final ActionForm form, final HttpServletRequest request,
 			final HttpServletResponse response) throws Exception {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -137,14 +86,6 @@ public class BookingReportAction extends BaseAction {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.yd.etravel.web.common.BaseAction#find(org.apache.struts.action.
-	 * ActionMapping, org.apache.struts.action.ActionForm,
-	 * javax.servlet.http.HttpServletRequest,
-	 * javax.servlet.http.HttpServletResponse)
-	 */
 	@Override
 	protected ActionForward find(final ActionMapping mapping,
 			final ActionForm actionForm, final HttpServletRequest request,

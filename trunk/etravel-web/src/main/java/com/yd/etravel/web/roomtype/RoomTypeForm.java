@@ -89,8 +89,8 @@ public class RoomTypeForm extends BaseForm {
 	public void resetBean(final ActionMapping mapping,
 			final HttpServletRequest request) {
 		// TODO Auto-generated method stub
-		this.name = EMPTY_STRING;
-		this.comments = EMPTY_STRING;
+		this.name = EMPTYSTRING;
+		this.comments = EMPTYSTRING;
 		this.active = true;
 		this.id = 0L;
 		this.allRoomType = Collections.emptyList();

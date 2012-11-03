@@ -68,8 +68,8 @@ public class RoleForm extends BaseForm {
 	@Override
 	public void resetBean(final ActionMapping mapping,
 			final HttpServletRequest request) {
-		this.name = ICommon.EMPTY_STRING;
-		this.discription = ICommon.EMPTY_STRING;
+		this.name = ICommon.EMPTYSTRING;
+		this.discription = ICommon.EMPTYSTRING;
 		this.active = false;
 		this.allRoles = Collections.emptyList();
 		this.id = null;
