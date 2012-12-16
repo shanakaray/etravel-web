@@ -12,26 +12,17 @@ import com.yd.etravel.util.mail.MailMessage;
 @Component
 public class BookingConfirmation extends MailMessage {
 
-	/**
-	 * 
-	 */
 	public BookingConfirmation() {
-		// TODO Auto-generated constructor stub
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.yd.etravel.util.mail.MailMessage#prepareBody()
-	 */
 	@Override
 	public void prepareBody() throws MessagingException {
-		final StringBuilder sb = new StringBuilder();
-		sb.append(
+		final StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append(
 				"<html><style type='text/css' >body{font-family: Arial,Verdana, Helvetica, sans-serif;font-size: 12px;height: 100%;margin: 20px 20px 20px 20px;background-color:#f3f1e5;color:#4c4c4b;font-weight:bold;}</style>"
 						+ "<body><table width='90%'><tr><td bgcolor='black'><img src='http://www.anilana.com/images/anilana_hotel_logo.gif'></img></td></tr><tr><td>Dear ")
 				.append(this.param.get("user.firstname")).append(",<br><br>");
-		sb.append(
+		stringBuilder.append(
 				"Your Booking attempt with www.anilana.com is Successfull !!<br><br>"
 
 				+ "<br><li>Booking Id: ")
@@ -66,18 +57,11 @@ public class BookingConfirmation extends MailMessage {
 				.append(this.param.get("user.lastname"))
 				.append("<br><li>Customer Email: ")
 				.append(this.param.get("user.email"))
-
 				.append("</td></tr><tr><td><br><br>Regards,<br>Anilana admin</td></tr></table></body><html>");
-		LOGGER.debug(sb.toString());
-		this.msg.setText(sb.toString(), true);
-
+		LOGGER.debug(stringBuilder.toString());
+		this.msg.setText(stringBuilder.toString(), true);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.yd.etravel.util.mail.MailMessage#prepareHeader()
-	 */
 	@Override
 	public void prepareHeader() throws MessagingException {
 		this.msg.setTo(this.param.get("user.email"));

@@ -1128,4 +1128,5 @@ public class DateUtil {
 
 		return new Date[] { startDate, endDate };
 	}
+
 }

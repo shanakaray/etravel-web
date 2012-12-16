@@ -17,8 +17,6 @@ import com.yd.etravel.domain.user.User;
 @Table(name = "T_BOOKING")
 public class Booking extends BaseObject {
 
-	private static final long serialVersionUID = -21233441337334686L;
-
 	@ManyToOne
 	@ForeignKey(name = "FK_BUSER")
 	private User bookingUser;
