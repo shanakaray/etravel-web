@@ -11,7 +11,7 @@
 <%@ taglib uri="displaytag" prefix="display"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-	<script type="text/javascript">
+<script type="text/javascript">
    $(function(){
             if( $.trim( $('#bookedtoString').val() ) == ""){
              $('#bookedFromString').datePicker({startDate:'01/01/1996'}).val(new Date().asString()).trigger('change');
@@ -28,83 +28,64 @@
   		window.open(theURL,winName,features);
 	}       
   </script>
-	<body>
-		<table width="100%" border="0">
-			<bean:define id="thisbean" name="reservationSheetForm"
-				type="com.yd.etravel.web.reservation.ReservationSheetForm" />
-			<tbody>
-				<tr>
-					<td>
-						<html:form action="/admin/findReservationSheet">
-							<table width="50%" border="0">
+<body>
+	<table width="100%" border="0">
+		<bean:define id="thisbean" name="reservationSheetForm"
+			type="com.yd.etravel.web.reservation.ReservationSheetForm" />
+		<tbody>
+			<tr>
+				<td><html:form action="/admin/findReservationSheet">
+						<table width="50%" border="0">
 
-								<tr>
-									<td >
-										Hotel
-									</td>
-									<td>
-										<html:select property="hotelId"
-											>
-											<logic:notEmpty name="reservationSheetForm"
-												property="hotelList">
-												<html:optionsCollection property="hotelList" label="name"
-													value="id" />
-											</logic:notEmpty>
-											<option value="-1"
-												<!-- <logic:equal value="-1" property="hotelId" name="reservationSheetForm">selected="selected"</logic:equal>>
+							<tr>
+								<td>Hotel</td>
+								<td><html:select property="hotelId">
+										<logic:notEmpty name="reservationSheetForm"
+											property="hotelList">
+											<html:optionsCollection property="hotelList" label="name"
+												value="id" />
+										</logic:notEmpty>
+										<option value="-1"
+											<!-- <logic:equal value="-1" property="hotelId" name="reservationSheetForm">selected="selected"</logic:equal>>
 												please select
 											</option-->
-										</html:select>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										From
-									</td>
-									<td>
-										<html:text styleId="bookedFromString" styleClass="date-pick"
-											property="startDate" size="12" maxlength="12" readonly="true" />
-									</td>
-								</tr>
-								<tr>
-									<td>
-										To
-									</td>
-									<td>
-										<html:text styleId="bookedtoString" styleClass="date-pick" 
-											property="endDate" size="12" maxlength="12" readonly="true" />
-									</td>
-								</tr>
+									</html:select></td>
+							</tr>
+							<tr>
+								<td>From</td>
+								<td><html:text styleId="bookedFromString"
+										styleClass="date-pick" property="startDate" size="12"
+										maxlength="12" readonly="true" /></td>
+							</tr>
+							<tr>
+								<td>To</td>
+								<td><html:text styleId="bookedtoString"
+										styleClass="date-pick" property="endDate" size="12"
+										maxlength="12" readonly="true" /></td>
+							</tr>
 
 
-								<tr>
-									<td>
-										<html:submit>Search</html:submit>
-									</td>
-									<td>
-										<input type="button" onclick="cle()" value="Clear" />
-									</td>
-								</tr>
+							<tr>
+								<td><html:submit>Search</html:submit></td>
+								<td><input type="button" onclick="cle()" value="Clear" />
+								</td>
+							</tr>
 
 
-							</table>
-						</html:form>
+						</table>
+					</html:form></td>
+			</tr>
 
-					</td>
-				</tr>
+			<tr>
+				<td colspan="2">
+					<div
+						style="width: 1024px; height: 500px; overflow: auto; background-color: #ffffff; background-image: url(../images/mgFade.jpg);">
 
-				<tr>
-					<td colspan="2">
-						<div
-							style="width: 1024px; height: 500px; overflow: auto; background-color: #ffffff;background-image:url(../images/mgFade.jpg);">
-							
-							<%if(!thisbean.getRoomAvailabilitySet().isEmpty()){%>
-							<table border="1" bordercolor="black">
-								<tr height="30px">
-									<th>
-										&nbsp;
-									</th>
-									<%
+						<%if(!thisbean.getRoomAvailabilitySet().isEmpty()){%>
+						<table border="1" bordercolor="black">
+							<tr height="30px">
+								<th>&nbsp;</th>
+								<%
                     if(thisbean.getStartDateToDate()!=null){
                     Calendar c=Calendar.getInstance();
                     c.setTime(thisbean.getStartDateToDate());
@@ -117,16 +98,16 @@
                     }else{
                      
                      %>
-									<th><%=DateUtil.format(c.getTime())%></th>
-									<% 
+								<th><%=DateUtil.format(c.getTime())%></th>
+								<% 
 										}
 										c.add(Calendar.DATE,1);
                                         c.getTimeInMillis();
 											}
 										}
 									%>
-								</tr>
-								<%
+							</tr>
+							<%
 									if (thisbean.getRoomAvailabilitySet() != null
 											&& !thisbean.getRoomAvailabilitySet().isEmpty()) {
 											Iterator iterator=thisbean.getRoomAvailabilitySet().iterator();
@@ -137,9 +118,9 @@
 								%>
 
 
-								<tr height="25px" >
-									<td style="background-color:<%=y%2==1?"#F4EDFA":"#A7A0AD"%>;"><strong><%=dto.getRoomTypeName().equals(tmp)?"":dto.getRoomTypeName()%></strong></td>
-									<%  tmp=dto.getRoomTypeName();
+							<tr height="25px">
+								<td style="background-color:<%=y%2==1?"#F4EDFA":"#A7A0AD"%>;"><strong><%=dto.getRoomTypeName().equals(tmp)?"":dto.getRoomTypeName()%></strong></td>
+								<%  tmp=dto.getRoomTypeName();
 										if (thisbean.getStartDateToDate() != null) {
 														Calendar c = Calendar.getInstance();
 														c.setTime(thisbean.getStartDateToDate());
@@ -205,10 +186,10 @@
 																		found = true;
 									%>
 
-									<td style="<%=thisbean.getColur(bdto.getBookingCode())%>"><a href="javascript:MM_openBrWindow('../admin/viewBookingDetail.do?bookingId=<%=bdto.getBookingId()%>','','width=600,height=330,scrollbars=yes');" ><%=bdto.getBookingCode()%></a>
-									<br/><%=bdto.getStatus()%>
-									</td>
-									<%  
+								<td style="<%=thisbean.getColur(bdto.getBookingCode())%>"><a
+									href="javascript:MM_openBrWindow('../admin/viewBookingDetail.do?bookingId=<%=bdto.getBookingId()%>','','width=600,height=330,scrollbars=yes');"><%=bdto.getBookingCode()%></a>
+									<br /><%=bdto.getStatus()%></td>
+								<%  
 										break;
 																	}
 																}
@@ -217,10 +198,9 @@
 																if (!found) {
 									%>
 
-									<td style="background-color:<%=y%2==1?"#F4EDFA":"#A7A0AD"%>;">
-										&nbsp;
-									</td>
-									<%
+								<td style="background-color:<%=y%2==1?"#F4EDFA":"#A7A0AD"%>;">
+									&nbsp;</td>
+								<%
 										}
 										
 										
@@ -231,21 +211,22 @@
 														}
 													}
 									%>
-								</tr>
+							</tr>
 
 
-								<%
+							<%
 									}
 										}
 									}
 								%>
-							</table><%}%>
-						</div>
+						</table>
+						<%}%>
+					</div>
 
 
-					</td>
-				</tr>
-			</tbody>
-		</table>
-	</body>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
 </html>

@@ -12,18 +12,10 @@ import com.yd.etravel.util.mail.MailMessage;
 @Component
 public class BookingOverDueNotification extends MailMessage {
 
-	/**
-	 * 
-	 */
 	public BookingOverDueNotification() {
 		super();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.yd.etravel.util.mail.MailMessage#prepareBody()
-	 */
 	@Override
 	public void prepareBody() throws MessagingException {
 		final StringBuilder sb = new StringBuilder();
@@ -69,11 +61,6 @@ public class BookingOverDueNotification extends MailMessage {
 		this.msg.setText(sb.toString(), true);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.yd.etravel.util.mail.MailMessage#prepareHeader()
-	 */
 	@Override
 	public void prepareHeader() throws MessagingException {
 		this.msg.setTo(this.param.get("user.email"));

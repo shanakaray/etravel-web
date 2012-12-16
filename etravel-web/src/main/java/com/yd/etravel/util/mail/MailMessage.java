@@ -15,11 +15,6 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 
 import com.yd.etravel.util.StringUtils;
 
-/**
- * 
- * @author shanaka
- * 
- */
 public abstract class MailMessage {
 	private JavaMailSenderImpl mailSender;
 	protected MimeMessageHelper msg;
