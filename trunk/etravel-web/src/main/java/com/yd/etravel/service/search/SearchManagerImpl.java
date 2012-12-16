@@ -3,7 +3,6 @@ package com.yd.etravel.service.search;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -29,24 +28,6 @@ import com.yd.etravel.service.exception.ServiceException;
 @Service(value = "searchService")
 @Transactional(propagation = Propagation.SUPPORTS)
 public class SearchManagerImpl implements ISearchManager {
-	class RoomDailyAvailabilityComparatorAsc implements
-			Comparator<RoomDailyAvailability> {
-		@Override
-		public int compare(final RoomDailyAvailability o1,
-				final RoomDailyAvailability o2) {
-			return o1.getAvailableUnit().compareTo(o2.getAvailableUnit());
-		}
-	}
-
-	class RoomDailyAvailabilityComparatorDscs implements
-			Comparator<RoomDailyAvailability> {
-		@Override
-		public int compare(final RoomDailyAvailability o1,
-				final RoomDailyAvailability o2) {
-			return o2.getAvailableUnit().compareTo(o1.getAvailableUnit());
-		}
-	}
-
 	@Autowired(required = true)
 	private ISearchDAO searchDAO;
 
