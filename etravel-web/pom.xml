@@ -22,7 +22,7 @@
 		<commons.pool.version>1.4.0</commons.pool.version>
 		<selenium.version>2.0b3</selenium.version>
 		<jetty.version>7.6.6.v20120903</jetty.version>
-		<org.springframework.version>5.2.1.RELEASE</org.springframework.version>
+		<org.springframework.version>5.3.7</org.springframework.version>
 	</properties>
 	<profiles>
 		<profile>
